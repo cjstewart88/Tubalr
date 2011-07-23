@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Tubalr</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+  <head>
+    <title>Tubalr</title>
+    <%= stylesheet_link_tag :all %>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script> 
+    <%= javascript_include_tag :defaults %>
+    <%= csrf_meta_tag %>
+  </head>
+  <body>
+    <header>
+      Tubalr
+    </header>
+    
+    <section>
+      <form  id="listenForm" name="listen" action="index.php" method="post"> 
+  			<input type="text" name="q" id="q" value="ENTER ARTIST'S NAME HERE"/><br/> 
+				<input type="submit" name="just" value="This Artist/Band Only" class="listen"/> <input type="submit" name="similar" value="Similar Artists/Bands" class="listen"/> 
+			</form>
+      <section id="player"> 
+     		<script type="text/javascript"> 
+				  just('Band of Horses');	
+				</script> 
+  			<nav> 
+  				<a href="#" onClick="nextSong()" id="next">NEXT</a> 
+  				<a href="#" onClick="previous()" id="prev">PREVIOUS</a> 
+  			</nav> 
+  			<span id="currentVideoTitle"></span><br/> 
+  			<div id="ytplayerid"></div> 
+  		</section>
+      <%= yield %>
+    </section>
+    
+    <footer>
+    </footer>
+  </body>
 </html>

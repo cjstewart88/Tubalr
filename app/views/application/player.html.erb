@@ -1,0 +1,10 @@
+<script type="text/javascript"> 
+	// <![CDATA[
+		// allowScriptAccess must be set to allow the Javascript from one domain to access the swf on the youtube domain
+		var params = { allowScriptAccess: "always", bgcolor: "#cccccc", allowFullScreen: true };
+		// this sets the id of the object or embed tag to 'ytplayerid'.
+		// You then use this id to access the swf and make calls to the player's API
+		var atts = { id: "ytplayerid" };
+		swfobject.embedSWF("http://www.youtube.com/v/<%= params[:track]=%>?autohide=1&border=0&fs=1&enablejsapi=1&playerapiid=ytplayer&color1=e3e3e3&color2=ffffff&autoplay=1&showinfo=0","ytplayerid", "659", "362", "8", null, null, params, atts);
+	//]]>
+</script>
