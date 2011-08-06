@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   
   def index
-    render :layout => "application", :text => "hey"
+    render :layout => "application", :action => "index"
   end
   
   def player
