@@ -16,11 +16,15 @@ google.load("jquery", "1.5");
 // variables to be used throughout
 var videos = new Array();
 var currenttrack = 0;
+var search = "";
+var search_type = "";
 
 // just a certain artist/band
 function just(who) {
   videos = [];
   currenttrack = 0;
+  search = who;
+  search_type = "just"
 	$.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+who+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
 		$.each(data.feed.entry, function(i,video) {
 			videos[i] = { 
@@ -36,6 +40,8 @@ function just(who) {
 function similarTo(who) {
   videos = [];
   currenttrack = 0;
+  search = who;
+  search_type = "similar"
 	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist='+who+'&limit=20&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
 		$.each(data, function(i,similars) {
 			var ajaxs = $.map(similars.artist, function(artist) {
@@ -56,7 +62,7 @@ function similarTo(who) {
 // start the playlist
 function initPlaylist() {
   console.log(videos);
-	$('#ytplayerid').load('/player/' + videos[currenttrack].id);
+	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].id);
 	$('#currentVideoTitle').html(videos[currenttrack].title);
 	$('#currentVideoId').attr('alt',videos[currenttrack].id);
 }

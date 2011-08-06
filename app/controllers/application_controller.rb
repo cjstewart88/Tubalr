@@ -6,6 +6,12 @@ class ApplicationController < ActionController::Base
   end
   
   def player
+    Searches.create({  
+      :search_type => params[:search_type],
+      :what => params[:search],
+      :who  => request.remote_ip
+    })
+    
     render "player", :layout => false
   end
 end

@@ -15,15 +15,26 @@
 					if ($(this).val() == "") $(this).val("ENTER ARTIST'S NAME HERE");
 				});
 				
-        $('.just').click(function(){
-      	  just($('#q').val());
+        $('.just').click(function() {
+       	  just($('#q').val());
       	  $('#player').show();
       	  $('#about').hide();
         });
-        $('.similar').click(function(){
+        $('.similar').click(function() {
           similarTo($('#q').val());
-      	  $('#player').show();
-      	  $('#about').hide();
+    	    $('#player').show();
+    	    $('#about').hide();
+        });
+        
+        $('input#q').keypress(function(e) {
+          var code = (e.keyCode ? e.keyCode : e.which);
+          if(code == 13) { //Enter keycode  
+            if ($('#q').val() != "") {
+              just($('#q').val());
+              $('#player').show();
+              $('#about').hide();
+            }
+          }
         });
       });
     </script>
@@ -32,7 +43,7 @@
     <header>
       <img src="../images/tubalr_logo.png" onClick="window.location = 'index.php';">
       
-      <form id="listenForm"> 
+      <form id="listenForm" onSubmit="return false;"> 
   			<input type="text" name="q" id="q" value="ENTER ARTIST'S NAME HERE"/><br/> 
 				<input type="button" name="just" value="This Artist/Band Only" class="listen just"/> 
 				<input type="button" name="similar" value="Similar Artists/Bands" class="listen similar"/> 
