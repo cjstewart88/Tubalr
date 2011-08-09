@@ -1,18 +1,3 @@
-// Google Analytics
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-16656461-3']);
-_gaq.push(['_trackPageview']);
-
-(function() {
-var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-
-// load jquery library and swfobject through google
-google.load("swfobject", "2.1");
-google.load("jquery", "1.5");
-
 // variables to be used throughout
 var videos = new Array();
 var currenttrack = 0;
@@ -25,13 +10,8 @@ function just(who) {
   currenttrack = 0;
   search = who;
   search_type = "just"
-	$.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+who+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
-		$.each(data.feed.entry, function(i,video) {
-			videos[i] = { 
-				id: video.id.$t.split(":")[3], 
-				title: video.title.$t 
-			};
-		});
+	$.getJSON('/just/'+who+'.json', function(data) {
+	  videos = data;
 		initPlaylist();
 	});
 }
@@ -42,29 +22,17 @@ function similarTo(who) {
   currenttrack = 0;
   search = who;
   search_type = "similar"
-	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist='+who+'&limit=20&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
-		$.each(data, function(i,similars) {
-			var ajaxs = $.map(similars.artist, function(artist) {
-				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+artist.name+'&orderby=relevance&start-index=1&max-results=1&v=2&alt=json-in-script&callback=?', function(data) {
-					$.each(data.feed.entry, function(i,video) {
-						videos.push({ 
-							id: video.id.$t.split(":")[3], 
-							title: video.title.$t 
-						});
-					});
-				});
-			});
-			$.when.apply($,ajaxs).then(initPlaylist);
-		});
+	$.getJSON('/similar/'+who+'.json', function(data) {
+    videos = data;
+		initPlaylist();
 	});
 }
 
 // start the playlist
 function initPlaylist() {
-  console.log(videos);
-	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].id);
-	$('#currentVideoTitle').html(videos[currenttrack].title);
-	$('#currentVideoId').attr('alt',videos[currenttrack].id);
+	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
+	$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
+	$('#currentVideoId').attr('alt',videos[currenttrack].VideoID);
 }
 
 // next
@@ -74,9 +42,9 @@ function nextSong() {
 	}
 	else {
 		currenttrack = currenttrack+=1;
-		ytplayer.loadVideoById(videos[currenttrack].id, 0);
-		$('#currentVideoTitle').html(videos[currenttrack].title);
-		$('#currentVideoId').attr('alt',videos[currenttrack].id);
+		ytplayer.loadVideoById(videos[currenttrack].VideoID, 0);
+		$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
+		$('#currentVideoId').attr('alt',videos[currenttrack].VideoID);
 	}
 }
 
@@ -87,9 +55,9 @@ function previousSong() {
 	}
 	else {
 		currenttrack = currenttrack-=1;
-		ytplayer.loadVideoById(videos[currenttrack].id, 0);
-		$('#currentVideoTitle').html(videos[currenttrack].title);
-		$('#currentVideoId').attr('alt',videos[currenttrack].id);
+		ytplayer.loadVideoById(videos[currenttrack].VideoID, 0);
+		$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
+		$('#currentVideoId').attr('alt',videos[currenttrack].VideoID);
 	}
 }
 
@@ -109,3 +77,34 @@ function onytplayerStateChange(newState) {
 function onPlayerError(errorCode) {
 	nextSong();
 }
+
+$(document).ready(function(){
+  $('#q').focus(function() {
+    if ($(this).val() == "ENTER ARTIST'S NAME HERE") $(this).val("");
+  });
+  $('#q').blur(function() {
+    if ($(this).val() == "") $(this).val("ENTER ARTIST'S NAME HERE");
+  });
+
+  $('.just').click(function() {
+     just($('#q').val());
+     $('#player').show();
+     $('#about').hide();
+  });
+  $('.similar').click(function() {
+    similarTo($('#q').val());
+    $('#player').show();
+    $('#about').hide();
+  });
+
+  $('input#q').keypress(function(e) {
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if(code == 13) { //Enter keycode  
+      if ($('#q').val() != "") {
+        just($('#q').val());
+        $('#player').show();
+        $('#about').hide();
+      }
+    }
+  });
+});

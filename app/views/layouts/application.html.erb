@@ -3,51 +3,18 @@
   <head>
     <title>Tubalr</title>
     <%= stylesheet_link_tag :all %>
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script> 
-    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js", "https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js", "ga", "application" %>
     <%= csrf_meta_tag %>
-    <script>
-      $(document).ready(function(){
-        $('#q').focus(function() {
-					if ($(this).val() == "ENTER ARTIST'S NAME HERE") $(this).val("");
-				});
-				$('#q').blur(function() {
-					if ($(this).val() == "") $(this).val("ENTER ARTIST'S NAME HERE");
-				});
-				
-        $('.just').click(function() {
-       	  just($('#q').val());
-      	  $('#player').show();
-      	  $('#about').hide();
-        });
-        $('.similar').click(function() {
-          similarTo($('#q').val());
-    	    $('#player').show();
-    	    $('#about').hide();
-        });
-        
-        $('input#q').keypress(function(e) {
-          var code = (e.keyCode ? e.keyCode : e.which);
-          if(code == 13) { //Enter keycode  
-            if ($('#q').val() != "") {
-              just($('#q').val());
-              $('#player').show();
-              $('#about').hide();
-            }
-          }
-        });
-      });
-    </script>
   </head>
   <body>
     <header>
-      <img src="../images/tubalr_logo.png" onClick="window.location = 'index.php';">
+      <img src="../images/tubalr_logo.png">
       
       <form id="listenForm" onSubmit="return false;"> 
-  			<input type="text" name="q" id="q" value="ENTER ARTIST'S NAME HERE"/><br/> 
-				<input type="button" name="just" value="This Artist/Band Only" class="listen just"/> 
-				<input type="button" name="similar" value="Similar Artists/Bands" class="listen similar"/> 
-			</form>
+        <input type="text" name="q" id="q" value="ENTER ARTIST'S NAME HERE"/><br/>
+        <input type="button" name="just" value="This Artist/Band Only" class="listen just"/>
+        <input type="button" name="similar" value="Similar Artists/Bands" class="listen similar"/>
+      </form>
     </header>
     
     <%= yield %>
