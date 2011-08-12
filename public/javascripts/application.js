@@ -9,7 +9,7 @@ function just(who) {
   videos = [];
   currenttrack = 0;
   search = who;
-  search_type = "just"
+  search_type = "just";
 	$.getJSON('/just/'+who+'.json', function(data) {
 	  videos = data;
 		initPlaylist();
@@ -21,8 +21,20 @@ function similarTo(who) {
   videos = [];
   currenttrack = 0;
   search = who;
-  search_type = "similar"
+  search_type = "similar";
 	$.getJSON('/similar/'+who+'.json', function(data) {
+    videos = data;
+		initPlaylist();
+	});
+}
+
+// similar artist/bands
+function playlist(id) {
+  videos = [];
+  currenttrack = 0;
+  search = id;
+  search_type = "playlist";
+	$.getJSON('/playlist/'+id+'.json', function(data) {
     videos = data;
 		initPlaylist();
 	});
@@ -30,9 +42,17 @@ function similarTo(who) {
 
 // start the playlist
 function initPlaylist() {
+  $('#player').show();
+  $('#about').hide();
 	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
 	$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
 	$('#currentVideoId').attr('alt',videos[currenttrack].VideoID);
+	if ($('#playlist-stuff').find() && search_type != "playlist") {
+	  $('#playlist-stuff').show();
+	}
+	else {
+  	$('#playlist-stuff').hide();
+	}
 }
 
 // next
@@ -88,13 +108,12 @@ $(document).ready(function(){
 
   $('.just').click(function() {
      just($('#q').val());
-     $('#player').show();
-     $('#about').hide();
   });
   $('.similar').click(function() {
     similarTo($('#q').val());
-    $('#player').show();
-    $('#about').hide();
+  });
+  $('.listen-to-playlist').click(function() {
+    playlist($('.listen-to-playlist').attr('playlist-id'));
   });
 
   $('input#q').keypress(function(e) {
@@ -102,9 +121,11 @@ $(document).ready(function(){
     if(code == 13) { //Enter keycode  
       if ($('#q').val() != "") {
         just($('#q').val());
-        $('#player').show();
-        $('#about').hide();
       }
     }
+  });
+  
+  $('.add-to-playlist').click(function() {
+    $.getJSON('/playlist/video/'+$(this).attr('playlist-id')+'/'+videos[currenttrack].VideoID+"/"+videos[currenttrack].VideoTitle);
   });
 });

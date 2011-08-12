@@ -27,4 +27,16 @@ class ApiController < ActionController::Base
     render :json => response
   end
   
+  def playlist
+    response = []
+    
+    playlistData = Playlists.videos(params[:id])
+    
+    playlistData.each do |video|
+      response.push(:VideoID => video["video_id"], :VideoTitle => video["video_title"])
+    end
+    
+    render :json => response
+  end
+  
 end

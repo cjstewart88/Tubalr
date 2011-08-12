@@ -15,3 +15,13 @@
 	<span id="currentVideoTitle"></span><br/> 
 	<div id="ytplayerid"></div> 
 </section>
+
+<% if @playlist_id %>
+  <script type="text/javascript">
+    playlist(<%= @playlist_id %>);
+  </script>
+  <section id="playlist-stuff" style="width: 975px; margin: 0 auto; text-align: right; display: none;">
+    <span class="add-to-playlist" playlist-id="<%= @playlist_id %>" style="cursor: pointer;">Add Current Song to Playlist</span>
+    <span class="listen-to-playlist" playlist-id="<%= @playlist_id %>" style="cursor: pointer;">Listen to Playlist</span>
+  </section>
+<% end %>

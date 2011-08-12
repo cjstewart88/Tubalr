@@ -10,7 +10,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110806040548) do
+ActiveRecord::Schema.define(:version => 20110812013848) do
+
+  create_table "playlists", :force => true do |t|
+    t.string   "secret"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "searches", :force => true do |t|
     t.string   "what"
@@ -18,6 +24,14 @@ ActiveRecord::Schema.define(:version => 20110806040548) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "search_type"
+  end
+
+  create_table "videos", :force => true do |t|
+    t.string   "playlist_id"
+    t.string   "video_id"
+    t.string   "video_title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
