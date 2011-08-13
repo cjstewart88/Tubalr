@@ -30,8 +30,8 @@ class ApiController < ActionController::Base
   def playlist
     response = []
     
-    playlistData = Playlists.videos(params[:id])
-    
+    playlistData = Playlists.videos(params[:playlist_id])    
+
     playlistData.each do |video|
       response.push(:VideoID => video["video_id"], :VideoTitle => video["video_title"])
     end

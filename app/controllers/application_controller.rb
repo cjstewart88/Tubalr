@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
       :who  => request.remote_ip
     })
     
-    render "player", :layout => false
+    render :template => "player", :layout => false
   end
   
 end

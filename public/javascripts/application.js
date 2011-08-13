@@ -34,9 +34,20 @@ function playlist(id) {
   currenttrack = 0;
   search = id;
   search_type = "playlist";
+  
 	$.getJSON('/playlist/'+id+'.json', function(data) {
-    videos = data;
-		initPlaylist();
+	  if (data.length != 0) {
+      videos = data;
+		  initPlaylist();
+	  } 
+	  else {
+      $('#about').show();
+      $('#player').hide();
+      $('#playlist-stuff').hide();
+	    $('#about span').html("Oh No!")
+	    $('#about p').html("You have 0 songs in your playlist, start using Tubalr and add some songs! Dont forget you can share your playlist by sending the URL to your friends!")
+	    $('#about span.create-playlist-header').hide().next().hide();
+	  } 
 	});
 }
 

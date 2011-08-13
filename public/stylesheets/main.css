@@ -99,9 +99,12 @@ header {
 		font-size: 28px; color: #181818;
 	}
 	#about p {
-		margin-left: 568px;	margin-top: 15px;
+		margin-left: 568px;	margin-top: 15px; margin-bottom: 30px;
 		width: 407px;
 		font-size: 18px;
+	}
+	#about p a {
+		color: #FFCD63;
 	}
 
 #player {
@@ -179,6 +182,12 @@ header {
 	#player #currentVideoId:hover {
 		color: #FFCD63;
 	}
+#playlist-stuff {
+  width: 975px; margin: 0 auto; text-align: right; display: none; margin-top: 10px;
+}
+#playlist-stuff a {
+  color: #FFCD63;
+}
 	
 footer {
 	background:url(../images/bg_trans.png); 

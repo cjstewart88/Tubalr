@@ -1,16 +1,23 @@
 class PlaylistController < ActionController::Base
   
   def init
-    # if a playlist with the given id dosnt exsist
-    # create a new playlist 
-    if !Playlists.exists?(params[:id])
-      newPlaylist = Playlists.create
-      redirect_to "/playlist/#{newPlaylist["id"]}"
+    if Playlists.exists?(:playlist_id => params[:playlist_id])
+      @playlist_id = params[:playlist_id] 
     else
-      @playlist_id = params[:id]
-      
-      render :layout => "application", :action => "application/index"
+      @no_playlist = params[:playlist_id]
     end
+    
+    render :layout => "application", :template => "index"
+  end
+  
+  def create
+    playlist_id = (0...8).map{65.+(rand(25)).chr}.join
+    
+    newPlaylist = Playlists.create({
+      :playlist_id => playlist_id
+    })
+    
+    redirect_to "/playlist/#{newPlaylist["playlist_id"]}"
   end
   
   def addVideo
