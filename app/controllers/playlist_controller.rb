@@ -13,11 +13,15 @@ class PlaylistController < ActionController::Base
   def create
     playlist_id = (0...8).map{65.+(rand(25)).chr}.join
     
-    newPlaylist = Playlists.create({
-      :playlist_id => playlist_id
-    })
+    if Playlists.exists?(:playlist_id => playlist_id)
+      redirect_to "/playlist"
+    else
+      newPlaylist = Playlists.create({
+        :playlist_id => playlist_id
+      })
+      redirect_to "/playlist/#{newPlaylist["playlist_id"]}"
+    end  
     
-    redirect_to "/playlist/#{newPlaylist["playlist_id"]}"
   end
   
   def addVideo
