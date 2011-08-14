@@ -11,8 +11,13 @@ function just(who) {
   currenttrack = 0;
   search = who;
   search_type = "just";
-	$.getJSON('/just/'+who+'.json', function(data) {
-	  videos = data;
+  $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+who+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
+		$.each(data.feed.entry, function(i,video) {
+			videos[i] = { 
+				VideoID: video.id.$t.split(":")[3], 
+				VideoTitle: video.title.$t 
+			};
+		});
 		initPlaylist();
 	});
 }
@@ -23,9 +28,20 @@ function similarTo(who) {
   currenttrack = 0;
   search = who;
   search_type = "similar";
-	$.getJSON('/similar/'+who+'.json', function(data) {
-    videos = data;
-		initPlaylist();
+	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist='+who+'&limit=20&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
+		$.each(data, function(i,similars) {
+			var ajaxs = $.map(similars.artist, function(artist) {
+				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+artist.name+'&orderby=relevance&start-index=1&max-results=1&v=2&alt=json-in-script&callback=?', function(data) {
+					$.each(data.feed.entry, function(i,video) {
+						videos.push({ 
+							VideoID: video.id.$t.split(":")[3], 
+							VideoTitle: video.title.$t 
+						});
+					});
+				});
+			});
+			$.when.apply($,ajaxs).then(initPlaylist);
+		});
 	});
 }
 
