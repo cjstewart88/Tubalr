@@ -222,11 +222,11 @@ header {
 }
 
 footer {
-	background:url(../images/bg_trans.png); 
+	background: url(../images/bg_trans.png); 
 	width: 100%;
 	position: absolute;
 	bottom: 0;
-	font-size: 14px;
+	font-size: 12px;
 }
 	footer section {
 		margin: 10px;
