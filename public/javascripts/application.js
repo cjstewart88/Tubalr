@@ -39,12 +39,6 @@ function playlist(id) {
   
 	$.getJSON('/playlist/'+id+'.json', function(data) {
 	  if (data.length != 0) {
-			$('#playlist span,#playlist span a.delete').mouseenter(function(){
-    		$(this).find('.delete').show();
-    	}).mouseleave(function(){
-    		$(this).find('.delete').hide();
-    	});
-			
       videos = data;
 		  initPlaylist();
 	  } 
@@ -69,6 +63,11 @@ function initPlaylist() {
     videosCopy = videosCopy + '<span class="'+i+'"><a href="#" class="delete" onClick="deleteVideo('+i+')">x</a><a href="#" onClick="jumpTo('+i+')">'+this.VideoTitle+'</a><br/></span>';
   });
 	$('#playlist div').html(videosCopy);
+  // $('#playlist span,#playlist span a.delete').mouseenter(function(){
+  //  $(this).find('.delete').show();
+  // }).mouseleave(function(){
+  //  $(this).find('.delete').hide();
+  // });
 	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
 	$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
 	$('#currentVideoId').attr('alt',videos[currenttrack].VideoID);
