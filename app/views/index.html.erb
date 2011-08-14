@@ -1,22 +1,31 @@
-<section id="about">
-  <span>WHAT IS THIS AND WHY'S IT SO AWESOME?</span>
-  <p>
-    Tubalr allows you to effortlessly and quickly listen to a band's or artist's top YouTube videos without
-    all the clutter YouTube brings. To get started just type an artist's name into the search box and select
-    similar artist or just this artist.
-  </p>
+<% if @no_playlist %>
+  <section id="no_playlist">
+    There dosnt seem to be a playlist with the ID of '<%= @no_playlist %>'. Feel free to <a href='/playlist'>create</a> a new one!
+  </section>
+<% else %>
+  <section id="about">
+    <span>WHAT IS THIS AND WHY'S IT SO AWESOME?</span>
+    <p>
+      Tubalr allows you to effortlessly and quickly listen to a band's or artist's top YouTube videos without
+      all the clutter YouTube brings. To get started just type an artist's name into the search box and select
+      similar artist or just this artist.
+    </p>
   
-  <span class='create-playlist-header'>Playlist on the Fly!</span>
-  <p class='create-playlist-disc'>
-    Dont forget you can create playlists on the fly and share them with your friends, no registering or logging in required!<br/><br/>
-    Go ahead, click <a href="/playlist">here</a> to create one!</a>
-  </p>
-</section>
+    <span class='create-playlist-header'>Playlist on the Fly!</span>
+    <p class='create-playlist-disc'>
+      Dont forget you can create playlists on the fly and share them with your friends, no registering or logging in required!<br/><br/>
+      Go ahead, click <a href="/playlist">here</a> to create one!</a>
+    </p>
+  </section>
+<% end %>
 
 <section id="player">
+	<section id="playlist">
+		<div></div>
+	</section>
 	<nav> 
-		<a href="#" onClick="nextSong()" id="next">NEXT</a> 
 		<a href="#" onClick="previousSong()" id="prev">PREVIOUS</a> 
+  	<a href="#" onClick="nextSong()" id="next">NEXT</a>
 	</nav> 
 	<span id="currentVideoTitle"></span><br/> 
 	<div id="ytplayerid"></div> 
@@ -28,13 +37,7 @@
   </script>
   <section id="playlist-stuff">
     Share URL to Share the Playlist! -
-    <a href="#" class="add-to-playlist" playlist-id="<%= @playlist_id %>">Add Song to Playlist</a> -
+    <a href="#" class="add-to-playlist" playlist-id="<%= @playlist_id %>">Add Video to Playlist</a> <span class="video-added">Video Added!</span>-
     <a href="#" class="listen-to-playlist" playlist-id="<%= @playlist_id %>">Listen to Playlist</a>
-  </section>
-<% end %>
-
-<% if @no_playlist %>
-  <section id="no_playlist">
-    There dosnt seem to be a playlist with the ID of '<%= @no_playlist %>'. Feel free to <a href='/playlist'>create</a> a new one!
   </section>
 <% end %>

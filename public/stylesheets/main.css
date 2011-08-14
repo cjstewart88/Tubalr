@@ -62,6 +62,11 @@ header {
 	header img {
 		cursor: pointer;
 	}
+	header aside {
+	  float: right;
+    font-size: 12px;
+    margin-top: 10px;
+	}
 	header #listenForm {
 		margin-top: -88px;
 		text-align: right;
@@ -143,8 +148,16 @@ header {
 	#player #playlist div {
 		margin-top: 10px;
 		max-width: 300px;
+		font-size: 12px;
 		overflow: hidden;
 	}
+	#player #playlist div span {
+	  display: block;
+    margin-bottom: 5px;
+  }
+ 	#player #playlist div span:nth-child(odd) {
+	  color: #FFCD63 !important;
+  }
 	#player #currentVideoTitle {
 		font-size: 14px;
 		color: #181818;
@@ -166,12 +179,13 @@ header {
 			color: #181818;
 			background: #FFCD63;
 			padding: 5px 8px;
+	    margin-top: 70px;
 		}
 			#player a#next {
-				margin-left: 42px;
+				margin-left: 704px;
 			}
 			#player a#prev {
-				margin-top: 35px;
+  			margin-left: 115px;
 			}
 	#player #currentVideoId {
 		display: block;
@@ -183,12 +197,30 @@ header {
 		color: #FFCD63;
 	}
 #playlist-stuff {
-  width: 975px; margin: 0 auto; text-align: right; display: none; margin-top: 10px;
+  width: 975px; margin: 0 auto; text-align: right; display: none; margin-top: 10px; padding-right: 230px; font-size: 12px;
 }
 #playlist-stuff a {
+  color: #FFCD63; 
+}
+#no_playlist {
+  width: 975px;
+  margin: 0 auto;
+  text-align: right;
+  margin-top: 20px;
+}	
+#no_playlist a {
   color: #FFCD63;
 }
-	
+.video-added {
+  padding: 5px 10px;
+  background: black;
+  opacity: .5;
+  position: absolute;
+  margin-left: -108px;
+  margin-top: 19px;
+  display: none;
+}
+
 footer {
 	background:url(../images/bg_trans.png); 
 	width: 100%;

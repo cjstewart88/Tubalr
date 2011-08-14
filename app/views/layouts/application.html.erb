@@ -8,6 +8,12 @@
   </head>
   <body>
     <header>
+      <% if @playlist_id %>
+        <aside>
+          Your currently in a user made playlist, to add songs to it simply start searching Tubalr below!
+        </aside>
+      <% end %>
+      
       <img src="../images/tubalr_logo.png" onClick="window.location.href='/'">
       
       <form id="listenForm" onSubmit="return false;"> 

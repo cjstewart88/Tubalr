@@ -3,6 +3,7 @@ var videos = new Array();
 var currenttrack = 0;
 var search = "";
 var search_type = "";
+var videosCopy = "";
 
 // just a certain artist/band
 function just(who) {
@@ -34,9 +35,16 @@ function playlist(id) {
   currenttrack = 0;
   search = id;
   search_type = "playlist";
+  videosCopy = "";
   
 	$.getJSON('/playlist/'+id+'.json', function(data) {
 	  if (data.length != 0) {
+			$('#playlist span,#playlist span a.delete').mouseenter(function(){
+    		$(this).find('.delete').show();
+    	}).mouseleave(function(){
+    		$(this).find('.delete').hide();
+    	});
+			
       videos = data;
 		  initPlaylist();
 	  } 
@@ -55,6 +63,12 @@ function playlist(id) {
 function initPlaylist() {
   $('#player').show();
   $('#about').hide();
+  $('#no_playlist').hide();
+  videosCopy = "";
+  $.each(videos, function(i) {
+    videosCopy = videosCopy + '<span class="'+i+'"><a href="#" class="delete" onClick="deleteVideo('+i+')">x</a><a href="#" onClick="jumpTo('+i+')">'+this.VideoTitle+'</a><br/></span>';
+  });
+	$('#playlist div').html(videosCopy);
 	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
 	$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
 	$('#currentVideoId').attr('alt',videos[currenttrack].VideoID);
@@ -64,6 +78,13 @@ function initPlaylist() {
 	else {
   	$('#playlist-stuff').hide();
 	}
+}
+
+// jump to a certain video
+function jumpTo(VideoID) {
+	currenttrack = VideoID;
+	ytplayer.loadVideoById(videos[currenttrack].VideoID, 0);
+	$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
 }
 
 // next
@@ -137,6 +158,9 @@ $(document).ready(function(){
   });
   
   $('.add-to-playlist').click(function() {
-    $.getJSON('/playlist/video/'+$(this).attr('playlist-id')+'/'+videos[currenttrack].VideoID+"/"+videos[currenttrack].VideoTitle);
+    $.getJSON('/playlist/video/'+$(this).attr('playlist-id')+'/'+videos[currenttrack].VideoID+"/"+videos[currenttrack].VideoTitle, function(){
+      $('.video-added').show();
+      setTimeout(function(){$('.video-added').hide()}, 2000)
+    });
   });
 });
