@@ -212,7 +212,7 @@ header {
 footer {
 	background: url(../images/bg_trans.png); 
 	width: 100%;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	font-size: 12px;
 }
