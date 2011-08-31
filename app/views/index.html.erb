@@ -1,10 +1,12 @@
-<% if request.path == "/just" %>
+<% if request.path.index("just") %>
   <script type="text/javascript">
     just('<%= params[:artist_band] %>');
+    console.log("test");
   </script>
-<% elsif request.path == "/similar" %>
+<% elsif request.path.index("similar") %>
   <script type="text/javascript">
     similarTo('<%= params[:artist_band] %>');
+    console.log("test2");
   </script>
 <% end %>
 
