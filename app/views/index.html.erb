@@ -1,3 +1,13 @@
+<% if request.path == "/just" %>
+  <script type="text/javascript">
+    just('<%= params[:artist_band] %>');
+  </script>
+<% elsif request.path == "/similar" %>
+  <script type="text/javascript">
+    similarTo('<%= params[:artist_band] %>');
+  </script>
+<% end %>
+
 <% if @no_playlist %>
   <section id="no_playlist">
     There dosnt seem to be a playlist with the ID of '<%= @no_playlist %>'. Feel free to <a href='/playlist'>create</a> a new one!

@@ -7,6 +7,9 @@ Tubalr::Application.routes.draw do
   get "/similar/:artist_band.json" => "api#similar"
   get "/playlist/:playlist_id.json" => "api#playlist"
   
+  get "/just/:artist_band" => ""
+  get "/similar/:artist_band" => ""
+  
   get "/playlist" => "playlist#create"
   get "/playlist/:playlist_id" => "playlist#init"
   get "/playlist/video/:playlist_id/:video_id/:video_title" => "playlist#addVideo"
