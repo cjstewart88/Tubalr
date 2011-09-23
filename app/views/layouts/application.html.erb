@@ -3,8 +3,8 @@
   <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# tubalrr: http://ogp.me/ns/fb/tubalrr#">
     <meta property="fb:app_id"      content="239275546125436"> 
     <meta property="og:type"        content="tubalrr:song"> 
-    <meta property="og:url"         content="http://www.tubalr.com"> 
-    <meta property="og:title"       content="Tubalr"> 
+    <meta property="og:url"         content="http://www.tubalr.com/just/<%= params[:artist_band] if params[:artist_band].present? %>"> 
+    <meta property="og:title"       content="<%= params[:artist_band].gsub!('+',' ') if params[:artist_band].present? %>"> 
     <meta property="og:description" content="Listen to your favorite artist and band's top YouTube videos!"> 
     <meta property="og:image"       content="http://profile.ak.fbcdn.net/hprofile-ak-snc4/203536_154359441249128_2650920_n.jpg">
     <title>Tubalr</title>
@@ -13,7 +13,7 @@
     <%= csrf_meta_tag %>
   </head>
   <body>
-    <!-- <div id="fb-root"></div>
+    <div id="fb-root"></div>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
     <script>
         FB.init({ 
@@ -21,10 +21,10 @@
             status:true, xfbml:true, oauth:true
         });
     </script>
-    <div id="fb-root"></div> -->
+    <div id="fb-root"></div>
     
     <header>
-      <!-- <fb:add-to-timeline  show-faces="false" mode="button" style="position: absolute; right: 0px; top: 15px;"></fb:add-to-timeline> -->
+      <fb:add-to-timeline  show-faces="false" mode="button" style="position: absolute; right: 0px; top: 15px;"></fb:add-to-timeline>
       
       <% if @playlist_id %>
         <aside>
