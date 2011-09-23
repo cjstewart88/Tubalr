@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:fb="https://www.facebook.com/2008/fbml">
   <head>
     <title>Tubalr</title>
     <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Raleway:100", "main" %>
@@ -7,7 +7,18 @@
     <%= csrf_meta_tag %>
   </head>
   <body>
+    <div id="fb-root"></div>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <script>
+        FB.init({ 
+            appId:'YOUR_APP_ID', cookie:true, 
+            status:true, xfbml:true, oauth:true
+        });
+    </script>
+    
     <header>
+      <fb:add-to-timeline style="position: absolute; right: 0px; top: 15px;"></fb:add-to-timeline>
+      
       <% if @playlist_id %>
         <aside>
           You're currently in a user made playlist; to add songs to it, simply start searching Tubalr below!
