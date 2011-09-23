@@ -5,8 +5,13 @@ var search = "";
 var search_type = "";
 var videosCopy = "";
 
+// 'https://graph.facebook.com/me/tubalrr:listen?access_token=AAADZAnq3uJHwBAPPkGNDRt8AWeD29a731w5xWvQgFqyllsEneIqny0qnoOETnSZBghV6TVANDOE0AlZAZBIwrB9TtlaKMPkC1Yc9ckZC4CNACXAPN2gQP&song=http://samples.ogp.me/239287459457578'
 // just a certain artist/band
 function just(who) {
+  $.post('https://graph.facebook.com/me/tubalrr:listen?access_token=AAADZAnq3uJHwBAPPkGNDRt8AWeD29a731w5xWvQgFqyllsEneIqny0qnoOETnSZBghV6TVANDOE0AlZAZBIwrB9TtlaKMPkC1Yc9ckZC4CNACXAPN2gQP&song=http://www.tubalr.com/just/'+who, function (data) {
+    console.log(data);
+  });
+  
   videos = [];
   currenttrack = 0;
   search = who;
