@@ -1,8 +1,8 @@
-General Usage:
+# General Usage
 http://www.tubalr.com/just/Band+of+Horses
 http://www.tubalr.com/similar/Fleet+Foxes
 
-API Usage:
+# API Usage
 http://www.tubalr.com/just/Band+of+Horses.json
 
     [
