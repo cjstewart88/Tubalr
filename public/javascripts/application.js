@@ -8,14 +8,14 @@ var videosCopy = "";
 // 'https://graph.facebook.com/me/tubalrr:listen?access_token=AAADZAnq3uJHwBAPPkGNDRt8AWeD29a731w5xWvQgFqyllsEneIqny0qnoOETnSZBghV6TVANDOE0AlZAZBIwrB9TtlaKMPkC1Yc9ckZC4CNACXAPN2gQP&song=http://samples.ogp.me/239287459457578'
 // just a certain artist/band
 function just(who) {
-  $("meta[property='og:title']").attr('url','www.tubalr.com/just/'+who);
-  $("meta[property='og:title']").attr('content',who+' on Tubalr');
-  $("meta[property='og:url']").attr('description','Listen to ' + who + ' on Tubalr! Tubalr lets you watch your favorite band or artists YouTube videos.');
-  
-  
-  $.post('https://graph.facebook.com/me/tubalrr:listen?access_token=AAADZAnq3uJHwBAPPkGNDRt8AWeD29a731w5xWvQgFqyllsEneIqny0qnoOETnSZBghV6TVANDOE0AlZAZBIwrB9TtlaKMPkC1Yc9ckZC4CNACXAPN2gQP&song=http://www.tubalr.com/just/'+who, function (data) {
-    console.log(data);
-  });
+  // $("meta[property='og:title']").attr('url','www.tubalr.com/just/'+who);
+  //  $("meta[property='og:title']").attr('content',who+' on Tubalr');
+  //  $("meta[property='og:url']").attr('description','Listen to ' + who + ' on Tubalr! Tubalr lets you watch your favorite band or artists YouTube videos.');
+  //  
+  //  
+  //  $.post('https://graph.facebook.com/me/tubalrr:listen?access_token=AAADZAnq3uJHwBAPPkGNDRt8AWeD29a731w5xWvQgFqyllsEneIqny0qnoOETnSZBghV6TVANDOE0AlZAZBIwrB9TtlaKMPkC1Yc9ckZC4CNACXAPN2gQP&song=http://www.tubalr.com/just/'+who, function (data) {
+  //    console.log(data);
+  //  });
   
 
   videos = [];
