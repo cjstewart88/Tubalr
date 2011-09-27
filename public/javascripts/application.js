@@ -4,6 +4,7 @@ var currenttrack = 0;
 var search = "";
 var search_type = "";
 var videosCopy = "";
+var ytplayer = null;
 
 function just(who) {
   videos = [];
