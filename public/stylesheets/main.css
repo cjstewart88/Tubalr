@@ -1,3 +1,15 @@
+@font-face {
+    font-family: 'ColaborateThinRegular';
+    src: url('ColabThi-webfont.eot');
+    src: url('ColabThi-webfont.eot?#iefix') format('embedded-opentype'),
+         url('ColabThi-webfont.woff') format('woff'),
+         url('ColabThi-webfont.ttf') format('truetype'),
+         url('ColabThi-webfont.svg#ColaborateThinRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 * { margin: 0px; padding: 0px; }
 
 header, footer, aside, nav, article, section { display: block; } 
@@ -8,12 +20,12 @@ body {
 	padding: 0; margin: 0; 
 	background:url(../images/bg.png); 
 	border-top: solid 5px #FFCD63; 
-	font-family: 'Raleway', Arial, sans-serif; 
+	font-family: 'ColaborateThinRegular', Arial, sans-serif; 
 	color: #fff;
 }	
 
 form input {	
-	font-family: 'Raleway', Arial, sans-serif; 
+	font-family: 'ColaborateThinRegular', Arial, sans-serif; 
 }		
 		
 #userPanel {
