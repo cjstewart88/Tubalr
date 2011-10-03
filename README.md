@@ -1,5 +1,8 @@
 # General Usage
+Watch the top 20 Band of Horses YouTube videos:
 http://www.tubalr.com/just/Band+of+Horses
+
+Watch 20 bands similar to Fleet Foxes' top YouTube videos:
 http://www.tubalr.com/similar/Fleet+Foxes
 
 # API Usage
