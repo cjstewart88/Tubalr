@@ -27,33 +27,6 @@ body {
 form input {	
 	font-family: 'ColaborateThinRegular', Arial, sans-serif; 
 }		
-		
-#userPanel {
-	padding-top: 10px;
-	position: absolute;
-	text-align: right;
-	width: 975px;
-	font-size: 12px;
-}
-#userPanel a {
-	color: #FFCD63;
-	text-decoration: none;
-	cursor: pointer;
-}
-#userPanel form {
-	margin-right: 30px;
-	margin-bottom: 10px;
-}
-#userPanel .input {
-	width: 80px;
-	background: none;
-	border: none; border-bottom: 1px solid #FFCD63;
-	outline: none;
-	font-size: 10px; color: #fff; margin-right: 10px; margin-left: 5px;
-}
-#userPanel form a {
-	position: absolute;
-}
 
 header {
 	width: 975px;
@@ -196,30 +169,6 @@ header {
 	#player #currentVideoId:hover {
 		color: #FFCD63;
 	}
-#playlist-stuff {
-  width: 975px; margin: 0 auto; text-align: right; display: none; margin-top: 10px; padding-right: 230px; font-size: 12px;
-}
-#playlist-stuff a {
-  color: #FFCD63; 
-}
-#no_playlist {
-  width: 975px;
-  margin: 0 auto;
-  text-align: right;
-  margin-top: 20px;
-}	
-#no_playlist a {
-  color: #FFCD63;
-}
-.video-added {
-  padding: 5px 10px;
-  background: black;
-  opacity: .5;
-  position: absolute;
-  margin-left: -108px;
-  margin-top: 19px;
-  display: none;
-}
 
 footer {
 	background: url(../images/bg_trans.png); 

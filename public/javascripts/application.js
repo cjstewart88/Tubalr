@@ -6,6 +6,7 @@ var search_type = "";
 var videosCopy = "";
 var ytplayer = null;
 
+// just artist/band
 function just(who) {
   videos = [];
   currenttrack = 0;
@@ -45,54 +46,18 @@ function similarTo(who) {
 	});
 }
 
-// similar artist/bands
-function playlist(id) {
-  videos = [];
-  currenttrack = 0;
-  search = id;
-  search_type = "playlist";
-  videosCopy = "";
-  
-	$.getJSON('/playlist/'+id+'.json', function(data) {
-	  if (data.length != 0) {
-      videos = data;
-		  initPlaylist();
-	  } 
-	  else {
-      $('#about').show();
-      $('#player').hide();
-      $('#playlist-stuff').hide();
-	    $('#about span').html("Oh No!")
-	    $('#about p').html("You have 0 songs in your playlist, start using Tubalr and add some songs! Dont forget you can share your playlist by sending the URL to your friends!")
-	    $('#about span.create-playlist-header').hide().next().hide();
-	  } 
-	});
-}
-
 // start the playlist
 function initPlaylist() {
   $('#player').show();
   $('#about').hide();
-  $('#no_playlist').hide();
   videosCopy = "";
   $.each(videos, function(i) {
     videosCopy = videosCopy + '<span class="'+i+'"><a href="#" class="delete" onClick="deleteVideo('+i+')">x</a><a href="#" onClick="jumpTo('+i+')">'+this.VideoTitle+'</a><br/></span>';
   });
 	$('#playlist div').html(videosCopy);
-  // $('#playlist span,#playlist span a.delete').mouseenter(function(){
-  //  $(this).find('.delete').show();
-  // }).mouseleave(function(){
-  //  $(this).find('.delete').hide();
-  // });
 	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
 	$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
 	$('#currentVideoId').attr('alt',videos[currenttrack].VideoID);
-	if ($('#playlist-stuff').find() && search_type != "playlist") {
-	  $('#playlist-stuff').show();
-	}
-	else {
-  	$('#playlist-stuff').hide();
-	}
 }
 
 // jump to a certain video
@@ -159,9 +124,6 @@ $(document).ready(function(){
   $('.similar').click(function() {
     similarTo($('#q').val());
   });
-  $('.listen-to-playlist').click(function() {
-    playlist($('.listen-to-playlist').attr('playlist-id'));
-  });
 
   $('input#q').keypress(function(e) {
     var code = (e.keyCode ? e.keyCode : e.which);
@@ -170,12 +132,5 @@ $(document).ready(function(){
         just($('#q').val());
       }
     }
-  });
-  
-  $('.add-to-playlist').click(function() {
-    $.getJSON('/playlist/video/'+$(this).attr('playlist-id')+'/'+videos[currenttrack].VideoID+"/"+videos[currenttrack].VideoTitle, function(){
-      $('.video-added').show();
-      setTimeout(function(){$('.video-added').hide()}, 2000)
-    });
   });
 });
