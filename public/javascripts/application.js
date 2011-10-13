@@ -48,16 +48,21 @@ function similarTo(who) {
 
 // start the playlist
 function initPlaylist() {
-  $('#player').show();
-  $('#about').hide();
-  videosCopy = "";
-  $.each(videos, function(i) {
-    videosCopy = videosCopy + '<span class="'+i+'"><a href="#" class="delete" onClick="deleteVideo('+i+')">x</a><a href="#" onClick="jumpTo('+i+')">'+this.VideoTitle+'</a><br/></span>';
+  $("#main").animate({
+    marginTop: 20
+  }, 500, function () {
+    $('#about').fadeOut(1000, function() {
+      videosCopy = "&#8226;";
+      $.each(videos, function(i) {
+        videosCopy = videosCopy + '<a href="#" onClick="jumpTo('+i+')">'+this.VideoTitle+'</a>&#8226;';
+      });
+    	$('#playlist').html(videosCopy);
+    	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
+    	$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
+    	$('#currentVideoId').attr('alt',videos[currenttrack].VideoID);
+    	$('#player').fadeIn(1000);
+    });
   });
-	$('#playlist div').html(videosCopy);
-	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
-	$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
-	$('#currentVideoId').attr('alt',videos[currenttrack].VideoID);
 }
 
 // jump to a certain video
@@ -111,11 +116,14 @@ function onPlayerError(errorCode) {
 }
 
 $(document).ready(function(){
+  $('#main').delay(500).fadeIn();
+  $('#footer').delay(500).fadeIn();
+  
   $('#q').focus(function() {
-    if ($(this).val() == "ENTER ARTIST'S NAME HERE") $(this).val("");
+    if ($(this).val() == "Enter Artist or Band Here") $(this).val("");
   });
   $('#q').blur(function() {
-    if ($(this).val() == "") $(this).val("ENTER ARTIST'S NAME HERE");
+    if ($(this).val() == "") $(this).val("Enter Artist or Band Here");
   });
 
   $('.just').click(function() {

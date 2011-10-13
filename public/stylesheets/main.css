@@ -1,165 +1,135 @@
-@font-face {
-    font-family: 'ColaborateThinRegular';
-    src: url('ColabThi-webfont.eot');
-    src: url('ColabThi-webfont.eot?#iefix') format('embedded-opentype'),
-         url('ColabThi-webfont.woff') format('woff'),
-         url('ColabThi-webfont.ttf') format('truetype'),
-         url('ColabThi-webfont.svg#ColaborateThinRegular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
 * { margin: 0px; padding: 0px; }
 
 header, footer, aside, nav, article, section { display: block; } 
 
 html { overflow-y: scroll; }
 
+a:hover { color: #E0401C; }
+
 body {
-	padding: 0; margin: 0; 
-	background:url(../images/bg.png); 
-	border-top: solid 5px #FFCD63; 
-	font-family: 'ColaborateThinRegular', Arial, sans-serif; 
-	color: #fff;
+	background: url(../images/bg.png); 
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+	color: #000;
 }	
 
+#main {
+  display: none;
+  width: 600px;
+  margin: 0 auto;
+  margin-top: 200px;
+}
+h1 { color: #464646; text-align: center; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
+h1:hover {
+  -webkit-transform: color;
+  -webkit-transition-duration: 1s;
+  color: #E0401C;
+}
+form { width: 355px; margin: 0 auto; }
 form input {	
-	font-family: 'ColaborateThinRegular', Arial, sans-serif; 
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
 }		
 
-header {
-	width: 975px;
-	margin: 0 auto;
+form input:focus {
+  outline: 0;
 }
-	header img {
-		cursor: pointer;
-	}
-	header aside {
-	  float: right;
-    font-size: 12px;
-    margin-top: 10px;
-	}
-	header #listenForm {
-		margin-top: -88px;
-		text-align: right;
-	}
 		
-		#q {
-			width: 640px;
-			padding: 10px;
-			background: transparent;
-			border: none; border-bottom: 1px solid #FFCD63;
-			outline: none;
-			font-size: 40px; color: #fff; text-align: right;
-			margin-bottom: 7px;
-		}
-		
-		.listen {
-			background: url(../images/link_arrow.png) right no-repeat;
-			border: none;
-			color: #FFCD63;
-			padding-right: 18px;
-			margin-left: 15px;
-			cursor: pointer;
-		}
+#q {
+  width: 200px;
+  height: 29px;
+  padding: 0px 8px;
+  border: solid 1px #cecfd1;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  font-size: 11px;
+  color: #666;
+  font-weight: bold;
+}
+
+.listen { 
+  min-width: 54px;
+  height: 29px;
+  margin: 11px 0px 11px 6px;
+  padding: 0 8px;
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#f5f5f5),to(#f1f1f1));
+  background-image: -webkit-linear-gradient(top,#f5f5f5,#f1f1f1);
+  background-color: whiteSmoke;
+  background-image: linear-gradient(top,#f5f5f5,#f1f1f1);
+  background-image: -o-linear-gradient(top,#f5f5f5,#f1f1f1);
+  border: 1px solid #cecfd1;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -webkit-user-select: none;
+  color: #666;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 27px;
+  cursor: pointer;
+}
+.listen:hover {
+  background-image: -webkit-gradient(linear,left top,left bottom,from(#f1f1f1),to(#f5f5f5));
+  background-image: -webkit-linear-gradient(top,#f1f1f1,#f5f5f5);
+  background-image: linear-gradient(top,#f1f1f1,#f5f5f5);
+  background-image: -o-linear-gradient(top,#f1f1f1,#f5f5f5);
+  border-color: #999;  
+}
+
+#q:focus, input:focus { border-color: #999; }
+input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; } 
 
 #about {
-	width: 975px;
-	margin: 0 auto;
-	margin-top: 30px;
-	text-align: right;
+	width: 300px;
+	margin-left: 128px;
+	margin-top: 15px;
+	background: rgba(0, 0, 0, .7);
+  border: solid 1px #464646;
+  border-radius: 2px;
+  padding: 10px 15px;
+  color: #fdfdfd;
+  font-size: 10px;
+  text-shadow: 1px 1px 0 rgba(34, 23, 23, 0.6);
+  text-align: center;
 }
-	#about span {
-		width: 642px;
-		padding: 3px 6px;
-		background: #FFCD63;
-		font-size: 28px; color: #181818;
-	}
-	#about p {
-		margin-left: 568px;	margin-top: 15px; margin-bottom: 30px;
-		width: 407px;
-		font-size: 18px;
-	}
-	#about p a {
-		color: #FFCD63;
-	}
 
 #player {
-	width: 975px;
+	width: 600px;
 	margin: 0 auto;
 	display: none;
-	text-align: right;
 	margin-top: 25px;
+	font-size: 10px;
+	position: relative;
+	z-index: 10000;
 }
-	#player #playlist {
-		position: absolute;
-		text-align: left;
-	}
-	#player #playlist .playlistTitle {
-		padding: 3px 6px;
-		background: #FFCD63;
-		color: #181818;
-	}
-	#player #playlist a {
-		color: #fff;
-		margin-left: -15px;
-		padding-left: 15px;
-		text-decoration: none;
-	}
-	#player #playlist a:hover {
-		color: #FFCD63;
-		text-decoration: none;
-	}
-	#player #playlist a.delete {
-		padding: 0;
-		display: none;
-		position: absolute;
-		margin-left: -13px;
-		padding-right: 10px;
-	}
-	#player #playlist div {
+	#playlist {
+  	width: 600px;
+  	max-width: 600px;
 		margin-top: 10px;
-		max-width: 300px;
-		font-size: 12px;
-		overflow: hidden;
+		color: #E0401C;
+		line-height: 16px;
 	}
-	#player #playlist div span {
-	  display: block;
-    margin-bottom: 5px;
-  }
- 	#player #playlist div span:nth-child(odd) {
-	  color: #FFCD63 !important;
-  }
+  #playlist a {
+		color: #464646;
+		margin-right: 8px;
+		margin-left: 8px;
+		text-decoration: none;
+	}
+	#playlist a:hover {
+	  color: #E0401C;
+	}
 	#player #currentVideoTitle {
-		font-size: 14px;
-		color: #181818;
-		background: #FFCD63;
-		padding: 5px 8px;
+		color: #464646;
 	}
 	#ytplayerid {
 		height: 362px;
 	}
-	#player nav {
-		margin-top: 314px;
-		position: absolute;
-		margin-left: 203px;
+	nav a {
+	  display: block;
+		text-decoration: none;
+		color: #464646;
 	}
-		#player nav a {
-			position: absolute;
-			text-decoration: none;
-			font-size: 20px;
-			color: #181818;
-			background: #FFCD63;
-			padding: 5px 8px;
-	    margin-top: 70px;
-		}
-			#player a#next {
-				margin-left: 704px;
-			}
-			#player a#prev {
-  			margin-left: 115px;
-			}
+	#next {
+		float: right;
+	}
+	
 	#player #currentVideoId {
 		display: block;
 		color: #fff;
@@ -171,21 +141,24 @@ header {
 	}
 
 footer {
-	background: url(../images/bg_trans.png); 
 	width: 100%;
 	position: fixed;
+	left: 0;
 	bottom: 0;
-	font-size: 12px;
+  color: #464646;
+  font-size: 10px;
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
 }
 	footer section {
 		margin: 10px;
 	}
 	footer a {
-		color: #FFCD63;
+		color: #464646;
 		text-decoration: none;
 	}
 	footer iframe {
 		position: absolute;
+		margin-top: -2px;
 		right: 10px;
 		top: 8px;
 	}

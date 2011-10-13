@@ -8,23 +8,22 @@
     <%= csrf_meta_tag %>
   </head>
   <body>
-    <header>
-      <img src="../images/tubalr_logo.png" width="230" onClick="window.location.href='/'">
-      
+    <div id="main">
+      <h1>Tubalr</h1>
+    
       <form id="listenForm" onSubmit="return false;"> 
-        <input type="text" name="q" id="q" value="ENTER ARTIST'S NAME HERE"/><br/>
-        <input type="button" name="just" value="This Artist/Band Only" class="listen just"/>
-        <input type="button" name="similar" value="Similar Artists/Bands" class="listen similar"/>
+        <input type="text" name="q" id="q" value="Enter Artist or Band Here" tabindex="1"/>
+        <input type="button" name="just" value="Only" class="listen just" tabindex="2"/>
+        <input type="button" name="similar" value="Similar" class="listen similar" tabindex="3"/>
       </form>
-    </header>
     
     <%= yield %>
-      
+    
     <footer>
- 			<iframe src="http://www.facebook.com/plugins/like.php?href=www.tubalr.com&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:80px; height:21px;" allowTransparency="true"></iframe>
-			<section>
-				Idea/Coding by <a href="http://twitter.com/codyjackstewart" target="_blank">Cody Stewart</a> - Design by <a href="http://twitter.com/alexpierce" target="_blank">Alex Pierce</a> - <a href='https://github.com/cjstewart88/Tubalr' target='_blank'>Github</a>
-			</section>
-		</footer>
+      <iframe src="http://www.facebook.com/plugins/like.php?href=www.tubalr.com&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe>
+      <section>
+        Crafted By: <a href="http://twitter.com/codyjackstewart" target="_blank">Cody Stewart</a>
+      </section>
+    </footer>
   </body>
 </html>

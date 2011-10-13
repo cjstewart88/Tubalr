@@ -1,25 +1,21 @@
+  <section id="about">
+    Tubalr allows you to effortlessly and quickly listen to a band's or artist's top YouTube videos without
+    all the clutter YouTube brings. To get started just type an artist's name into the search box and select
+    only or similar.
+  </section>
+</div>
+
 <script>
   <%= "just('#{params[:artist_band]}');" if request.path.index("just") %>
   <%= "similarTo('#{params[:artist_band]}');" if request.path.index("similar") %>
 </script>
 
-<section id="about">
-  <span>WHAT IS THIS AND WHY'S IT SO AWESOME?</span>
-  <p>
-    Tubalr allows you to effortlessly and quickly listen to a band's or artist's top YouTube videos without
-    all the clutter YouTube brings. To get started just type an artist's name into the search box and select
-    similar artist or just this artist.
-  </p>
-</section>
-
 <section id="player">
-	<section id="playlist">
-		<div></div>
-	</section>
-	<nav> 
-		<a href="#" onClick="previousSong()" id="prev">PREVIOUS</a> 
-  	<a href="#" onClick="nextSong()" id="next">NEXT</a>
-	</nav> 
 	<span id="currentVideoTitle"></span><br/> 
 	<div id="ytplayerid"></div> 
+	<nav> 
+		<a href="#" onClick="nextSong()" id="next">next</a>
+		<a href="#" onClick="previousSong()" id="prev">previous</a> 
+	</nav>
+	<section id="playlist">	</section>
 </section>
