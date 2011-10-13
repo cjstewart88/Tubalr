@@ -99,6 +99,9 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	position: relative;
 	z-index: 10000;
 }
+  #player object {
+    margin-top: 5px;
+  }
 	#playlist {
   	width: 600px;
   	max-width: 600px;
@@ -117,6 +120,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	}
 	#player #currentVideoTitle {
 		color: #464646;
+		font-weight: normal;
 	}
 	#ytplayerid {
 		height: 362px;
