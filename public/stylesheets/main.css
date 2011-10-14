@@ -4,7 +4,7 @@ header, footer, aside, nav, article, section { display: block; }
 
 html { overflow-y: scroll; }
 
-a:hover { color: #E0401C; }
+a:hover { color: #940500; }
 
 body {
 	background: url(../images/bg.png); 
@@ -22,7 +22,7 @@ h1 { color: #464646; text-align: center; text-shadow: 1px 1px 0 rgba(255, 255, 2
 h1:hover {
   -webkit-transform: color;
   -webkit-transition-duration: 1s;
-  color: #E0401C;
+  color: #940500;
 }
 form { width: 355px; margin: 0 auto; }
 form input {	
@@ -106,7 +106,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   	width: 600px;
   	max-width: 600px;
 		margin-top: 10px;
-		color: #E0401C;
+		color: #940500;
 		line-height: 16px;
 	}
   #playlist a {
@@ -116,7 +116,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 		text-decoration: none;
 	}
 	#playlist a:hover {
-	  color: #E0401C;
+	  color: #940500;
 	}
 	#player #currentVideoTitle {
 		color: #464646;
