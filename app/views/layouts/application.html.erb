@@ -2,14 +2,14 @@
 <html>
   <head>
     <title>Tubalr</title>
-    <%= stylesheet_link_tag "main" %>
+    <%= stylesheet_link_tag "main", "http://fonts.googleapis.com/css?family=Pacifico" %>
     <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js", "https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js", "ga", "application" %>
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <%= csrf_meta_tag %>
   </head>
   <body>
     <div id="main">
-      <h1>Tubalr</h1>
+      <h1>tubalr</h1>
     
       <form id="listenForm" onSubmit="return false;"> 
         <input type="text" name="q" id="q" value="Enter Artist or Band Here" tabindex="1"/>
