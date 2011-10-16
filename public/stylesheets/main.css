@@ -40,7 +40,7 @@ form input:focus {
   border: solid 1px #cecfd1;
   border-radius: 2px;
   -webkit-border-radius: 2px;
-  font-size: 11px;
+  font-size: 12px;
   color: #666;
   font-weight: bold;
 }
@@ -60,7 +60,7 @@ form input:focus {
   -webkit-border-radius: 2px;
   -webkit-user-select: none;
   color: #666;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: bold;
   line-height: 27px;
   cursor: pointer;
@@ -77,15 +77,15 @@ form input:focus {
 input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; } 
 
 #about {
-	width: 300px;
+	width: 312px;
 	margin-left: 128px;
 	margin-top: 15px;
 	background: rgba(0, 0, 0, .7);
   border: solid 1px #464646;
   border-radius: 2px;
-  padding: 10px 15px;
+  padding: 10px;
   color: #fdfdfd;
-  font-size: 10px;
+  font-size: 12px;
   text-shadow: 1px 1px 0 rgba(34, 23, 23, 0.6);
   text-align: center;
 }
@@ -95,12 +95,12 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	margin: 0 auto;
 	display: none;
 	margin-top: 25px;
-	font-size: 10px;
+	font-size: 12px;
 	position: relative;
 	z-index: 10000;
 }
   #player object {
-    margin-top: 5px;
+    margin: 5px 0px;
   }
 	#playlist {
   	width: 600px;
@@ -109,14 +109,15 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 		color: #940500;
 		line-height: 16px;
 	}
+	#playlist b {
+	  margin: 0px 8px;
+	}
   #playlist a {
 		color: #464646;
-		margin-right: 8px;
-		margin-left: 8px;
 		text-decoration: none;
 	}
 	#playlist a:hover {
-	  color: #940500;
+	  color: #940500 !important;
 	}
 	#player #currentVideoTitle {
 		color: #464646;
@@ -126,22 +127,12 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 		height: 362px;
 	}
 	nav a {
-	  display: block;
+	  display: inline-block;
 		text-decoration: none;
 		color: #464646;
 	}
 	#next {
 		float: right;
-	}
-	
-	#player #currentVideoId {
-		display: block;
-		color: #fff;
-		font-size: 12px;
-		text-decoration: none;
-	}
-	#player #currentVideoId:hover {
-		color: #FFCD63;
 	}
 
 footer {
@@ -149,13 +140,11 @@ footer {
 	position: fixed;
 	left: 0;
 	bottom: 0;
+	padding: 10px;
   color: #464646;
-  font-size: 10px;
+  font-size: 12px;
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6);
 }
-	footer section {
-		margin: 10px;
-	}
 	footer a {
 		color: #464646;
 		text-decoration: none;
@@ -163,6 +152,6 @@ footer {
 	footer iframe {
 		position: absolute;
 		margin-top: -2px;
-		right: 10px;
+		right: 30px;
 		top: 8px;
 	}

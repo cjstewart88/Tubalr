@@ -1,4 +1,4 @@
-// variables to be used throughout
+  // variables to be used throughout
 var videos = new Array();
 var currenttrack = 0;
 var search = "";
@@ -52,24 +52,30 @@ function initPlaylist() {
     marginTop: 20
   }, 500, function () {
     $('#about').fadeOut(1000, function() {
-      videosCopy = "&#8226;";
+      videosCopy = "";
       $.each(videos, function(i) {
-        videosCopy = videosCopy + '<a href="#" onClick="jumpTo('+i+')">'+this.VideoTitle+'</a>&#8226;';
+        videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'" onClick="jumpTo('+i+')">'+this.VideoTitle+'</a>'+(i == 19 ? '' : '<b>&#8226;</b>');
       });
     	$('#playlist').html(videosCopy);
     	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
-    	$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
-    	$('#currentVideoId').attr('alt',videos[currenttrack].VideoID);
+  		currentVideo(videos[currenttrack], true);
     	$('#player').fadeIn(1000);
     });
   });
 }
 
+// denote current song in the ui
+function currentVideo (video, init) {
+  if (!init) ytplayer.loadVideoById(video.VideoID, 0);
+	$('#currentVideoTitle').html(video.VideoTitle);
+	$('#playlist a').css('color', '#464646');
+	$('#'+video.VideoID).css('color', '#940500');
+}
+
 // jump to a certain video
 function jumpTo(VideoID) {
 	currenttrack = VideoID;
-	ytplayer.loadVideoById(videos[currenttrack].VideoID, 0);
-	$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
+	currentVideo(videos[currenttrack]);
 }
 
 // next
@@ -79,9 +85,7 @@ function nextSong() {
 	}
 	else {
 		currenttrack = currenttrack+=1;
-		ytplayer.loadVideoById(videos[currenttrack].VideoID, 0);
-		$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
-		$('#currentVideoId').attr('alt',videos[currenttrack].VideoID);
+		currentVideo(videos[currenttrack]);
 	}
 }
 
@@ -92,9 +96,7 @@ function previousSong() {
 	}
 	else {
 		currenttrack = currenttrack-=1;
-		ytplayer.loadVideoById(videos[currenttrack].VideoID, 0);
-		$('#currentVideoTitle').html(videos[currenttrack].VideoTitle);
-		$('#currentVideoId').attr('alt',videos[currenttrack].VideoID);
+		currentVideo(videos[currenttrack]);
 	}
 }
 
