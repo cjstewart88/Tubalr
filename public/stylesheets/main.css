@@ -18,7 +18,7 @@ body {
   margin: 0 auto;
   margin-top: 200px;
 }
-h1 { font-family: 'Pacifico'; color: #464646; display: inline-block; margin-left: 251px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
+h1 { cursor: default; font-family: 'Pacifico'; color: #464646; display: inline-block; margin-left: 251px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
 h1:hover {
   -webkit-transform: color;
   -webkit-transition-duration: 1s;
