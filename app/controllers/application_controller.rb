@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
   end
   
   def ensure_domain
-    if Rails.env.production? && request.url != "www.tubalr.com"
-      redirect_to "www.tubalr.com"
+    if Rails.env.production? && request.url == "tubalr.com"
+      redirect_to "http://www.tubalr.com"
     end
   end
 end
