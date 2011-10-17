@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  
+  before_filter :ensure_domain
+
   protect_from_forgery
   
   def index
@@ -16,4 +17,9 @@ class ApplicationController < ActionController::Base
     render :template => "player", :layout => false
   end
   
+  def ensure_domain
+    if Rails.env.production? && request.url != "www.tubalr.com"
+      redirect_to "www.tubalr.com"
+    end
+  end
 end
