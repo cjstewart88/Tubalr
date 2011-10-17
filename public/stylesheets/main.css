@@ -113,6 +113,25 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	position: relative;
 	z-index: 10000;
 }
+  #share {
+    position: absolute;
+    margin-left: 610px;
+    margin-top: 20px;
+  }
+  #share a {
+    display: block;
+    width: 16px;
+    height: 16px;
+    border: none;
+  }
+  #share a#facebook {
+    background: url(/images/facebook.png) no-repeat;
+  }
+  #share a#twitter {
+    background: url(/images/twitter.png) no-repeat;
+    margin-top: 5px;
+  }
+  
   #player object {
     margin: 5px 0px;
   }

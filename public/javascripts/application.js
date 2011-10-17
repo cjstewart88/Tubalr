@@ -1,4 +1,12 @@
-  // variables to be used throughout
+window.fbAsyncInit = function() { FB.init({ 
+    appId : '239275546125436', 
+    status : true, 
+    cookie : true, 
+    xfbml : true 
+  }); 
+};
+
+// variables to be used throughout
 var videos = new Array();
 var currenttrack = 0;
 var search = "";
@@ -58,6 +66,7 @@ function initPlaylist() {
       });
     	$('#playlist').html(videosCopy);
     	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
+    	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+search_type+"%2F"+search.replace(/[ +]/g,"%2B"));
   		currentVideo(videos[currenttrack], true);
     	$('#player').fadeIn(1000);
     });
@@ -117,6 +126,17 @@ function onPlayerError(errorCode) {
 	nextSong();
 }
 
+function facebook () {
+  FB.ui({
+      method: 'feed',
+      name: "I'm listening to "+(search_type == 'similar' ? 'artists/bands similar to ' : '')+search+" on tubalr! www.tubalr.com/"+search_type+"/"+search.replace(/ /g,"%20"),
+    },
+    function (response) {
+    }
+  );
+  return false;
+}
+
 $(document).ready(function(){
   $('#main').delay(500).fadeIn();
   $('#footer').delay(500).fadeIn();
@@ -142,5 +162,22 @@ $(document).ready(function(){
         just($('#q').val());
       }
     }
+  });
+  
+  $('#twitter').click(function(event) {
+    var width  = 575,
+        height = 400,
+        left   = ($(window).width()  - width)  / 2,
+        top    = ($(window).height() - height) / 2,
+        url    = this.href,
+        opts   = 'status=1' +
+                 ',width='  + width  +
+                 ',height=' + height +
+                 ',top='    + top    +
+                 ',left='   + left;
+    
+    window.open(url, 'twitter', opts);
+ 
+    return false;
   });
 });
