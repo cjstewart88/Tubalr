@@ -128,10 +128,13 @@ function onPlayerError(errorCode) {
 
 function facebook () {
   FB.ui({
-      method: 'feed',
-      name: (search_type == 'similar' ? 'Artists/Bands Similar to ' : '')+search+", brought to you by tubalr!",
-      link: "http://www.tubalr.com/"+search_type+"/"+search.replace(/ /g,"+"),
-      description: "Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without all the clutter YouTube brings."
+      method: 'stream.publish',
+      attachment: {
+        name: (search_type == 'similar' ? 'Artists/Bands Similar to ' : '')+search+", brought to you by tubalr!",
+        href: "http://www.tubalr.com/"+search_type+"/"+search.replace(/ /g,"+"),
+        description: ("Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without all the clutter YouTube brings.")
+      },
+      display: 'popup'
     },
     function (response) {
     }
