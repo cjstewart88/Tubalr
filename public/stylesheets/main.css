@@ -187,3 +187,5 @@ footer {
 		right: 30px;
 		top: 8px;
 	}
+
+.fb_dialog { z-index: 10000; }
