@@ -69,6 +69,14 @@ function initPlaylist() {
     	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+search_type+"%2F"+search.replace(/[ +]/g,"%2B"));
   		currentVideo(videos[currenttrack], true);
     	$('#player').fadeIn(1000);
+      $('body').keyup(function(e) {
+        if (!$('#q').is(":focus")) {
+          var code = (e.keyCode ? e.keyCode : e.which);
+          if (code == 39) nextSong();
+          if (code == 37) previousSong();
+          if (code == 32) ytplayer.getPlayerState() == 2 ? ytplayer.playVideo() : ytplayer.pauseVideo();
+        }
+      });
     });
   });
 }
@@ -162,7 +170,7 @@ $(document).ready(function(){
 
   $('input#q').keypress(function(e) {
     var code = (e.keyCode ? e.keyCode : e.which);
-    if(code == 13) { //Enter keycode  
+    if (code == 13) { //Enter keycode  
       if ($('#q').val() != "") {
         just($('#q').val());
       }
