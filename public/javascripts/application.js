@@ -151,6 +151,12 @@ function facebook () {
 }
 
 $(document).ready(function(){
+  $('#history').mouseenter(function(){
+    $(this).find('a').fadeIn(300);
+  }).mouseleave(function(){
+    $(this).find('a').fadeOut(300);
+  });
+  
   $('#main').delay(500).fadeIn();
   $('#footer').delay(500).fadeIn();
   

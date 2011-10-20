@@ -9,16 +9,11 @@
   </head>
   <body>
     <div id="fb-root"></div>
-    <div id="main">
-      <h1>tubalr</h1>
-
-      <form id="listenForm" onSubmit="return false;"> 
-        <input type="text" name="q" id="q" value="<%= (params[:artist_band] ? params[:artist_band].gsub('+',' ') : 'Enter Artist or Band Here') %>" tabindex="1"/>
-        <input type="button" name="just" value="Only" class="listen just" tabindex="2"/>
-        <input type="button" name="similar" value="Similar" class="listen similar" tabindex="3"/>
-      </form>
+    <% if !request.path.index("history") %> <aside id='history'><a href='/history'>What's being listened to?</a></aside> <% end %> 
+    <div id="main" <%= "style='margin-top: 20px;'" if request.path.index("history") %>>
+      <h1><a href='/'>tubalr</a></h1>
     
-    <%= yield %>
+      <%= yield %>
     
     <footer>
       <iframe src="http://www.facebook.com/plugins/like.php?href=www.tubalr.com&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe>

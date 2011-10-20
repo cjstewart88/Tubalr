@@ -1,3 +1,9 @@
+  <form id="listenForm" onSubmit="return false;"> 
+    <input type="text" name="q" id="q" value="<%= (params[:artist_band] ? params[:artist_band].gsub('+',' ') : 'Enter Artist or Band Here') %>" tabindex="1"/>
+    <input type="button" name="just" value="Only" class="listen just" tabindex="2"/>
+    <input type="button" name="similar" value="Similar" class="listen similar" tabindex="3"/>
+  </form>
+
   <section id="about">
     <span class="tooltip-tip"></span>
     Howdy, friend, wondering what Tubalr is? Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without

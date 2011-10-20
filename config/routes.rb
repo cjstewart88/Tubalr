@@ -9,4 +9,5 @@ Tubalr::Application.routes.draw do
   get "/just/:artist_band" => "application#index"
   get "/similar/:artist_band" => "application#index"
   
+  get "/history" => "application#history"
 end

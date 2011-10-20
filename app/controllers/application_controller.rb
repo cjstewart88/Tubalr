@@ -24,4 +24,17 @@ class ApplicationController < ActionController::Base
     
     render :template => "player", :layout => false
   end
+  
+  def history
+    @history    = []
+    tmp_history = Searches.find(:all, :limit => 100, :order => "created_at DESC")
+    
+    tmp_history.each do | search |
+      @history << search.what if !@history.include?(search.what)
+    end
+    
+    Rails.logger.debug @history
+    
+    render :layout => "application", :template => "history"
+  end
 end
