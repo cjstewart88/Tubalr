@@ -16,6 +16,7 @@ var ytplayer = null;
 
 // just artist/band
 function just(who) {
+  $('.just').addClass('listen-active');
   videos = [];
   currenttrack = 0;
   search = who;
@@ -33,6 +34,7 @@ function just(who) {
 
 // similar artist/bands
 function similarTo(who) {
+  $('.similar').addClass('listen-active');
   videos = [];
   currenttrack = 0;
   search = who;
@@ -56,6 +58,7 @@ function similarTo(who) {
 
 // start the playlist
 function initPlaylist() {
+  $('.listen-active').removeClass('listen-active');
   videos.sort(function () { return (Math.round(Math.random())-0.5); });
   $("#main").animate({
     marginTop: 20

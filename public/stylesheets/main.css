@@ -125,6 +125,13 @@ form input:focus {
   border-color: #999;  
 }
 
+.listen-active {
+  background-image: url(/images/loading.gif);
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: rgba(0, 0, 0, 0.0);
+}
+
 #q:focus, input:focus { border-color: #999; }
 input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; } 
 
