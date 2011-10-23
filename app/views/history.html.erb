@@ -1,5 +1,24 @@
-<ul id='history-list'>
-  <% @history.each do | search | %>
-   <li><%= search %></li>
-  <% end %>
-</ul>
+<section id="history-main">
+  <h2>
+    Most Recent Search History
+  </h2>
+  
+  <table>
+    <thead>
+      <tr>
+        <td>Artist/Band</td>
+        <td>Search Type</td>
+        <td>Date</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @history.each do | search | %>
+        <tr url="<%= search[:url] %>">
+          <td><%= search[:what] %></td>
+          <td><%= search[:type] %></td>
+          <td><i><%= search[:date] %></i></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>

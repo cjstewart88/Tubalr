@@ -31,7 +31,53 @@ body {
 #history a:hover {
   color: #940500;
 }
-#history-list li {
+
+#history-main { 
+  position: relative;
+  margin-top: 15px; 
+  margin-bottom: 50px; 
+  z-index: 10000; 
+  font-size: 12px;
+  color: #464646;
+}
+#history-main h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+#history-main table {
+  width: 100%;
+  border-spacing: 0;
+}
+#history-main table tr {
+  cursor: pointer;
+}
+#history-main table tr:hover {
+  background: #f0f0f0;
+}
+#history-main table thead{
+  font-weight: bold;
+}
+#history-main table thead tr:hover {
+  cursor: default;
+  background: none;
+}
+#history-main table tr td:nth-child(3) {
+  border-right: none;
+}
+#history-main table tr td {
+  padding: 5px;
+  border-right: dotted 1px #ababab;
+  border-bottom: dotted 1px #ababab;
+}
+#history-main table tbody tr:last-child td {
+  border-bottom: none;
+}
+#history-main a {
+  color: #464646;
+  text-decoration: none;
+}
+#history-main a:hover {
+  color: #940500;
 }
 
 #main {
@@ -40,7 +86,7 @@ body {
   margin: 0 auto;
   margin-top: 200px;
 }
-h1 { cursor: default; font-family: 'Pacifico'; color: #464646; display: inline-block; margin-left: 251px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
+h1 { cursor: default; font-family: 'Pacifico'; color: #464646; display: block; margin-left: 251px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
 h1:hover {
   -webkit-transform: color;
   -webkit-transition-duration: 1s;
@@ -48,7 +94,7 @@ h1:hover {
 }
 h1 a { text-decoration: none; color: #464646; }
 h1 a:hover { color: 940500; text-decoration: none; }
-form { width: 355px; margin: 0 auto; }
+form { width: 356px; margin: 0 auto; }
 form input {	
 	font-family: 'Cabin', Arial, sans-serif; 
 }		

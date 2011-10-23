@@ -9,15 +9,17 @@
   </head>
   <body>
     <div id="fb-root"></div>
-    <% if !request.path.index("history") %> <aside id='history'><a href='/history'>What's being listened to?</a></aside> <% end %> 
     <div id="main" <%= "style='margin-top: 20px;'" if request.path.index("history") %>>
-      <h1><a href='/'>tubalr</a></h1>
+      <% if !request.path.index("history") %><aside id='history'><a href='/history' target='_blank'>What's being listened to?</a></aside><% end %> 
     
+      <h1><a href='/'>tubalr</a></h1>
+  
       <%= yield %>
     
-    <footer>
-      <iframe src="http://www.facebook.com/plugins/like.php?href=www.tubalr.com&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe>
-      Crafted By: <a href="http://twitter.com/codyjackstewart" target="_blank">Cody Stewart</a>
-    </footer>
+      <footer>
+        <iframe src="http://www.facebook.com/plugins/like.php?href=www.tubalr.com&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe>
+        Crafted By: <a href="http://twitter.com/codyjackstewart" target="_blank">Cody Stewart</a>
+      </footer>
+    </div>
   </body>
 </html>
