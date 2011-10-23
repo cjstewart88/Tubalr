@@ -56,6 +56,7 @@ function similarTo(who) {
 
 // start the playlist
 function initPlaylist() {
+  videos.sort(function () { return (Math.round(Math.random())-0.5); });
   $("#main").animate({
     marginTop: 20
   }, 500, function () {
