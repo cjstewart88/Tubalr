@@ -12,26 +12,6 @@ body {
 	color: #000;
 }	
 
-#history {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 300px;
-  height: 150px;
-}
-#history a {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  font-size: 12px;
-  color: #464646;
-  text-decoration: none;
-  display: none;
-}
-#history a:hover {
-  color: #940500;
-}
-
 #history-main { 
   position: relative;
   margin-top: 15px; 

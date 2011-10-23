@@ -153,11 +153,6 @@ function facebook () {
 $(document).ready(function(){
   $('table tbody tr').click(function() {
     window.open(window.location.protocol+"//"+window.location.host+$(this).attr('url'));
-  })
-  $('#history').mouseenter(function(){
-    $(this).find('a').fadeIn(300);
-  }).mouseleave(function(){
-    $(this).find('a').fadeOut(300);
   });
   
   $('#main').delay(500).fadeIn();
