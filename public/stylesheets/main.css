@@ -79,7 +79,7 @@ form input {
 	font-family: 'Cabin', Arial, sans-serif; 
 }		
 
-form input:focus {
+input:focus {
   outline: 0;
 }
 		
@@ -141,15 +141,12 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	margin-top: 15px;
 	background: url(/images/tooltip-bg.png);
   border: solid 1px #464646;
-  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   padding: 10px;
   color: #fdfdfd;
   font-size: 12px;
   text-align: center;
-  box-shadow: 1px 1px 1px rgba(0,0,0,3);
-  -webkit-box-shadow: 1px 1px 1px rgba(0,0,0,3);
-  -moz-box-shadow: 1px 1px 1px rgba(0,0,0,3);
-  -o-shadow: 1px 1px 1px rgba(0,0,0,3);
 }
 #about .tooltip-tip {
   background: url(/images/tooltip-tip.png) no-repeat;
@@ -188,6 +185,47 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
     background: url(/images/twitter.png) no-repeat;
     margin-top: 5px;
   }
+  #share a#link {
+    background: url(/images/link.png) no-repeat;
+    margin-top: 5px;
+  }
+  #link-tooltip {
+    display: none;
+    margin-top: -24px;
+  }
+  #link-tooltip div {
+  	margin-left: 25px;
+  	background: url(/images/tooltip-bg.png);
+    border: solid 1px #464646;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 6px 8px;
+    color: #fdfdfd;
+    font-size: 10px;
+    text-align: center;
+  }
+  #link-tooltip .tooltip-tip {
+    background: url(/images/tooltip-tip-right.png) no-repeat;
+    width: 8px;
+    height: 8px;
+    display: block;
+    position: absolute;
+    margin-top: 5px;
+    margin-left: -17px;
+  }
+  #link-tooltip input {
+    width: 120px;
+    margin-top: 4px;
+    padding: 2px;
+    border: solid 1px #cecfd1;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    font-size: 10px;
+    color: #666;
+  }
+  #link-tooltip input:focus { border-color: #999; }
   
   #player object {
     margin: 5px 0px;

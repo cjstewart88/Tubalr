@@ -71,6 +71,7 @@ function initPlaylist() {
     	$('#playlist').html(videosCopy);
     	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
     	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+search_type+"%2F"+search.replace(/[ +]/g,"%2B"));
+			$('#link-tooltip input').val("http://www.tubalr.com/"+search_type+"/"+search.replace(/ /g,"+"));
   		currentVideo(videos[currenttrack], true);
     	$('#player').fadeIn(1000);
       $('body').keyup(function(e) {
@@ -155,6 +156,13 @@ function facebook () {
 }
 
 $(document).ready(function(){
+  $('.link-tooltip').mouseenter(function(){
+    $('#link-tooltip').show();
+  }).mouseleave(function(){
+    $('#link-tooltip').hide();
+  });
+  $('#link-tooltip input').focus(function(){$(this).select();}).mouseup(function(e){e.preventDefault();});
+  
   $('table tbody tr').click(function() {
     window.open(window.location.protocol+"//"+window.location.host+$(this).attr('url'));
   });
