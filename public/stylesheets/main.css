@@ -14,48 +14,8 @@ a { text-decoration: none; color: #464646; }
 a:hover { color: #940500; }
 
 input { color: #666; font:  13.34px helvetica, arial, freesans, clean, sans-serif; }
-
-#history-main { 
-  position: relative;
-  margin-top: 15px; 
-  margin-bottom: 50px; 
-  z-index: 10000; 
-}
-#history-main h2 {
-  margin-bottom: 20px;
-  text-align: center;
-}
-#history-main table {
-  width: 100%;
-  border-spacing: 0;
-}
-#history-main table tr {
-  cursor: pointer;
-}
-#history-main table tr:hover {
-  background: #f0f0f0;
-}
-#history-main table thead{
-  font-weight: bold;
-}
-#history-main table thead tr:hover {
-  cursor: default;
-  background: none;
-}
-#history-main table tr td:nth-child(3) {
-  border-right: none;
-}
-#history-main table tr td {
-  padding: 5px;
-  border-right: dotted 1px #ababab;
-  border-bottom: dotted 1px #ababab;
-}
-#history-main table tbody tr:last-child td {
-  border-bottom: none;
-}
-#history-main a:hover {
-  color: #940500;
-}
+input:focus { outline: 0; }
+input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; }
 
 #main {
   display: none;
@@ -63,6 +23,7 @@ input { color: #666; font:  13.34px helvetica, arial, freesans, clean, sans-seri
   margin: 0 auto;
   margin-top: 200px;
 }
+
 h1 { cursor: default; font: 36px 'Pacifico'; display: block; margin-left: 248px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
 h1 a { text-decoration: none; color: #464646; }
 h1 a:hover { 
@@ -74,10 +35,6 @@ h1 a:hover {
 
 form { width: 356px; margin: 0 auto; }
 
-input:focus {
-  outline: 0;
-}
-		
 #q {
   width: 200px;
   height: 29px;
@@ -113,7 +70,6 @@ input:focus {
   background-image: -o-linear-gradient(top,#f1f1f1,#f5f5f5);
   border-color: #999;  
 }
-
 .listen-active {
   background-image: url(/images/loading.gif);
   background-position: center center;
@@ -122,7 +78,6 @@ input:focus {
 }
 
 #q:focus, input:focus { border-color: #999; }
-input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; } 
 
 #about {
 	width: 312px;
@@ -154,95 +109,134 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	position: relative;
 	z-index: 10000;
 }
-  #share {
-    position: absolute;
-    margin-left: 610px;
-    margin-top: 20px;
-  }
-  #share a {
-    display: block;
-    width: 16px;
-    height: 16px;
-    border: none;
-  }
-  #share a#facebook {
-    background: url(/images/facebook.png) no-repeat;
-  }
-  #share a#twitter {
-    background: url(/images/twitter.png) no-repeat;
-    margin-top: 5px;
-  }
-  #share a#link {
-    background: url(/images/link.png) no-repeat;
-    margin-top: 5px;
-  }
-  #link-tooltip {
-    display: none;
-    margin-top: -24px;
-  }
-  #link-tooltip div {
-  	margin-left: 25px;
-  	background: url(/images/tooltip-bg.png);
-    border: solid 1px #464646;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    padding: 6px 8px;
-    color: #fdfdfd;
-    text-align: center;
-  }
-  #link-tooltip .tooltip-tip {
-    background: url(/images/tooltip-tip-right.png) no-repeat;
-    width: 8px;
-    height: 8px;
-    display: block;
-    position: absolute;
-    margin-top: 5px;
-    margin-left: -17px;
-  }
-  #link-tooltip input {
-    width: 120px;
-    margin-top: 4px;
-    padding: 2px;
-    border: solid 1px #cecfd1;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-  }
-  #link-tooltip input:focus { border-color: #999; }
-  
-  #player object {
-    margin: 5px 0px;
-  }
-	#playlist {
-  	width: 600px;
-  	max-width: 600px;
-		margin-top: 10px;
-		color: #940500;
-		line-height: 16px;
-	}
-	#playlist b {
-	  margin: 0px 8px;
-	}
-  #playlist a {
-		text-decoration: none;
-	}
-	#playlist a:hover {
-	  color: #940500 !important;
-	}
-	#player #currentVideoTitle {
-		font-weight: normal;
-	}
-	#ytplayerid {
-		height: 362px;
-	}
-	nav a {
-	  display: inline-block;
-		text-decoration: none;
-	}
-	#next {
-		float: right;
-	}
+#share {
+  position: absolute;
+  margin-left: 610px;
+  margin-top: 20px;
+}
+#share a {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border: none;
+}
+#share a#facebook {
+  background: url(/images/facebook.png) no-repeat;
+}
+#share a#twitter {
+  background: url(/images/twitter.png) no-repeat;
+  margin-top: 5px;
+}
+#share a#link {
+  background: url(/images/link.png) no-repeat;
+  margin-top: 5px;
+}
+#link-tooltip {
+  display: none;
+  margin-top: -24px;
+}
+#link-tooltip div {
+	margin-left: 25px;
+	background: url(/images/tooltip-bg.png);
+  border: solid 1px #464646;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  padding: 6px 8px;
+  color: #fdfdfd;
+  text-align: center;
+}
+#link-tooltip .tooltip-tip {
+  background: url(/images/tooltip-tip-right.png) no-repeat;
+  width: 8px;
+  height: 8px;
+  display: block;
+  position: absolute;
+  margin-top: 5px;
+  margin-left: -17px;
+}
+#link-tooltip input {
+  width: 120px;
+  margin-top: 4px;
+  padding: 2px;
+  border: solid 1px #cecfd1;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+#link-tooltip input:focus { border-color: #999; }
+
+#player object {
+  margin: 5px 0px;
+}
+#playlist {
+	width: 600px;
+	max-width: 600px;
+	margin-top: 10px;
+	color: #940500;
+	line-height: 16px;
+}
+#playlist b {
+  margin: 0px 8px;
+}
+#playlist a {
+	text-decoration: none;
+}
+#playlist a:hover {
+  color: #940500 !important;
+}
+#player #currentVideoTitle {
+	font-weight: normal;
+}
+#ytplayerid {
+	height: 362px;
+}
+nav a {
+  display: inline-block;
+	text-decoration: none;
+}
+#next {
+	float: right;
+}
+
+#history-main { 
+  position: relative;
+  margin-top: 15px; 
+  margin-bottom: 50px; 
+  z-index: 10000; 
+}
+#history-main h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+#history-main table {
+  width: 100%;
+  border-spacing: 0;
+}
+#history-main table tr {
+  cursor: pointer;
+}
+#history-main table tr:hover {
+  background: #f0f0f0;
+}
+#history-main table tr td {
+  padding: 5px;
+  border-right: dotted 1px #ababab;
+  border-bottom: dotted 1px #ababab;
+}
+#history-main table tr td:nth-child(3) {
+  border-right: none;
+}
+#history-main table thead {
+  font-weight: bold;
+}
+#history-main table thead tr:hover {
+  cursor: default;
+  background: none;
+}
+#history-main table tbody tr:last-child td {
+  border-bottom: none;
+}
 
 footer {
 	width: 100%;
@@ -251,12 +245,12 @@ footer {
 	bottom: 0;
 	padding: 10px;
 }
-	footer a {
-		text-decoration: none;
-	}
-	footer iframe {
-		position: absolute;
-		margin-top: -2px;
-		right: 30px;
-		top: 8px;
-	}
+footer a {
+	text-decoration: none;
+}
+footer iframe {
+	position: absolute;
+	margin-top: -2px;
+	right: 30px;
+	top: 8px;
+}
