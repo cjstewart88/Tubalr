@@ -90,8 +90,8 @@ function initPlaylist() {
 function currentVideo (video, init) {
   if (!init) ytplayer.loadVideoById(video.VideoID, 0);
 	$('#currentVideoTitle').html(video.VideoTitle);
-	$('#playlist a').css('color', '#464646');
-	$('#'+video.VideoID).css('color', '#940500');
+	$('#playlist .active').removeClass('active');
+	$('#'+video.VideoID).addClass('active');
 }
 
 // jump to a certain video

@@ -5,6 +5,7 @@ header, footer, aside, nav, article, section { display: block; }
 html { overflow-y: scroll; }
 
 body {
+  padding-bottom: 50px;  
 	background: url(../images/bg.png); 
 	font:  13.34px helvetica, arial, freesans, clean, sans-serif; 
 	color: #464646;
@@ -109,6 +110,7 @@ form { width: 356px; margin: 0 auto; }
 	position: relative;
 	z-index: 10000;
 }
+
 #share {
   position: absolute;
   margin-left: 610px;
@@ -181,6 +183,9 @@ form { width: 356px; margin: 0 auto; }
 }
 #playlist a {
 	text-decoration: none;
+}
+#playlist a.active {
+	color: #940500;
 }
 #playlist a:hover {
   color: #940500 !important;
