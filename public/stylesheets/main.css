@@ -4,21 +4,22 @@ header, footer, aside, nav, article, section { display: block; }
 
 html { overflow-y: scroll; }
 
-a:hover { color: #940500; }
-
 body {
 	background: url(../images/bg.png); 
-	font-family:  'Cabin', Arial, sans-serif; 
-	color: #000;
+	font:  13.34px helvetica, arial, freesans, clean, sans-serif; 
+	color: #464646;
 }	
+
+a { text-decoration: none; color: #464646; }
+a:hover { color: #940500; }
+
+input { color: #666; font:  13.34px helvetica, arial, freesans, clean, sans-serif; }
 
 #history-main { 
   position: relative;
   margin-top: 15px; 
   margin-bottom: 50px; 
   z-index: 10000; 
-  font-size: 12px;
-  color: #464646;
 }
 #history-main h2 {
   margin-bottom: 20px;
@@ -52,10 +53,6 @@ body {
 #history-main table tbody tr:last-child td {
   border-bottom: none;
 }
-#history-main a {
-  color: #464646;
-  text-decoration: none;
-}
 #history-main a:hover {
   color: #940500;
 }
@@ -66,18 +63,16 @@ body {
   margin: 0 auto;
   margin-top: 200px;
 }
-h1 { cursor: default; font-family: 'Pacifico'; color: #464646; display: block; margin-left: 251px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
-h1:hover {
+h1 { cursor: default; font: 36px 'Pacifico'; display: block; margin-left: 248px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
+h1 a { text-decoration: none; color: #464646; }
+h1 a:hover { 
+  text-decoration: none; 
+  color: 940500; 
   -webkit-transform: color;
   -webkit-transition-duration: 1s;
-  color: #940500;
 }
-h1 a { text-decoration: none; color: #464646; }
-h1 a:hover { color: 940500; text-decoration: none; }
+
 form { width: 356px; margin: 0 auto; }
-form input {	
-	font-family: 'Cabin', Arial, sans-serif; 
-}		
 
 input:focus {
   outline: 0;
@@ -91,9 +86,6 @@ input:focus {
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
-  font-size: 12px;
-  color: #666;
-  font-weight: bold;
 }
 
 .listen { 
@@ -111,9 +103,6 @@ input:focus {
   -webkit-border-radius: 3px;
   -webkit-user-select: none;
   -moz-border-radius: 3px;
-  color: #666;
-  font-size: 12px;
-  font-weight: bold;
   line-height: 27px;
   cursor: pointer;
 }
@@ -145,7 +134,6 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   -webkit-border-radius: 3px;
   padding: 10px;
   color: #fdfdfd;
-  font-size: 12px;
   text-align: center;
 }
 #about .tooltip-tip {
@@ -163,7 +151,6 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	margin: 0 auto;
 	display: none;
 	margin-top: 25px;
-	font-size: 12px;
 	position: relative;
 	z-index: 10000;
 }
@@ -202,7 +189,6 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
     -webkit-border-radius: 3px;
     padding: 6px 8px;
     color: #fdfdfd;
-    font-size: 10px;
     text-align: center;
   }
   #link-tooltip .tooltip-tip {
@@ -222,8 +208,6 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
     border-radius: 3px;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
-    font-size: 10px;
-    color: #666;
   }
   #link-tooltip input:focus { border-color: #999; }
   
@@ -241,14 +225,12 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	  margin: 0px 8px;
 	}
   #playlist a {
-		color: #464646;
 		text-decoration: none;
 	}
 	#playlist a:hover {
 	  color: #940500 !important;
 	}
 	#player #currentVideoTitle {
-		color: #464646;
 		font-weight: normal;
 	}
 	#ytplayerid {
@@ -257,7 +239,6 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	nav a {
 	  display: inline-block;
 		text-decoration: none;
-		color: #464646;
 	}
 	#next {
 		float: right;
@@ -269,11 +250,8 @@ footer {
 	left: 0;
 	bottom: 0;
 	padding: 10px;
-  color: #464646;
-  font-size: 12px;
 }
 	footer a {
-		color: #464646;
 		text-decoration: none;
 	}
 	footer iframe {
