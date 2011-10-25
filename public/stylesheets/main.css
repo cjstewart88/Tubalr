@@ -7,6 +7,8 @@ html { overflow-y: scroll; }
 a:hover { color: #940500; }
 
 body {
+    padding-bottom: 50px;
+    
 	background: url(../images/bg.png); 
 	font-family:  'Cabin', Arial, sans-serif; 
 	color: #000;
@@ -240,10 +242,16 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	#playlist b {
 	  margin: 0px 8px;
 	}
-  #playlist a {
+    
+    #playlist a {
 		color: #464646;
 		text-decoration: none;
 	}
+	
+	#playlist .active {
+	    color: #940500;
+	}
+	
 	#playlist a:hover {
 	  color: #940500 !important;
 	}
