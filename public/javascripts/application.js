@@ -66,7 +66,7 @@ function initPlaylist() {
     $('#about').fadeOut(1000, function() {
       videosCopy = "";
       $.each(videos, function(i) {
-        videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'" onClick="jumpTo('+i+')">'+this.VideoTitle+'</a>'+(i == 19 ? '' : '<b>&#8226;</b>');
+        videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'">'+this.VideoTitle+'</a>'+(i == 19 ? '' : '<b>&#8226;</b>');
       });
     	$('#playlist').html(videosCopy);
     	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
