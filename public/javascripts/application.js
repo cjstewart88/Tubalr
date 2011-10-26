@@ -155,7 +155,19 @@ function facebook () {
   return false;
 }
 
+function bindVideoTitles() {
+    // for every video title in #playlist
+    $('#playlist').delegate('a', 'click', function(){
+        // bind jumpTo(index) on click
+        jumpTo($(this).index('#playlist a'));
+        // stop page repositioning
+        return false;
+    });
+}
+
 $(document).ready(function(){
+  bindVideoTitles();    
+    
   $('.link-tooltip').mouseenter(function(){
     $('#link-tooltip').show();
   }).mouseleave(function(){
