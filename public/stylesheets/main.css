@@ -25,7 +25,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   margin-top: 200px;
 }
 
-h1 { cursor: default; font: 60px 'Pacifico'; display: block; margin-left: 222px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
+h1 { cursor: default; font: 50px 'Pacifico'; display: block; margin-left: 235px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
 h1 a { text-decoration: none; color: #464646; }
 h1 a:hover { 
   text-decoration: none; 
@@ -34,7 +34,7 @@ h1 a:hover {
   -webkit-transition-duration: 1s;
 }
 
-form { width: 356px; margin: 0 auto; }
+form { width: 356px; margin-left: 120px; }
 
 #q {
   width: 200px;
@@ -106,7 +106,7 @@ form { width: 356px; margin: 0 auto; }
 	width: 600px;
 	margin: 0 auto;
 	display: none;
-	margin-top: 25px;
+	margin-top: 40px;
 	position: relative;
 	z-index: 10000;
 }
@@ -169,12 +169,12 @@ form { width: 356px; margin: 0 auto; }
 #link-tooltip input:focus { border-color: #999; }
 
 #player object {
-  margin: 5px 0px;
+  margin: 10px 0px;
 }
 #playlist {
 	width: 600px;
 	max-width: 600px;
-	margin-top: 10px;
+	margin-top: 20px;
 	color: #940500;
 	line-height: 16px;
 }
