@@ -78,8 +78,8 @@ function initPlaylist () {
       $('body').keyup(function(e) {
         if (!$('#q').is(":focus")) {
           var code = (e.keyCode ? e.keyCode : e.which);
-          // if (code == 39) nextSong();
-          // if (code == 37) previousSong();
+          if (code == 39) nextSong();
+          if (code == 37) previousSong();
           if (code == 32) ytplayer.getPlayerState() == 2 ? ytplayer.playVideo() : ytplayer.pauseVideo();
         }
       });
