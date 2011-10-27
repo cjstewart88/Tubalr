@@ -75,16 +75,12 @@ function initPlaylist () {
 			$('#link-tooltip input').val("http://www.tubalr.com/"+search_type+"/"+search.replace(/ /g,"+"));
   		currentVideo(videos[currenttrack], true);
     	$('#player').fadeIn(1000);
-    	var timeout;
       $('body').keyup(function(e) {
         if (!$('#q').is(":focus")) {
-          if (timeout) { clearTimeout(timeout); }
-          timeout = setTimeout(function() {
-            var code = (e.keyCode ? e.keyCode : e.which);
-            if (code == 39) nextSong();
-            if (code == 37) previousSong();
-            if (code == 32) ytplayer.getPlayerState() == 2 ? ytplayer.playVideo() : ytplayer.pauseVideo();
-          }, 500);
+          var code = (e.keyCode ? e.keyCode : e.which);
+          // if (code == 39) nextSong();
+          // if (code == 37) previousSong();
+          if (code == 32) ytplayer.getPlayerState() == 2 ? ytplayer.playVideo() : ytplayer.pauseVideo();
         }
       });
     });
