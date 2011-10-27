@@ -13,9 +13,10 @@ var search = "";
 var search_type = "";
 var videosCopy = "";
 var ytplayer = null;
+var playlistDirection = "forward";
 
 // just artist/band
-function just(who) {
+function just (who) {
   $('.just').addClass('listen-active');
   videos = [];
   currenttrack = 0;
@@ -33,7 +34,7 @@ function just(who) {
 }
 
 // similar artist/bands
-function similarTo(who) {
+function similarTo (who) {
   $('.similar').addClass('listen-active');
   videos = [];
   currenttrack = 0;
@@ -57,7 +58,7 @@ function similarTo(who) {
 }
 
 // start the playlist
-function initPlaylist() {
+function initPlaylist () {
   $('.listen-active').removeClass('listen-active');
   videos.sort(function () { return (Math.round(Math.random())-0.5); });
   $("#main").animate({
@@ -74,12 +75,16 @@ function initPlaylist() {
 			$('#link-tooltip input').val("http://www.tubalr.com/"+search_type+"/"+search.replace(/ /g,"+"));
   		currentVideo(videos[currenttrack], true);
     	$('#player').fadeIn(1000);
+    	var timeout;
       $('body').keyup(function(e) {
         if (!$('#q').is(":focus")) {
-          var code = (e.keyCode ? e.keyCode : e.which);
-          // if (code == 39) nextSong();
-          // if (code == 37) previousSong();
-          if (code == 32) ytplayer.getPlayerState() == 2 ? ytplayer.playVideo() : ytplayer.pauseVideo();
+          if (timeout) { clearTimeout(timeout); }
+          timeout = setTimeout(function() {
+            var code = (e.keyCode ? e.keyCode : e.which);
+            if (code == 39) nextSong();
+            if (code == 37) previousSong();
+            if (code == 32) ytplayer.getPlayerState() == 2 ? ytplayer.playVideo() : ytplayer.pauseVideo();
+          }, 500);
         }
       });
     });
@@ -95,48 +100,59 @@ function currentVideo (video, init) {
 }
 
 // jump to a certain video
-function jumpTo(VideoID) {
+function jumpTo (VideoID) {
 	currenttrack = VideoID;
 	currentVideo(videos[currenttrack]);
 }
 
 // next
-function nextSong() {
+function nextSong () {
+  direction = "forward";
 	if (currenttrack == videos.length-1) {
-		alert("Woops, you're at the end of the playlist!");
+		currenttrack = 0;
+		currentVideo(videos[currenttrack]);
 	}
 	else {
 		currenttrack = currenttrack+=1;
 		currentVideo(videos[currenttrack]);
 	}
+	return false;
 }
 
 // previousSong
-function previousSong() {
-	if (currenttrack <= 0) {
-		alert("Woops, you're at the beginning of the playlist, we cant go back any further!");
+function previousSong () {
+  direction = "backward";
+	if (currenttrack == 0) {
+		currenttrack = 19;
+		currentVideo(videos[currenttrack]);
 	}
 	else {
 		currenttrack = currenttrack-=1;
 		currentVideo(videos[currenttrack]);
 	}
+	return false;
 }
 
 // Getting youtube player ready
-function onYouTubePlayerReady(playerId) {
+function onYouTubePlayerReady (playerId) {
 	ytplayer = document.getElementById("ytplayerid");
 	ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
 	ytplayer.addEventListener("onError", "onPlayerError");
 }
 
 // YouTube player changes states
-function onytplayerStateChange(newState) {
+function onytplayerStateChange (newState) {
 	if (newState == 0) nextSong(); // track ended
 }
 
 //YouTube player error
-function onPlayerError(errorCode) {
-	nextSong();
+function onPlayerError (errorCode) {
+	if (direction == "backward") {
+	  previousSong();
+	} 
+	else {
+	  nextSong();
+	}
 }
 
 function facebook () {
@@ -155,18 +171,10 @@ function facebook () {
   return false;
 }
 
-function bindVideoTitles() {
-    // for every video title in #playlist
-    $('#playlist').delegate('a', 'click', function(){
-        // bind jumpTo(index) on click
-        jumpTo($(this).index('#playlist a'));
-        // stop page repositioning
-        return false;
-    });
-}
-
 $(document).ready(function(){
-  bindVideoTitles();    
+  $('#next').click(function () { nextSong(); });
+  $('#prev').click(function () { previousSong(); });
+  $('#playlist').delegate('a', 'click', function () { jumpTo($(this).index('#playlist a')); return false; });   
     
   $('.link-tooltip').mouseenter(function(){
     $('#link-tooltip').show();
