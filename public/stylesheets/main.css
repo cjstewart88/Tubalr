@@ -29,7 +29,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   margin-top: 200px;
 }
 
-h1 { cursor: default; font: 32px 'Pacifico'; display: block; margin-left: 255px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
+h1 { cursor: default; font: 32px 'Pacifico'; display: block; margin-left: 260px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
 h1 a { text-decoration: none; color: #464646; }
 h1 a:hover { 
   text-decoration: none; 
@@ -38,7 +38,7 @@ h1 a:hover {
   -webkit-transition-duration: 1s;
 }
 
-form { width: 356px; margin-left: 124px; }
+form { width: 356px; margin-left: 130px; }
 
 #q {
   width: 200px;
@@ -86,7 +86,7 @@ form { width: 356px; margin-left: 124px; }
 
 #about {
 	width: 312px;
-	margin-left: 130px;
+	margin-left: 135px;
 	margin-top: 15px;
 	background: url(/images/tooltip-bg.png);
   border: solid 1px #464646;
