@@ -2,19 +2,23 @@
 
 header, footer, aside, nav, article, section { display: block; } 
 
+html, body { width: 100%; }
+
 html { overflow-y: scroll; }
 
 body {
   padding-bottom: 50px;  
 	background: url(../images/bg.png); 
-	font:  13.34px helvetica, arial, freesans, clean, sans-serif; 
+	font:  11px helvetica, arial, freesans, clean, sans-serif; 
 	color: #464646;
 }	
 
 a { text-decoration: none; color: #464646; }
 a:hover { color: #940500; }
+a:active { outline: none; }
+a:focus { -moz-outline-style: none; }
 
-input { color: #666; font:  13.34px helvetica, arial, freesans, clean, sans-serif; }
+input { color: #666; font:  11px helvetica, arial, freesans, clean, sans-serif; }
 input:focus { outline: 0; }
 input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; }
 
@@ -25,7 +29,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   margin-top: 200px;
 }
 
-h1 { cursor: default; font: 50px 'Pacifico'; display: block; margin-left: 235px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
+h1 { cursor: default; font: 32px 'Pacifico'; display: block; margin-left: 255px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
 h1 a { text-decoration: none; color: #464646; }
 h1 a:hover { 
   text-decoration: none; 
@@ -34,7 +38,7 @@ h1 a:hover {
   -webkit-transition-duration: 1s;
 }
 
-form { width: 356px; margin-left: 120px; }
+form { width: 356px; margin-left: 124px; }
 
 #q {
   width: 200px;
@@ -106,15 +110,13 @@ form { width: 356px; margin-left: 120px; }
 	width: 600px;
 	margin: 0 auto;
 	display: none;
-	margin-top: 40px;
+	margin-top: 15px;
 	position: relative;
-	z-index: 10000;
 }
 
 #share {
   position: absolute;
   margin-left: 610px;
-  margin-top: 20px;
 }
 #share a {
   display: block;
@@ -168,27 +170,30 @@ form { width: 356px; margin-left: 120px; }
 }
 #link-tooltip input:focus { border-color: #999; }
 
-#player object {
-  margin: 10px 0px;
-}
 #playlist {
-	width: 600px;
-	max-width: 600px;
-	margin-top: 20px;
-	color: #940500;
-	line-height: 16px;
-}
-#playlist b {
-  margin: 0px 8px;
+  display: none;
+  background: url(/images/tooltip-bg.png);
+  border: solid 1px #464646;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+	width: 200px;
+	font-size: 11px;
+	height: 100%;
+	overflow: auto;
 }
 #playlist a {
+  display: block;
+  color: #fdfdfd;
 	text-decoration: none;
+	padding: 10px;
+	border-bottom: groove 2px #666;
 }
 #playlist a.active {
-	color: #940500;
+	color: #ccc;
 }
 #playlist a:hover {
-  color: #940500 !important;
+  color: #ccc !important;
 }
 #player #currentVideoTitle {
 	font-weight: normal;
@@ -208,7 +213,6 @@ nav a {
   position: relative;
   margin-top: 15px; 
   margin-bottom: 50px; 
-  z-index: 10000; 
 }
 #history-main h2 {
   margin-bottom: 20px;
@@ -244,18 +248,13 @@ nav a {
 }
 
 footer {
-	width: 100%;
+  background: url(/images/bg.png);
+	width: 600px;
 	position: fixed;
-	left: 0;
 	bottom: 0;
-	padding: 10px;
-}
-footer a {
-	text-decoration: none;
+	text-align: center;
+	padding-top: 10px;
 }
 footer iframe {
-	position: absolute;
-	margin-top: -2px;
-	right: 30px;
-	top: 8px;
+  margin: 5px;
 }

@@ -61,13 +61,13 @@ function similarTo (who) {
 function initPlaylist () {
   $('.listen-active').removeClass('listen-active');
   videos.sort(function () { return (Math.round(Math.random())-0.5); });
-  $('#about').fadeOut(1000, function () {
-    $("#main").animate({ marginTop: 20 }, 500); 
-    $("h1").animate({ marginLeft: 0 }, 500);
-    $("form").animate({ marginLeft: 250, marginTop: "-70px" }, 500, function () {    
+  $('#about').fadeOut(500, function(){
+    $("#main").animate({
+      marginTop: 100
+    }, 500, function () {  
       videosCopy = "";
       $.each(videos, function(i) {
-        videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'">'+this.VideoTitle+'</a>'+(i == 19 ? '' : '<b>&#8226;</b>');
+        videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'">'+this.VideoTitle+'</a>';
       });
     	$('#playlist').html(videosCopy);
     	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
@@ -75,6 +75,7 @@ function initPlaylist () {
   		$('#link-tooltip input').val("http://www.tubalr.com/"+search_type+"/"+search.replace(/ /g,"+"));
   		currentVideo(videos[currenttrack], true);
     	$('#player').fadeIn(1000);
+    	$('#playlist').fadeIn(1000);
       $('body').keyup(function(e) {
         if (!$('#q').is(":focus")) {
           var code = (e.keyCode ? e.keyCode : e.which);
@@ -82,6 +83,10 @@ function initPlaylist () {
           if (code == 37) previousSong();
           if (code == 32) ytplayer.getPlayerState() == 2 ? ytplayer.playVideo() : ytplayer.pauseVideo();
         }
+      });
+      $('#playlist').slimScroll({
+          height: '100%',
+          width: '200px'
       });
     });
   });
@@ -168,8 +173,6 @@ function facebook () {
 }
 
 $(document).ready(function(){
-  $('#next').click(function () { nextSong(); });
-  $('#prev').click(function () { previousSong(); });
   $('#playlist').delegate('a', 'click', function () { jumpTo($(this).index('#playlist a')); return false; });   
     
   $('.link-tooltip').mouseenter(function(){

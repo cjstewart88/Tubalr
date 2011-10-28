@@ -3,7 +3,7 @@
   <head>
     <title>Tubalr</title>
     <%= stylesheet_link_tag "main", "http://fonts.googleapis.com/css?family=Pacifico", "http://fonts.googleapis.com/css?family=Cabin" %>
-    <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js", "https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js", "http://connect.facebook.net/en_US/all.js", "ga", "application" %>
+    <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js", "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js", "https://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js", "http://connect.facebook.net/en_US/all.js", "ga", "application", "slimScroll" %>
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <%= csrf_meta_tag %>
   </head>
@@ -15,8 +15,8 @@
       <%= yield %>
     
       <footer>
+        <% if request.path.index("history") %><a href='/'>Home</a><% else %><a href='/history'>Recent Searches</a><% end %> - <a href="http://www.tubalr.tumblr.com">Blog</a> - <a href="http://twitter.com/tubalr" target="_blank">@tubalr</a>'s crafted by <a href="http://twitter.com/codyjackstewart" target="_blank">@codyjackstewart</a>!<br/>
         <iframe src="http://www.facebook.com/plugins/like.php?href=www.tubalr.com&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe>
-        <a href="http://www.tubalr.tumblr.com" target="_blank">Blog</a> <% if !request.path.index("history") %><a href='/history' target='_blank'>- Recent Searches </a><% end %>- <a href="http://twitter.com/tubalr" target="_blank">@tubalr</a>'s crafted by <a href="http://twitter.com/codyjackstewart" target="_blank">@codyjackstewart</a>!
       </footer>
     </div>
   </body>
