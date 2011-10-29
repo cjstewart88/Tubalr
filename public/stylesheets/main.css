@@ -170,6 +170,13 @@ form { width: 356px; margin-left: 130px; }
 }
 #link-tooltip input:focus { border-color: #999; }
 
+.slimScrollDiv {
+  -moz-box-shadow: 0 0 5px 1px #888;
+  -webkit-box-shadow: 0 0 5px 1px#888;
+  box-shadow: 0 0 5px 1px #888;
+  border-left: groove 2px #666;
+}
+
 #playlist {
   display: none;
   background: url(/images/tooltip-bg.png);
@@ -184,16 +191,21 @@ form { width: 356px; margin-left: 130px; }
 }
 #playlist a {
   display: block;
-  color: #fdfdfd;
+  color: #ccc;
 	text-decoration: none;
-	padding: 10px;
+	padding: 10px 15px;
 	border-bottom: groove 2px #666;
+	text-shadow: 1px 1px #222;
+	-moz-text-shadow: 1px 1px #222;
+	-webkit-text-shadow: 1px 1px #222;
 }
 #playlist a.active {
-	color: #ccc;
+	color: #efefef;
+  background: url(/images/active.png) center left;
+  background-repeat: no-repeat;
 }
 #playlist a:hover {
-  color: #ccc !important;
+  color: #efefef !important;
 }
 #player #currentVideoTitle {
 	font-weight: normal;
