@@ -140,6 +140,8 @@ form { width: 356px; margin-left: 130px; }
   margin-top: -24px;
 }
 #link-tooltip div {
+  position: relative;
+  z-index: 10000;
 	margin-left: 25px;
 	background: url(/images/tooltip-bg.png);
   border: solid 1px #464646;
