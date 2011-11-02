@@ -11,11 +11,12 @@
     <div id="fb-root"></div>
     <div id="main" <%= "style='margin-top: 20px;'" if request.path.index("history") %>>
       <h1><a href='/'>tubalr</a></h1>
-  
+
+      <p id="flash"><%= flash[:alert] %></p>      
       <%= yield %>
     
       <footer>
-        <% if request.path.index("history") %><a href='/'>Home</a><% else %><a href='/history'>Recent Searches</a><% end %> - <a href="http://www.tubalr.tumblr.com">Blog</a><br/>
+        <%= request.path.index("history") ? link_to('Home', '/') : link_to('Recent Searches', '/history') %> - <a href="http://www.tubalr.tumblr.com">Blog</a> - <%= user_signed_in? ? link_to('My Settings', '/users/edit') + ' - ' + link_to('Logout', destroy_user_session_path, :method => :delete) : link_to('Register', '/users/sign_up') + ' - ' + link_to('Login', '/users/sign_in') %><br/>
         <iframe src="http://www.facebook.com/plugins/like.php?href=www.tubalr.com&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe>
         <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.tubalr.com/" data-text="@tubalr lets you search your favorite artist/band's top YouTube Videos, without the clutter." data-count="horizontal" data-via="codyjackstewart" data-related="tubalr">Tweet</a><script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
       </footer>

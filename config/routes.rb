@@ -1,4 +1,6 @@
 Tubalr::Application.routes.draw do
+  devise_for :users
+
   root :to => "application#index"
   
   get "/player/:search_type/:search/:first_video" => "application#player"
@@ -10,4 +12,8 @@ Tubalr::Application.routes.draw do
   get "/similar/:artist_band" => "application#index"
   
   get "/history" => "application#history"
+  
+  devise_scope :user do
+    get "/users/sign_out" => "devise/sessions#destroy"
+  end
 end
