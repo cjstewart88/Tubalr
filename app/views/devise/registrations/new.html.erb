@@ -1,0 +1,22 @@
+<h2>Sign up</h2>
+
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <div>
+    <%= f.label :email %><br />
+    <%= f.email_field :email %> <%= "<span class='error'>#{resource.errors[:email][0]}</span>".html_safe if resource.errors[:email][0] %>
+  </div>
+
+  <div>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %> <%= "<span class='error'>#{resource.errors[:password][0]}</span>".html_safe if resource.errors[:password][0] %>
+  </div>
+
+  <div>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %> <%= "<span class='error'>#{resource.errors[:password_confirmation][0]}</span>".html_safe if resource.errors[:password_confirmation][0] %>
+  </div>
+
+  <div><%= f.submit "Sign up" %></div>
+
+  <%= render :partial => "devise/shared/links" %>
+<% end %>

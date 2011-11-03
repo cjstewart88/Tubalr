@@ -188,6 +188,14 @@ function facebook () {
 }
 
 $(document).ready(function(){
+  if ($('.flash-msg')) {
+    setTimeout(function () {
+      $('.flash-msg').slideUp(500, function () {
+        $(this).remove();
+      });
+    }, 5000);
+  }
+  
   $('#playlist').delegate('a', 'click', function () { jumpTo($(this).index('#playlist a')); return false; });   
     
   $('.link-tooltip').mouseenter(function(){
