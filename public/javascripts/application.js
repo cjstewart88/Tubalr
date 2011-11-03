@@ -1,3 +1,8 @@
+
+
+// this is true if a youtube video is loading
+window.yt_loading = false;
+
 window.fbAsyncInit = function() { FB.init({ 
     appId : '239275546125436', 
     status : true, 
@@ -5,20 +10,6 @@ window.fbAsyncInit = function() { FB.init({
     xfbml : true 
   }); 
 };
-
-// this is true if a youtube video is loading
-window.yt_loading = false;
-
-// on youtube player state change
-function onytplayerStateChange(newState) {
-  // if video is loading
-  if (newState == 3) {
-    window.yt_loading = true;
-  // if video is ready
-  } else if (newState ==1) {
-    window.yt_loading = false;
-  }
-}
 
 // variables to be used throughout
 var videos = new Array();
@@ -160,7 +151,16 @@ function onYouTubePlayerReady (playerId) {
 
 // YouTube player changes states
 function onytplayerStateChange (newState) {
-	if (newState == 0) nextSong(); // track ended
+    // if track ended
+	if (newState == 0) {
+      nextSong();
+    // if video is loading
+    } else if (newState == 3) {
+      window.yt_loading = true;
+    // if video is ready
+    } else if (newState ==1) {
+      window.yt_loading = false;
+    }
 }
 
 //YouTube player error
