@@ -1,3 +1,8 @@
+
+
+// this is true if a youtube video is loading
+window.yt_loading = false;
+
 window.fbAsyncInit = function() { FB.init({ 
     appId : '239275546125436', 
     status : true, 
@@ -77,6 +82,9 @@ function initPlaylist () {
     	$('#player').fadeIn(1000);
     	$('#playlist').fadeIn(1000);
       $('body').keyup(function(e) {
+        // if video is loading, stop
+        if(window.yt_loading) return false;
+        
         if (!$('#q').is(":focus")) {
           var code = (e.keyCode ? e.keyCode : e.which);
           if (code == 39) nextSong();
@@ -143,7 +151,16 @@ function onYouTubePlayerReady (playerId) {
 
 // YouTube player changes states
 function onytplayerStateChange (newState) {
-	if (newState == 0) nextSong(); // track ended
+    // if track ended
+	if (newState == 0) {
+      nextSong();
+    // if video is loading
+    } else if (newState == 3) {
+      window.yt_loading = true;
+    // if video is ready
+    } else if (newState ==1) {
+      window.yt_loading = false;
+    }
 }
 
 //YouTube player error
