@@ -6,6 +6,20 @@ window.fbAsyncInit = function() { FB.init({
   }); 
 };
 
+// this is true if a youtube video is loading
+window.yt_loading = false;
+
+// on youtube player state change
+function onytplayerStateChange(newState) {
+  // if video is loading
+  if (newState == 3) {
+    window.yt_loading = true;
+  // if video is ready
+  } else if (newState ==1) {
+    window.yt_loading = false;
+  }
+}
+
 // variables to be used throughout
 var videos = new Array();
 var currenttrack = 0;
@@ -77,6 +91,9 @@ function initPlaylist () {
     	$('#player').fadeIn(1000);
     	$('#playlist').fadeIn(1000);
       $('body').keyup(function(e) {
+        // if video is loading, stop
+        if(window.yt_loading) return false;
+        
         if (!$('#q').is(":focus")) {
           var code = (e.keyCode ? e.keyCode : e.which);
           if (code == 39) nextSong();
