@@ -2,6 +2,11 @@
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
   <div>
+    <%= f.label :username %><br />
+    <%= f.text_field :username %> <%= "<span class='error'>#{resource.errors[:username][0]}</span>".html_safe if resource.errors[:username][0] %>
+  </div>
+
+  <div>
     <%= f.label :email %><br />
     <%= f.email_field :email %> <%= "<span class='error'>#{resource.errors[:email][0]}</span>".html_safe if resource.errors[:email][0] %>
   </div>

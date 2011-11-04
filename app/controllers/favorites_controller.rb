@@ -1,6 +1,6 @@
 class FavoritesController < ApplicationController
   def init
-    @user_id = params[:user_id]
+    @username = params[:username]
 
     render :layout => "application", :template => "index"
   end

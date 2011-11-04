@@ -14,7 +14,7 @@ Tubalr::Application.routes.draw do
   
   get "/history" => "application#history"
   
-  get "/users/:user_id/favorites" => "favorites#init"
+  get "/users/:username/favorites" => "favorites#init"
   
   devise_scope :user do
     get "/users/sign_out" => "devise/sessions#destroy"

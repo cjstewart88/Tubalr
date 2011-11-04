@@ -207,4 +207,25 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
+  
+  config.warden do |manager|
+    manager.strategies.add(:login_with_username_or_email) do 
+      def valid?
+        params[:user] && params[:user][:email] && params[:user][:password]
+      end
+
+      def authenticate!
+        resource = User.where('email = :token OR username = :token', {token: params[:user][:email]}).first
+        if not resource.nil? and resource.valid_password?(params[:user][:password])
+          resource.after_database_authentication
+          success!(resource)
+        elsif !halted?
+          fail(:invalid)
+        end
+      end
+    end
+    manager.default_strategies(scope: :user).unshift :login_with_username_or_email
+  end
+  
+  config.authentication_keys = [ :login ]
 end

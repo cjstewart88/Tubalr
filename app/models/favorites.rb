@@ -1,5 +1,7 @@
 class Favorites < ActiveRecord::Base
-  def self.get(user_id)
-    return Favorites.where(["user_id = ?", user_id])
+  def self.get(username)
+    user = User.where(["username = ?", username]).first()
+
+    return Favorites.where(["user_id = ?", user.id])
   end
 end

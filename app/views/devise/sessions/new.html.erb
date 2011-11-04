@@ -2,8 +2,8 @@
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <div>
-    <%= f.label :email %><br />
-    <%= f.email_field :email %> <%= "<span class='error'>#{resource.errors[:email][0]}</span>".html_safe if resource.errors[:email][0] %>
+    <%= f.label :login %><br />
+    <%= f.text_field :login %> <%= "<span class='error'>#{resource.errors[:login][0]}</span>".html_safe if resource.errors[:login][0] %>
   </div>
 
   <div>

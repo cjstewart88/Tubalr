@@ -62,12 +62,12 @@ function similarTo (who) {
 }
 
 // user favorites
-function userFavorites(userID) {
+function userFavorites(username) {
   videos = [];
   currenttrack = 0;
-  search = userID;
+  search = username;
   search_type = "favorites";
-	$.getJSON('/users/'+userID+'/favorites.json', function(data) {
+	$.getJSON('/users/'+username+'/favorites.json', function(data) {
 	  if (data.length != 0) {
       videos = data;
 		  initPlaylist();
