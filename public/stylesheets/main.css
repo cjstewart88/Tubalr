@@ -106,7 +106,7 @@ input[type=button]:hover, input[type=submit]:hover {
   border-color: #999;  
 }
 .listen-active {
-  background-image: url(/images/loading.gif);
+  background-image: url(/images/loading.gif) !important;
   background-position: center center;
   background-repeat: no-repeat;
   color: rgba(0, 0, 0, 0.0);

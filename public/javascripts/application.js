@@ -67,7 +67,6 @@ function userFavorites(userID) {
   currenttrack = 0;
   search = userID;
   search_type = "favorites";
-  
 	$.getJSON('/users/'+userID+'/favorites.json', function(data) {
 	  if (data.length != 0) {
       videos = data;
@@ -84,7 +83,7 @@ function initPlaylist () {
   playlistLength = videos.length; 
   $('.listen-active').removeClass('listen-active');
   videos.sort(function () { return (Math.round(Math.random())-0.5); });
-  $('#about').delay(600).fadeOut(500, function(){
+  $('#about').fadeOut(500, function(){
     $("#main").animate({
       marginTop: 100
     }, 500, function () {  
