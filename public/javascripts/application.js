@@ -17,6 +17,7 @@ var search_type = "";
 var videosCopy = "";
 var ytplayer = null;
 var playlistDirection = "forward";
+var playlistLength = 0;
 
 // just artist/band
 function just (who) {
@@ -60,11 +61,30 @@ function similarTo (who) {
 	});
 }
 
+// user favorites
+function userFavorites(userID) {
+  videos = [];
+  currenttrack = 0;
+  search = userID;
+  search_type = "favorites";
+  
+	$.getJSON('/users/'+userID+'/favorites.json', function(data) {
+	  if (data.length != 0) {
+      videos = data;
+		  initPlaylist();
+	  } 
+	  else {
+      window.location = "/";
+	  } 
+	});
+}
+
 // start the playlist
 function initPlaylist () {
+  playlistLength = videos.length; 
   $('.listen-active').removeClass('listen-active');
   videos.sort(function () { return (Math.round(Math.random())-0.5); });
-  $('#about').fadeOut(500, function(){
+  $('#about').delay(600).fadeOut(500, function(){
     $("#main").animate({
       marginTop: 100
     }, 500, function () {  
@@ -130,7 +150,7 @@ function nextSong () {
 function previousSong () {
   direction = "backward";
 	if (currenttrack == 0) {
-		currenttrack = 19;
+		currenttrack = playlistLength;
 		currentVideo(videos[currenttrack]);
 	}
 	else {
@@ -187,6 +207,41 @@ function facebook () {
   return false;
 }
 
+function favorite (star) {
+  if ($(star).hasClass('fav')) {
+    $.ajax({
+      type: 'PUT',
+      url: '/users/'+user-id+'.json',
+      data: {
+        action:       "remove",
+        video_id:     videos[currenttrack].VideoID,
+        video_title:  videos[currenttrack].VideoTitle
+      },
+      dataType: 'json',
+      success: function(data) {
+        videos.splice(currenttrack, 1);
+        $(star).removeClass('fav');
+        nextSong();
+      }
+    });
+  }
+  else {
+    $.ajax({
+      type: 'PUT',
+      url: '/users/'+user-id+'.json',
+      data: {
+        action:       "add",
+        video_id:     videos[currenttrack].VideoID,
+        video_title:  videos[currenttrack].VideoTitle
+      },
+      dataType: 'json',
+      success: function(data) {
+        $(star).addClass('fav');
+      }
+    });  
+  }
+}
+
 $(document).ready(function(){
   if ($('.flash-msg')) {
     setTimeout(function () {
@@ -195,6 +250,10 @@ $(document).ready(function(){
       });
     }, 5000);
   }
+  
+  $('#player').delegate('#favorite-star', 'click', function() {
+    favorite(this);
+  });
   
   $('#playlist').delegate('a', 'click', function () { jumpTo($(this).index('#playlist a')); return false; });   
     

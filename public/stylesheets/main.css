@@ -144,9 +144,20 @@ input[type=button]:hover, input[type=submit]:hover {
 	position: relative;
 }
 
+#favorite-star { 
+  position: absolute; 
+  margin-left: 605px;
+  width: 16px;
+  height: 16px;
+  display: block;
+  background: url(/images/favorite-sprite.png) no-repeat;
+}
+.fav { background-position: 0px -16px !important; }
+
 #share {
   position: absolute;
   margin-left: 610px;
+  visibility: hidden;
 }
 #share a {
   display: block;

@@ -14,9 +14,11 @@
 <script>
   <%= "just('#{params[:artist_band]}');" if request.path.index("just") %>
   <%= "similarTo('#{params[:artist_band]}');" if request.path.index("similar") %>
+  <%= "userFavorites('#{@user_id}');" if request.env['PATH_INFO'].include?("favorites") %>
 </script>
 
 <section id="player">
+  <a href="#" id="favorite-star" class="fav"></a>
   <aside id="share">
     <a href="#" id="facebook" onClick="facebook()"></a>
     <a href="" id="twitter"></a>
