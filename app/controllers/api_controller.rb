@@ -30,7 +30,7 @@ class ApiController < ActionController::Base
   def userFavorites
     response = []
 
-    favoritesData = Favorites.get(params[:user_id])    
+    favoritesData = Favorites.get(params[:username], nil)    
 
     favoritesData.each do |video|
       response.push(:VideoID => video["video_id"], :VideoTitle => video["video_title"])

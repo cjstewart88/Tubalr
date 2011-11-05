@@ -7,14 +7,16 @@ Tubalr::Application.routes.draw do
   
   get "/just/:artist_band.json" => "api#just"
   get "/similar/:artist_band.json" => "api#similar"
-  get "/users/:user_id/favorites.json" => "api#userFavorites"
+  get "/:username/favorites.json" => "api#userFavorites"
   
   get "/just/:artist_band" => "application#index"
   get "/similar/:artist_band" => "application#index"
   
   get "/history" => "application#history"
   
-  get "/users/:username/favorites" => "favorites#init"
+  get "/:username/favorites" => "favorites#init"
+  
+  post "/check-favorites" => "favorites#check"
   
   devise_scope :user do
     get "/users/sign_out" => "devise/sessions#destroy"

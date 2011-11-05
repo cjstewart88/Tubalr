@@ -19,6 +19,14 @@ var ytplayer = null;
 var playlistDirection = "forward";
 var playlistLength = 0;
 
+var userId = 0;
+var alreadyFavorites = [];
+
+// set user id
+function setUserId (id) {
+  userId = id;
+}
+
 // just artist/band
 function just (who) {
   $('.just').addClass('listen-active');
@@ -67,7 +75,7 @@ function userFavorites(username) {
   currenttrack = 0;
   search = username;
   search_type = "favorites";
-	$.getJSON('/users/'+username+'/favorites.json', function(data) {
+	$.getJSON('/'+username+'/favorites.json', function(data) {
 	  if (data.length != 0) {
       videos = data;
 		  initPlaylist();
@@ -80,6 +88,22 @@ function userFavorites(username) {
 
 // start the playlist
 function initPlaylist () {
+  // check to see if any of the video ids are already marked as a favorite for the user
+  if (userId > 0) {
+    $.ajax({
+      type: 'POST',
+      url: '/check-favorites',
+      data: {
+        user_id:  userId,
+        videos:   videos
+      },
+      dataType: 'json',
+      success: function(data) {
+        alreadyFavorites = data;
+      }
+    });
+  }
+  
   playlistLength = videos.length; 
   $('.listen-active').removeClass('listen-active');
   videos.sort(function () { return (Math.round(Math.random())-0.5); });
@@ -119,6 +143,12 @@ function initPlaylist () {
 
 // denote current song in the ui
 function currentVideo (video, init) {
+  if ($.inArray(video.VideoID, alreadyFavorites) != -1) {
+    $('#favorite-star').addClass('fav');
+  }
+  else {
+    $('#favorite-star').removeClass('fav');    
+  }
   if (!init) ytplayer.loadVideoById(video.VideoID, 0);
 	$('#currentVideoTitle').html(video.VideoTitle);
 	$('#playlist .active').removeClass('active');

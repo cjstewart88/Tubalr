@@ -12,13 +12,14 @@
 </section>
 
 <script>
+  <%= "setUserId(#{current_user.id})" if user_signed_in? %>
   <%= "just('#{params[:artist_band]}');" if request.path.index("just") %>
   <%= "similarTo('#{params[:artist_band]}');" if request.path.index("similar") %>
   <%= "userFavorites('#{@username}');" if request.env['PATH_INFO'].include?("favorites") %>
 </script>
 
 <section id="player">
-  <a href="#" id="favorite-star" class="fav"></a>
+ <% if user_signed_in? %><a href="#" id="favorite-star" class="fav"></a><% end %>
   <aside id="share">
     <a href="#" id="facebook" onClick="facebook()"></a>
     <a href="" id="twitter"></a>
