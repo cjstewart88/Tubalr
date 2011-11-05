@@ -28,4 +28,14 @@ class FavoritesController < ApplicationController
 
     render :json => response
   end
+  
+  def add
+    Favorites.create(:user_id => params[:user_id], :video_id => params[:video_id], :video_title => params[:video_title])
+    render :json => { :success => true }
+  end
+  
+  def remove
+    Favorites.where(:user_id => params[:user_id], :video_id => params[:video_id]).first().destroy
+    render :json => { :success => true }
+  end
 end

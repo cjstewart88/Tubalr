@@ -239,32 +239,32 @@ function facebook () {
 function favorite (star) {
   if ($(star).hasClass('fav')) {
     $.ajax({
-      type: 'PUT',
-      url: '/users/'+user-id+'.json',
+      type: 'POST',
+      url: '/favorites/remove',
       data: {
-        action:       "remove",
-        video_id:     videos[currenttrack].VideoID,
-        video_title:  videos[currenttrack].VideoTitle
+        user_id:  userId,  
+        video_id: videos[currenttrack].VideoID
       },
       dataType: 'json',
       success: function(data) {
-        videos.splice(currenttrack, 1);
         $(star).removeClass('fav');
-        nextSong();
+        alreadyFavorites.splice(videos[currenttrack].VideoID, 1);
+        //nextSong();
       }
     });
   }
   else {
     $.ajax({
-      type: 'PUT',
-      url: '/users/'+user-id+'.json',
+      type: 'POST',
+      url: '/favorites/add',
       data: {
-        action:       "add",
+        user_id:      userId,  
         video_id:     videos[currenttrack].VideoID,
         video_title:  videos[currenttrack].VideoTitle
       },
       dataType: 'json',
       success: function(data) {
+        alreadyFavorites.push(videos[currenttrack].VideoID);
         $(star).addClass('fav');
       }
     });  
