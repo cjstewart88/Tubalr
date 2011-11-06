@@ -8,7 +8,7 @@
   <span class="tooltip-tip"></span>
   Howdy, friend, wondering what Tubalr is? Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without
   all the clutter YouTube brings. To get started just type a band's or artist's name into the search box and select
-  only or similar. Oh, and if you're interested in saving your favorite videos, <a href='/users/sign_up'>register</a> an account, it's easy!
+  only or similar. <% if !user_signed_in? %> Oh, and if you're interested in saving your favorite videos, <a href='/users/sign_up'>register</a> an account, it's easy! <% end %>
 </section>
 
 <section id="empty-playlist" class='middle-tooltip'>
