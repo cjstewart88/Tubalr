@@ -30,15 +30,15 @@ class ApplicationController < ActionController::Base
     tmp_history = Searches.find(:all, :limit => 500, :order => "created_at DESC")
     
     tmp_history.each do | search |
-      #if !@history.has_key?(search.what)
+      if search.search_type != 'favorites'
         @history << {
           :what => search.what.gsub("+"," "),
           :date => search.created_at.strftime("%D"),
           :type => search.search_type,
-          :url  => search.search_type == 'favorites' ? "/#{search.what.gsub(" ","+")}/favorites" : "/#{search.search_type}/#{search.what.gsub(" ","+")}",
+          :url  => "/#{search.search_type}/#{search.what.gsub(" ","+")}",
           :who  => search.who
         }
-      #end
+      end
     end
     
     render :layout => "application", :template => "history"
