@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
           :what => search.what.gsub("+"," "),
           :date => search.created_at.strftime("%D"),
           :type => search.search_type,
-          :url  => "/#{search.search_type}/#{search.what.gsub(" ","+")}",
+          :url  => search.search_type == 'favorites' ? "/#{search.what.gsub(" ","+")}/favorites" : "/#{search.search_type}/#{search.what.gsub(" ","+")}",
           :who  => search.who
         }
       #end

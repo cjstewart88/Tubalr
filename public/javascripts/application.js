@@ -17,14 +17,15 @@ var search_type = "";
 var videosCopy = "";
 var ytplayer = null;
 var playlistDirection = "forward";
-var playlistLength = 0;
 
 var userId = 0;
+var userUsername = null;
 var alreadyFavorites = [];
 
 // set user id
-function setUserId (id) {
+function setUserInfo (id, username) {
   userId = id;
+  userUsername = username;
 }
 
 // just artist/band
@@ -70,18 +71,25 @@ function similarTo (who) {
 }
 
 // user favorites
-function userFavorites(username) {
+function userFavorites(un) {
   videos = [];
   currenttrack = 0;
-  search = username;
+  search = un;
   search_type = "favorites";
-	$.getJSON('/'+username+'/favorites.json', function(data) {
+	$.getJSON('/'+un+'/favorites.json', function(data) {
 	  if (data.length != 0) {
       videos = data;
 		  initPlaylist();
 	  } 
 	  else {
-      window.location = "/";
+      if (search == userUsername) {
+        $('#empty-playlist .bystander').remove();
+        $('#empty-playlist').fadeIn();
+      }
+      else {
+        $('#empty-playlist .users-favorites').remove();
+        $('#empty-playlist').fadeIn();      
+      }
 	  } 
 	});
 }
@@ -104,10 +112,9 @@ function initPlaylist () {
     });
   }
   
-  playlistLength = videos.length; 
   $('.listen-active').removeClass('listen-active');
   videos.sort(function () { return (Math.round(Math.random())-0.5); });
-  $('#about').fadeOut(500, function(){
+  $('.middle-tooltip').fadeOut(500, function(){
     $("#main").animate({
       marginTop: 100
     }, 500, function () {  
@@ -115,13 +122,14 @@ function initPlaylist () {
       $.each(videos, function(i) {
         videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'">'+this.VideoTitle+'</a>';
       });
-    	$('#playlist').html(videosCopy);
+    	$('#the-list').html(videosCopy);
     	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
-    	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+search_type+"%2F"+search.replace(/[ +]/g,"%2B"));
+    	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+(search_type == 'favorites' ? "%27s%20favorites": '')+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+(search_type == 'favorites' ? search.replace(/[ +]/g,"%2B")+"%2Ffavorites" : search_type+"%2F"+search.replace(/[ +]/g,"%2B")));
   		$('#link-tooltip input').val("http://www.tubalr.com/"+search_type+"/"+search.replace(/ /g,"+"));
   		currentVideo(videos[currenttrack], true);
     	$('#player').fadeIn(1000);
     	$('#playlist').fadeIn(1000);
+    	$('.slimScrollDiv').fadeIn(1000);
       $('body').keyup(function(e) {
         // if video is loading, stop
         if (window.yt_loading) return false;
@@ -151,7 +159,7 @@ function currentVideo (video, init) {
   }
   if (!init) ytplayer.loadVideoById(video.VideoID, 0);
 	$('#currentVideoTitle').html(video.VideoTitle);
-	$('#playlist .active').removeClass('active');
+	$('#the-list .active').removeClass('active');
 	$('#'+video.VideoID).addClass('active');
 }
 
@@ -162,9 +170,18 @@ function jumpTo (VideoID) {
 }
 
 // next
-function nextSong () {
+function nextSong (removedFromFavorites) {
   direction = "forward";
-	if (currenttrack == videos.length-1) {
+  if (removedFromFavorites) {
+    if (currenttrack == videos.length) {
+      currenttrack = 0;
+	    currentVideo(videos[currenttrack]);
+	  }
+	  else {
+	    currentVideo(videos[currenttrack]);
+	  }
+  }
+	else if (currenttrack == videos.length-1) {
 		currenttrack = 0;
 		currentVideo(videos[currenttrack]);
 	}
@@ -179,7 +196,7 @@ function nextSong () {
 function previousSong () {
   direction = "backward";
 	if (currenttrack == 0) {
-		currenttrack = playlistLength;
+		currenttrack = videos.length-1;
 		currentVideo(videos[currenttrack]);
 	}
 	else {
@@ -224,8 +241,8 @@ function facebook () {
   FB.ui({
       method: 'stream.publish',
       attachment: {
-        name: (search_type == 'similar' ? 'Artists/Bands similar to ' : '')+search.replace(/[+]/g," ")+", brought to you by tubalr!",
-        href: "http://www.tubalr.com/"+search_type+"/"+search.replace(/ /g,"+"),
+        name: (search_type == 'similar' ? 'Artists/Bands similar to ' : '')+search.replace(/[+]/g," ")+(search_type == 'favorites' ? "'s favorites": '')+", brought to you by tubalr!",
+        href: "http://www.tubalr.com/"+(search_type == 'favorites' ? search.replace(/ /g,"+")+'/favorites' : search_type+"/"+search.replace(/ /g,"+")),
         description: ("Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without all the clutter YouTube brings.")
       },
       display: 'popup'
@@ -248,8 +265,22 @@ function favorite (star) {
       dataType: 'json',
       success: function(data) {
         $(star).removeClass('fav');
-        alreadyFavorites.splice(videos[currenttrack].VideoID, 1);
-        //nextSong();
+        alreadyFavorites.splice(alreadyFavorites.indexOf(videos[currenttrack].VideoID), 1);
+        if (search == userUsername) {
+          $("#the-list #"+videos[currenttrack].VideoID).remove();
+          videos.splice(currenttrack, 1);
+          if (videos.length == 0) {
+            $('#player').fadeOut();
+            $('.slimScrollDiv').fadeOut(500, function() {
+              $('#main').animate({ marginTop: 200 }, 500);
+            });
+            $('#empty-playlist .bystander').remove();
+            $('#empty-playlist').fadeIn();
+          }
+          else {
+            nextSong("removedFromFavorites");
+          }
+        }
       }
     });
   }
@@ -284,7 +315,7 @@ $(document).ready(function(){
     favorite(this);
   });
   
-  $('#playlist').delegate('a', 'click', function () { jumpTo($(this).index('#playlist a')); return false; });   
+  $('#the-list').delegate('a', 'click', function () { jumpTo($(this).index('#the-list a')); return false; });   
     
   $('.link-tooltip').mouseenter(function(){
     $('#link-tooltip').show();

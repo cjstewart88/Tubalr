@@ -4,7 +4,7 @@ header, footer, aside, nav, article, section { display: block; }
 
 html, body { width: 100%; }
 
-html { overflow-y: scroll; }
+html { overflow-x: hidden; }
 
 body {
   padding-bottom: 50px;  
@@ -23,16 +23,25 @@ input:focus { outline: 0; }
 input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; }
 
 .flash-msg {
-  position: absolute;
-  top: 0px;
-  width: 100%;
+  margin: 0 auto;
+  width: 600px;
+  padding: 10px;
+  -moz-box-shadow: 0 0 2px 1px #888;
+  -webkit-box-shadow: 0 0 2px 1px#888;
+  box-shadow: 0 0 2px 1px #888;
+  -moz-border-radius-bottomright: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -webkit-border-bottom-left-radius: 3px;
+  -webkit-border-bottom-right-radius: 3px;
+  text-align: center;
 }
-.flash-msg-alert { background: #BD5E55; }
+.flash-msg-alert { background: #BD5E55;  }
 .flash-msg-notice { background: #6D8F5A; }
 .flash-msg p {
-  margin: 10px;
   color: #efefef;
-  text-shadow: 1px 1px #565656;
+  text-shadow: 1px 1px 1px #565656;
+  -moz-text-shadow: 1px 1px 1px #565656;
+  -webkit-text-shadow: 1px 1px 1px #565656;
 }
 
 #main {
@@ -114,7 +123,7 @@ input[type=button]:hover, input[type=submit]:hover {
 
 #q:focus, input:focus { border-color: #999; }
 
-#about {
+.middle-tooltip {
 	width: 312px;
 	margin-left: 135px;
 	margin-top: 15px;
@@ -126,7 +135,7 @@ input[type=button]:hover, input[type=submit]:hover {
   color: #fdfdfd;
   text-align: center;
 }
-#about .tooltip-tip {
+.middle-tooltip .tooltip-tip {
   background: url(/images/tooltip-tip.png) no-repeat;
   width: 8px;
   height: 8px;
@@ -135,6 +144,9 @@ input[type=button]:hover, input[type=submit]:hover {
   margin-top: -19px;
   margin-left: 151px;
 }
+.middle-tooltip a { color: #EFF06C; }
+.middle-tooltip a:hover { text-decoration: underline; }
+#empty-playlist { display: none; }
 
 #player {
 	width: 600px;
@@ -154,23 +166,22 @@ input[type=button]:hover, input[type=submit]:hover {
 }
 .fav { background-position: 0px -16px !important; }
 
-#share {
-  position: absolute;
-  margin-left: 610px;
-  visibility: hidden;
-}
+#share { color: #efefef; 	border-bottom: groove 2px #666; padding: 10px 42px; }
 #share a {
-  display: block;
   width: 16px;
   height: 16px;
   border: none;
+  position: absolute;
+  margin-top: -3px;
 }
 #share a#facebook {
   background: url(/images/facebook.png) no-repeat;
+  margin-left: 3px;
 }
 #share a#twitter {
   background: url(/images/twitter.png) no-repeat;
-  margin-top: 5px;
+  margin-left: 20px;
+  margin-top: -2px;
 }
 #share a#link {
   background: url(/images/link.png) no-repeat;
@@ -232,7 +243,7 @@ input[type=button]:hover, input[type=submit]:hover {
 	height: 100%;
 	overflow: auto;
 }
-#playlist a {
+#playlist #the-list a {
   display: block;
   color: #ccc;
 	text-decoration: none;
@@ -242,12 +253,12 @@ input[type=button]:hover, input[type=submit]:hover {
 	-moz-text-shadow: 1px 1px #222;
 	-webkit-text-shadow: 1px 1px #222;
 }
-#playlist a.active {
+#playlist #the-list a.active {
 	color: #efefef;
   background: url(/images/active.png) center left;
   background-repeat: no-repeat;
 }
-#playlist a:hover {
+#playlist #the-list a:hover {
   color: #efefef !important;
 }
 #player #currentVideoTitle {
@@ -266,7 +277,6 @@ nav a {
 
 #history-main { 
   position: relative;
-  margin-top: 15px; 
   margin-bottom: 50px; 
 }
 #history-main h2 {
@@ -311,4 +321,8 @@ footer {
 }
 footer iframe {
   margin: 5px;
+}
+
+#usrFeedbackModalOverlay {
+  height: 100%;
 }

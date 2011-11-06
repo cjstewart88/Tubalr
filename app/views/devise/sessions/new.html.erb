@@ -1,8 +1,8 @@
-<h2>Sign in</h2>
+<h2>Login</h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
   <div>
-    <%= f.label :login %><br />
+    <%= f.label :login, "Username or E-Mail" %><br />
     <%= f.text_field :login %> <%= "<span class='error'>#{resource.errors[:login][0]}</span>".html_safe if resource.errors[:login][0] %>
   </div>
 
