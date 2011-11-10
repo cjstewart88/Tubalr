@@ -15,14 +15,14 @@ class ApplicationController < ActionController::Base
     render :layout => "application", :template => "index"
   end
   
-  def player
+  def search
     Searches.create({  
       :search_type  => params[:search_type],
       :what         => params[:search],
       :who          => request.remote_ip
     })
     
-    render :template => "player", :layout => false
+    render :json => ""
   end
   
   def history

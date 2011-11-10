@@ -17,32 +17,25 @@
   <p class="bystander">Doh! This user currently has 0 favorites, tell them to get some and check back later!</p>
 </section>
 
+<section id="player">
+  <% if user_signed_in? %><a href="#" id="favorite-star" class="fav"></a><% end %>
+	<div id="ytplayerid"></div> 
+  <nav> 
+    <a href="#" id="next" onClick="nextSong();">next</a>
+    <a href="#" id="prev" onClick="previousSong();">previous</a> 
+  </nav>
+</section>
+
+<section id="playlist">
+  <aside id="share">
+    Share this playlist: <a href="#" id="facebook" onClick="facebook()"></a> <a href="" id="twitter"></a>
+	</aside>
+	<div id="the-list"></div>
+</section>
+
 <script>
   <%= "setUserInfo(#{current_user.id}, '#{current_user.username}')" if user_signed_in? %>
   <%= "just('#{params[:artist_band]}');" if request.path.index("just") %>
   <%= "similarTo('#{params[:artist_band]}');" if request.path.index("similar") %>
   <%= "userFavorites('#{@username}');" if request.env['PATH_INFO'].include?("favorites") %>
 </script>
-
-<section id="player">
- <% if user_signed_in? %><a href="#" id="favorite-star" class="fav"></a><% end %>
-	<div id="ytplayerid"></div> 
-</section>
-<section id="playlist">
-  <aside id="share">
-    Share this playlist:
-    <a href="#" id="facebook" onClick="facebook()"></a>
-    <a href="" id="twitter"></a>
-    <!-- <a href="" id="link" class="link-tooltip"></a>
-        <div id="link-tooltip" class="link-tooltip">
-          <div>
-            <span class="tooltip-tip"></span>
-            Sharable URL:
-            <input type="text" value=""/>
-          </div>
-        </div> -->
-	</aside>
-	<div id="the-list">
-	 
-	</div>
-</section>

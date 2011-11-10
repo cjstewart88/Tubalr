@@ -267,6 +267,7 @@ input[type=button]:hover, input[type=submit]:hover {
 #ytplayerid {
 	height: 362px;
 }
+nav { margin-top: 10px; }
 nav a {
   display: inline-block;
 	text-decoration: none;

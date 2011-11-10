@@ -1,6 +1,3 @@
-// this is true if a youtube video is loading
-window.yt_loading = false;
-
 window.fbAsyncInit = function() { FB.init({ 
     appId : '239275546125436', 
     status : true, 
@@ -15,12 +12,17 @@ var currenttrack = 0;
 var search = "";
 var search_type = "";
 var videosCopy = "";
-var ytplayer = null;
-var playlistDirection = "forward";
+var direction = "forward";
 
 var userId = 0;
 var userUsername = null;
 var alreadyFavorites = [];
+
+var tag = null;
+var firstScriptTag = null;
+var thePlayer;
+
+var firstSearch = true;
 
 // set user id
 function setUserInfo (id, username) {
@@ -94,8 +96,29 @@ function userFavorites(un) {
 	});
 }
 
+function onYouTubePlayerAPIReady() {
+  thePlayer = new YT.Player('ytplayerid', {
+    videoId: videos[currenttrack].VideoID,
+    width: 600,
+    height: 362,
+    playerVars: { 'autoplay': 1, 'rel': 0, 'theme': 'light', 'showinfo': 0 },
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange,
+      'onError': onPlayerError
+    }
+  });
+}
+
 // start the playlist
 function initPlaylist () {
+  videos.sort(function () { return (Math.round(Math.random())-0.5); });
+  
+  var tag = document.createElement('script');
+  tag.src = "http://www.youtube.com/player_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
   // check to see if any of the video ids are already marked as a favorite for the user
   if (userId > 0) {
     $.ajax({
@@ -111,10 +134,9 @@ function initPlaylist () {
       }
     });
   }
-  
+
   $('.listen-active').removeClass('listen-active');
-  videos.sort(function () { return (Math.round(Math.random())-0.5); });
-  $('.middle-tooltip').fadeOut(500, function(){
+  $('#about').fadeOut(500, function(){
     $("#main").animate({
       marginTop: 100
     }, 500, function () {  
@@ -123,42 +145,40 @@ function initPlaylist () {
         videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'">'+this.VideoTitle+'</a>';
       });
     	$('#the-list').html(videosCopy);
-    	$('#ytplayerid').load('/player/' + search_type + '/' + escape(search) + '/' + videos[currenttrack].VideoID);
+
+    	$.post('/insert_search/' + search_type + '/' + escape(search));
+  	
     	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+(search_type == 'favorites' ? "%27s%20favorites": '')+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+(search_type == 'favorites' ? search.replace(/[ +]/g,"%2B")+"%2Ffavorites" : search_type+"%2F"+search.replace(/[ +]/g,"%2B")));
-  		$('#link-tooltip input').val("http://www.tubalr.com/"+search_type+"/"+search.replace(/ /g,"+"));
-  		currentVideo(videos[currenttrack], true);
+		
+    	currentVideo(videos[currenttrack]);
+		  firstSearch = false;
+		  
     	$('#player').fadeIn(1000);
     	$('#playlist').fadeIn(1000);
     	$('.slimScrollDiv').fadeIn(1000);
-      $('body').keyup(function(e) {
-        // if video is loading, stop
-        if (window.yt_loading) return false;
-        
-        if (!$('#q').is(":focus")) {
-          var code = (e.keyCode ? e.keyCode : e.which);
-          if (code == 39) nextSong();
-          if (code == 37) previousSong();
-          if (code == 32) ytplayer.getPlayerState() == 2 ? ytplayer.playVideo() : ytplayer.pauseVideo();
-        }
-      });
+    
       $('#playlist').slimScroll({
-          height: '100%',
-          width: '200px'
+        height: '100%',
+        width: '200px'
       });
     });
   });
 }
 
 // denote current song in the ui
-function currentVideo (video, init) {
+function currentVideo (video) {
   if ($.inArray(video.VideoID, alreadyFavorites) != -1) {
     $('#favorite-star').addClass('fav');
   }
   else {
     $('#favorite-star').removeClass('fav');    
   }
-  if (!init) ytplayer.loadVideoById(video.VideoID, 0);
-	$('#currentVideoTitle').html(video.VideoTitle);
+  
+  if (!firstSearch) {
+    firstSearch = false;
+    thePlayer.loadVideoById(video.VideoID, 0);
+  }
+	
 	$('#the-list .active').removeClass('active');
 	$('#'+video.VideoID).addClass('active');
 }
@@ -206,24 +226,11 @@ function previousSong () {
 	return false;
 }
 
-// Getting youtube player ready
-function onYouTubePlayerReady (playerId) {
-	ytplayer = document.getElementById("ytplayerid");
-	ytplayer.addEventListener("onStateChange", "onytplayerStateChange");
-	ytplayer.addEventListener("onError", "onPlayerError");
-}
-
 // YouTube player changes states
-function onytplayerStateChange (newState) {
+function onPlayerStateChange (newState) {
   // if track ended
-	if (newState == 0) {
+	if (newState.data == 0) {
     nextSong();
-  // if video is loading
-  } else if (newState == 3) {
-    window.yt_loading = true;
-  // if video is ready
-  } else if (newState ==1) {
-    window.yt_loading = false;
   }
 }
 
@@ -235,6 +242,10 @@ function onPlayerError (errorCode) {
 	else {
 	  nextSong();
 	}
+}
+
+function onPlayerReady () {
+
 }
 
 function facebook () {
@@ -316,13 +327,6 @@ $(document).ready(function(){
   });
   
   $('#the-list').delegate('a', 'click', function () { jumpTo($(this).index('#the-list a')); return false; });   
-    
-  $('.link-tooltip').mouseenter(function(){
-    $('#link-tooltip').show();
-  }).mouseleave(function(){
-    $('#link-tooltip').hide();
-  });
-  $('#link-tooltip input').focus(function(){$(this).select();}).mouseup(function(e){e.preventDefault();});
   
   $('table tbody tr').click(function() {
     window.open(window.location.protocol+"//"+window.location.host+$(this).attr('url'));
