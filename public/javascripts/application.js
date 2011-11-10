@@ -114,11 +114,13 @@ function onYouTubePlayerAPIReady() {
 function initPlaylist () {
   videos.sort(function () { return (Math.round(Math.random())-0.5); });
   
-  var tag = document.createElement('script');
-  tag.src = "http://www.youtube.com/player_api";
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
+  if (firstSearch) {
+    console.log("firstSearch");
+    var tag = document.createElement('script');
+    tag.src = "http://www.youtube.com/player_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  }
   // check to see if any of the video ids are already marked as a favorite for the user
   if (userId > 0) {
     $.ajax({
