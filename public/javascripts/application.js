@@ -115,7 +115,6 @@ function initPlaylist () {
   videos.sort(function () { return (Math.round(Math.random())-0.5); });
   
   if (firstSearch) {
-    console.log("firstSearch");
     var tag = document.createElement('script');
     tag.src = "http://www.youtube.com/player_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
