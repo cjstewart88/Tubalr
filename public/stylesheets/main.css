@@ -51,7 +51,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   margin-top: 200px;
 }
 
-h1 { cursor: default; font: 32px 'Pacifico'; display: block; margin-left: 260px; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
+h1 { cursor: default; font: 32px 'Pacifico'; display: block; text-align: center; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
 h1 a { text-decoration: none; color: #464646; }
 h1 a:hover { 
   text-decoration: none; 
@@ -323,6 +323,12 @@ footer {
 footer iframe {
   margin: 5px;
 }
+footer aside {
+  text-align: left;
+  margin-left: 205px;
+}
+.follow-us { position: absolute; margin-top: 7px; }
+.follow-us span { position: absolute; margin-top: 2px; width: 75px; margin-left: 5px; }
 
 #usrFeedbackModalOverlay {
   height: 100%;
