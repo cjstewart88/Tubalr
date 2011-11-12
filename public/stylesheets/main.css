@@ -229,6 +229,7 @@ input[type=button]:hover, input[type=submit]:hover {
   -webkit-box-shadow: 0 0 5px 1px#888;
   box-shadow: 0 0 5px 1px #888;
   border-left: groove 2px #666;
+  z-index: 10000;
 }
 
 #playlist {
