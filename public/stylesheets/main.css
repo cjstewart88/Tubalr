@@ -14,7 +14,7 @@ body {
 }	
 
 a { text-decoration: none; color: #464646; }
-a:hover { color: #940500; }
+a:hover { color: #FC7D49; }
 a:active { outline: none; }
 a:focus { -moz-outline-style: none; }
 
@@ -55,7 +55,7 @@ h1 { cursor: default; font: 32px 'Pacifico'; display: block; text-align: center;
 h1 a { text-decoration: none; color: #464646; }
 h1 a:hover { 
   text-decoration: none; 
-  color: 940500; 
+  color: #FC7D49; 
   -webkit-transform: color;
   -webkit-transition-duration: 1s;
 }
