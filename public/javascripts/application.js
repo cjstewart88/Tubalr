@@ -120,6 +120,7 @@ function initPlaylist () {
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   }
+  
   // check to see if any of the video ids are already marked as a favorite for the user
   if (userId > 0) {
     $.ajax({
@@ -137,6 +138,7 @@ function initPlaylist () {
   }
 
   $('.listen-active').removeClass('listen-active');
+  $('#empty-playlist').fadeOut();
   $('#about').fadeOut(500, function(){
     $("#main").animate({
       marginTop: 100
