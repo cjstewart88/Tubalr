@@ -52,7 +52,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 }
 
 h1 { cursor: default; font: 32px 'Pacifico'; display: block; text-align: center; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
-h1 a { text-decoration: none; color: #464646; }
+h1 a { text-decoration: none; color: #464646; padding: 0 5px; }
 h1 a:hover { 
   text-decoration: none; 
   color: #FC7D49; 
