@@ -9,7 +9,7 @@ html { overflow-x: hidden; }
 body {
   padding-bottom: 50px;  
 	background: url(../images/bg.png); 
-	font:  11px helvetica, arial, freesans, clean, sans-serif; 
+	font:  11px 'lucida grande', tahoma, verdana, arial, sans-serif; 
 	color: #464646;
 }	
 
@@ -18,7 +18,7 @@ a:hover { color: #FC7D49; }
 a:active { outline: none; }
 a:focus { -moz-outline-style: none; }
 
-input { color: #666; font:  11px helvetica, arial, freesans, clean, sans-serif; }
+input { color: #666; font:  11px 'lucida grande', tahoma, verdana, arial, sans-serif; }
 input:focus { outline: 0; }
 input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; }
 
@@ -61,6 +61,7 @@ h1 a:hover {
 }
 
 h2 {
+  margin-top: 10px;
   margin-bottom: 20px;
   margin-left: 190px;
 }
@@ -121,31 +122,28 @@ input[type=button]:hover, input[type=submit]:hover {
   color: rgba(0, 0, 0, 0.0);
 }
 
+nav { 
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
 #q:focus, input:focus { border-color: #999; }
 
 .middle-tooltip {
-	width: 312px;
-	margin-left: 135px;
-	margin-top: 15px;
-	background: url(/images/tooltip-bg.png);
-  border: solid 1px #464646;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  padding: 10px;
-  color: #fdfdfd;
+  width: 312px;
+  margin-left: 135px;
+  margin-top: 15px;
+  padding: 18px 10px;
+  color: #464646;
   text-align: center;
+  border-top: solid 1px #888;
+  border-bottom: solid 1px #888;
+  line-height: 16px;
 }
-.middle-tooltip .tooltip-tip {
-  background: url(/images/tooltip-tip.png) no-repeat;
-  width: 8px;
-  height: 8px;
-  display: block;
-  position: absolute;
-  margin-top: -19px;
-  margin-left: 151px;
-}
-.middle-tooltip a { color: #EFF06C; }
+.middle-tooltip a { color: #464646; }
 .middle-tooltip a:hover { text-decoration: underline; }
+
 #empty-playlist { display: none; }
 
 #player {
@@ -183,46 +181,6 @@ input[type=button]:hover, input[type=submit]:hover {
   margin-left: 20px;
   margin-top: -2px;
 }
-#share a#link {
-  background: url(/images/link.png) no-repeat;
-  margin-top: 5px;
-}
-#link-tooltip {
-  display: none;
-  margin-top: -24px;
-}
-#link-tooltip div {
-  position: relative;
-  z-index: 10000;
-	margin-left: 25px;
-	background: url(/images/tooltip-bg.png);
-  border: solid 1px #464646;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  padding: 6px 8px;
-  color: #fdfdfd;
-  text-align: center;
-}
-#link-tooltip .tooltip-tip {
-  background: url(/images/tooltip-tip-right.png) no-repeat;
-  width: 8px;
-  height: 8px;
-  display: block;
-  position: absolute;
-  margin-top: 5px;
-  margin-left: -17px;
-}
-#link-tooltip input {
-  width: 120px;
-  margin-top: 4px;
-  padding: 2px;
-  border: solid 1px #cecfd1;
-  border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-}
-#link-tooltip input:focus { border-color: #999; }
 
 .slimScrollDiv {
   -moz-box-shadow: 0 0 5px 1px #888;
@@ -268,14 +226,6 @@ input[type=button]:hover, input[type=submit]:hover {
 #ytplayerid {
 	height: 362px;
 }
-nav { margin-top: 10px; }
-nav a {
-  display: inline-block;
-	text-decoration: none;
-}
-#next {
-	float: right;
-}
 
 #history-main { 
   position: relative;
@@ -313,24 +263,5 @@ nav a {
   border-bottom: none;
 }
 
-footer {
-  background: url(/images/bg.png);
-	width: 600px;
-	position: fixed;
-	bottom: 0;
-	text-align: center;
-	padding-top: 10px;
-}
-footer iframe {
-  margin: 5px;
-}
-footer aside {
-  text-align: left;
-  margin-left: 205px;
-}
-.follow-us { position: absolute; margin-top: 7px; }
-.follow-us span { position: absolute; margin-top: 2px; width: 75px; margin-left: 5px; }
-
-#usrFeedbackModalOverlay {
-  height: 100%;
-}
+.social { position: fixed; bottom: 10px; left: 10px; }
+.social .twitter { position: absolute; margin-top: -20px; margin-left: 85px; width: 90px; }

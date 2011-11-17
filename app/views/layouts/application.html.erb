@@ -12,19 +12,20 @@
     
     <%= "<aside class='flash-msg flash-msg-alert'><p>#{flash[:alert]}</p></aside>".html_safe if !flash[:alert].nil? %>
     <%= "<aside class='flash-msg flash-msg-notice'><p>#{flash[:notice]}</p></aside>".html_safe if !flash[:notice].nil? %>
-    
+        
     <div id="main" <%= "style='margin-top: 20px;'" if request.path.index("history") || request.env['PATH_INFO'].include?("users") %>>
+      <nav>
+        <%= user_signed_in? ? link_to('My Favorites', "/#{current_user.username}/favorites") + ' - ' + link_to('My Settings', '/users/edit') + ' - ' + link_to('Logout', destroy_user_session_path, :method => :delete) : link_to('Register', '/users/sign_up') + ' - ' + link_to('Login', '/users/sign_in') %>
+      </nav>
+    
       <h1><a href='/'>tubalr</a></h1>
-      
+
       <%= yield %>
 
-      <footer>
-        <a href="/">Home</a> - <a href="/history">Search History</a> - <a href="http://www.tubalr.tumblr.com">Blog</a> - <%= user_signed_in? ? link_to('My Favorites', "/#{current_user.username}/favorites") + ' - ' + link_to('My Settings', '/users/edit') + ' - ' + link_to('Logout', destroy_user_session_path, :method => :delete) : link_to('Register', '/users/sign_up') + ' - ' + link_to('Login', '/users/sign_in') %>
-        <aside>
-          <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/pages/Tubalr/154359441249128&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe>
-          <a href="https://twitter.com/tubalr" target="_blank" class="follow-us"><img src="/images/twitter-footer.png"><span>Follow @tubalr</span></a>
-        </aside>
-      </footer>
+      <aside class="social">
+        <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/pages/Tubalr/154359441249128&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:85px; height:21px;" allowTransparency="true"></iframe>
+        <a href="https://twitter.com/tubalr" target="_blank" class="twitter">Follow @tubalr</a>
+      </aside>
     </div>
   </body>
 </html>

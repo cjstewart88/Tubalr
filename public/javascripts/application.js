@@ -157,13 +157,15 @@ function initPlaylist () {
 		  firstSearch = false;
 		  
     	$('#player').fadeIn(1000);
-    	$('#playlist').fadeIn(1000);
-    	$('.slimScrollDiv').fadeIn(1000);
-    
-      $('#playlist').slimScroll({
-        height: '100%',
-        width: '200px'
-      });
+    	$('nav').animate({ right: 220 }, 500, function() {
+    	  $('#playlist').fadeIn(1000);
+      	$('.slimScrollDiv').fadeIn(1000);
+
+        $('#playlist').slimScroll({
+          height: '100%',
+          width: '200px'
+        });
+    	});
     });
   });
 }
