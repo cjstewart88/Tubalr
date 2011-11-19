@@ -264,4 +264,5 @@ nav {
 }
 
 .social { position: fixed; bottom: 10px; left: 10px; }
-.social .twitter { position: absolute; margin-top: -20px; margin-left: 85px; width: 90px; }
+.social iframe { position: absolute; margin-top: -40px; }
+.social .twitter { position: absolute; margin-top: -15px; width: 90px; }
