@@ -31,5 +31,5 @@
   <%= "setUserInfo(#{current_user.id}, '#{current_user.username}')" if user_signed_in? %>
   <%= "just('#{params[:artist_band]}');" if request.path.index("just") %>
   <%= "similarTo('#{params[:artist_band]}');" if request.path.index("similar") %>
-  <%= "userFavorites('#{@username}');" if request.env['PATH_INFO'].include?("favorites") %>
+  <%= "userFavorites('#{@username}','#{@search.present? ? @search : '' }');" if request.env['PATH_INFO'].include?("favorites") %>
 </script>

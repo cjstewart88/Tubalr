@@ -6,6 +6,7 @@ Tubalr::Application.routes.draw do
   get "/just/:artist_band.json" => "api#just"
   get "/similar/:artist_band.json" => "api#similar"
   get "/:username/favorites.json" => "api#userFavorites"
+  get "/:username/favorites/:search.json" => "api#userFavorites"
   
   get "/just/:artist_band" => "application#index"
   get "/similar/:artist_band" => "application#index"
@@ -14,6 +15,7 @@ Tubalr::Application.routes.draw do
   get "/history" => "application#history"
   
   get "/:username/favorites" => "favorites#init"
+  get "/:username/favorites/:search" => "favorites#init"
   
   post "/check-favorites" => "favorites#check"
   post "/favorites/add" => "favorites#add"

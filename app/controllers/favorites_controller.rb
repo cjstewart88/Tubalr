@@ -1,6 +1,7 @@
 class FavoritesController < ApplicationController
   def init
     @username = params[:username]
+    @search   = params[:search]
 
     render :layout => "application", :template => "index"
   end
@@ -8,7 +9,7 @@ class FavoritesController < ApplicationController
   def check
     response = []
     
-    tmp_favorites = Favorites.get(nil, params[:user_id])
+    tmp_favorites = Favorites.get(nil, params[:user_id], nil)
     tmp_videos    = params[:videos]
     
     current_favorites = []

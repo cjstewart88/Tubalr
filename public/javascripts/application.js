@@ -73,12 +73,13 @@ function similarTo (who) {
 }
 
 // user favorites
-function userFavorites(un) {
+function userFavorites(un, srch) {
   videos = [];
   currenttrack = 0;
-  search = un;
+  search = (srch != '' ? un + ' : ' + srch : un);
   search_type = "favorites";
-	$.getJSON('/'+un+'/favorites.json', function(data) {
+  url = (srch != '' ? '/'+un+'/favorites/'+srch+'.json' : '/'+un+'/favorites.json');
+	$.getJSON(url, function(data) {
 	  if (data.length != 0) {
       videos = data;
 		  initPlaylist();
