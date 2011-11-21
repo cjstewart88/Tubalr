@@ -175,11 +175,12 @@ nav {
 #share a#facebook {
   background: url(/images/facebook.png) no-repeat;
   margin-left: 3px;
+  margin-top: -1px;
 }
 #share a#twitter {
   background: url(/images/twitter.png) no-repeat;
   margin-left: 20px;
-  margin-top: -2px;
+  margin-top: -1px;
 }
 
 .slimScrollDiv {
