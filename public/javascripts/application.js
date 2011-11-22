@@ -10,6 +10,7 @@ window.fbAsyncInit = function() { FB.init({
 var videos = new Array();
 var currenttrack = 0;
 var search = "";
+var prev_search = "";
 var search_type = "";
 var videosCopy = "";
 var direction = "forward";
@@ -150,8 +151,11 @@ function initPlaylist () {
       });
     	$('#the-list').html(videosCopy);
 
-    	$.post('/insert_search/' + search_type + '/' + escape(search));
-  	
+     if (prev_search != search) {  
+      	$.post('/insert_search/' + search_type + '/' + escape(search));
+    	  prev_search = search;
+    	}
+    	
     	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+(search_type == 'favorites' ? "%27s%20favorites": '')+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+(search_type == 'favorites' ? search.replace(/[ +]/g,"%2B")+"%2Ffavorites" : search_type+"%2F"+search.replace(/[ +]/g,"%2B")));
 		
     	currentVideo(videos[currenttrack]);
