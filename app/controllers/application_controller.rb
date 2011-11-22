@@ -31,13 +31,15 @@ class ApplicationController < ActionController::Base
     
     tmp_history.each do | search |
       if search.search_type != 'favorites'
-        @history << {
-          :what => search.what.gsub("+"," "),
-          :date => search.created_at.strftime("%D"),
-          :type => search.search_type,
-          :url  => "/#{search.search_type}/#{search.what.gsub(" ","+")}",
-          :who  => search.who
-        }
+        if @history.select {|s| s[:what] == search.what.gsub("+"," ") && s[:who] == search.who }.length == 0
+          @history << {
+            :what => search.what.gsub("+"," "),
+            :date => search.created_at.strftime("%D"),
+            :type => search.search_type,
+            :url  => "/#{search.search_type}/#{search.what.gsub(" ","+")}",
+            :who  => search.who
+          }
+        end
       end
     end
     
