@@ -7,7 +7,6 @@ html, body { width: 100%; }
 html { overflow-x: hidden; }
 
 body {
-  padding-bottom: 50px;  
 	background: url(../images/bg.png); 
 	font:  11px 'lucida grande', tahoma, verdana, arial, sans-serif; 
 	color: #464646;
@@ -235,6 +234,7 @@ nav {
   margin-left: 0px;
 }
 #stats-main table {
+  margin-bottom: 40px;
   width: 100%;
   border-spacing: 0;
 }
@@ -249,7 +249,7 @@ nav {
   border-right: dotted 1px #ababab;
   border-bottom: dotted 1px #ababab;
 }
-#stats-main table tr td:nth-child(3) {
+#stats-main table tr td:last-child {
   border-right: none;
 }
 #stats-main table thead {

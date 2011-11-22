@@ -1,4 +1,10 @@
 class StatsController < ApplicationController
+  def index
+    self.recent_searches
+    self.recent_favorites
+    render :layout => "application", :template => "stats"
+  end
+  
   def recent_searches
     @recent_searches    = []
     tmp_recent_searches = Searches.find(:all, :limit => 200, :order => "created_at DESC")
@@ -17,6 +23,22 @@ class StatsController < ApplicationController
       end
     end
     
-    render :layout => "application", :template => "stats"
+    return @recent_searches
   end
+  
+  def recent_favorites
+    @recent_favorites    = []
+    tmp_recent_favorites = Favorites.find(:all, :limit => 200, :order => "created_at DESC")
+    
+    tmp_recent_favorites.each do | favorite |
+      @recent_favorites << {
+        :what => favorite.video_title,
+        :date => favorite.created_at.strftime("%D"),
+        :url  => "/#{User.where(["id = ?", favorite.user_id]).first().username.gsub(" ","%20")}/favorites",
+        :who  => User.where(["id = ?", favorite.user_id]).first().username
+      }
+    end
+    
+    return @recent_favorites
+  end  
 end

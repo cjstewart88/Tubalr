@@ -21,4 +21,22 @@
       <% end %>
     </tbody>
   </table>
+  
+  <h2>Recent User Favorites</h2>
+  <table>
+    <thead>
+      <tr>
+        <td>Artist/Band</td>
+        <td>Date</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recent_favorites.each do | favorite | %>
+        <tr url="<%= favorite[:url] %>">
+          <td><%= favorite[:who] + " favorited " + favorite[:what] %></td>
+          <td><%= favorite[:date] %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </section>
