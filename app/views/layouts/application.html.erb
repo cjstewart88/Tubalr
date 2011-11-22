@@ -13,9 +13,17 @@
     <%= "<aside class='flash-msg flash-msg-alert'><p>#{flash[:alert]}</p></aside>".html_safe if !flash[:alert].nil? %>
     <%= "<aside class='flash-msg flash-msg-notice'><p>#{flash[:notice]}</p></aside>".html_safe if !flash[:notice].nil? %>
         
-    <div id="main" <%= "style='margin-top: 20px;'" if request.path.index("history") || request.env['PATH_INFO'].include?("users") %>>
+    <div id="main" <%= "style='margin-top: 20px;'" if request.path.index("stats") || request.env['PATH_INFO'].include?("users") %>>
       <nav>
-        <%= user_signed_in? ? link_to('My Favorites', "/#{current_user.username}/favorites") + ' - ' + link_to('My Settings', '/users/edit') + ' - ' + link_to('Logout', destroy_user_session_path, :method => :delete) : link_to('Register', '/users/sign_up') + ' - ' + link_to('Login', '/users/sign_in') %>
+        <%= link_to('Stats', '/stats') %> - 
+        <% if user_signed_in? %>
+          <%= link_to('Favs', "/#{current_user.username}/favorites") %> - 
+          <%= link_to('Settings', '/users/edit') %> - 
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+        <% else %>  
+          <%= link_to('Register', '/users/sign_up') %> -
+          <%= link_to('Login', '/users/sign_in') %>
+        <% end %>
       </nav>
     
       <h1><a href='/'>tubalr</a></h1>

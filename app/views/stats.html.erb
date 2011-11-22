@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @history.each do | search | %>
+      <% @recent_searches.each do | search | %>
         <tr url="<%= search[:url] %>">
           <td><%= search[:what] %></td>
           <td><%= search[:type] %></td>

@@ -12,7 +12,7 @@ Tubalr::Application.routes.draw do
   get "/similar/:artist_band" => "application#index"
   
   post "/insert_search/:search_type/:search" => "application#search"
-  get "/history" => "application#history"
+  get "/stats" => "stats#recent_searches"
   
   get "/:username/favorites" => "favorites#init"
   get "/:username/favorites/:search" => "favorites#init"

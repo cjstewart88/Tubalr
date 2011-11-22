@@ -24,25 +24,4 @@ class ApplicationController < ActionController::Base
     
     render :json => ""
   end
-  
-  def history
-    @history    = []
-    tmp_history = Searches.find(:all, :limit => 500, :order => "created_at DESC")
-    
-    tmp_history.each do | search |
-      if search.search_type != 'favorites'
-        if @history.select {|s| s[:what] == search.what.gsub("+"," ") && s[:who] == search.who }.length == 0
-          @history << {
-            :what => search.what.gsub("+"," "),
-            :date => search.created_at.strftime("%D"),
-            :type => search.search_type,
-            :url  => "/#{search.search_type}/#{search.what.gsub(" ","+")}",
-            :who  => search.who
-          }
-        end
-      end
-    end
-    
-    render :layout => "application", :template => "history"
-  end
 end
