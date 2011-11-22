@@ -228,39 +228,38 @@ nav {
 	height: 362px;
 }
 
-#history-main { 
+#stats-main { 
   position: relative;
-  margin-bottom: 50px; 
 }
-#history-main h2 {
+#stats-main h2 {
   margin-left: 0px;
 }
-#history-main table {
+#stats-main table {
   width: 100%;
   border-spacing: 0;
 }
-#history-main table tr {
+#stats-main table tr {
   cursor: pointer;
 }
-#history-main table tr:hover {
+#stats-main table tr:hover {
   background: #f0f0f0;
 }
-#history-main table tr td {
+#stats-main table tr td {
   padding: 5px;
   border-right: dotted 1px #ababab;
   border-bottom: dotted 1px #ababab;
 }
-#history-main table tr td:nth-child(3) {
+#stats-main table tr td:nth-child(3) {
   border-right: none;
 }
-#history-main table thead {
+#stats-main table thead {
   font-weight: bold;
 }
-#history-main table thead tr:hover {
+#stats-main table thead tr:hover {
   cursor: default;
   background: none;
 }
-#history-main table tbody tr:last-child td {
+#stats-main table tbody tr:last-child td {
   border-bottom: none;
 }
 
