@@ -4,15 +4,19 @@
   <input type="button" name="similar" value="Similar" class="listen similar" tabindex="3"/>
 </form>
 
-<section id="about" class='middle-tooltip' <%= 'style="display: none;"'.html_safe if request.path.index("just") || request.path.index("similar") || request.env['PATH_INFO'].include?("favorites") %>>
+<section id="about" class='middle-tooltip <%= 'middle-tooltip-hide'.html_safe if request.path.index("just") || request.path.index("similar") || request.env['PATH_INFO'].include?("favorites") %>'>
   Howdy, friend, wondering what Tubalr is? Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without
   all the clutter YouTube brings. To get started just type a band's or artist's name into the search box and select
   only or similar. <% if !user_signed_in? %> Oh, and if you're interested in saving your favorite videos, <a href='/users/sign_up'>register</a> an account, it's easy! <% end %>
 </section>
 
 <section id="empty-playlist" class='middle-tooltip'>
-  <p class="users-favorites">Woahhhh, you currently have 0 favorites, start using tubalr and marking your favorite videos!</p>
-  <p class="bystander">Doh! This user currently has 0 favorites, tell them to get some and check back later!</p>
+  <p class="users-favorites">
+    Woahhhh, you currently have 0 favorites, start using tubalr and marking your favorite videos!
+  </p>
+  <p class="bystander">
+    Doh! This user currently has 0 favorites, tell them to get some and check back later!
+  </p>
 </section>
 
 <section id="player">
@@ -28,8 +32,8 @@
 </section>
 
 <script>
-  <%= "setUserInfo(#{current_user.id}, '#{current_user.username}')" if user_signed_in? %>
-  <%= "just('#{params[:artist_band]}');" if request.path.index("just") %>
-  <%= "similarTo('#{params[:artist_band]}');" if request.path.index("similar") %>
-  <%= "userFavorites('#{@username}','#{@search.present? ? @search : '' }');" if request.env['PATH_INFO'].include?("favorites") %>
+  <%= "setUserInfo(#{current_user.id}, '#{current_user.username}')"           if user_signed_in?                                %>
+  <%= "just('#{params[:artist_band]}');"                                      if request.path.index("just")                     %>
+  <%= "similarTo('#{params[:artist_band]}');"                                 if request.path.index("similar")                  %>
+  <%= "userFavorites('#{@username}','#{@search.present? ? @search : '' }');"  if request.env['PATH_INFO'].include?("favorites") %>
 </script>

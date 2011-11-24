@@ -1,10 +1,7 @@
 * { margin: 0px; padding: 0px; }
 
-header, footer, aside, nav, article, section { display: block; } 
-
-html, body { width: 100%; }
-
 html { overflow-x: hidden; }
+html, body { width: 100%; }
 
 body {
 	background: url(../images/bg.png); 
@@ -12,19 +9,22 @@ body {
 	color: #464646;
 }	
 
-a { text-decoration: none; color: #464646; }
-a:hover { color: #FC7D49; }
-a:active { outline: none; }
-a:focus { -moz-outline-style: none; }
+header, footer, aside, nav, article, section { display: block; } 
 
-input { color: #666; font:  11px 'lucida grande', tahoma, verdana, arial, sans-serif; }
+a         { color: #464646; text-decoration: none; }
+a:hover   { color: #FC7D49; }
+a:active  { outline: none; }
+a:focus   { -moz-outline-style: none; }
+
+input       { color: #666; font: 11px 'lucida grande', tahoma, verdana, arial, sans-serif; }
 input:focus { outline: 0; }
 input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; }
 
 .flash-msg {
-  margin: 0 auto;
   width: 600px;
+  margin: 0 auto;
   padding: 10px;
+  text-align: center;
   -moz-box-shadow: 0 0 2px 1px #888;
   -webkit-box-shadow: 0 0 2px 1px#888;
   box-shadow: 0 0 2px 1px #888;
@@ -32,9 +32,8 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   -moz-border-radius-bottomleft: 3px;
   -webkit-border-bottom-left-radius: 3px;
   -webkit-border-bottom-right-radius: 3px;
-  text-align: center;
 }
-.flash-msg-alert { background: #BD5E55;  }
+.flash-msg-alert  { background: #BD5E55; }
 .flash-msg-notice { background: #6D8F5A; }
 .flash-msg p {
   color: #efefef;
@@ -50,8 +49,18 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   margin-top: 200px;
 }
 
-h1 { cursor: default; font: 32px 'Pacifico'; display: block; text-align: center; text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); }
-h1 a { text-decoration: none; color: #464646; padding: 0 5px; }
+h1 { 
+  display: block;
+  cursor: default; 
+  font: 32px 'Pacifico';
+  text-align: center; 
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); 
+}
+h1 a { 
+  text-decoration: none; 
+  color: #464646; 
+  padding: 0 5px; 
+}
 h1 a:hover { 
   text-decoration: none; 
   color: #FC7D49; 
@@ -75,9 +84,7 @@ form div input[type=submit] { margin: 0px; }
 form .field_with_errors { margin-top: 0px; display: inline-block; }
 form .error { color: red; }
 form a { display: inline-block; margin-top: 5px; }
-label {
-  font-weight: bold;
-}
+label { font-weight: bold; }
 
 input[type=text], input[type=email], input[type=password] {
   width: 200px;
@@ -140,6 +147,7 @@ nav {
   border-bottom: solid 1px #888;
   line-height: 16px;
 }
+.middle-tooltip-hide { display: none; }  
 .middle-tooltip a { color: #464646; }
 .middle-tooltip a:hover { text-decoration: underline; }
 
