@@ -4,7 +4,7 @@ gem 'rails', '3.1.0'
 
 gem 'pg'
 gem 'httparty'
-gem 'rake', '0.8.7'
+gem 'rake'
 gem 'devise'
 gem 'jquery-rails', '1.0.12'
 
