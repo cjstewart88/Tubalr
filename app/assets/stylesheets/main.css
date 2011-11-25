@@ -4,7 +4,7 @@ html { overflow-x: hidden; }
 html, body { width: 100%; }
 
 body {
-	background: url(../images/bg.png); 
+	background: url(/assets/bg.png); 
 	font:  11px 'lucida grande', tahoma, verdana, arial, sans-serif; 
 	color: #464646;
 }	
@@ -122,7 +122,7 @@ input[type=button]:hover, input[type=submit]:hover {
   border-color: #999;  
 }
 .listen-active {
-  background-image: url(/images/loading.gif) !important;
+  background-image: url(/assets/loading.gif) !important;
   background-position: center center;
   background-repeat: no-repeat;
   color: rgba(0, 0, 0, 0.0);
@@ -167,7 +167,7 @@ nav {
   width: 16px;
   height: 16px;
   display: block;
-  background: url(/images/favorite-sprite.png) no-repeat;
+  background: url(/assets/favorite-sprite.png) no-repeat;
 }
 .fav { background-position: 0px -16px !important; }
 
@@ -180,12 +180,12 @@ nav {
   margin-top: -3px;
 }
 #share a#facebook {
-  background: url(/images/facebook.png) no-repeat;
+  background: url(/assets/facebook.png) no-repeat;
   margin-left: 3px;
   margin-top: -1px;
 }
 #share a#twitter {
-  background: url(/images/twitter.png) no-repeat;
+  background: url(/assets/twitter.png) no-repeat;
   margin-left: 20px;
   margin-top: -1px;
 }
@@ -200,7 +200,7 @@ nav {
 
 #playlist {
   display: none;
-  background: url(/images/tooltip-bg.png);
+  background: url(/assets/tooltip-bg.png);
   border: solid 1px #464646;
   position: absolute;
   top: 0px;
@@ -222,7 +222,7 @@ nav {
 }
 #playlist #the-list a.active {
 	color: #efefef;
-  background: url(/images/active.png) center left;
+  background: url(/assets/active.png) center left;
   background-repeat: no-repeat;
 }
 #playlist #the-list a:hover {

@@ -2,16 +2,16 @@
 <html>
   <head>
     <title>Tubalr</title>
-    <%= stylesheet_link_tag "main", "http://fonts.googleapis.com/css?family=Pacifico" %>
-    <%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.js", "https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.js", "http://connect.facebook.net/en_US/all.js", "rails", "ga", "application", "slimScroll" %>
+    <%= stylesheet_link_tag     "http://fonts.googleapis.com/css?family=Pacifico",  "application" %>
+    <%= javascript_include_tag  "http://connect.facebook.net/en_US/all.js",         "application" %>
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <%= csrf_meta_tag %>
   </head>
   <body>
     <div id="fb-root"></div>
     
-    <%= "<aside class='flash-msg flash-msg-alert'><p>#{flash[:alert]}</p></aside>".html_safe if !flash[:alert].nil? %>
-    <%= "<aside class='flash-msg flash-msg-notice'><p>#{flash[:notice]}</p></aside>".html_safe if !flash[:notice].nil? %>
+    <%= "<aside class='flash-msg flash-msg-alert'><p>#{flash[:alert]}</p></aside>".html_safe    if !flash[:alert].nil?  %>
+    <%= "<aside class='flash-msg flash-msg-notice'><p>#{flash[:notice]}</p></aside>".html_safe  if !flash[:notice].nil? %>
         
     <div id="main" <%= "style='margin-top: 20px;'" if request.path.index("stats") || request.env['PATH_INFO'].include?("users") %>>
       <nav>
