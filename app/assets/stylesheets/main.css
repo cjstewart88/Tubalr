@@ -153,14 +153,6 @@ nav {
 
 #empty-playlist { display: none; }
 
-#player {
-	width: 600px;
-	margin: 0 auto;
-	display: none;
-	margin-top: 15px;
-	position: relative;
-}
-
 #favorite-star { 
   position: absolute; 
   margin-left: 605px;
@@ -228,11 +220,64 @@ nav {
 #playlist #the-list a:hover {
   color: #efefef !important;
 }
-#player #currentVideoTitle {
-	font-weight: normal;
+#player {
+	width: 500px;
+	margin: 0 auto;
+	display: none;
+	margin-top: 15px;
+	position: relative;
 }
 #ytplayerid {
-	height: 362px;
+	height: 250px;
+	border: solid 1px #000;
+	-moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+#video-progress {
+  width: 500px;
+  height: 18px;
+  borer: solid 1px #000;
+}
+#video-progress #progress-bar {
+  width: 100%;
+  height: 5px;
+  position: relative;
+  background: #ccc;
+  top: 6px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+#video-progress #progress-bar div {
+  width: 0%;
+  height: 100%;
+  background: #999;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+#player { text-align: center; }
+#player button {
+  display: inline-block;
+  cursor: pointer; 
+  //background: url(/assets/controls.png) no-repeat;
+  background: none; 
+  border: none;
+}
+#play-or-pause {
+}
+#play-or-pause.playing {
+  background-position: -40px 2px;
+}
+#play-or-pause.paused {
+  background-position: -66px 3px;
+}
+#prev-or-next {
+}
+#prev-or-next.next {
+  background-position: -101px 0px;
+}
+#prev-or-next.prev {
+  background-position: -9px 0px;
 }
 
 #stats-main { 

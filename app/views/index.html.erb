@@ -22,6 +22,12 @@
 <section id="player">
   <% if user_signed_in? %><a href="#" id="favorite-star" class="fav"></a><% end %>
 	<div id="ytplayerid"></div> 
+	<div id="video-progress">
+	 <div id="progress-bar"><div></div></div>
+	</div>
+	<button id="prev-or-next"  class="prev">prev</button> | 
+	<button id="play-or-pause" class="playing">pause</button> | 
+	<button id="prev-or-next"  class="next">next</button>
 </section>
 
 <section id="playlist">

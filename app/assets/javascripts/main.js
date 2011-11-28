@@ -1,43 +1,43 @@
 window.fbAsyncInit = function() { FB.init({ 
-    appId : '239275546125436', 
-    status : true, 
-    cookie : true, 
-    xfbml : true 
+    appId   : '239275546125436', 
+    status  : true, 
+    cookie  : true, 
+    xfbml   : true 
   }); 
 };
 
 // variables to be used throughout
-var videos = new Array();
-var currenttrack = 0;
-var search = "";
-var prev_search = "";
-var search_type = "";
-var videosCopy = "";
-var direction = "forward";
+var videos            = new Array();
+var currenttrack      = 0;
+var search            = "";
+var prev_search       = "";
+var search_type       = "";
+var videosCopy        = "";
+var direction         = "forward";
 
-var userId = 0;
-var userUsername = null;
-var alreadyFavorites = [];
+var userId            = 0;
+var userUsername      = null;
+var alreadyFavorites  = [];
 
-var tag = null;
-var firstScriptTag = null;
+var tag               = null;
+var firstScriptTag    = null;
 var thePlayer;
 
-var firstSearch = true;
+var firstSearch       = true;
 
 // set user id
 function setUserInfo (id, username) {
-  userId = id;
-  userUsername = username;
+  userId        = id;
+  userUsername  = username;
 }
 
 // just artist/band
 function just (who) {
   $('.just').addClass('listen-active');
-  videos = [];
-  currenttrack = 0;
-  search = who;
-  search_type = "just";
+  videos        = [];
+  currenttrack  = 0;
+  search        = who;
+  search_type   = "just";
   $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+who+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
 		$.each(data.feed.entry, function(i,video) {
 			videos[i] = { 
@@ -52,10 +52,10 @@ function just (who) {
 // similar artist/bands
 function similarTo (who) {
   $('.similar').addClass('listen-active');
-  videos = [];
-  currenttrack = 0;
-  search = who;
-  search_type = "similar";
+  videos        = [];
+  currenttrack  = 0;
+  search        = who;
+  search_type   = "similar";
 	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist='+who+'&limit=20&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
 		$.each(data, function(i,similars) {
 			var ajaxs = $.map(similars.artist, function(artist) {
@@ -75,11 +75,11 @@ function similarTo (who) {
 
 // user favorites
 function userFavorites(un, srch) {
-  videos = [];
-  currenttrack = 0;
-  search = (srch != '' ? un + ' : ' + srch : un);
-  search_type = "favorites";
-  url = (srch != '' ? '/'+un+'/favorites/'+srch+'.json' : '/'+un+'/favorites.json');
+  videos        = [];
+  currenttrack  = 0;
+  search        = (srch != '' ? un + ' : ' + srch : un);
+  search_type   = "favorites";
+  url           = (srch != '' ? '/'+un+'/favorites/'+srch+'.json' : '/'+un+'/favorites.json');
 	$.getJSON(url, function(data) {
 	  if (data.length != 0) {
       videos = data;
@@ -98,12 +98,18 @@ function userFavorites(un, srch) {
 	});
 }
 
+function updatePlayerInfo () {
+  if (thePlayer && thePlayer.getDuration) {
+    $('#progress-bar div').css('width',Math.floor((thePlayer.getCurrentTime()/thePlayer.getDuration())*100)+'%');
+  }
+}
+
 function onYouTubePlayerAPIReady() {
   thePlayer = new YT.Player('ytplayerid', {
     videoId: videos[currenttrack].VideoID,
-    width: 600,
-    height: 362,
-    playerVars: { 'autoplay': 1, 'rel': 0, 'theme': 'light', 'showinfo': 0 },
+    width: 498,
+    height: 250,
+    playerVars: { 'autoplay': 1, 'rel': 0, 'theme': 'light', 'showinfo': 0, 'controls': 0 },
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange,
@@ -113,7 +119,7 @@ function onYouTubePlayerAPIReady() {
 }
 
 // start the playlist
-function initPlaylist () {
+function initPlaylist () {  
   videos.sort(function () { return (Math.round(Math.random())-0.5); });
   
   if (firstSearch) {
@@ -242,6 +248,26 @@ function onPlayerStateChange (newState) {
 	if (newState.data == 0) {
     nextSong();
   }
+  else if (newState.data == 2) {
+    $("#play-or-pause").removeClass('playing');
+    $("#play-or-pause").addClass('paused');
+    $("#play-or-pause").html('play');
+  }
+  else if (newState.data == 1) {
+    $("#play-or-pause").removeClass('paused');
+    $("#play-or-pause").addClass('playing');
+    $("#play-or-pause").html('pause');
+  }
+}
+
+// play or pause
+function playOrPause () {
+  if (thePlayer.getPlayerState() == 2) {
+    thePlayer.playVideo();
+  }
+  else {
+    thePlayer.pauseVideo();
+  }
 }
 
 //YouTube player error
@@ -255,7 +281,7 @@ function onPlayerError (errorCode) {
 }
 
 function onPlayerReady () {
-
+  setInterval(updatePlayerInfo, 250);
 }
 
 function facebook () {
@@ -323,7 +349,27 @@ function favorite (star) {
   }
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
+  $('#video-progress #progress-bar').click(function (e) {
+		var ratio = (e.pageX-$(this).offset().left)/$(this).outerWidth();
+		
+		$(this).find('div').width(ratio*100+'%');
+		thePlayer.seekTo(Math.round(thePlayer.getDuration()*ratio), true);
+		return false;
+	});
+  
+  $('#play-or-pause').click(function () {
+    playOrPause("fromClickingTheButton");
+  });
+  
+  $('#prev-or-next.prev').click(function () {
+    previousSong();
+  });
+  
+  $('#prev-or-next.next').click(function () {
+    nextSong();
+  });  
+  
   if ($('.flash-msg')) {
     setTimeout(function () {
       $('.flash-msg').slideUp(500, function () {
