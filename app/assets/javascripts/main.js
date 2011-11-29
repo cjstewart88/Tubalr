@@ -251,12 +251,10 @@ function onPlayerStateChange (newState) {
   else if (newState.data == 2) {
     $("#play-or-pause").removeClass('playing');
     $("#play-or-pause").addClass('paused');
-    $("#play-or-pause").html('play');
   }
   else if (newState.data == 1) {
     $("#play-or-pause").removeClass('paused');
     $("#play-or-pause").addClass('playing');
-    $("#play-or-pause").html('pause');
   }
 }
 
@@ -362,11 +360,11 @@ $(document).ready(function () {
     playOrPause("fromClickingTheButton");
   });
   
-  $('#prev-or-next.prev').click(function () {
+  $('.prev').click(function () {
     previousSong();
   });
   
-  $('#prev-or-next.next').click(function () {
+  $('.next').click(function () {
     nextSong();
   });  
   
