@@ -348,6 +348,17 @@ function favorite (star) {
 }
 
 $(document).ready(function () {
+  $('#video-progress #volume span').click(function (e) {
+    var vol = $(this).attr('volume');
+    thePlayer.setVolume(vol);
+    $('#video-progress #volume span').removeClass('active');
+    $('#video-progress #volume span').each(function () {
+        if (parseInt($(this).attr('volume')) <= vol) {
+          $(this).addClass('active');
+        }
+    });
+  });
+  
   $('#video-progress #progress-bar').click(function (e) {
 		var ratio = (e.pageX-$(this).offset().left)/$(this).outerWidth();
 		

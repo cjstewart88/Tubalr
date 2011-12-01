@@ -23,7 +23,13 @@
   <% if user_signed_in? %><a href="#" id="favorite-star" class="fav"></a><% end %>
 	<div id="ytplayerid"></div> 
 	<div id="video-progress">
-	 <div id="progress-bar"><div><div class="knob"></div></div></div>
+	  <div id="volume">
+	    <span volume="25"  class="active"></span>
+      <span volume="50"  class="active"></span>
+      <span volume="75"  class="active"></span>
+      <span volume="100" class="active"></span>
+	  </div>
+	  <div id="progress-bar"><div><div class="knob"></div></div></div>
 	</div>	
 	<div class="beak"></div>
 	<button id="prev" class="prev"><span>prev</span></button> 
