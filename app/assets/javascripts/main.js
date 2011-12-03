@@ -365,22 +365,22 @@ $(document).ready(function () {
     }
   });
   
-  $("#volume").click(function(){
-    $(this).removeClass('volume-text-mute');
-  });
-  
-  $("#volume-text").click(function () {
-    if ($(this).hasClass('volume-text-mute')) {
-      thePlayer.setVolume(100);
-      $(this).removeClass('volume-text-mute');
-      $("#volume").slider({value: 100});
-    }
-    else {
-      thePlayer.setVolume(0);
-      $(this).addClass('volume-text-mute');
-      $("#volume").slider({value: 0});
-    }
-  });
+  // $("#volume").click(function(){
+  //   $(this).removeClass('volume-text-mute');
+  // });
+  // 
+  // $("#volume-text").click(function () {
+  //   if ($(this).hasClass('volume-text-mute')) {
+  //     thePlayer.setVolume(100);
+  //     $(this).removeClass('volume-text-mute');
+  //     $("#volume").slider({value: 100});
+  //   }
+  //   else {
+  //     thePlayer.setVolume(0);
+  //     $(this).addClass('volume-text-mute');
+  //     $("#volume").slider({value: 0});
+  //   }
+  // });
   
   $('#video-progress #progress-bar').click(function (e) {
 		var ratio = (e.pageX-$(this).offset().left)/$(this).outerWidth();
