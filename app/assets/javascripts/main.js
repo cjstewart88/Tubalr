@@ -348,15 +348,38 @@ function favorite (star) {
 }
 
 $(document).ready(function () {
-  $('#video-progress #volume span').click(function (e) {
-    var vol = $(this).attr('volume');
-    thePlayer.setVolume(vol);
-    $('#video-progress #volume span').removeClass('active');
-    $('#video-progress #volume span').each(function () {
-        if (parseInt($(this).attr('volume')) <= vol) {
-          $(this).addClass('active');
-        }
-    });
+  $("#volume").slider({
+    value: 100,
+    range: "min",
+    min: 0,
+    max: 100,
+    step: 5,
+    slide: function(event, ui) {
+      if (ui.value == 0) {
+        $("#volume-text").addClass('volume-text-mute');
+      }
+      else {
+        $("#volume-text").removeClass('volume-text-mute');
+      }
+      thePlayer.setVolume(ui.value);
+    }
+  });
+  
+  $("#volume").click(function(){
+    $(this).removeClass('volume-text-mute');
+  });
+  
+  $("#volume-text").click(function () {
+    if ($(this).hasClass('volume-text-mute')) {
+      thePlayer.setVolume(100);
+      $(this).removeClass('volume-text-mute');
+      $("#volume").slider({value: 100});
+    }
+    else {
+      thePlayer.setVolume(0);
+      $(this).addClass('volume-text-mute');
+      $("#volume").slider({value: 0});
+    }
   });
   
   $('#video-progress #progress-bar').click(function (e) {
