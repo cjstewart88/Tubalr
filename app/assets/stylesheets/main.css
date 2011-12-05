@@ -236,7 +236,11 @@ nav {
   /*background: url(/assets/shadows.png) bottom center no-repeat;*/
 }
 #ytplayerid {
-	height: 300px;
+	height: 280px;
+	width: 480px;
+	box-shadow: 10px 4px 5px rgba(0,0,0,0.7);
+	-moz-box-shadow: 10px 4px 5px rgba(0,0,0,0.7);
+	-webkit-box-shadow: 10px 4px 5px rgba(0,0,0,0.7);
   /*border: solid 1px #000;
   -moz-border-radius-topleft:4px;
   -webkit-border-top-left-radius:4px;
