@@ -108,8 +108,8 @@ function onYouTubePlayerAPIReady() {
   thePlayer = new YT.Player('ytplayerid', {
     videoId: videos[currenttrack].VideoID,
     width: 498,
-    height: 250,
-    playerVars: { 'autoplay': 1, 'rel': 0, 'theme': 'light', 'showinfo': 0, 'controls': 0 },
+    height: 280,
+    playerVars: { 'autoplay': 1, 'rel': 0, 'theme': 'dark', 'showinfo': 0, 'autohide': 1 },
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange,
