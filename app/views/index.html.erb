@@ -20,20 +20,12 @@
 </section>
 
 <section id="player">
-  <% if user_signed_in? %><a href="#" id="favorite-star" class="fav"></a><% end %>
+  <aside id="icons">
+    <% if user_signed_in? %><a href="#" id="favorite-star" class="fav"></a><% end %>
+    <a href="#" id="info-icon"></a>
+	</aside>
 	<div id="ytplayerid"></div> 
-  <!-- <div id="video-progress">
-    <span id="progress-bar-text">prog</span>
-    <div id="progress-bar"><div><div class="knob"></div></div></div>
-    <span id="volume-text">vol</span>
-    <div id="volume"></div>
-  </div>  
-  <div class="beak"></div>
-  <button id="prev" class="prev"><span>prev</span></button> 
-  <button id="play-or-pause" class="paused"><span>play</span></button>
-  <button id="next" class="next"><span>next</span></button> -->
 </section>
-
 
 <section id="playlist">
   <aside id="share">
@@ -41,6 +33,8 @@
 	</aside>
 	<div id="the-list"></div>
 </section>
+
+<aside id="info"></aside>
 
 <script>
   <%= "setUserInfo(#{current_user.id}, '#{current_user.username}')"           if user_signed_in?                                %>

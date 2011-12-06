@@ -63,7 +63,8 @@ function similarTo (who) {
 					$.each(data.feed.entry, function(i,video) {
 						videos.push({ 
 							VideoID: video.id.$t.split(":")[3], 
-							VideoTitle: video.title.$t 
+							VideoTitle: video.title.$t,
+							ArtistName: artist.name 
 						});
 					});
 				});
@@ -98,18 +99,12 @@ function userFavorites(un, srch) {
 	});
 }
 
-function updatePlayerInfo () {
-  if (thePlayer && thePlayer.getDuration) {
-    $('#progress-bar div').css('width',Math.floor((thePlayer.getCurrentTime()/thePlayer.getDuration())*100)+'%');
-  }
-}
-
 function onYouTubePlayerAPIReady() {
   thePlayer = new YT.Player('ytplayerid', {
     videoId: videos[currenttrack].VideoID,
     width: 498,
     height: 280,
-    playerVars: { 'autoplay': 1, 'rel': 0, 'theme': 'dark', 'showinfo': 0, 'autohide': 1 },
+    playerVars: { 'autoplay': 1, 'rel': 0, 'theme': 'dark', 'showinfo': 0, 'autohide': 1, 'wmode': 'opaque' },
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange,
@@ -149,7 +144,7 @@ function initPlaylist () {
   $('#empty-playlist').fadeOut();
   $('#about').fadeOut(500, function(){
     $("#main").animate({
-      marginTop: 100
+      marginTop: ($('#main').css('marginTop') == '20px' ? 20 : 100)
     }, 500, function () {  
       videosCopy = "";
       $.each(videos, function(i) {
@@ -162,10 +157,21 @@ function initPlaylist () {
     	  prev_search = search;
     	}
     	
+    	if (search_type == 'favorites') {
+    	  $('#info-icon').hide();
+    	}
+    	else {
+    	  $('#info-icon').show();
+    	} 
+    	
     	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+(search_type == 'favorites' ? "%27s%20favorites": '')+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+(search_type == 'favorites' ? search.replace(/[ +]/g,"%2B")+"%2Ffavorites" : search_type+"%2F"+search.replace(/[ +]/g,"%2B")));
 		
     	currentVideo(videos[currenttrack]);
 		  firstSearch = false;
+		  
+		  if (search_type == 'just') {
+		    getInfo();
+	    }
 		  
     	$('#player').fadeIn(1000);
     	$('nav').animate({ right: 220 }, 500, function() {
@@ -183,6 +189,10 @@ function initPlaylist () {
 
 // denote current song in the ui
 function currentVideo (video) {
+  if (search_type == 'similar') {
+    getInfo();
+  }
+  
   if ($.inArray(video.VideoID, alreadyFavorites) != -1) {
     $('#favorite-star').addClass('fav');
   }
@@ -248,24 +258,6 @@ function onPlayerStateChange (newState) {
 	if (newState.data == 0) {
     nextSong();
   }
-  else if (newState.data == 2) {
-    $("#play-or-pause").removeClass('playing');
-    $("#play-or-pause").addClass('paused');
-  }
-  else if (newState.data == 1) {
-    $("#play-or-pause").removeClass('paused');
-    $("#play-or-pause").addClass('playing');
-  }
-}
-
-// play or pause
-function playOrPause () {
-  if (thePlayer.getPlayerState() == 2) {
-    thePlayer.playVideo();
-  }
-  else {
-    thePlayer.pauseVideo();
-  }
 }
 
 //YouTube player error
@@ -278,9 +270,7 @@ function onPlayerError (errorCode) {
 	}
 }
 
-function onPlayerReady () {
-  setInterval(updatePlayerInfo, 250);
-}
+function onPlayerReady () { }
 
 function facebook () {
   FB.ui({
@@ -347,60 +337,40 @@ function favorite (star) {
   }
 }
 
-$(document).ready(function () {
-  $("#volume").slider({
-    value: 100,
-    range: "min",
-    min: 0,
-    max: 100,
-    step: 5,
-    slide: function(event, ui) {
-      if (ui.value == 0) {
-        $("#volume-text").addClass('volume-text-mute');
-      }
-      else {
-        $("#volume-text").removeClass('volume-text-mute');
-      }
-      thePlayer.setVolume(ui.value);
+function getInfo () {
+  var tmpWho = "";
+  if (search_type == 'similar') {
+    tmpWho = videos[currenttrack].ArtistName;
+  }
+  else {
+   tmpWho = search; 
+  }
+  
+  $.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&artist='+tmpWho+'&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
+		if (data.error == 6 || data.artist.bio.content == "") {
+		  $('#info').html('No information could be found for the artist/band you supplied.');
+		}
+		else {
+		  $('#info').html(data.artist.bio.content.replace(/[\n]/g,"<br/>"));
+		}
+	});
+}
+
+$(document).ready(function () {    
+  $('#info-icon').click(function(){
+    if ($('#main').css('marginTop') == '20px') {
+      $('#info').slideToggle(function(){
+        $("#main").animate({ marginTop: 100 }, 500);
+      });
+    }
+    else {
+      $("#main").animate({
+        marginTop: 20
+      }, 500, function () {
+        $('#info').slideToggle();
+      });
     }
   });
-  
-  // $("#volume").click(function(){
-  //   $(this).removeClass('volume-text-mute');
-  // });
-  // 
-  // $("#volume-text").click(function () {
-  //   if ($(this).hasClass('volume-text-mute')) {
-  //     thePlayer.setVolume(100);
-  //     $(this).removeClass('volume-text-mute');
-  //     $("#volume").slider({value: 100});
-  //   }
-  //   else {
-  //     thePlayer.setVolume(0);
-  //     $(this).addClass('volume-text-mute');
-  //     $("#volume").slider({value: 0});
-  //   }
-  // });
-  
-  $('#video-progress #progress-bar').click(function (e) {
-		var ratio = (e.pageX-$(this).offset().left)/$(this).outerWidth();
-		
-		$(this).find('div').width(ratio*100+'%');
-		thePlayer.seekTo(Math.round(thePlayer.getDuration()*ratio), true);
-		return false;
-	});
-  
-  $('#play-or-pause').click(function () {
-    playOrPause("fromClickingTheButton");
-  });
-  
-  $('.prev').click(function () {
-    previousSong();
-  });
-  
-  $('.next').click(function () {
-    nextSong();
-  });  
   
   if ($('.flash-msg')) {
     setTimeout(function () {
