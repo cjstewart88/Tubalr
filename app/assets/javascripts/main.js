@@ -115,6 +115,8 @@ function onYouTubePlayerAPIReady() {
 
 // start the playlist
 function initPlaylist () {  
+  _gaq.push(['_trackPageview', (search_type == 'favorites' ? search.replace(/[ ]/g,"+")+"/favorites" : search_type+"/"+search.replace(/[ ]/g,"+"))]);
+  
   videos.sort(function () { return (Math.round(Math.random())-0.5); });
   
   if (firstSearch) {
