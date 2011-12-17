@@ -7,6 +7,7 @@ window.fbAsyncInit = function() { FB.init({
 };
 
 // variables to be used throughout
+var genres            = ["rock","seenlive","alternative","indie","electronic","pop","metal","femalevocalists","classicrock","alternativerock","jazz","punk","indierock","folk","ambient","singer-songwriter","experimental","electronica","hardrock","hip-hop","80s","dance","hardcore","blackmetal","chillout","progressiverock","deathmetal","instrumental","heavymetal","british","punkrock","soundtrack","industrial","soul","blues","classical","emo","rap","90s","thrashmetal","metalcore","trance","japanese","favorites","reggae","acoustic","country","progressivemetal","trip-hop","hiphop","powermetal","funk","psychedelic","melodicdeathmetal","newwave","post-rock","electro","house","indiepop","techno","german","love","70s","rnb","britpop","american","gothicmetal","downtempo","piano","60s","00s","grunge","post-punk","albumsiown","beautiful","ska","gothic","screamo","mellow","chill","doommetal","french","guitar","oldies","idm","swedish","malevocalists","awesome","j-rock","numetal","symphonicmetal","finnish","lounge","polish","femalevocalist","grindcore","progressive","folkmetal","canadian","post-hardcore","world","drumandbass","synthpop","j-pop","newage","minimal","favourites","ebm","russian","poprock","cover","poppunk","latin","darkwave","favorite","female","darkambient","noise","industrialmetal","avant-garde","psychedelicrock","brutaldeathmetal","dub","disco","gothicrock","celtic","sexy","easylistening","alternativemetal","anime","christian","bluesrock","cool","favourite","classic","shoegaze","heardonpandora","folkrock","stonerrock","comedy","psytrance","christmas","sad","atmospheric","melancholy","fun","deathcore","jpop","deutsch","romantic","vikingmetal","fusion","femalefrontedmetal","irish","uk","visualkei","spanish","relax","hardcorepunk","acidjazz","relaxing","alt-country","amazing","covers","favoritesongs","italian","lo-fi","garagerock","happy","goth","melancholic","rockabilly","live","swing","ethereal","dark","norwegian","emocore","ballad","glamrock","australian","brazilian","malevocalist","good","americana","party","softrock","synthpop","political","melodicmetal","sludge","jrock","epic","hiphop","rocknroll","postrock","technicaldeathmetal","usa","favouritesongs","vocal","femalevocals","remix","speedmetal","club","electropop","contemporaryclassical","bossanova","funky","baroque","rhythmandblues","progressivetrance","electroclash","russianrock","brasil","neofolk","triphop","nu-metal","dancehall","industrialrock","rockandroll","guitarvirtuoso","worldmusic","drone","smoothjazz","dnb","breakbeat","catchy","rapcore","dubstep","artrock","loved","summer","thrash","drumnbass","darkelectro","psychobilly","mpb","undergroundhip-hop","skapunk","southernrock","medieval","vocaltrance","dreamy","christianrock","dreampop","paganmetal","minimaltechno","nujazz","breakcore","english"];
 var videos            = new Array();
 var currenttrack      = 0;
 var search            = "";
@@ -31,22 +32,53 @@ function setUserInfo (id, username) {
   userUsername  = username;
 }
 
-// just artist/band
-function just (who) {
+// genre search
+function genreSearch (who) {
   $('.just').addClass('listen-active');
   videos        = [];
   currenttrack  = 0;
   search        = who;
-  search_type   = "just";
-  $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+who+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
-		$.each(data.feed.entry, function(i,video) {
-			videos[i] = { 
-				VideoID: video.id.$t.split(":")[3], 
-				VideoTitle: video.title.$t 
-			};
+  search_type   = "genre";
+	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag='+who+'&api_key=b25b959554ed76058ac220b7b2e0a026&limit=20&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
+		$.each(data, function(i,artists) {
+			var ajaxs = $.map(artists.artist, function(artist) {
+				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+artist.name+'&orderby=relevance&start-index=1&max-results=1&v=2&alt=json-in-script&callback=?', function(data) {
+					$.each(data.feed.entry, function(i,video) {
+						videos.push({ 
+							VideoID: video.id.$t.split(":")[3], 
+							VideoTitle: video.title.$t,
+							ArtistName: artist.name 
+						});
+					});
+				});
+			});
+			$.when.apply($,ajaxs).then(initPlaylist);
 		});
-		initPlaylist();
-	});
+	});  
+}
+
+// just artist/band
+function just (who) {
+  // check if the users input is a last.fm top tag
+  if ($.inArray(who.replace(/[ +]/g, ""), genres) > -1) {
+    genreSearch(who);
+  }
+  else {
+    $('.just').addClass('listen-active');
+    videos        = [];
+    currenttrack  = 0;
+    search        = who;
+    search_type   = "just";
+    $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+who+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
+  		$.each(data.feed.entry, function(i,video) {
+  			videos[i] = { 
+  				VideoID: video.id.$t.split(":")[3], 
+  				VideoTitle: video.title.$t 
+  			};
+  		});
+  		initPlaylist();
+  	});
+  }
 }
 
 // similar artist/bands
@@ -191,7 +223,7 @@ function initPlaylist () {
 
 // denote current song in the ui
 function currentVideo (video) {
-  if (search_type == 'similar') {
+  if (search_type == 'similar' || search_type == 'genre') {
     getInfo();
   }
   
@@ -339,9 +371,24 @@ function favorite (star) {
   }
 }
 
+function getGenreInfo (clickedGenre) {
+  var genre = clickedGenre.parent().find('a').text();
+  $('.ui-dialog-title').html('About ' + genre);
+  $('.ui-dialog-content').html("");
+  $.getJSON('http://ws.audioscrobbler.com/2.0/?method=tag.getinfo&tag='+genre+'&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
+		if (data.error == 6 || data.tag.wiki == "") {
+		  $('.ui-dialog-content').html('No information could be found for this genre.');
+		}
+		else {
+		  $('.ui-dialog-content').html(data.tag.wiki.content.replace(/[\n]/g,"<br/>"));
+		}
+    $('#about-genre').dialog('open');
+	});
+}
+
 function getInfo () {
   var tmpWho = "";
-  if (search_type == 'similar') {
+  if (search_type == 'similar' || search_type == 'genre') {
     tmpWho = videos[currenttrack].ArtistName;
   }
   else {
@@ -358,7 +405,17 @@ function getInfo () {
 	});
 }
 
-$(document).ready(function () {    
+$(document).ready(function () {   
+  $('#about-genre').dialog({
+    modal: true,
+    autoOpen: false,
+    width: 600,
+    draggable: false
+  });
+  $('#genres-main ul li i').click(function () {
+    getGenreInfo($(this));
+  });
+   
   $('#info-icon').click(function(){
     if ($('#main').css('marginTop') == '20px') {
       $('#info').slideToggle(function(){

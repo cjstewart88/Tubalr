@@ -24,4 +24,8 @@ class ApplicationController < ActionController::Base
     
     render :json => ""
   end
+  
+  def genres
+    render :layout => "application", :template => "genres"
+  end
 end
