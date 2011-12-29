@@ -5,7 +5,7 @@ html { overflow-x: hidden; overflow-y: scroll; overflow: -moz-scrollbars-vertica
 html, body { width: 100%; }
 
 body {
-	background: url(/assets/bg.png); 
+	background: #efefef; 
 	font:  11px 'lucida grande', tahoma, verdana, arial, sans-serif; 
 	color: #666;
 	margin-bottom: 20px;
@@ -14,7 +14,7 @@ body {
 header, footer, aside, nav, article, section { display: block; } 
 
 a         { color: #666; text-decoration: none; }
-a:hover   { color: #C21F1F; }
+a:hover   { color: #60B99A; }
 a:active  { outline: none; }
 a:focus   { -moz-outline-style: none; }
 
@@ -58,28 +58,31 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 }
 
 h1 { 
+  height: 90px;
   display: block;
   cursor: default; 
-  font: 32px 'Pacifico';
+  font: 60px 'Pacifico';
   text-align: center; 
   text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); 
 }
 h1 a { 
   text-decoration: none; 
   color: #464646; 
-  padding: 0 5px; 
+  padding: 0 8px; 
 }
 h1 a:hover { 
   text-decoration: none; 
-  color: #C21F1F; 
+  color: #60B99A; 
   -webkit-transform: color;
   -webkit-transition-duration: 1s;
 }
 
 h2 {
+  font-size: 26px;
   margin-top: 10px;
   margin-bottom: 20px;
   margin-left: 150px;
+  color: #F77825;
 }
 
 form { margin-left: 150px; }
@@ -288,7 +291,7 @@ display: block;
   cursor: pointer;
 }
 #stats-main table tr:hover {
-  background: #f0f0f0;
+  background: #F1EFD3;
 }
 #stats-main table tr td {
   padding: 5px;
@@ -307,6 +310,20 @@ display: block;
 }
 #stats-main table tbody tr:last-child td {
   border-bottom: none;
+}
+
+#stats-main table#general thead tr {
+  font-size: 22px;
+}
+#stats-main table#general tbody tr {
+  font-size: 18px;
+}
+#stats-main table#general tr td {
+  border: none;
+}
+#stats-main table#general tr:hover {
+  cursor: default;
+  background: none;
 }
 
 #genres-main h2 {
@@ -330,7 +347,7 @@ display: block;
 }
 #genres-main ul li i:hover {
   cursor: pointer;
-  color: #C21F1F;
+  color: #60B99A;
 }
 
 .social { position: fixed; bottom: 10px; left: 10px; }

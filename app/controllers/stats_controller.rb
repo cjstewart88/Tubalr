@@ -1,13 +1,22 @@
 class StatsController < ApplicationController
   def index
+    self.general
     self.recent_searches
     self.recent_favorites
     render :layout => "application", :template => "stats"
   end
   
+  def general
+    @general = []
+    
+    @general << ["Searchs"  ,   Searches.count]
+    @general << ["Favorites",  Favorites.count]
+    @general << ["Users"    ,       User.count]
+  end
+  
   def recent_searches
     @recent_searches    = []
-    tmp_recent_searches = Searches.find(:all, :limit => 200, :order => "created_at DESC")
+    tmp_recent_searches = Searches.find(:all, :limit => 100, :order => "created_at DESC")
     
     tmp_recent_searches.each do | search |
       if search.search_type != 'favorites'
@@ -28,7 +37,7 @@ class StatsController < ApplicationController
   
   def recent_favorites
     @recent_favorites    = []
-    tmp_recent_favorites = Favorites.find(:all, :limit => 200, :order => "created_at DESC")
+    tmp_recent_favorites = Favorites.find(:all, :limit => 100, :order => "created_at DESC")
     
     tmp_recent_favorites.each do | favorite |
       @recent_favorites << {

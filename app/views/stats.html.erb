@@ -1,5 +1,25 @@
 <section id="stats-main">
   <h2>
+    General
+  </h2>
+  <table id="general">
+    <thead>
+      <tr>
+        <% @general.each do | stat | %>
+          <td><%= stat[0] %></td>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @general.each do | stat | %>
+          <td><%= number_with_delimiter(stat[1], :delimiter => ',') %></td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h2>
     Most Recent Search History
   </h2>
   <table>
