@@ -405,7 +405,16 @@ function getInfo () {
 	});
 }
 
-$(document).ready(function () {   
+$(document).ready(function () { 
+  $('#about-tubalr').dialog({
+    modal: true,
+    autoOpen: false,
+    width: 600,
+    draggable: false,
+    title: 'About Tubalr'
+  });
+  $('.about-tubalr').click(function () { $('#about-tubalr').dialog('open'); });
+    
   $('#about-genre').dialog({
     modal: true,
     autoOpen: false,

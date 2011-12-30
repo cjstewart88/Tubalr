@@ -365,6 +365,16 @@ display: block;
 .ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; max-height: 300px !important; overflow: auto; zoom: 1; }
 .ui-dialog .ui-dialog-content ul { list-style-type: none; }
 
+#about-tubalr p {
+  display: block;
+  margin-bottom: 15px;
+  line-height: 16px;
+  font-size: 12px;
+}
+#about-tubalr p a {
+  text-decoration: underline;
+}
+
 img#santa-hat {
   position: absolute;
   margin-left: -99px;
