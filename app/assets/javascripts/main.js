@@ -401,6 +401,7 @@ function getInfo () {
 		}
 		else {
 		  $('#info').html(data.artist.bio.content.replace(/[\n]/g,"<br/>"));
+		  $('#info').prepend("<h3><a href='http://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Ddigital-music&field-keywords="+tmpWho+"&x=0&y=0&tag=tubalr-20' target='_blank'>Shop on</a>"+tmpWho.replace(/[+]/g,' ')+"</h3>")
 		}
 	});
 }

@@ -355,6 +355,21 @@ display: block;
 
 #info { display: none; margin-top: 25px; }
 
+#info h3 {
+  font-size: 16px;
+  margin-bottom:10px;
+}
+#info h3 a {
+  float: right;
+  background: url(/assets/amazon.png) no-repeat 51px -1px;
+  width: 98px;
+  height: 18px;
+  font-size: 12px;
+  margin-top: 1px;
+  margin-right: 2px;
+  color: #FC7E15;
+}
+
 .ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 .ui-widget-overlay { background: #000; opacity: .30;filter:Alpha(Opacity=30); }
 .ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #aaaaaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -khtml-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }
