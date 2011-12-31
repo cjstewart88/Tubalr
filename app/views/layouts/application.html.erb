@@ -17,6 +17,7 @@
       <nav> 
         <%= link_to('Genres', '/genres') %> - 
         <%= link_to('Stats', '/stats') %> - 
+        <%= link_to('Blog', 'http://www.tubalr.tumblr.com/', :target => '_blank')%> - 
         <%= link_to('About', '#', :class => 'about-tubalr') %> -        
         <% if user_signed_in? %>
           <%= link_to('Favs', "/#{current_user.username}/favorites") %> - 
@@ -58,7 +59,7 @@
         
         <p>
           Oh, by the way, my name's Cody Stewart, the founder and crafter of Tubalr. If ya need anything
-          at all, you can find me on twitter: <a href='http://www.twitter.com/codyjackstewart'>@codyjackstewart</a>.
+          at all, you can find me on twitter: <a href='http://www.twitter.com/codyjackstewart' target="_blank">@codyjackstewart</a>.
         </p>
       </div>
     </div>
