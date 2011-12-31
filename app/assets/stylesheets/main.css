@@ -253,10 +253,11 @@ display: block;
 }
 #ytplayerid {
 	height: 280px;
-	width: 480px;
-	box-shadow: 10px 4px 5px rgba(0,0,0,0.7);
-	-moz-box-shadow: 10px 4px 5px rgba(0,0,0,0.7);
-	-webkit-box-shadow: 10px 4px 5px rgba(0,0,0,0.7);
+	width: 100%;
+	background: #000;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 }
 
 #player { text-align: center; }
