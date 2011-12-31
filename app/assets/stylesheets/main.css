@@ -147,6 +147,9 @@ nav {
 
 #q:focus, input:focus { border-color: #999; }
 
+.middle-tooltip a {
+  text-decoration: underline;
+}
 .middle-tooltip {
   width: 312px;
   margin: 0 auto;
