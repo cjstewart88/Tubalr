@@ -381,7 +381,7 @@ display: block;
 .ui-dialog .ui-dialog-titlebar { padding: .4em 1em; position: relative;  }
 .ui-dialog .ui-dialog-title { float: left; margin-bottom: 5px; height: 20px; width: 100%; font-size: 17px; font-weight: bold; } 
 .ui-dialog .ui-dialog-titlebar-close { position: absolute; right: 10px; font-style: italic; }
-.ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; max-height: 300px !important; overflow: auto; zoom: 1; }
+.ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; max-height: 330px !important; overflow: auto; zoom: 1; }
 .ui-dialog .ui-dialog-content ul { list-style-type: none; }
 
 #about-tubalr p {
@@ -392,6 +392,10 @@ display: block;
 }
 #about-tubalr p a {
   text-decoration: underline;
+}
+#about-tubalr h3 {
+  font-size: 17px;
+  margin-bottom: 10px;
 }
 
 img#santa-hat {
