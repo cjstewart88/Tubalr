@@ -407,6 +407,15 @@ function getInfo () {
 }
 
 $(document).ready(function () { 
+  $('#next').click(function () { 
+    nextSong();
+    return false;
+  });
+  $('#previous').click(function () {
+    previousSong();
+    return false;
+  });
+  
   $('#about-tubalr').dialog({
     modal: true,
     autoOpen: false,
@@ -456,7 +465,9 @@ $(document).ready(function () {
   $('#the-list').delegate('a', 'click', function () { jumpTo($(this).index('#the-list a')); return false; });   
   
   $('table tbody tr').click(function() {
-    window.open(window.location.protocol+"//"+window.location.host+$(this).attr('url'));
+    if ($(this).parent().parent().attr("id") != 'general') {
+      window.open(window.location.protocol+"//"+window.location.host+$(this).attr('url'));
+    }
   });
   
   $('#main').delay(500).fadeIn();

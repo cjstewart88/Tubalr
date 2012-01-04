@@ -252,7 +252,7 @@ display: block;
 	position: relative;
 }
 #ytplayerid {
-	height: 280px;
+	height: 281px;
 	width: 100%;
 	background: #000;
 	border-radius: 3px;
@@ -261,26 +261,17 @@ display: block;
 }
 
 #player { text-align: center; }
-#player button {
+
+#player-controls {
+  text-align: left;
+  margin-top: 10px;
+}
+#player-controls #next, #player-controls #previous {
   display: inline-block;
-  cursor: pointer; 
-  border: none;
+  cursor: pointer;
 }
-#play-or-pause {
-}
-#play-or-pause.playing {
-  background-position: -40px 2px;
-}
-#play-or-pause.paused {
-  background-position: -66px 3px;
-}
-#prev-or-next {
-}
-#prev-or-next.next {
-  background-position: -101px 0px;
-}
-#prev-or-next.prev {
-  background-position: -9px 0px;
+#player-controls #next {
+  float: right;
 }
 
 #stats-main h2 {
