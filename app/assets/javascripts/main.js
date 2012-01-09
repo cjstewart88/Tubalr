@@ -57,6 +57,25 @@ function genreSearch (who) {
 	});  
 }
 
+function not_lastfm_artist (who) {
+  console.log(who);
+  $('.just').addClass('listen-active');
+  videos        = [];
+  currenttrack  = 0;
+  search        = who;
+  search_type   = "just";
+  $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+who+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
+    console.log(data);
+    $.each(data.feed.entry, function(i,video) {
+      videos[i] = { 
+        VideoID: video.id.$t.split(":")[3], 
+        VideoTitle: video.title.$t 
+      };
+    });
+    initPlaylist();
+  });
+}
+
 // just artist/band
 function just (who) {
   // check if the users input is a last.fm top tag
@@ -64,21 +83,44 @@ function just (who) {
     genreSearch(who);
   }
   else {
-    $('.just').addClass('listen-active');
+  	$('.just').addClass('listen-active');
     videos        = [];
     currenttrack  = 0;
     search        = who;
     search_type   = "just";
-    $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+who+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
-  		$.each(data.feed.entry, function(i,video) {
-  			videos[i] = { 
-  				VideoID: video.id.$t.split(":")[3], 
-  				VideoTitle: video.title.$t 
-  			};
-  		});
-  		initPlaylist();
+  	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist='+who+'&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
+  		if (data.error == 6) {
+  		  console.log(data.error);
+  		  not_lastfm_artist(who);
+  		}
+  		else {
+  		  $.each(data, function(i, tracks) {
+    			var ajaxs = $.map(tracks.track, function(track) {
+    				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+who+'%20%2D$20'+track.name+'&orderby=relevance&start-index=1&max-results=1&v=2&alt=json-in-script&callback=?', function(data) {
+    					if (typeof data.feed.entry !== "undefined") {
+    					  $.each(data.feed.entry, function(i,video) {
+    					    var not_in_array = true;
+    					    $.each(videos, function () {
+    					      if (this.VideoID == video.id.$t.split(":")[3] || this.VideoTitle.toLowerCase().replace(/"metallica"/g, '').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") == video.title.$t.toLowerCase().replace(/"metallica"/g, '').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"")) {
+    					        not_in_array = false;
+    					        console.log("found duplicate!");
+    					      }
+    					    });
+    					    if (not_in_array) {
+      						  videos.push({ 
+        							VideoID: video.id.$t.split(":")[3], 
+        							VideoTitle: video.title.$t
+        						});
+      						}
+      					});
+    					}
+    				});
+    			});
+    			$.when.apply($,ajaxs).then(initPlaylist);
+    		});
+    	}
   	});
-  }
+  } 
 }
 
 // similar artist/bands
