@@ -354,21 +354,11 @@ display: block;
   font-size: 16px;
   margin-bottom:10px;
 }
-#info h3 a {
-  float: right;
-  background: url(/assets/amazon.png) no-repeat 51px -1px;
-  width: 98px;
-  height: 18px;
-  font-size: 12px;
-  margin-top: 1px;
-  margin-right: 2px;
-  color: #FC7E15;
-}
 
 .ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 .ui-widget-overlay { background: #000; opacity: .30;filter:Alpha(Opacity=30); }
 .ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #aaaaaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -khtml-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }
-.ui-dialog { position: absolute; padding: .2em; width: 300px; overflow: hidden; padding: 10px; background: url(/assets/bg.png); border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
+.ui-dialog { position: absolute; padding: .2em; width: 300px; overflow: hidden; padding: 10px; background: #efefef; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
 .ui-dialog .ui-dialog-titlebar { padding: .4em 1em; position: relative;  }
 .ui-dialog .ui-dialog-title { float: left; margin-bottom: 5px; height: 20px; width: 100%; font-size: 17px; font-weight: bold; } 
 .ui-dialog .ui-dialog-titlebar-close { position: absolute; right: 10px; font-style: italic; }
@@ -387,11 +377,4 @@ display: block;
 #about-tubalr h3 {
   font-size: 17px;
   margin-bottom: 10px;
-}
-
-img#santa-hat {
-  position: absolute;
-  margin-left: -99px;
-  margin-top: 2px;
-  width: 30px;
 }
