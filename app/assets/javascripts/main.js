@@ -58,14 +58,12 @@ function genreSearch (who) {
 }
 
 function not_lastfm_artist (who) {
-  console.log(who);
   $('.just').addClass('listen-active');
   videos        = [];
   currenttrack  = 0;
   search        = who;
   search_type   = "just";
-  $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+who+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
-    console.log(data);
+  $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
     $.each(data.feed.entry, function(i,video) {
       videos[i] = { 
         VideoID: video.id.$t.split(":")[3], 
@@ -88,30 +86,30 @@ function just (who) {
     currenttrack  = 0;
     search        = who;
     search_type   = "just";
-  	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist='+who+'&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
+  	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist='+escape(who)+'&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
   		if (data.error == 6) {
-  		  console.log(data.error);
   		  not_lastfm_artist(who);
   		}
   		else {
   		  $.each(data, function(i, tracks) {
     			var ajaxs = $.map(tracks.track, function(track) {
-    				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+who+'%20%2D$20'+track.name+'&orderby=relevance&start-index=1&max-results=1&v=2&alt=json-in-script&callback=?', function(data) {
+    				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'%20%2D$20'+escape(track.name)+'&orderby=relevance&start-index=1&max-results=1&v=2&alt=json-in-script&callback=?', function(data) {
     					if (typeof data.feed.entry !== "undefined") {
     					  $.each(data.feed.entry, function(i,video) {
-    					    var not_in_array = true;
-    					    $.each(videos, function () {
-    					      if (this.VideoID == video.id.$t.split(":")[3] || this.VideoTitle.toLowerCase().replace(/"metallica"/g, '').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") == video.title.$t.toLowerCase().replace(/"metallica"/g, '').replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"")) {
-    					        not_in_array = false;
-    					        console.log("found duplicate!");
-    					      }
-    					    });
-    					    if (not_in_array) {
-      						  videos.push({ 
-        							VideoID: video.id.$t.split(":")[3], 
-        							VideoTitle: video.title.$t
-        						});
-      						}
+    					    if (video.yt$accessControl[4].permission != "denied") {
+      					    var not_in_array = true;
+      					    $.each(videos, function () {
+      					      if (this.VideoID == video.id.$t.split(":")[3] || this.VideoTitle.toLowerCase().replace('/"'+who+'"/g', '').replace(/ *\([^)]*\) */g, "").replace(/ *\([^]]*\) */g, "").replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") == video.title.$t.toLowerCase().replace('/"'+who+'"/g', '').replace(/ *\([^)]*\) */g, "").replace(/ *\([^]]*\) */g, "").replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") || video.title.$t.toLowerCase().search("remix") != -1) {
+      					        not_in_array = false;
+      					      }
+      					    });
+      					    if (not_in_array) {
+        						  videos.push({ 
+          							VideoID: video.id.$t.split(":")[3], 
+          							VideoTitle: video.title.$t
+          						});
+        						}
+        					}
       					});
     					}
     				});
@@ -130,10 +128,10 @@ function similarTo (who) {
   currenttrack  = 0;
   search        = who;
   search_type   = "similar";
-	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist='+who+'&limit=20&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
+	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist='+escape(who)+'&limit=20&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
 		$.each(data, function(i,similars) {
 			var ajaxs = $.map(similars.artist, function(artist) {
-				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+artist.name+'&orderby=relevance&start-index=1&max-results=1&v=2&alt=json-in-script&callback=?', function(data) {
+				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(artist.name)+'&orderby=relevance&start-index=1&max-results=1&v=2&alt=json-in-script&callback=?', function(data) {
 					$.each(data.feed.entry, function(i,video) {
 						videos.push({ 
 							VideoID: video.id.$t.split(":")[3], 
