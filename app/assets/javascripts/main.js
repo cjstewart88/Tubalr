@@ -87,7 +87,7 @@ function just (who) {
     search        = who;
     search_type   = "just";
   	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist='+escape(who)+'&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
-  		if (data.error == 6) {
+  		if (data.error == 6 || data.toptracks.total == 0) {
   		  not_lastfm_artist(who);
   		}
   		else {
