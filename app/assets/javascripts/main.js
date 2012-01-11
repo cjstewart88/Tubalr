@@ -93,7 +93,7 @@ function just (who) {
   		else {
   		  $.each(data, function(i, tracks) {
     			var ajaxs = $.map(tracks.track, function(track) {
-    				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'%20%2D$20'+escape(track.name)+'&orderby=relevance&start-index=1&max-results=1&v=2&alt=json-in-script&callback=?', function(data) {
+    				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'%20%2D$20'+escape(track.name)+'&restriction=US&orderby=relevance&start-index=1&max-results=1&v=2&alt=json-in-script&callback=?', function(data) {
     					if (typeof data.feed.entry !== "undefined") {
     					  $.each(data.feed.entry, function(i,video) {
     					    if (video.yt$accessControl[4].permission != "denied") {
@@ -176,7 +176,8 @@ function onYouTubePlayerAPIReady() {
     videoId: videos[currenttrack].VideoID,
     width: 498,
     height: 280,
-    playerVars: { 'autoplay': 1, 'rel': 0, 'theme': 'dark', 'showinfo': 0, 'autohide': 1, 'wmode': 'opaque' },
+    version: 3,
+    playerVars: { 'autoplay': 1, 'rel': 0, 'theme': 'dark', 'showinfo': 0, 'autohide': 1, 'wmode': 'opaque', 'allowScriptAccess': 'always', 'version': 3 },
     events: {
       'onReady': onPlayerReady,
       'onStateChange': onPlayerStateChange,
@@ -193,7 +194,7 @@ function initPlaylist () {
   
   if (firstSearch) {
     var tag = document.createElement('script');
-    tag.src = "http://www.youtube.com/player_api";
+    tag.src = "http://www.youtube.com/player_api?version=3";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   }
