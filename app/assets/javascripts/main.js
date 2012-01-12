@@ -96,10 +96,10 @@ function just (who) {
     				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'%20%2D$20'+escape(track.name)+'&orderby=relevance&start-index=1&max-results=1&v=2&alt=json-in-script&callback=?', function(data) {
     					if (typeof data.feed.entry !== "undefined") {
     					  $.each(data.feed.entry, function(i,video) {
-    					    if (video.yt$accessControl[4].permission != "denied" && video.media$group.media$category[0].$t == "Music" && unescape(who.toLowerCase().replace(/[ ]/g, "").replace(/[+]/g, "").replace(/["%20"]/g, "")) == video.title.$t.toLowerCase().split("-")[0].replace(/[ ]/g, "").replace(/[+]/g, "").replace(/["%20"]/g, "")) {
+    					    if (video.yt$accessControl[4].permission != "denied" && video.media$group.media$category[0].$t == "Music") {
       					    var not_in_array = true;
       					    $.each(videos, function () {
-      					      if (this.VideoID == video.id.$t.split(":")[3] || this.VideoTitle.toLowerCase().replace('/"'+who+'"/g', '').replace(/ *\([^)]*\) */g, "").replace(/ *\([^]]*\) */g, "").replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") == video.title.$t.toLowerCase().replace('/"'+who+'"/g', '').replace(/ *\([^)]*\) */g, "").replace(/ *\([^]]*\) */g, "").replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"") || video.title.$t.toLowerCase().search("remix") != -1) {
+      					      if (this.VideoID == video.id.$t.split(":")[3] || this.VideoTitle.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").toLowerCase().search(track.name.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"").toLowerCase()) != -1) {
       					        not_in_array = false;
       					      }
       					    });
