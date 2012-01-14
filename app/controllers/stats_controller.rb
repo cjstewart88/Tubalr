@@ -39,13 +39,17 @@ class StatsController < ApplicationController
     @recent_favorites    = []
     tmp_recent_favorites = Favorites.find(:all, :limit => 100, :order => "created_at DESC")
     
-    tmp_recent_favorites.each do | favorite |
-      @recent_favorites << {
-        :what => favorite.video_title,
-        :date => favorite.created_at.strftime("%D"),
-        :url  => "/#{User.where(["id = ?", favorite.user_id]).first().username.gsub(" ","%20")}/favorites",
-        :who  => User.where(["id = ?", favorite.user_id]).first().username
-      }
+    tmp_recent_favorites.each do | favorite |      
+      tmp_user = User.where(["id = ?", favorite.user_id]).first()
+      
+      if !tmp_user.nil?
+        @recent_favorites << {
+          :what => favorite.video_title,
+          :date => favorite.created_at.strftime("%D"),
+          :url  => "/#{tmp_user.username.gsub(" ","%20")}/favorites",
+          :who  => User.where(["id = ?", favorite.user_id]).first().username
+        }
+      end
     end
     
     return @recent_favorites
