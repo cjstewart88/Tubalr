@@ -114,10 +114,12 @@ function not_lastfm_artist (who) {
   
   $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
     $.each(data.feed.entry, function(i,video) {
-      videos[i] = { 
-        VideoID: video.id.$t.split(":")[3], 
-        VideoTitle: video.title.$t 
-      };
+      if (!is_blocked(video)) {
+        videos[i] = { 
+          VideoID: video.id.$t.split(":")[3], 
+          VideoTitle: video.title.$t 
+        };
+      }
     });
     initPlaylist();
   });
