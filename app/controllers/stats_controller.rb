@@ -1,17 +1,27 @@
 class StatsController < ApplicationController
   def index
-    self.general
+    self.overall_stats
+    self.weekly_stats
     self.recent_searches
     self.recent_favorites
+    
     render :layout => "application", :template => "stats"
   end
   
-  def general
-    @general = []
+  def overall_stats
+    @overall_stats = []
     
-    @general << ["Searchs"  ,   Searches.count]
-    @general << ["Favorites",  Favorites.count]
-    @general << ["Users"    ,       User.count]
+    @overall_stats << ["Searchs"   ,    Searches.count]
+    @overall_stats << ["Favorites" ,   Favorites.count]
+    @overall_stats << ["Users"     ,        User.count]
+  end
+  
+  def weekly_stats
+    @weekly_stats = []
+    
+    @weekly_stats << ["Searches"  ,     Searches.where("created_at >= ?", Date.today-7).count]
+    @weekly_stats << ["Favorites" ,    Favorites.where("created_at >= ?", Date.today-7).count]
+    @weekly_stats << ["Users"     ,         User.where("created_at >= ?", Date.today-7).count]
   end
   
   def recent_searches
