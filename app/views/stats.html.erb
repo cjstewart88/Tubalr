@@ -42,7 +42,7 @@
   <h3>Top Searches</h3>
   <ol>
     <% @top_weekly_searches.each do | key, value | %>
-      <li><a href='/just/<%= key %>'><%= key %></a></li>
+      <li><a href='/just/<%= key %>' target='_blank'><%= key %></a></li>
     <% end %>
   </ol>
     
