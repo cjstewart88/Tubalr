@@ -277,6 +277,21 @@ display: block;
 #stats-main h2 {
   margin-left: 0px;
 }
+#stats-main h3 {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+#stats-main ol {
+  margin-left: 28px;
+  font-size: 16px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+#stats-main ol li {
+  margin-bottom: 10px;
+}
+
 #stats-main table {
   margin-bottom: 40px;
   width: 100%;

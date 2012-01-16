@@ -22,6 +22,10 @@ class StatsController < ApplicationController
     @weekly_stats << ["Searches"  ,     Searches.where("created_at >= ?", Date.today-7).count]
     @weekly_stats << ["Favorites" ,    Favorites.where("created_at >= ?", Date.today-7).count]
     @weekly_stats << ["Users"     ,         User.where("created_at >= ?", Date.today-7).count]
+    
+    top_weekly_searches = Searches.where("created_at >= ?", Date.today-7).group("what").count
+    top_weekly_searches.delete("Enter Artist or Band Here")
+    @top_weekly_searches = top_weekly_searches.sort_by{ |k, v| -v }[0...5] 
   end
   
   def recent_searches

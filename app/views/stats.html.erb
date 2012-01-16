@@ -39,6 +39,13 @@
     </tbody>
   </table>
   
+  <h3>Top Searches</h3>
+  <ol>
+    <% @top_weekly_searches.each do | key, value | %>
+      <li><a href='/just/<%= key %>'><%= key %></a></li>
+    <% end %>
+  </ol>
+    
   <h2>
     Most Recent Search History
   </h2>
