@@ -1,7 +1,8 @@
 class StatsController < ApplicationController
   def index
     self.overall_stats
-    self.weekly_stats
+    self.past_7_days_stats
+    self.today_stats
     self.recent_searches
     self.recent_favorites
     
@@ -16,16 +17,28 @@ class StatsController < ApplicationController
     @overall_stats << ["Users"     ,        User.count]
   end
   
-  def weekly_stats
-    @weekly_stats = []
+  def past_7_days_stats
+    @past_7_days_stats = []
     
-    @weekly_stats << ["Searches"  ,     Searches.where("created_at >= ?", Date.today-7).count]
-    @weekly_stats << ["Favorites" ,    Favorites.where("created_at >= ?", Date.today-7).count]
-    @weekly_stats << ["Users"     ,         User.where("created_at >= ?", Date.today-7).count]
+    @past_7_days_stats << ["Searches"  ,     Searches.where("created_at >= ?", Date.today-7).count]
+    @past_7_days_stats << ["Favorites" ,    Favorites.where("created_at >= ?", Date.today-7).count]
+    @past_7_days_stats << ["Users"     ,         User.where("created_at >= ?", Date.today-7).count]
     
-    top_weekly_searches = Searches.where("created_at >= ?", Date.today-7).group("what").count
-    top_weekly_searches.delete("Enter Artist or Band Here")
-    @top_weekly_searches = top_weekly_searches.sort_by{ |k, v| -v }[0...5] 
+    top_past_7_days_searches = Searches.where("created_at >= ?", Date.today-7).group("what").count
+    top_past_7_days_searches.delete("Enter Artist or Band Here")
+    @top_past_7_days_searches = top_past_7_days_searches.sort_by{ |k, v| -v }[0...5] 
+  end
+  
+  def today_stats
+    @today_stats = []
+    
+    @today_stats << ["Searches"  ,     Searches.where("created_at >= ?", Date.today).count]
+    @today_stats << ["Favorites" ,    Favorites.where("created_at >= ?", Date.today).count]
+    @today_stats << ["Users"     ,         User.where("created_at >= ?", Date.today).count]
+    
+    top_searches_today = Searches.where("created_at >= ?", Date.today).group("what").count
+    top_searches_today.delete("Enter Artist or Band Here")
+    @top_searches_today = top_searches_today.sort_by{ |k, v| -v }[0...5] 
   end
   
   def recent_searches

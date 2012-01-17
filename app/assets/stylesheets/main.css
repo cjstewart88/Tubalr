@@ -276,7 +276,13 @@ display: block;
 
 #stats-main h2 {
   margin-left: 0px;
+  margin-top: 0px;
+  border-top: dashed 2px #CCC;
+  padding-top: 40px;
 }
+#stats-main h2:first-child {
+  border-top: none;
+} 
 #stats-main h3 {
   font-size: 22px;
   font-weight: bold;

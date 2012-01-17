@@ -20,19 +20,19 @@
   </table>
   
   <h2>
-    Weekly Stats
+    Past 7 Days
   </h2>
   <table id="general">
     <thead>
       <tr>
-        <% @weekly_stats.each do | stat | %>
+        <% @past_7_days_stats.each do | stat | %>
           <td><%= stat[0] %></td>
         <% end %>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <% @weekly_stats.each do | stat | %>
+        <% @past_7_days_stats.each do | stat | %>
           <td><%= number_with_delimiter(stat[1], :delimiter => ',') %></td>
         <% end %>
       </tr>
@@ -41,7 +41,34 @@
   
   <h3>Top Searches</h3>
   <ol>
-    <% @top_weekly_searches.each do | key, value | %>
+    <% @top_past_7_days_searches.each do | key, value | %>
+      <li><a href='/just/<%= key %>' target='_blank'><%= key %></a></li>
+    <% end %>
+  </ol>
+    
+  <h2>
+    Today
+  </h2>
+  <table id="general">
+    <thead>
+      <tr>
+        <% @today_stats.each do | stat | %>
+          <td><%= stat[0] %></td>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @today_stats.each do | stat | %>
+          <td><%= number_with_delimiter(stat[1], :delimiter => ',') %></td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h3>Top Searches</h3>
+  <ol>
+    <% @top_searches_today.each do | key, value | %>
       <li><a href='/just/<%= key %>' target='_blank'><%= key %></a></li>
     <% end %>
   </ol>
