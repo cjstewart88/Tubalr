@@ -399,3 +399,12 @@ display: block;
   font-size: 17px;
   margin-bottom: 10px;
 }
+
+#sopa {
+  position: absolute;
+  width: 300px;
+  height: 80px;
+  background: black;
+  margin-top: 5px;
+  margin-left: 100px;
+}
