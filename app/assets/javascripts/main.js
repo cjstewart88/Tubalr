@@ -73,6 +73,22 @@ function is_cover_or_remix (video) {
   return cover_or_remix;
 }
 
+function is_live (video) {
+  var live_video = false;
+  
+  if (search.toLowerCase().search("live") > -1) return live_video;
+  
+  if (video.title.$t.toLowerCase().search("live") > -1 || video.title.$t.toLowerCase().search("@") > -1 || video.title.$t.toLowerCase().search("19") > -1 || video.title.$t.toLowerCase().search("200") > -1) live_video = true;
+  
+  if (!live_video) {
+    $.each(video.category, function () {
+      if (this.term.toLowerCase() == "live") live_video = true;
+    });
+  }
+
+  return live_video
+}
+
 function prepare_search (who, type_of_search) {
   $('.' + type_of_search).addClass('listen-active');
 
@@ -115,10 +131,10 @@ function not_lastfm_artist (who) {
   $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
     $.each(data.feed.entry, function(i,video) {
       if (!is_blocked(video)) {
-        videos[i] = { 
+        videos.push({ 
           VideoID: video.id.$t.split(":")[3], 
           VideoTitle: video.title.$t 
-        };
+        });
       }
     });
     initPlaylist();
@@ -146,7 +162,7 @@ function just (who) {
                 if (typeof data.feed.entry !== "undefined") {
                   $.each(data.feed.entry, function(i,video) {
                     var video_is_good = false;
-                    if (!video_is_good && !is_blocked(video) && is_music(video) && is_unique(track.name, video) && !is_cover_or_remix(video)) {
+                    if (!video_is_good && !is_blocked(video) && !is_live(video) && is_music(video) && is_unique(track.name, video) && !is_cover_or_remix(video)) {
                       videos.push({ 
                         VideoID: video.id.$t.split(":")[3], 
                         VideoTitle: video.title.$t
