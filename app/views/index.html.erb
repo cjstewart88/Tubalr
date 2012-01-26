@@ -17,6 +17,9 @@
   <p class="bystander">
     Doh! This user currently has 0 favorites, tell them to get some and check back later!
   </p>
+  <p class="empty-standard-playlist">
+    o_O This playlist has 0 videos... this is kinda weird.
+  </p>
 </section>
 
 <section id="player">
@@ -26,6 +29,7 @@
 	</aside>
 	<div id="ytplayerid"></div> 
 	<div id="player-controls">
+    <a href="#" id="remove-ban"><% if user_signed_in? %>ban<% else %>remove<% end %> video</a>
 	  <a href="#" id="next">next</a>
     <a href="#" id="previous">previous</a>
 	</div>
@@ -41,8 +45,8 @@
 <aside id="info"></aside>
 
 <script>
-  <%= "setUserInfo(#{current_user.id}, '#{current_user.username}')"           if user_signed_in?                                          %>
+  <%= "setUserInfo(#{current_user.id}, '#{current_user.username}')"           if user_signed_in?                                            %>
   <%= "just('#{params[:artist_band]}');"                                      if request.path.index("just") || request.path.index("genre")  %>
-  <%= "similarTo('#{params[:artist_band]}');"                                 if request.path.index("similar")                            %>
-  <%= "userFavorites('#{@username}','#{@search.present? ? @search : '' }');"  if request.env['PATH_INFO'].include?("favorites")           %>
+  <%= "similarTo('#{params[:artist_band]}');"                                 if request.path.index("similar")                              %>
+  <%= "userFavorites('#{@username}','#{@search.present? ? @search : '' }');"  if request.env['PATH_INFO'].include?("favorites")             %>
 </script>

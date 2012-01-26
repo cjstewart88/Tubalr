@@ -167,9 +167,9 @@ nav {
   display: block;
 }
 #player #icons a {
-width: 16px;
-height: 16px;
-display: block;
+  width: 16px;
+  height: 16px;
+  display: block;
 }
 #info-icon {
   background: url(/assets/info.png) no-repeat;
@@ -179,6 +179,15 @@ display: block;
   background: url(/assets/favorite-sprite.png) no-repeat;
 }
 .fav { background-position: 0px -16px !important; }
+
+#remove-ban {
+  position: absolute;
+  width: 100%;
+  text-align: center; 
+}
+#remove-ban:hover {
+  color: red;
+}
 
 #share { color: #efefef; 	border-bottom: groove 2px #555; padding: 10px 42px; }
 #share a {

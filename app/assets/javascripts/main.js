@@ -19,6 +19,7 @@ var direction         = "forward";
 var userId            = 0;
 var userUsername      = null;
 var alreadyFavorites  = [];
+var bannedVideos      = [];
 
 var tag               = null;
 var firstScriptTag    = null;
@@ -30,6 +31,19 @@ var firstSearch       = true;
 function setUserInfo (id, username) {
   userId        = id;
   userUsername  = username;
+  
+  // get users banned videos
+  $.ajax({
+    type: 'POST',
+    url: '/check_banned',
+    data: {
+      user_id:  userId
+    },
+    dataType: 'json',
+    success: function(data) {
+      bannedVideos = data;
+    }
+  });
 }
 
 function is_blocked (video) {
@@ -89,6 +103,16 @@ function is_live (video) {
   return live_video
 }
 
+function is_not_banned (video_id) {
+  var video_banned = true;
+
+  $.each(bannedVideos, function () {
+    if (this == video_id) video_banned = false;
+  });
+  
+  return video_banned;
+}
+
 function prepare_search (who, type_of_search) {
   $('.' + type_of_search).addClass('listen-active');
 
@@ -130,7 +154,7 @@ function not_lastfm_artist (who) {
   
   $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
     $.each(data.feed.entry, function(i,video) {
-      if (!is_blocked(video)) {
+      if (!is_blocked(video) && is_not_banned(video.id.$t.split(":")[3])) {
         videos.push({ 
           VideoID: video.id.$t.split(":")[3], 
           VideoTitle: video.title.$t 
@@ -162,7 +186,7 @@ function just (who) {
                 if (typeof data.feed.entry !== "undefined") {
                   $.each(data.feed.entry, function(i,video) {
                     var video_is_good = false;
-                    if (!video_is_good && !is_blocked(video) && !is_live(video) && is_music(video) && is_unique(track.name, video) && !is_cover_or_remix(video)) {
+                    if (!video_is_good && !is_blocked(video) && !is_live(video) && is_music(video) && is_unique(track.name, video) && !is_cover_or_remix(video) && is_not_banned(video.id.$t.split(":")[3])) {
                       videos.push({ 
                         VideoID: video.id.$t.split(":")[3], 
                         VideoTitle: video.title.$t
@@ -191,7 +215,7 @@ function similarTo (who) {
 				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(artist.name)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?&format=5', function(data) {
 					$.each(data.feed.entry, function(i,video) {
 						var video_is_good = false;
-            if (!video_is_good && !is_blocked(video) && is_music(video) && !is_cover_or_remix(video)) {
+            if (!video_is_good && !is_blocked(video) && is_music(video) && !is_cover_or_remix(video) && is_not_banned(video.id.$t.split(":")[3])) {
 					  	videos.push({ 
   							VideoID: video.id.$t.split(":")[3], 
   							VideoTitle: video.title.$t,
@@ -208,12 +232,13 @@ function similarTo (who) {
 }
 
 // user favorites
-function userFavorites(un, srch) {
+function userFavorites (un, srch) {
   videos        = [];
   currenttrack  = 0;
   search        = (srch != '' ? un + ' : ' + srch : un);
   search_type   = "favorites";
   url           = (srch != '' ? '/'+un+'/favorites/'+srch+'.json' : '/'+un+'/favorites.json');
+  
 	$.getJSON(url, function(data) {
 	  if (data.length != 0) {
       videos = data;
@@ -221,10 +246,12 @@ function userFavorites(un, srch) {
 	  } 
 	  else {
       if (search == userUsername) {
+        $('#empty-playlist .empty-standard-playlist').remove();
         $('#empty-playlist .bystander').remove();
         $('#empty-playlist').fadeIn();
       }
       else {
+        $('#empty-playlist .empty-standard-playlist').remove();
         $('#empty-playlist .users-favorites').remove();
         $('#empty-playlist').fadeIn();      
       }
@@ -232,7 +259,7 @@ function userFavorites(un, srch) {
 	});
 }
 
-function onYouTubePlayerAPIReady() {
+function onYouTubePlayerAPIReady () {
   thePlayer = new YT.Player('ytplayerid', {
     videoId: videos[currenttrack].VideoID,
     width: 498,
@@ -249,77 +276,88 @@ function onYouTubePlayerAPIReady() {
 
 // start the playlist
 function initPlaylist () {  
-  _gaq.push(['_trackPageview', (search_type == 'favorites' ? search.replace(/[ ]/g,"+")+"/favorites" : search_type+"/"+search.replace(/[ ]/g,"+"))]);
-  
-  videos.sort(function () { return (Math.round(Math.random())-0.5); });
-  
-  if (firstSearch) {
-    var tag = document.createElement('script');
-    tag.src = "http://www.youtube.com/player_api?version=3";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  if (videos.length == 0) {
+    $('.listen-active').removeClass('listen-active');
+    $('#empty-playlist .bystander').remove();
+    $('#empty-playlist .users-favorites').remove();
+    $('#empty-playlist').fadeIn();
   }
-  // check to see if any of the video ids are already marked as a favorite for the user
-  if (userId > 0) {
-    $.ajax({
-      type: 'POST',
-      url: '/check-favorites',
-      data: {
-        user_id:  userId,
-        videos:   videos
-      },
-      dataType: 'json',
-      success: function(data) {
-        alreadyFavorites = data;
-      }
-    });
-  }
-
-  $('.listen-active').removeClass('listen-active');
-  $('#empty-playlist').fadeOut();
-  $('#about').fadeOut(500, function(){
-    $("#main").animate({
-      marginTop: ($('#main').css('marginTop') == '20px' ? 20 : 100)
-    }, 500, function () {  
-      videosCopy = "";
-      $.each(videos, function(i) {
-        videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'">'+this.VideoTitle+'</a>';
+  else {
+    _gaq.push(['_trackPageview', (search_type == 'favorites' ? search.replace(/[ ]/g,"+")+"/favorites" : search_type+"/"+search.replace(/[ ]/g,"+"))]);
+  
+    videos.sort(function () { return (Math.round(Math.random())-0.5); });
+  
+    if (firstSearch) {
+      var tag = document.createElement('script');
+      tag.src = "http://www.youtube.com/player_api?version=3";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    }
+    
+    // check to see if any of the video ids are already marked as a favorite for the user
+    if (userId > 0) {
+      $.ajax({
+        type: 'POST',
+        url: '/check_favorites',
+        data: {
+          user_id:  userId,
+          videos:   videos
+        },
+        dataType: 'json',
+        success: function(data) {
+          alreadyFavorites = data;
+        }
       });
-    	$('#the-list').html(videosCopy);
+    }
 
-     if (prev_search != search) {  
-      	$.post('/insert_search/' + search_type + '/' + escape(search));
-    	  prev_search = search;
-    	}
-    	
-    	if (search_type == 'favorites') {
-    	  $('#info-icon').hide();
-    	}
-    	else {
-    	  $('#info-icon').show();
-    	} 
-    	
-    	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+(search_type == 'favorites' ? "%27s%20favorites": '')+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+(search_type == 'favorites' ? search.replace(/[ +]/g,"%2B")+"%2Ffavorites" : search_type+"%2F"+search.replace(/[ +]/g,"%2B")));
-		
-    	currentVideo(videos[currenttrack]);
-		  firstSearch = false;
-		  
-		  if (search_type == 'just') {
-		    getInfo();
-	    }
-		  
-    	$('#player').fadeIn(1000);
-    	$('nav').animate({ right: 220 }, 500, function() {
-    	  $('#playlist').fadeIn(1000);
-      	$('.slimScrollDiv').fadeIn(1000);
-
-        $('#playlist').slimScroll({
-          height: '100%',
-          width: '200px'
+    $('.listen-active').removeClass('listen-active');
+    $('#empty-playlist').fadeOut();
+    $('#about').fadeOut(500, function(){
+      $("#main").animate({
+        marginTop: ($('#main').css('marginTop') == '20px' ? 20 : 100)
+      }, 500, function () {  
+        videosCopy = "";
+        $.each(videos, function(i) {
+          videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'">'+this.VideoTitle+'</a>';
         });
-    	});
+      	$('#the-list').html(videosCopy);
+
+       if (prev_search != search) {  
+        	$.post('/insert_search/' + search_type + '/' + escape(search));
+      	  prev_search = search;
+      	}
+    	
+      	if (search_type == 'favorites') {
+      	  $('#info-icon').hide();
+      	  $('#remove-ban').hide();
+      	}
+      	else {
+      	  $('#info-icon').show();
+      	  $('#remove-ban').show();
+      	} 
+    	
+      	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+(search_type == 'favorites' ? "%27s%20favorites": '')+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+(search_type == 'favorites' ? search.replace(/[ +]/g,"%2B")+"%2Ffavorites" : search_type+"%2F"+search.replace(/[ +]/g,"%2B")));
+		
+      	currentVideo(videos[currenttrack]);
+  		  firstSearch = false;
+		  
+  		  if (search_type == 'just') {
+  		    getInfo();
+  	    }
+		  
+      	$('#player').fadeIn(1000);
+      	$('nav').animate({ right: 220 }, 500, function() {
+      	  $('#playlist').fadeIn(1000);
+        	$('.slimScrollDiv').fadeIn(1000);
+
+          $('#playlist').slimScroll({
+            height: '100%',
+            width: '200px'
+          });
+      	});
+      });
     });
-  });
+  }
 }
 
 // denote current song in the ui
@@ -423,6 +461,47 @@ function facebook () {
   return false;
 }
 
+function remove_from_list (type_of_list) {
+  if (videos.length == 0) {
+    thePlayer.stopVideo();
+    $('#player').fadeOut();
+    $('.slimScrollDiv').fadeOut(500, function() {
+      $('#main').animate({ marginTop: 200 }, 500);
+      $('#main nav').animate({ right: 20 }, 500);
+    });
+    $('#empty-playlist .bystander').remove();
+    $('#empty-playlist .' + type_of_list).remove();
+    $('#empty-playlist').fadeIn();
+  }
+  else {
+    nextSong("removedFromFavorites");
+  }
+}
+
+function remove_ban_video () {
+  if (userId != 0) {
+    $.ajax({
+      type: 'POST',
+      url: '/ban_video',
+      data: {
+        user_id:  userId,  
+        video_id: videos[currenttrack].VideoID
+      },
+      dataType: 'json',
+      success: function(data) {
+        bannedVideos.push(videos[currenttrack].VideoID);
+        $("#the-list #"+videos[currenttrack].VideoID).remove();
+        videos.splice(currenttrack, 1);
+        remove_from_list("users-favorites");
+      }
+    });
+  }
+  else {
+    $("#the-list #"+videos[currenttrack].VideoID).remove();
+    videos.splice(currenttrack, 1);
+  }
+}
+
 function favorite (star) {
   if ($(star).hasClass('fav')) {
     $.ajax({
@@ -439,17 +518,7 @@ function favorite (star) {
         if (search == userUsername) {
           $("#the-list #"+videos[currenttrack].VideoID).remove();
           videos.splice(currenttrack, 1);
-          if (videos.length == 0) {
-            $('#player').fadeOut();
-            $('.slimScrollDiv').fadeOut(500, function() {
-              $('#main').animate({ marginTop: 200 }, 500);
-            });
-            $('#empty-playlist .bystander').remove();
-            $('#empty-playlist').fadeIn();
-          }
-          else {
-            nextSong("removedFromFavorites");
-          }
+          remove_from_list("empty-standard-playlist");
         }
       }
     });
@@ -508,6 +577,11 @@ function getInfo () {
 }
 
 $(document).ready(function () { 
+  $('#remove-ban').click(function () {
+    remove_ban_video();
+    return false;
+  });
+  
   $('#next').click(function () { 
     nextSong();
     return false;

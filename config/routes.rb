@@ -21,10 +21,13 @@ Tubalr::Application.routes.draw do
   get "/:username/favorites"                  => "favorites#init"
   get "/:username/favorites/:search"          => "favorites#init"
   
-  post "/check-favorites"                     => "favorites#check"
+  post "/check_favorites"                     => "favorites#check"
   post "/favorites/add"                       => "favorites#add"
   post "/favorites/remove"                    => "favorites#remove"  
   
+  post "/check_banned"                        => "bannedVideos#check"
+  post "/ban_video"                           => "bannedVideos#add"
+
   devise_scope :user do
     get "/users/sign_out"                     => "devise/sessions#destroy"
   end
