@@ -277,6 +277,7 @@ function onYouTubePlayerAPIReady () {
 // start the playlist
 function initPlaylist () {  
   if (videos.length == 0) {
+    $('#about').hide();
     $('.listen-active').removeClass('listen-active');
     $('#empty-playlist .bystander').remove();
     $('#empty-playlist .users-favorites').remove();
