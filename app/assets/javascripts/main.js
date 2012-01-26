@@ -499,6 +499,7 @@ function remove_ban_video () {
   else {
     $("#the-list #"+videos[currenttrack].VideoID).remove();
     videos.splice(currenttrack, 1);
+    remove_from_list(videos[currenttrack].VideoID);
   }
 }
 
