@@ -28,26 +28,31 @@ input {
 input:focus, button:focus { outline: 0; }
 input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; }
 
-.flash-msg {
-  width: 550px;
-  margin: 0 auto;
-  padding: 10px;
-  text-align: center;
-  -moz-box-shadow: 0 0 2px 1px #888;
-  -webkit-box-shadow: 0 0 2px 1px#888;
-  box-shadow: 0 0 2px 1px #888;
-  -moz-border-radius-bottomright: 3px;
-  -moz-border-radius-bottomleft: 3px;
-  -webkit-border-bottom-left-radius: 3px;
-  -webkit-border-bottom-right-radius: 3px;
+#notices {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 300px;
 }
-.flash-msg-alert  { background: #BD5E55; }
-.flash-msg-notice { background: #6D8F5A; }
-.flash-msg p {
-  color: #efefef;
-  text-shadow: 1px 1px 1px #565656;
-  -moz-text-shadow: 1px 1px 1px #565656;
-  -webkit-text-shadow: 1px 1px 1px #565656;
+#notices aside {
+  display: block;
+  margin-bottom: 10px;
+  text-shadow: 1px 1px #222;
+  -moz-text-shadow: 1px 1px #222;
+  -webkit-text-shadow: 1px 1px #222;
+  color: #fff;
+  background: #333;
+  background: -moz-linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)) !important;
+  background: -webkit-linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)) !important;
+  border: solid 1px #464646;
+  width: 200px;
+  padding: 10px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+#notices aside a {
+  color: #60B99A !important;
 }
 
 #main {
