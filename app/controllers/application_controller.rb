@@ -14,18 +14,27 @@ class ApplicationController < ActionController::Base
   def index
     render :layout => "application", :template => "index"
   end
-  
-  def search
-    Searches.create({  
-      :search_type  => params[:search_type],
-      :what         => params[:search],
-      :who          => request.remote_ip
-    })
     
-    render :json => ""
-  end
-  
   def genres
     render :layout => "application", :template => "genres"
+  end
+  
+  def users
+    @users = []
+    
+    Favorites.group("user_id").count.each do | user_id, count |
+      if count >= 15
+        user = User.where("id = ?", user_id).first
+        Rails.logger.debug "=="
+        Rails.logger.debug user.inspect
+        @users << {
+          :username       => user[:username], 
+          :music_tastes   => user[:music_tastes],
+          :number_of_favs => count
+        } if !user[:music_tastes].nil?
+      end
+    end  
+
+    render :layout => "application", :template => "users"
   end
 end

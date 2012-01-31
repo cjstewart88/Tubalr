@@ -323,8 +323,8 @@ function initPlaylist () {
         });
       	$('#the-list').html(videosCopy);
 
-       if (prev_search != search) {  
-        	$.post('/insert_search/' + search_type + '/' + escape(search));
+        if (prev_search != search) {  
+        	$.get('/insert_search/' + search_type + '/' + escape(search));
       	  prev_search = search;
       	}
     	

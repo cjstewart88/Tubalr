@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  validates_presence_of :username
+  validates_presence_of   :username
   validates_uniqueness_of :username
     
   # Include default devise modules. Others available are:
@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :username, :password, :password_confirmation, :remember_me, :login
+  attr_accessible :email, :username, :password, :password_confirmation, :remember_me, :login, :music_tastes
   
   def self.find_for_database_authentication(warden_conditions)
      conditions = warden_conditions.dup

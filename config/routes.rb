@@ -3,20 +3,20 @@ Tubalr::Application.routes.draw do
 
   root :to => "application#index"
   
+  get "/insert_search/:search_type/:search"   => "api#search"
   get "/just/:artist_band.json"               => "api#just"
   get "/similar/:artist_band.json"            => "api#similar"
   get "/:username/favorites.json"             => "api#userFavorites"
   get "/:username/favorites/:search.json"     => "api#userFavorites"
   
-  get "/genre/:artist_band"                   => "application#index"
-  get "/just/:artist_band"                    => "application#index"
-  get "/similar/:artist_band"                 => "application#index"
-  
-  post "/insert_search/:search_type/:search"  => "application#search"
-  
   get "/stats"                                => "stats#index"
   
   get "/genres"                               => "application#genres"
+  get "/users"                                => "application#users"
+  
+  get "/genre/:artist_band"                   => "application#index"
+  get "/just/:artist_band"                    => "application#index"
+  get "/similar/:artist_band"                 => "application#index"
   
   get "/:username/favorites"                  => "favorites#init"
   get "/:username/favorites/:search"          => "favorites#init"

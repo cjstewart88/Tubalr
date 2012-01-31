@@ -1,7 +1,7 @@
 <form id="listenForm" onSubmit="return false;"> 
   <input type="text" name="q" id="q" value="<%= (params[:artist_band] ? params[:artist_band].gsub('+',' ') : 'Enter Artist or Band Here') %>" tabindex="1"/>
   <input type="button" name="just" value="Only" class="listen just" tabindex="2"/>
-  <input type="button" name="similar" value="Similar" class="listen similar" tabindex="3"/>
+  <input type="button" name="similar" value="Similar" class="listen similar" tabindex="3"/><br/>
 </form>
 
 <section id="about" class='middle-tooltip <%= 'middle-tooltip-hide'.html_safe if request.path.index("just") || request.path.index("similar") || request.path.index("genre") || request.env['PATH_INFO'].include?("favorites") %>'>

@@ -1,0 +1,16 @@
+<section id="users-main">
+  <h2>
+    Users
+  </h2>
+  
+  <p><i>NOTE:</i> the following users have 10+ favorites and have noted their "music tastes"</p>
+  
+  <ul>  
+    <% @users.each do | user | %>
+      <li>
+        <a href="http://www.tubalr.com/<%= user[:username] %>/favorites" target="_blank"><%= user[:username] %></a> <i><%= user[:number_of_favs] %> Favorites</i><br/>      
+        <p><%= user[:music_tastes] %></p>
+      </li>    
+    <% end %>
+  <ul>
+</section>
