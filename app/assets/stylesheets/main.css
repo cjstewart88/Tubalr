@@ -29,7 +29,7 @@ input:focus, button:focus { outline: 0; }
 input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; }
 
 .flash-msg {
-  width: 600px;
+  width: 550px;
   margin: 0 auto;
   padding: 10px;
   text-align: center;
