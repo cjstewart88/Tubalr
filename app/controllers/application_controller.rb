@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     @users = []
     
     Favorites.group("user_id").count.each do | user_id, count |
-      if count >= 15
+      if count >= 10
         user = User.where("id = ?", user_id).first
         Rails.logger.debug "=="
         Rails.logger.debug user.inspect
