@@ -14,7 +14,7 @@
       <div id="notices">
         <%= "<aside class='flash-msg'>#{flash[:alert]}</aside>".html_safe    if !flash[:alert].nil?  %>
         <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
-        <%= "<aside class='attention'>You should update your 'music tastes' in your <a href='/users/edit'>settings</a> so others can discover your favorites!</aside>".html_safe if !current_user.nil? && current_user.music_tastes == "" %>
+        <%= "<aside class='attention'>You should update your 'music tastes' in your <a href='/users/edit'>settings</a> so others can discover your favorites!</aside>".html_safe if !current_user.nil? && (current_user.music_tastes == "" || current_user.music_tastes.nil?) %>
       </div>
       
       <nav> 
