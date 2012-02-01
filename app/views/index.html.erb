@@ -45,8 +45,8 @@
 <aside id="info"></aside>
 
 <script>
-  <%= "setUserInfo(#{current_user.id}, '#{current_user.username}')"           if user_signed_in?                                            %>
-  <%= "just('#{params[:artist_band]}');"                                      if request.path.index("just") || request.path.index("genre")  %>
-  <%= "similarTo('#{params[:artist_band]}');"                                 if request.path.index("similar")                              %>
-  <%= "userFavorites('#{@username}','#{@search.present? ? @search : '' }');"  if request.env['PATH_INFO'].include?("favorites")             %>
+  <%= "setUserInfo(#{current_user.id}, '#{escape_javascript(current_user.username)}')"                              if user_signed_in?                                            %>
+  <%= "just('#{escape_javascript(params[:artist_band])}');"                                                         if request.path.index("just") || request.path.index("genre")  %>
+  <%= "similarTo('#{escape_javascript(params[:artist_band])}');"                                                    if request.path.index("similar")                              %>
+  <%= "userFavorites('#{escape_javascript(@username)}','#{@search.present? ? escape_javascript(@search) : '' }');"  if request.env['PATH_INFO'].include?("favorites")             %>
 </script>
