@@ -24,7 +24,7 @@ class StatsController < ApplicationController
     @past_7_days_stats << ["Favorites" ,    Favorites.where("created_at >= ?", Date.today-7).count]
     @past_7_days_stats << ["Users"     ,         User.where("created_at >= ?", Date.today-7).count]
     
-    top_past_7_days_searches = Searches.where("created_at >= ?", Date.today-7).group("what").count
+    top_past_7_days_searches = Searches.where("created_at >= ? AND search_type != ?", Date.today-7, 'favorites').group("what").count
     top_past_7_days_searches.delete("Enter Artist or Band Here")
     @top_past_7_days_searches = top_past_7_days_searches.sort_by{ |k, v| -v }[0...5] 
   end
@@ -36,7 +36,7 @@ class StatsController < ApplicationController
     @today_stats << ["Favorites" ,    Favorites.where("created_at >= ?", Date.today).count]
     @today_stats << ["Users"     ,         User.where("created_at >= ?", Date.today).count]
     
-    top_searches_today = Searches.where("created_at >= ?", Date.today).group("what").count
+    top_searches_today = Searches.where("created_at >= ? AND search_type != ?", Date.today, 'favorites').group("what").count
     top_searches_today.delete("Enter Artist or Band Here")
     @top_searches_today = top_searches_today.sort_by{ |k, v| -v }[0...5] 
   end
