@@ -42,7 +42,7 @@
   <h3>Top Searches</h3>
   <ol>
     <% @top_past_7_days_searches.each do | key, value | %>
-      <li><a href='/just/<%= key %>' target='_blank'><%= key %></a></li>
+      <li><a href='/just/<%= key %>' target='_blank'><%= key.gsub("+", " ") %></a></li>
     <% end %>
   </ol>
     
@@ -69,7 +69,7 @@
   <h3>Top Searches</h3>
   <ol>
     <% @top_searches_today.each do | key, value | %>
-      <li><a href='/just/<%= key %>' target='_blank'><%= key %></a></li>
+      <li><a href='/just/<%= key %>' target='_blank'><%= key.gsub("+", " ") %></a></li>
     <% end %>
   </ol>
     
