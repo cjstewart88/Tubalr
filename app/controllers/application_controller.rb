@@ -25,8 +25,6 @@ class ApplicationController < ActionController::Base
     Favorites.group("user_id").count.each do | user_id, count |
       if count >= 10
         user = User.where("id = ?", user_id).first
-        Rails.logger.debug "=="
-        Rails.logger.debug user.inspect
         @users << {
           :username       => user[:username], 
           :music_tastes   => user[:music_tastes],
