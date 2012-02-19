@@ -29,7 +29,7 @@ class ApplicationController < ActionController::Base
           :username       => user[:username], 
           :music_tastes   => user[:music_tastes],
           :number_of_favs => count
-        } if !user[:music_tastes].nil?
+        } if !user[:music_tastes].nil? && user[:music_tastes] != ""
       end
     end  
 
