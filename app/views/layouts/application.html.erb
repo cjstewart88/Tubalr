@@ -1,30 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+<html>
   <head>
     <title>Tubalr</title>
     <%= stylesheet_link_tag     "http://fonts.googleapis.com/css?family=Pacifico",  "application" %>
     <%= javascript_include_tag  "http://connect.facebook.net/en_US/all.js",         "application" %>
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <%= csrf_meta_tag %>
-    
-    <% if request.path.index("just") || request.path.index("similar") %>
-      <meta property="og:title" content="<%= params[:artist_band].gsub('+', ' ') %>"/>
-      <meta property="og:locale" content="de_DE"/>
-      <meta property="og:site_name" content="Tubalr"/>
-      <meta property="fb:admins" content="1120350227"/>
-      <meta property="fb:app_id" content="239275546125436"/>
-      <meta property="og:url" content="http://www.tubalr.com<%= request.path %>"/>
-      <meta property="og:type" content="watch"/>
-    <% end %>
-    
   </head>
   <body>
     <div id="fb-root"></div>
-    
-    <% if user_signed_in? && current_user.id == 1 %>
-      <fb:login-button show-faces="true" width="200" max-rows="1" scope="publish_actions"></fb:login-button>    
-    <% end %>
-    
+        
     <div id="main" <%= "style='margin-top: 20px;'" if request.path.index("stats") || request.path.index("genres") || request.env['PATH_INFO'].include?("users") %>>
       <div id="notices">
         <%= "<aside class='flash-msg'>#{flash[:alert]}</aside>".html_safe    if !flash[:alert].nil?  %>
