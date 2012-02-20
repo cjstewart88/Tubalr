@@ -372,10 +372,16 @@ function initPlaylist () {
 // denote current song in the ui
 function currentVideo (video) {
 	if (search_type == 'just' || search_stype == 'similar') {
-		$('meta').each(function () {
-			if ($(this).attr('property') == 'og:title') $(this).attr('content', search);
-			if ($(this).attr('property') == 'og:url') $(this).attr('content','http://www.tubalr.com/'+search_type+"/"+search);
-		});
+    FB.api(
+      '/me/listen_to_tubalr:listen?song=http://www.tubalr.com/'+search_type+'/'+search,
+      'post',
+      function(response) {
+         if (!response || response.error) {
+            alert('Error occured');
+         } else {
+            alert('successful! Action ID: ' + response.id);
+         }
+      });
 	}	
 	
   if (search_type == 'similar' || search_type == 'genre') {
