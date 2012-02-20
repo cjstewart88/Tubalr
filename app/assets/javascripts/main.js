@@ -373,7 +373,7 @@ function initPlaylist () {
 function currentVideo (video) {
 	if (search_type == 'just' || search_stype == 'similar') {
 		$('meta').each(function () {
-			if ($(this).attr('property') == 'og:title') $(this).attr('content',);
+			if ($(this).attr('property') == 'og:title') $(this).attr('content', search);
 			if ($(this).attr('property') == 'og:url') $(this).attr('content','http://www.tubalr.com/'+search_type+"/"+search);
 		});
 	}	
