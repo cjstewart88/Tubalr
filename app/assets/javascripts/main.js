@@ -331,11 +331,11 @@ function initPlaylist () {
     	
       	if (search_type == 'favorites') {
       	  $('#info-icon').hide();
-      	  $('#remove-ban').hide();
+      	  $('#remove-video').hide();
       	}
       	else {
       	  $('#info-icon').show();
-      	  $('#remove-ban').show();
+      	  $('#remove-video').show();
       	} 
     	
       	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+(search_type == 'favorites' ? "%27s%20favorites": '')+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+(search_type == 'favorites' ? search.replace(/[ +]/g,"%2B")+"%2Ffavorites" : search_type+"%2F"+search.replace(/[ +]/g,"%2B")));
@@ -616,7 +616,7 @@ $(document).ready(function () {
 		import_youtube_favorites($('#youtube_username').val());
 	});
 	
-  $('#remove-ban').click(function () {
+  $('#remove-video').click(function () {
     remove_ban_video();
     return false;
   });

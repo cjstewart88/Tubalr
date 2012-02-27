@@ -27,7 +27,7 @@ Tubalr::Application.routes.draw do
   post "/add_youtube_favorites"               => "favorites#add_youtube_favorites"
   
   post "/check_banned"                        => "bannedVideos#check"
-  post "/ban_video"                           => "bannedVideos#add"
+  post "/ban_video"                           => "bannedVideos#ban_video"
 
   devise_scope :user do
     get "/users/sign_out"                     => "devise/sessions#destroy"

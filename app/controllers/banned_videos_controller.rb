@@ -11,7 +11,7 @@ class BannedVideosController < ApplicationController
     render :json => response
   end
   
-  def add
+  def ban_video
     BannedVideos.create(:user_id => params[:user_id], :video_id => params[:video_id])
     render :json => { :success => true }
   end

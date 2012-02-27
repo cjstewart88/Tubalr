@@ -190,11 +190,11 @@ nav {
 }
 .fav { background-position: 0px -16px !important; }
 
-#remove-ban {
+#remove-video {
   position: absolute;
   margin-left: 212px; 
 }
-#remove-ban:hover {
+#remove-video:hover {
   color: red;
 }
 
