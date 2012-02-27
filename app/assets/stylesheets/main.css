@@ -50,6 +50,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
+	border: groove 2px #555;
 }
 #notices aside a {
   color: #60B99A !important;
@@ -261,6 +262,32 @@ nav {
 #playlist #the-list a:hover {
   color: #efefef !important;
 }
+.share-video {
+	display: none;
+	width: 100%;
+	text-align: center;
+	margin-top: 8px;
+}
+#share-video {
+	overflow: hidden;
+}
+#share-video div {
+	width: 100%;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	text-align: center;
+	margin-bottom: 10px;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+}
+#share-video div.facebook {
+	background: #3B5998;
+}
+#share-video div.twitter {
+	background: #4099FF;
+}
+
 #player {
 	width: 500px;
 	padding-bottom: 3px;

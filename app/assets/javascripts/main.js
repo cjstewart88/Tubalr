@@ -166,6 +166,30 @@ function not_lastfm_artist (who) {
   });
 }
 
+function video (video_id) {
+	videos        = [];
+  currenttrack  = 0;
+  search_type   = "video";
+  url           = "/video/" + video_id;
+
+	$.getJSON('https://gdata.youtube.com/feeds/api/videos/' + video_id + '?v=2&alt=json-in-script&callback=?', function (data) {
+		var single_vid = data.entry;
+    if (typeof single_vid !== "undefined") {      
+      var video_is_good = false;
+      if (!video_is_good && !is_blocked(single_vid) && is_not_banned(single_vid.id.$t.split(":")[3])) {
+				videos.push({ 
+				  VideoID: single_vid.id.$t.split(":")[3], 
+				  VideoTitle: single_vid.title.$t
+				}); 
+				video_is_good = true;
+				search        = single_vid.title.$t;
+      }
+    }
+
+  	initPlaylist();
+	});
+}
+
 // just artist/band
 function just (who) {
   // check if the users input is a last.fm top tag
@@ -320,7 +344,7 @@ function initPlaylist () {
       }, 500, function () {  
         videosCopy = "";
         $.each(videos, function(i) {
-          videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'">'+this.VideoTitle+'</a>';
+          videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'">'+this.VideoTitle+'<div class="share-video" data-video-id="' + this.VideoID + '" data-video-title="' + this.VideoTitle + '">share video</div></a>';
         });
       	$('#the-list').html(videosCopy);
 
@@ -346,7 +370,18 @@ function initPlaylist () {
   		  if (search_type == 'just') {
   		    getInfo();
   	    }
-		  
+		  	
+				if (search_type == 'video') {
+					$('#player-controls').hide();
+					$('#info-icon').hide();
+					$('#share').hide();
+				}
+				else {
+					$('#player-controls').show();
+					$('#info-icon').show();
+					$('#share').show();
+				}
+				
       	$('#player').fadeIn(1000);
       	$('nav').animate({ right: 220 }, 500, function() {
       	  $('#playlist').fadeIn(1000);
@@ -463,6 +498,22 @@ function facebook () {
   return false;
 }
 
+function share_video_facebook (video_id, video_title) {
+  FB.ui({
+      method: 'stream.publish',
+      attachment: {
+        name: video_title + ", brought to you by tubalr!",
+        href: "http://www.tubalr.com/video/" + video_id,
+        description: ("Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without all the clutter YouTube brings.")
+      },
+      display: 'popup'
+    },
+    function (response) {
+    }
+  );
+  return false;
+}
+
 function remove_from_list (type_of_list) {
   if (videos.length == 0) {
     thePlayer.stopVideo();
@@ -480,7 +531,7 @@ function remove_from_list (type_of_list) {
   }
 }
 
-function remove_ban_video () {
+function remove_video () {
   if (userId != 0) {
     $.ajax({
       type: 'POST',
@@ -610,14 +661,57 @@ function import_youtube_favorites (youtube_username) {
   });
 }
 
+function share_single (video_id, video_title) {
+	$('#share-video div.facebook').data('video-id', video_id);
+	$('#share-video div.facebook').data('video-title', video_title);	
+	$('#share-video div.twitter').data('video-id', video_id);
+	$('#share-video div.twitter').data('video-title', video_title);
+}
+
 $(document).ready(function () { 
+	$('#share-video div.facebook').click(function () {
+		share_video_facebook($(this).data('video-id'), $(this).data('video-title'));
+	});
+	$('#share-video div.twitter').click(function() {
+	  var width  = 575,
+	      height = 400,
+	      left   = ($(window).width()  - width)  / 2,
+	      top    = ($(window).height() - height) / 2,
+	      url    = "https://twitter.com/share?text=I%27m%20enjoying%20%20"+$(this).data('video-title')+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2Fvideo%2f"+$(this).data('video-id'),
+	      opts   = 'status=1' +
+	               ',width='  + width  +
+	               ',height=' + height +
+	               ',top='    + top    +
+	               ',left='   + left;
+
+	  window.open(url, 'twitter', opts);
+	});
+	
+	$('#the-list').delegate('.share-video', 'click', function (e) {
+		e.stopImmediatePropagation();
+		share_single($(this).data('video-id'), $(this).data('video-title'));
+		$('#share-video').dialog('open');
+	});
+
+	var share_single_timer;
+	$("#the-list").delegate('a', 'mouseenter', function () {
+		var playlist_item = $(this);
+		share_single_timer = setTimeout(function () {
+      playlist_item.find('.share-video').stop(true, true).slideDown();
+    }, 800);		
+	});
+	$("#the-list").delegate('a', 'mouseleave', function () {
+		clearTimeout(share_single_timer);
+		$(this).find('.share-video').stop(true, true).slideUp();
+	});
+	
 	$("#import-favorites").click(function () {
 		$(this).addClass("listen-active");
 		import_youtube_favorites($('#youtube_username').val());
 	});
 	
   $('#remove-video').click(function () {
-    remove_ban_video();
+    remove_video();
     return false;
   });
   
@@ -630,6 +724,15 @@ $(document).ready(function () {
     return false;
   });
   
+	$('#share-video').dialog({
+    modal: true,
+    autoOpen: false,
+    width: 200,
+    draggable: false,
+		height: 128,
+		title: "Share Video"
+  });
+
   $('#about-tubalr').dialog({
     modal: true,
     autoOpen: false,

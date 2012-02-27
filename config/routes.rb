@@ -17,6 +17,7 @@ Tubalr::Application.routes.draw do
   get "/genre/:artist_band"                   => "application#index"
   get "/just/:artist_band"                    => "application#index"
   get "/similar/:artist_band"                 => "application#index"
+  get "/video/:video_id"                      => "application#index"
   
   get "/:username/favorites"                  => "favorites#init"
   get "/:username/favorites/:search"          => "favorites#init"
