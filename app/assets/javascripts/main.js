@@ -579,7 +579,43 @@ function getInfo () {
 	});
 }
 
+function import_youtube_favorites (youtube_username) {
+	$.ajax({
+    type: 'POST',
+    url: '/add_youtube_favorites',
+    data: {
+      youtube_username:  youtube_username
+    },
+    dataType: 'json',
+    success: function (data) {
+			$("#import-favorites").removeClass('listen-active');
+
+			if (data.success) {
+				$('#import-youtube-favorites .error').hide();
+				$('#import-youtube-favorites .success').show();
+				
+				setTimeout(function () {
+		      $('#import-youtube-favorites .success').fadeOut(500);
+		    }, 5000);
+			}
+			else {
+				$('#import-youtube-favorites .error').show();
+				$('#import-youtube-favorites .success').hide();
+			}
+    },
+		error: function () {
+			$('#import-youtube-favorites .error').show();
+			$('#import-youtube-favorites .success').hide();
+		}
+  });
+}
+
 $(document).ready(function () { 
+	$("#import-favorites").click(function () {
+		$(this).addClass("listen-active");
+		import_youtube_favorites($('#youtube_username').val());
+	});
+	
   $('#remove-ban').click(function () {
     remove_ban_video();
     return false;

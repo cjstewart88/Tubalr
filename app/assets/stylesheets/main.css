@@ -86,11 +86,8 @@ h2 {
   font-size: 26px;
   margin-top: 10px;
   margin-bottom: 20px;
-  margin-left: 150px;
   color: #F77825;
 }
-
-form { margin-left: 150px; }
 
 #listenForm { text-align: center; margin-left: 0px; }
 
@@ -425,3 +422,24 @@ nav {
 #users-main li  { margin-bottom: 10px; line-height: 16px; }
 #users-main a   { font-size: 14px; font-weight: bold; }
 #users-main p   { margin-top: 5px; }
+
+#import-youtube-favorites p {
+	margin-bottom: 10px;
+}
+#import-youtube-favorites label {
+	font-weight: bold;
+	margin-bottom: 5px;
+	display: block;
+}
+#import-youtube-favorites span {
+	display: none;
+}
+#import-youtube-favorites .error {
+	color: red;
+}
+#import-youtube-favorites .success {
+	color: green;
+}
+#import-youtube-favorites input[type=button] {
+	margin-left: 0px;
+}

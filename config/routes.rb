@@ -24,6 +24,7 @@ Tubalr::Application.routes.draw do
   post "/check_favorites"                     => "favorites#check"
   post "/favorites/add"                       => "favorites#add"
   post "/favorites/remove"                    => "favorites#remove"  
+  post "/add_youtube_favorites"               => "favorites#add_youtube_favorites"
   
   post "/check_banned"                        => "bannedVideos#check"
   post "/ban_video"                           => "bannedVideos#add"
