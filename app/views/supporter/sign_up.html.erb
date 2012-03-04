@@ -8,6 +8,7 @@
         if (response.error) {
             //show the errors on the form
             $(".payment-errors").html(response.error.message);
+            $('.submit-button').attr("disabled", "enabled");
         } else {
             var form$ = $("#payment-form");
             // token contains id, last4, and card type
