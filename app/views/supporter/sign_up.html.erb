@@ -26,10 +26,10 @@
         $('.submit-button').attr("disabled", "disabled");
 
         Stripe.createToken({
-            number: $('.card-number').val(),
-            cvc: $('.card-cvc').val(),
-            exp_month: $('.card-expiry-month').val(),
-            exp_year: $('.card-expiry-year').val()
+            number:     $('.card-number').val(),
+            cvc:        $('.card-cvc').val(),
+            exp_month:  $('.card-expiry-month').val(),
+            exp_year:   $('.card-expiry-year').val()
         }, stripeResponseHandler);
 
         // prevent the form from submitting with the default action
@@ -43,31 +43,44 @@
     Become A Supporter!
   </h2>
 
-  <p>
-    Thanks for your interest in becoming a Tubalr supporter! Sign-up below for a supporter account, at $5 a month.
-  </p>
-
-  <form action="/supporter/sign_up" method="POST" id="payment-form">
-    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
-    <input type="hidden" name="user_id"  value="<%= current_user.id %>"/>
+  <% if current_user.nil? %>
+    <p>To become a support you first need to register an account! Click <a href='/users/sign_up'>here</a> to do that!</p>
+  <% else %>
+    <% if current_user.supporter %>
+      <p>Woah, sweet, you're already a supporter, thanks a ton. If you need to edit your support settings go to your <a href="/users/edit">account settings.</a></p>
+    <% else %>
+      <p>
+        Thanks for your interest in becoming a Tubalr supporter! Sign-up below for a supporter account, at $5 a month.<br/><br/>
+        A supporter account gets you nothing special, it simply shows your support for Tubalr. Supporters do have the highest 
+        possible priority when it comes to bugs/feature request. 
     
-    <div>
-      <label>Card Number</label><br/>
-      <input type="text" autocomplete="off" class="card-number"/>
-    </div>
-  
-    <div>
-      <label>CVC</label><br/>
-      <input type="text" autocomplete="off" class="card-cvc"/>
-    </div>
-  
-    <div>
-      <label>Expiration (MM/YYYY)</label><br/>
-      <input type="text" class="card-expiry-month"/> <span> / </span> <input type="text" class="card-expiry-year"/>
-    </div>
-    
-    <input type="button" class="submit-button" value="Submit"/>
+        <br/><br/>NOTE: Supporter accounts may be awarded special functionality as Tubalr
+        matures.
+      </p>
 
-    <span class="payment-errors error"></span>
-  </form>
+      <form action="/supporter/sign_up" method="POST" id="payment-form">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"/>
+        <input type="hidden" name="user_id"  value="<%= current_user.id %>"/>
+    
+        <div>
+          <label>Card Number</label><br/>
+          <input type="text" autocomplete="off" class="card-number"/>
+        </div>
+  
+        <div>
+          <label>CVC</label><br/>
+          <input type="text" autocomplete="off" class="card-cvc"/>
+        </div>
+  
+        <div>
+          <label>Expiration (MM/YYYY)</label><br/>
+          <input type="text" class="card-expiry-month"/> <span> / </span> <input type="text" class="card-expiry-year"/>
+        </div>
+    
+        <input type="button" class="submit-button" value="Submit"/>
+
+        <span class="payment-errors error"></span>
+      </form>
+    <% end %>
+  <% end %>
 </section>

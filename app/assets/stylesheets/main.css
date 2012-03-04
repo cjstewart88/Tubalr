@@ -18,6 +18,8 @@ a:hover   { color: #60B99A; }
 a:active  { outline: none; }
 a:focus   { -moz-outline-style: none; }
 
+p a { color: #60B99A !important; }
+
 button::-moz-focus-inner {
   border: 0;
 }
