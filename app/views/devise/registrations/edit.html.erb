@@ -37,6 +37,16 @@
   <div><%= f.submit "Update" %></div>
 <% end %>
 
+<section id="supporter-settings">
+  <h2>Supporter Settings</h2>
+  
+  <% if !current_user.supporter %>
+    Click <a href="/supporter/sign_up">here</a> to become a Tubalr supporter for $5 a month.
+  <% else %>
+    Click <a href="/supporter/cancel_subscription">here</a> to cancel you're support subscription.
+  <% end %>
+<section>
+  
 <section id="import-youtube-favorites">
   <h2>Import YouTube Favorites</h2>
 
