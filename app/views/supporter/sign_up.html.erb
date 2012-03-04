@@ -44,7 +44,7 @@
   </h2>
 
   <% if current_user.nil? %>
-    <p>To become a support you first need to register an account! Click <a href='/users/sign_up'>here</a> to do that!</p>
+    <p>To become a support you first need to <a href='/users/sign_up'>register an account</a> or <a href='/users/sign_in'>login to an existing one</a>!</p>
   <% else %>
     <% if current_user.supporter %>
       <p>Woah, sweet, you're already a supporter, thanks a ton. If you need to edit your support settings go to your <a href="/users/edit">account settings.</a></p>
