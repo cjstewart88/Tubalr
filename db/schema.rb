@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120304040434) do
+ActiveRecord::Schema.define(:version => 20120304215037) do
 
   create_table "banned_videos", :force => true do |t|
     t.integer  "user_id"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(:version => 20120304040434) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                 :default => "",    :null => false
-    t.string   "encrypted_password",     :limit => 128, :default => "",    :null => false
+    t.string   "email",                                 :default => "", :null => false
+    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -59,8 +59,6 @@ ActiveRecord::Schema.define(:version => 20120304040434) do
     t.string   "username"
     t.text     "music_tastes"
     t.boolean  "premium"
-    t.text     "customer_id"
-    t.boolean  "supporter",                             :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

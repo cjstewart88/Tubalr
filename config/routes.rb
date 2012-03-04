@@ -30,10 +30,6 @@ Tubalr::Application.routes.draw do
   post "/check_banned"                        => "bannedVideos#check"
   post "/ban_video"                           => "bannedVideos#ban_video"
 
-  get "/supporter/sign_up"                    => "supporter#index"
-  post "/supporter/sign_up"                   => "supporter#sign_up"
-  get "/supporter/cancel_subscription"        => "supporter#cancel_subscription"
-
   devise_scope :user do
     get "/users/sign_out"                     => "devise/sessions#destroy"
   end

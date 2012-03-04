@@ -472,20 +472,3 @@ nav {
 #import-youtube-favorites input[type=button] {
 	margin-left: 0px;
 }
-
-#supporter-main p {
-  margin-bottom: 15px;
-}
-
-.card-expiry-month {
-  width: 18px !important;
-}
-.card-expiry-year {
-  width: 32px !important;
-}
-.card-cvc {
-  width: 22px !important;
-}
-.submit-button {
-  margin-left: 0px !important;
-}
