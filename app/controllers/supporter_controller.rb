@@ -28,6 +28,8 @@ class SupporterController < ApplicationController
   end
   
   def cancel_subscription
+    Stripe.api_key = "IOznm5t5eX7zPzEtuZmunBMRadz07iW6"
+
     user              = User.find(current_user.id)
 
     customer          = Stripe::Customer.retrieve(user.customer_id)
