@@ -95,7 +95,7 @@
       <% @recent_favorites.each do | favorite | %>
         <tr url="<%= favorite[:url] %>">
           <td><%= favorite[:who] + " favorited " + favorite[:what] %></td>
-          <td><%= time_ago_in_words(favorite[:date]) %></td>
+          <td><%= time_ago_in_words(favorite[:date]) %> ago</td>
         </tr>
       <% end %>
     </tbody>

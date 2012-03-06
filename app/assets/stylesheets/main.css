@@ -362,7 +362,8 @@ nav {
   border-bottom: dotted 1px #ababab;
 }
 #stats-main table tr td:last-child {
-  border-right: none;
+  border-right: none;  
+  width: 130px;
 }
 #stats-main table thead {
   font-weight: bold;
