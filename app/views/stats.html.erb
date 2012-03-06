@@ -67,7 +67,7 @@
       <tr>
         <td>Artist/Band</td>
         <td>Search Type</td>
-        <td>Date</td>
+        <td>When</td>
       </tr>
     </thead>
     <tbody>
@@ -75,7 +75,7 @@
         <tr url="<%= search[:url] %>">
           <td><%= search[:what] %></td>
           <td><%= search[:type] %></td>
-          <td><%= search[:date] %></td>
+          <td><%= time_ago_in_words(search[:date]) %> ago</td>
         </tr>
       <% end %>
     </tbody>
@@ -88,14 +88,14 @@
     <thead>
       <tr>
         <td>Artist/Band</td>
-        <td>Date</td>
+        <td>When</td>
       </tr>
     </thead>
     <tbody>
       <% @recent_favorites.each do | favorite | %>
         <tr url="<%= favorite[:url] %>">
           <td><%= favorite[:who] + " favorited " + favorite[:what] %></td>
-          <td><%= favorite[:date] %></td>
+          <td><%= time_ago_in_words(favorite[:date]) %></td>
         </tr>
       <% end %>
     </tbody>

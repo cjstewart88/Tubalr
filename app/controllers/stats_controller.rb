@@ -42,7 +42,7 @@ class StatsController < ApplicationController
         if @recent_searches.select {|s| s[:what] == search.what.gsub("+"," ") && s[:who] == search.who }.length == 0
           @recent_searches << {
             :what => search.what.gsub("+"," "),
-            :date => search.created_at.strftime("%D"),
+            :date => search.created_at,
             :type => search.search_type,
             :url  => "/#{search.search_type}/#{search.what.gsub(" ","+")}",
             :who  => search.who
@@ -64,7 +64,7 @@ class StatsController < ApplicationController
       if !tmp_user.nil?
         @recent_favorites << {
           :what => favorite.video_title,
-          :date => favorite.created_at.strftime("%D"),
+          :date => favorite.created_at,
           :url  => "/#{tmp_user.username.gsub(" ","%20")}/favorites",
           :who  => User.where(["id = ?", favorite.user_id]).first().username
         }
