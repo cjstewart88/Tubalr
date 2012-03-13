@@ -18,18 +18,18 @@
       </div>
       
       <nav> 
-        <%= link_to('Home', '/') %> -
-        <%= link_to('Stats', '/stats') %> - 
-        <%= link_to('Blog', 'http://www.tubalr.tumblr.com/', :target => '_blank')%> - 
-        <%= link_to('About', '#', :class => 'about-tubalr') %> -   
-        <%= link_to('Genres', '/genres') %> - 
-        <%= link_to('Users', '/users') %> -              
+        <%= link_to('Home', '/') %> 
+        <%= link_to('Stats', '/stats') %>  
+        <%= link_to('Blog', 'http://www.tubalr.tumblr.com/', :target => '_blank')%>  
+        <%= link_to('About', '#', :class => 'about-tubalr') %>    
+        <%= link_to('Genres', '/genres') %>  
+        <%= link_to('Users', '/users') %>               
         <% if user_signed_in? %>
-          <%= link_to('My Favs', "/#{current_user.username}/favorites") %> - 
-          <%= link_to('Settings', '/users/edit') %> - 
+          <%= link_to('My Favs', "/#{current_user.username}/favorites") %>  
+          <%= link_to('Settings', '/users/edit') %>  
           <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
         <% else %>  
-          <%= link_to('Register', '/users/sign_up') %> -
+          <%= link_to('Register', '/users/sign_up') %> 
           <%= link_to('Login', '/users/sign_in') %>
         <% end %>
       </nav>

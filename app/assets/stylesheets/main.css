@@ -14,11 +14,11 @@ body {
 header, footer, aside, nav, article, section { display: block; } 
 
 a         { color: #666; text-decoration: none; }
-a:hover   { color: #60B99A; }
+a:hover   { color: blueviolet; }
 a:active  { outline: none; }
 a:focus   { -moz-outline-style: none; }
 
-p a { color: #60B99A !important; }
+p a { color: blueviolet !important; }
 
 button::-moz-focus-inner {
   border: 0;
@@ -55,7 +55,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	border: groove 2px #555;
 }
 #notices aside a {
-  color: #60B99A !important;
+  color: blueviolet !important;
 }
 
 #main {
@@ -71,7 +71,9 @@ h1 {
   cursor: default; 
   font: 60px 'Pacifico';
   text-align: center; 
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.6); 
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  -webkit-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  -moz-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
 h1 a { 
   text-decoration: none; 
@@ -80,16 +82,14 @@ h1 a {
 }
 h1 a:hover { 
   text-decoration: none; 
-  color: #60B99A; 
-  -webkit-transform: color;
-  -webkit-transition-duration: 1s;
+  color: blueviolet; 
 }
 
 h2 {
   font-size: 26px;
   margin-top: 10px;
   margin-bottom: 20px;
-  color: #F77825;
+  color: Chartreuse;
 }
 
 #listenForm { text-align: center; margin-left: 0px; }
@@ -112,6 +112,10 @@ input[type=text], input[type=email], input[type=password], textarea {
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
+  moz-transition: all .218s;
+  -o-transition: all .218s;
+  -webkit-transition: all .218s;
+  transition: all .218s;
 }
 
 textarea { 
@@ -121,15 +125,14 @@ textarea {
 }
 
 input[type=button], input[type=submit] { 
-  min-width: 54px;
   height: 29px;
   margin: 11px 0px 11px 6px;
-  padding: 0 8px;
-  background-image: -webkit-gradient(linear,left top,left bottom,from(#f5f5f5),to(#f1f1f1));
-  background-image: -webkit-linear-gradient(top,#f5f5f5,#f1f1f1);
+  padding: 0 12px;
+  background-image: -webkit-gradient(linear,left top,left bottom,from(white),to(#e6e6e6));
+  background-image: -webkit-linear-gradient(top,white,#e6e6e6);
   background-color: whiteSmoke;
-  background-image: linear-gradient(top,#f5f5f5,#f1f1f1);
-  background-image: -o-linear-gradient(top,#f5f5f5,#f1f1f1);
+  background-image: linear-gradient(top,white,#e6e6e6);
+  background-image: -o-linear-gradient(top,white,#e6e6e6);
   border: 1px solid #cecfd1;
   border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -137,12 +140,16 @@ input[type=button], input[type=submit] {
   -moz-border-radius: 3px;
   line-height: 27px;
   cursor: pointer;
+  moz-transition: all .218s;
+  -o-transition: all .218s;
+  -webkit-transition: all .218s;
+  transition: all .218s;
+  font-weight: bold;
 }
 input[type=button]:hover, input[type=submit]:hover {
-  background-image: -webkit-gradient(linear,left top,left bottom,from(#f1f1f1),to(#f5f5f5));
-  background-image: -webkit-linear-gradient(top,#f1f1f1,#f5f5f5);
-  background-image: linear-gradient(top,#f1f1f1,#f5f5f5);
-  background-image: -o-linear-gradient(top,#f1f1f1,#f5f5f5);
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
   border-color: #999;  
 }
 .listen-active {
@@ -157,18 +164,26 @@ nav {
   top: 10px;
   right: 10px;
 }
+nav a {
+  margin-left: 8px;
+}
 
-#q:focus, input:focus { border-color: #999; }
+#q:focus, input:focus, textarea:focus {  
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  border-color: #999;
+}
 
 .middle-tooltip a {
-  text-decoration: underline;
+  color: blueviolet;
 }
 .middle-tooltip {
   width: 312px;
   margin: 0 auto;
   margin-top: 13px;
   text-align: center;
-  line-height: 16px;
+  line-height: 18px;
 }
 .middle-tooltip-hide { display: none; }  
 
@@ -411,7 +426,7 @@ nav {
 }
 #genres-main ul li i:hover {
   cursor: pointer;
-  color: #60B99A;
+  color: blueviolet;
 }
 
 .social { position: fixed; bottom: 10px; left: 10px; }
@@ -441,7 +456,7 @@ nav {
   font-size: 12px;
 }
 #about-tubalr p a {
-  text-decoration: underline;
+  color: blueviolet;
 }
 #about-tubalr h3 {
   font-size: 17px;
@@ -468,7 +483,7 @@ nav {
 	color: red;
 }
 #import-youtube-favorites .success {
-	color: green;
+	color: lawngreen;
 }
 #import-youtube-favorites input[type=button] {
 	margin-left: 0px;
