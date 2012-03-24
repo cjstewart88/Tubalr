@@ -4,8 +4,6 @@ Tubalr::Application.routes.draw do
   root :to => "application#index"
   
   get "/insert_search/:search_type/:search"   => "api#search"
-  get "/just/:artist_band.json"               => "api#just"
-  get "/similar/:artist_band.json"            => "api#similar"
   get "/:username/favorites.json"             => "api#userFavorites"
   get "/:username/favorites/:search.json"     => "api#userFavorites"
   
