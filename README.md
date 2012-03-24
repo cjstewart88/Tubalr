@@ -1,34 +1,12 @@
 # General Usage
-Watch the top 20 Band of Horses YouTube videos:
+Watch/Listen to just Band of Horses:
 http://www.tubalr.com/just/Band+of+Horses
 
-Watch 20 bands similar to Fleet Foxes' top YouTube videos:
+Watch/Listen to bands similar to Fleet Foxes:
 http://www.tubalr.com/similar/Fleet+Foxes
 
-# API Usage
-http://www.tubalr.com/just/Band+of+Horses.json
+Discover genres:
+http://www.tubalr.com/genres
 
-    [
-      {
-        VideoID: "cMFWFhTFohk"
-        VideoTitle: "Band of Horses - The Funeral (OFFICIAL VIDEO)"
-      }, {
-        VideoID: "JK716RqoUms"
-        VideoTitle: "Band of Horses - Is There a Ghost (OFFICIAL VIDEO)"
-      }
-    ]
-    
-http://www.tubalr.com/similar/Fleet+Foxes.json
-
-    [
-      {
-        VideoID: "DrQRS40OKNE"
-        VideoTitle: "Fleet Foxes - White Winter Hymnal (OFFICIAL VIDEO)"
-      }, {
-        VideoID: "_0Q9iAcPjzc"
-        VideoTitle: "My Morning Jacket"
-      }, {
-        VideoID: "OkITsv3Nk6M"
-        VideoTitle: "The Shins - Phantom Limb (OFFICIAL VIDEO)"
-      }
-    ]
+Discover users with 10+ favorites and have denoted their "Music Tastes":
+http://www.tubalr.com/users
