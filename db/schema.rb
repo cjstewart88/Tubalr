@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120304215037) do
+ActiveRecord::Schema.define(:version => 20120324183957) do
 
   create_table "banned_videos", :force => true do |t|
     t.integer  "user_id"
@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(:version => 20120304215037) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
-    t.text     "music_tastes"
     t.boolean  "premium"
   end
 

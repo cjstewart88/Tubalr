@@ -18,21 +18,4 @@ class ApplicationController < ActionController::Base
   def genres
     render :layout => "application", :template => "genres"
   end
-  
-  def users
-    @users = []
-    
-    Favorites.group("user_id").count.each do | user_id, count |
-      if count >= 10
-        user = User.where("id = ?", user_id).first
-        @users << {
-          :username       => user[:username], 
-          :music_tastes   => user[:music_tastes],
-          :number_of_favs => count
-        } if !user[:music_tastes].nil? && user[:music_tastes] != ""
-      end
-    end  
-
-    render :layout => "application", :template => "users"
-  end
 end

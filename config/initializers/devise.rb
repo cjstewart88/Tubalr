@@ -211,7 +211,7 @@ Devise.setup do |config|
   config.warden do |manager|
     manager.strategies.add(:login_with_username_or_email) do 
       def valid?
-        params[:user] && params[:user][:email] && params[:user][:password] && params[:user][:music_tastes]
+        params[:user] && params[:user][:email] && params[:user][:password]
       end
 
       def authenticate!

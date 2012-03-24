@@ -12,12 +12,6 @@
   </div>
 
   <div>
-    <%= f.label :music_tastes %> <br />
-    <i>this helps others discover your tubalr favorites</i><br />
-    <%= f.text_area :music_tastes %> <%= "<span class='error'>#{resource.errors[:music_tastes][0]}</span>".html_safe if resource.errors[:music_tastes][0] %>
-  </div>
-
-  <div>
     <%= f.label :password %><br />
     <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password %> <%= "<span class='error'>#{resource.errors[:password][0]}</span>".html_safe if resource.errors[:password][0] %>

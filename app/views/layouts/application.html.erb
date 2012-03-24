@@ -14,7 +14,6 @@
       <div id="notices">
         <%= "<aside class='flash-msg'>#{flash[:alert]}</aside>".html_safe    if !flash[:alert].nil?  %>
         <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
-        <%= "<aside class='attention'>You should update your 'music tastes' in your <a href='/users/edit'>settings</a> so others can discover your favorites!</aside>".html_safe if !current_user.nil? && (current_user.music_tastes == "" || current_user.music_tastes.nil?) %>
       </div>
       
       <nav> 
@@ -22,8 +21,7 @@
         <%= link_to('Stats', '/stats') %>  
         <%= link_to('Blog', 'http://www.tubalr.tumblr.com/', :target => '_blank')%>  
         <%= link_to('About', '#', :class => 'about-tubalr') %>    
-        <%= link_to('Genres', '/genres') %>  
-        <%= link_to('Users', '/users') %>               
+        <%= link_to('Genres', '/genres') %>      
         <% if user_signed_in? %>
           <%= link_to('My Favs', "/#{current_user.username}/favorites") %>  
           <%= link_to('Settings', '/users/edit') %>  
