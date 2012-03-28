@@ -8,9 +8,6 @@ http://www.tubalr.com/similar/Fleet+Foxes
 Discover genres:
 http://www.tubalr.com/genres
 
-Discover users with 10+ favorites and have denoted their "Music Tastes":
-http://www.tubalr.com/users
-
 # Copyright and license
 Copyright 2012 Tubalr
 
