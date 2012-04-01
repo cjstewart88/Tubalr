@@ -28,7 +28,10 @@
 
 <section id="player">
   <aside id="icons">
-    <% if user_signed_in? %><a href="#" id="favorite-star" class="fav"></a><% end %>
+    <% if user_signed_in? %>
+      <!-- <a href="#" id="favorite-star" class="fav"></a> -->
+      <a href="#" id="playlists-opener"></a>
+    <% end %>
     <a href="#" id="info-icon"></a>
 	</aside>
 	<div id="ytplayerid"></div> 
@@ -52,6 +55,31 @@
 </div>
 
 <aside id="info"></aside>
+
+<% if user_signed_in? %>
+  <div id="playlist-dialog" data-song-to-add-to-playlist='abc123'>
+    <ul id="playlists">
+      <li data-playlist-id="1">Indie Shit</li>
+      <li data-playlist-id="2">Jack Johnson</li>
+      <li data-playlist-id="3">Nine Inch Nails</li>
+      <li data-playlist-id="4">Tool</li>
+      <li data-playlist-id="5">Edward Sharp and the Magnetic Zeros</li>
+    </ul>
+    
+    <div id="create-new-playlist">
+      <div id="create-playlist-status">
+        <span id="creating-playlist">We're creating your new playlist!<span>
+        <span id="playlist-created">Your new playlist is ready and should be above!</span>
+      </div>
+      
+      <div id="create-playlist-form">
+        <input type="text"    id="new-playlist-name" placeholder="Enter new playlist name here...">
+        <input type="button"  id="create-new-playlist-button" value="Create New Playlist">
+        <input type="button"  id="cancel-create-new-playlist-button" value="Cancel">
+      </div>
+    </div>
+  </div>
+<% end %>
 
 <script>
   <%= "setUserInfo(#{current_user.id}, '#{escape_javascript(current_user.username)}')"                              if user_signed_in?                                            %>

@@ -294,7 +294,7 @@ function onYouTubePlayerAPIReady () {
 function initPlaylist () {  
   if (videos.length == 0) {
     $('#about').hide();
-    $('.listen-active').removeClass('listen-active');
+    $('.loading-button').removeClass('listen-active');
     $('#empty-playlist .bystander').remove();
     $('#empty-playlist .users-favorites').remove();
     $('#empty-playlist').fadeIn();
@@ -327,7 +327,7 @@ function initPlaylist () {
       });
     }
 
-    $('.listen-active').removeClass('listen-active');
+    $('.loading-button').removeClass('listen-active');
     $('#empty-playlist').fadeOut();
     $('#about').fadeOut(500, function(){
       $("#main").animate({
@@ -659,6 +659,12 @@ function share_single (video_id, video_title) {
 	$('#share-video div.twitter').data('video-title', video_title);
 }
 
+function create_new_playlist (new_playlist_name) {
+  $('#create-playlist-form').hide();
+  $('#creating-playlist').show().find('#creating-playlist').show();
+  console.log(new_playlist_name);
+}
+
 $(document).ready(function () { 
 	FB.init({ 
     appId   : '239275546125436', 
@@ -720,6 +726,35 @@ $(document).ready(function () {
   $('#previous').click(function () {
     previousSong();
     return false;
+  });
+  
+  $('#playlist-dialog').dialog({
+    modal: true,
+    autoOpen: false,
+    width: 600,
+    draggable: false,
+    title: 'Your Playlists'    
+  });
+  $('#playlists-opener').click(function () { $('#playlist-dialog').dialog('open'); });
+  
+  $('#create-new-playlist-button').click(function () {
+    if ($("#create-new-playlist-button").val() == 'Create!' && !$("#new-playlist-name").val()) {
+      return false;
+    }
+    else if ($("#new-playlist-name").val()) {
+      create_new_playlist($("#new-playlist-name").val());
+      return false;
+    }
+    
+    $("#create-new-playlist-button").val('Create!'); 
+    $("#new-playlist-name").toggle();
+    $("#cancel-create-new-playlist-button").toggle();
+  });
+  
+  $('#cancel-create-new-playlist-button').click(function () {
+    $("#create-new-playlist-button").val('Create New Playlist');
+    $("#new-playlist-name").toggle();
+    $("#cancel-create-new-playlist-button").toggle();
   });
   
 	$('#share-video').dialog({

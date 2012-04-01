@@ -106,7 +106,7 @@ label { font-weight: bold; }
 
 input[type=text], input[type=email], input[type=password], textarea {
   width: 200px;
-  height: 29px;
+  height: 27px;
   padding: 0px 8px;
   border: solid 1px #cecfd1;
   border-radius: 3px;
@@ -152,7 +152,7 @@ input[type=button]:hover, input[type=submit]:hover {
   -moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
   border-color: #999;  
 }
-.listen-active {
+.loading-button {
   background-image: url(/assets/loading.gif) !important;
   background-position: center center;
   background-repeat: no-repeat;
@@ -207,6 +207,11 @@ nav a {
   background: url(/assets/favorite-sprite.png) no-repeat;
 }
 .fav { background-position: 0px -16px !important; }
+
+#playlists-opener {
+  margin-bottom: 5px;
+  background: url(/assets/playlist-icon.png) no-repeat;
+}
 
 #remove-video {
   position: absolute;
@@ -487,4 +492,43 @@ nav a {
 }
 #import-youtube-favorites input[type=button] {
 	margin-left: 0px;
+}
+
+ul#playlists {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul#playlists li {
+  display: inline-block;
+  width: 257px;
+  padding: 15px 10px;
+  margin: 5px;
+  background: #CCC;
+  color: #464646;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  text-align: center;
+  cursor: pointer;
+}
+
+ul#playlists li:hover {
+  background: #555;
+  color: #fff;
+}
+
+#create-new-playlist {
+  text-align: center;
+}
+#create-new-playlist input[type=text] {
+  display: none;
+}
+#create-new-playlist #cancel-create-new-playlist-button {
+  display: none;
+}
+#create-new-playlist #create-playlist-status span {
+  padding: 15px 0 10px;
+  display: none;
 }
