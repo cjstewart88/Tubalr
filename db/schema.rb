@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120324183957) do
+ActiveRecord::Schema.define(:version => 20120401143443) do
 
   create_table "banned_videos", :force => true do |t|
     t.integer  "user_id"
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(:version => 20120324183957) do
   create_table "playlist", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "playlists", :force => true do |t|
+    t.string   "playlist_name"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -67,6 +74,14 @@ ActiveRecord::Schema.define(:version => 20120324183957) do
     t.integer  "playlist_id"
     t.string   "video_id"
     t.string   "video_title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "videos", :force => true do |t|
+    t.string   "video_title"
+    t.string   "video_id"
+    t.integer  "playlist_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
