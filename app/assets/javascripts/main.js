@@ -106,7 +106,7 @@ function is_not_banned (video_id) {
 }
 
 function prepare_search (who, type_of_search) {
-  $('.' + type_of_search).addClass('listen-active');
+  $('.' + type_of_search).addClass('loading-button');
 
   videos        = []; 
   currenttrack  = 0;
@@ -247,31 +247,17 @@ function similarTo (who) {
 	});
 }
 
-// user favorites
-function userFavorites (un, srch) {
+// user playlist
+function userPlaylist (username, playlist_name) {
   videos        = [];
   currenttrack  = 0;
-  search        = (srch != '' ? un + ' : ' + srch : un);
+  search        = playlist_name;
   search_type   = "favorites";
-  url           = (srch != '' ? '/'+un+'/favorites/'+srch+'.json' : '/'+un+'/favorites.json');
-  
-	$.getJSON(url, function(data) {
-	  if (data.length != 0) {
-      videos = data;
-		  initPlaylist();
-	  } 
-	  else {
-      if (search == userUsername) {
-        $('#empty-playlist .empty-standard-playlist').remove();
-        $('#empty-playlist .bystander').remove();
-        $('#empty-playlist').fadeIn();
-      }
-      else {
-        $('#empty-playlist .empty-standard-playlist').remove();
-        $('#empty-playlist .users-favorites').remove();
-        $('#empty-playlist').fadeIn();      
-      }
-	  } 
+  url           = "/" + username + "/playlist/" + playlist_name + ".json";
+
+  $.getJSON(url, function (data) {
+    videos = data;
+	  initPlaylist(); 
 	});
 }
 
@@ -294,9 +280,7 @@ function onYouTubePlayerAPIReady () {
 function initPlaylist () {  
   if (videos.length == 0) {
     $('#about').hide();
-    $('.loading-button').removeClass('listen-active');
-    $('#empty-playlist .bystander').remove();
-    $('#empty-playlist .users-favorites').remove();
+    $('.loading-button').removeClass('loading-button');
     $('#empty-playlist').fadeIn();
   }
   else {
@@ -327,7 +311,7 @@ function initPlaylist () {
       });
     }
 
-    $('.loading-button').removeClass('listen-active');
+    $('.loading-button').removeClass('loading-button');
     $('#empty-playlist').fadeOut();
     $('#about').fadeOut(500, function(){
       $("#main").animate({
@@ -513,8 +497,6 @@ function remove_from_list (type_of_list) {
       $('#main').animate({ marginTop: 200 }, 500);
       $('#main nav').animate({ right: 20 }, 500);
     });
-    $('#empty-playlist .bystander').remove();
-    $('#empty-playlist .' + type_of_list).remove();
     $('#empty-playlist').fadeIn();
   }
   else {
@@ -630,7 +612,7 @@ function import_youtube_favorites (youtube_username) {
     },
     dataType: 'json',
     success: function (data) {
-			$("#import-favorites").removeClass('listen-active');
+			$("#import-favorites").removeClass('loading-button');
 
 			if (data.success) {
 				$('#import-youtube-favorites .error').hide();
@@ -710,7 +692,7 @@ $(document).ready(function () {
 	});
 	
 	$("#import-favorites").click(function () {
-		$(this).addClass("listen-active");
+		$(this).addClass("loading-button");
 		import_youtube_favorites($('#youtube_username').val());
 	});
 	
@@ -831,7 +813,7 @@ $(document).ready(function () {
   });
 
   $('.just').click(function() {
-     just($('#q').val());
+    just($('#q').val());
   });
   $('.similar').click(function() {
     similarTo($('#q').val());

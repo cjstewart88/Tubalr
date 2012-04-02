@@ -4,34 +4,23 @@
   <input type="button" name="similar" value="Similar" class="listen similar" tabindex="3"/><br/>
 </form>
 
-<section id="about" class='middle-tooltip <%= 'middle-tooltip-hide'.html_safe if request.path.index("just") || request.path.index("similar") || request.path.index("video") || request.path.index("genre") || request.env['PATH_INFO'].include?("favorites") %>'>
+<section id="about" class='middle-tooltip <%= 'middle-tooltip-hide'.html_safe if request.path.index("just") || request.path.index("similar") || request.path.index("video") || request.path.index("genre") || request.env['PATH_INFO'].include?("playlist/") %>'>
   <% if !user_signed_in? %>
     Howdy, friend, wondering what Tubalr is? Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without
     all the clutter YouTube brings. To get started just type a band's or artist's name into the search box and select
     only or similar. <i>Oh, and if you're interested in saving your favorite videos, <a href='/users/sign_up'>register</a> an account, it's easy!</i> 
   <% else %>
-    Welcome back, friend! Thanks for being a registered user, be sure to share <%= link_to('your favorites', "/#{current_user.username}/favorites") %> with your friends. Oh ya, don't forget you can import your YouTube favorites on your <a href='/users/edit'>settings</a> page!
+    Welcome back, friend! Thanks for being a registered user.
   <% end %>
 </section>
 
 <section id="empty-playlist" class='middle-tooltip'>
-  <p class="users-favorites">
-    Woahhhh, you currently have 0 favorites, start using tubalr and marking your favorite videos!
-  </p>
-  <p class="bystander">
-    Doh! This user currently has 0 favorites, tell them to get some and check back later!
-  </p>
-  <p class="empty-standard-playlist">
-    o_O This playlist has 0 videos... this is kinda weird.
-  </p>
+  o_O This playlist has 0 videos... this is kinda weird.
 </section>
 
 <section id="player">
   <aside id="icons">
-    <% if user_signed_in? %>
-      <!-- <a href="#" id="favorite-star" class="fav"></a> -->
-      <a href="#" id="playlists-opener"></a>
-    <% end %>
+    <% if user_signed_in? %><a href="#" id="playlists-opener"></a><% end %>
     <a href="#" id="info-icon"></a>
 	</aside>
 	<div id="ytplayerid"></div> 
@@ -86,5 +75,5 @@
   <%= "just('#{escape_javascript(params[:artist_band])}');"                                                         if request.path.index("just") || request.path.index("genre")  %>
   <%= "video('#{escape_javascript(params[:video_id])}');"                                                           if request.path.index("video")                                %>
   <%= "similarTo('#{escape_javascript(params[:artist_band])}');"                                                    if request.path.index("similar")                              %>
-  <%= "userFavorites('#{escape_javascript(@username)}','#{@search.present? ? escape_javascript(@search) : '' }');"  if request.env['PATH_INFO'].include?("favorites")             %>
+  <%= "userPlaylist('#{escape_javascript(@username)}','#{escape_javascript(@playlist_name)}');"                     if @playlist_name                                             %>
 </script>

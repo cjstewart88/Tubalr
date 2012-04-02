@@ -10,7 +10,7 @@
   <body>
     <div id="fb-root"></div>
         
-    <div id="main" <%= "style='margin-top: 20px;'" if request.path.index("stats") || request.path.index("genres") || request.env['PATH_INFO'].include?("users") %>>
+    <div id="main" <%= "style='margin-top: 20px;'" if request.path.index("stats") || request.path.index("genres") || request.env['PATH_INFO'].include?("users") || request.env['PATH_INFO'].include?("playlists") %>>
       <div id="notices">
         <%= "<aside class='flash-msg'>#{flash[:alert]}</aside>".html_safe    if !flash[:alert].nil?  %>
         <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
@@ -19,11 +19,11 @@
       <nav> 
         <%= link_to('Home', '/') %> 
         <%= link_to('Stats', '/stats') %>  
-        <%= link_to('Blog', 'http://www.tubalr.tumblr.com/', :target => '_blank')%>  
+        <%= link_to('Blog', 'http://www.tubalr.tumblr.com/', :target => '_blank') %>  
         <%= link_to('About', '#', :class => 'about-tubalr') %>    
         <%= link_to('Genres', '/genres') %>      
         <% if user_signed_in? %>
-          <%= link_to('My Favs', "/#{current_user.username}/favorites") %>  
+          <%= link_to('My Playlists', "/#{current_user.username}/playlists") %>  
           <%= link_to('Settings', '/users/edit') %>  
           <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
         <% else %>  

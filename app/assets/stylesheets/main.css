@@ -532,3 +532,13 @@ ul#playlists li:hover {
   padding: 15px 0 10px;
   display: none;
 }
+
+#playlists-main ul {
+  list-style: none;
+}
+#playlists-main ul {
+  margin-top: 20px;
+}
+#playlists-main ul li {
+  font-size: 18px;
+}

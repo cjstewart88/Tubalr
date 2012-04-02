@@ -3,9 +3,10 @@ Tubalr::Application.routes.draw do
 
   root :to => "application#index"
   
-  get "/insert_search/:search_type/:search"   => "api#search"
-  get "/:username/favorites.json"             => "api#userFavorites"
-  get "/:username/favorites/:search.json"     => "api#userFavorites"
+  get "/insert_search/:search_type/:search"     => "api#search"
+  get "/:username/favorites.json"               => "api#userFavorites"
+  get "/:username/favorites/:search.json"       => "api#userFavorites"
+  get "/:username/playlist/:playlist_name.json" => "api#user_playlist"
   
   get "/stats"                                => "stats#index"
   
@@ -15,6 +16,9 @@ Tubalr::Application.routes.draw do
   get "/just/:artist_band"                    => "application#index"
   get "/similar/:artist_band"                 => "application#index"
   get "/video/:video_id"                      => "application#index"
+  
+  get "/:username/playlists"                  => "playlists#index"
+  get "/:username/playlist/:playlist_name"    => "playlists#listen"
   
   get "/:username/favorites"                  => "favorites#init"
   get "/:username/favorites/:search"          => "favorites#init"
