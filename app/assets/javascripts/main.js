@@ -636,9 +636,13 @@ $(document).ready(function () {
     autoOpen: false,
     width: 600,
     draggable: false,
-    title: 'Your Playlists'    
+    title: 'Playlists Manager'    
   });
-  $('#playlists-opener').click(function () { $('#playlist-dialog').dialog('open'); });
+  $('#playlists-opener').click(function () { 
+    $('#playlist-dialog').dialog('open'); 
+    $('#video-to-add-to-playlist-title').text(videos[currenttrack].VideoTitle);
+    $('#playlist-dialog').data('data-video-to-add-to-playlist', { VideoID: videos[currenttrack].VideoID, VideoTitle: videos[currenttrack].VideoTitle });
+  });
   
   $('#create-new-playlist-button').click(function () {
     if ($("#create-new-playlist-button").val() == 'Create!' && !$("#new-playlist-name").val()) {

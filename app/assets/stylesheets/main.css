@@ -470,7 +470,7 @@ nav a {
 
 ul#playlists {
   list-style: none;
-  margin: 0;
+  margin: 25px 0px;
   padding: 0;
 }
 

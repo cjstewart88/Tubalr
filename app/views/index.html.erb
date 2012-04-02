@@ -46,15 +46,17 @@
 <aside id="info"></aside>
 
 <% if user_signed_in? %>
-  <div id="playlist-dialog" data-song-to-add-to-playlist='abc123'>
-    <ul id="playlists">
-      <li data-playlist-id="1">Indie Shit</li>
-      <li data-playlist-id="2">Jack Johnson</li>
-      <li data-playlist-id="3">Nine Inch Nails</li>
-      <li data-playlist-id="4">Tool</li>
-      <li data-playlist-id="5">Edward Sharp and the Magnetic Zeros</li>
-    </ul>
-    
+  <div id="playlist-dialog" data-video-to-add-to-playlist="">
+    <% if current_user.playlists.count != 0 %>
+      Pick a playlist below to add "<b id="video-to-add-to-playlist-title"></b>" to.
+      <ul id="playlists">
+        <% current_user.playlists.each do | playlist | %>
+          <li data-playlist-id="<%= playlist.id %>"><%= playlist.playlist_name %></li>
+        <% end %>
+      </ul>  
+    <% else %>
+      You currently have 0 playlist, create one below.
+    <% end %>
     <div id="create-new-playlist">
       <div id="create-playlist-status">
         <span id="creating-playlist">We're creating your new playlist!<span>
