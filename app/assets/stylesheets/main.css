@@ -202,11 +202,6 @@ nav a {
 #info-icon {
   background: url(/assets/info.png) no-repeat;
 }
-#favorite-star { 
-  margin-bottom: 5px;
-  background: url(/assets/favorite-sprite.png) no-repeat;
-}
-.fav { background-position: 0px -16px !important; }
 
 #playlists-opener {
   margin-bottom: 5px;
@@ -472,27 +467,6 @@ nav a {
 #users-main li  { margin-bottom: 10px; line-height: 16px; }
 #users-main a   { font-size: 14px; font-weight: bold; }
 #users-main p   { margin-top: 5px; }
-
-#import-youtube-favorites p {
-	margin-bottom: 10px;
-}
-#import-youtube-favorites label {
-	font-weight: bold;
-	margin-bottom: 5px;
-	display: block;
-}
-#import-youtube-favorites span {
-	display: none;
-}
-#import-youtube-favorites .error {
-	color: red;
-}
-#import-youtube-favorites .success {
-	color: lawngreen;
-}
-#import-youtube-favorites input[type=button] {
-	margin-left: 0px;
-}
 
 ul#playlists {
   list-style: none;

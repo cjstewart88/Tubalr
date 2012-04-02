@@ -8,7 +8,7 @@
   <% if !user_signed_in? %>
     Howdy, friend, wondering what Tubalr is? Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without
     all the clutter YouTube brings. To get started just type a band's or artist's name into the search box and select
-    only or similar. <i>Oh, and if you're interested in saving your favorite videos, <a href='/users/sign_up'>register</a> an account, it's easy!</i> 
+    only or similar. <i>Oh, and if you're interested in making custom playlists videos, <a href='/users/sign_up'>register</a> an account, it's easy!</i> 
   <% else %>
     Welcome back, friend! Thanks for being a registered user.
   <% end %>
@@ -71,9 +71,9 @@
 <% end %>
 
 <script>
-  <%= "setUserInfo(#{current_user.id}, '#{escape_javascript(current_user.username)}')"                              if user_signed_in?                                            %>
-  <%= "just('#{escape_javascript(params[:artist_band])}');"                                                         if request.path.index("just") || request.path.index("genre")  %>
-  <%= "video('#{escape_javascript(params[:video_id])}');"                                                           if request.path.index("video")                                %>
-  <%= "similarTo('#{escape_javascript(params[:artist_band])}');"                                                    if request.path.index("similar")                              %>
-  <%= "userPlaylist('#{escape_javascript(@username)}','#{escape_javascript(@playlist_name)}');"                     if @playlist_name                                             %>
+  <%= "setUserInfo(#{current_user.id}, '#{escape_javascript(current_user.username)}')"            if user_signed_in?                                            %>
+  <%= "just('#{escape_javascript(params[:artist_band])}');"                                       if request.path.index("just") || request.path.index("genre")  %>
+  <%= "video('#{escape_javascript(params[:video_id])}');"                                         if request.path.index("video")                                %>
+  <%= "similarTo('#{escape_javascript(params[:artist_band])}');"                                  if request.path.index("similar")                              %>
+  <%= "userPlaylist('#{escape_javascript(@username)}','#{escape_javascript(@playlist_name)}');"   if @playlist_name                                             %>
 </script>
