@@ -493,6 +493,10 @@ ul#playlists li:hover {
   color: #fff;
 }
 
+#playlists-dialog #no-playlists {
+  margin: 25px 0px;
+}
+
 #create-new-playlist {
   text-align: center;
 }

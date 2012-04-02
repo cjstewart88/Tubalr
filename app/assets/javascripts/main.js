@@ -631,7 +631,7 @@ $(document).ready(function () {
     return false;
   });
   
-  $('#playlist-dialog').dialog({
+  $('#playlists-dialog').dialog({
     modal: true,
     autoOpen: false,
     width: 600,
@@ -639,9 +639,9 @@ $(document).ready(function () {
     title: 'Playlists Manager'    
   });
   $('#playlists-opener').click(function () { 
-    $('#playlist-dialog').dialog('open'); 
+    $('#playlists-dialog').dialog('open'); 
     $('#video-to-add-to-playlist-title').text(videos[currenttrack].VideoTitle);
-    $('#playlist-dialog').data('data-video-to-add-to-playlist', { VideoID: videos[currenttrack].VideoID, VideoTitle: videos[currenttrack].VideoTitle });
+    $('#playlists-dialog').data('data-video-to-add-to-playlist', { VideoID: videos[currenttrack].VideoID, VideoTitle: videos[currenttrack].VideoTitle });
   });
   
   $('#create-new-playlist-button').click(function () {

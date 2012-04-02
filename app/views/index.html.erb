@@ -46,16 +46,18 @@
 <aside id="info"></aside>
 
 <% if user_signed_in? %>
-  <div id="playlist-dialog" data-video-to-add-to-playlist="">
+  <div id="playlists-dialog" data-video-to-add-to-playlist="">
+    Pick a playlist below to add "<b id="video-to-add-to-playlist-title"></b>" to.
     <% if current_user.playlists.count != 0 %>
-      Pick a playlist below to add "<b id="video-to-add-to-playlist-title"></b>" to.
       <ul id="playlists">
         <% current_user.playlists.each do | playlist | %>
           <li data-playlist-id="<%= playlist.id %>"><%= playlist.playlist_name %></li>
         <% end %>
       </ul>  
     <% else %>
-      You currently have 0 playlist, create one below.
+      <div id="no-playlists">
+        You currently have 0 playlist, create one below.
+      </div>
     <% end %>
     <div id="create-new-playlist">
       <div id="create-playlist-status">
