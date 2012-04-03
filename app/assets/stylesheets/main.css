@@ -446,7 +446,7 @@ nav a {
 .ui-dialog .ui-dialog-titlebar { padding: .4em 1em; position: relative;  }
 .ui-dialog .ui-dialog-title { float: left; margin-bottom: 5px; height: 20px; width: 100%; font-size: 17px; font-weight: bold; } 
 .ui-dialog .ui-dialog-titlebar-close { position: absolute; right: 10px; font-style: italic; }
-.ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; max-height: 330px !important; overflow: auto; zoom: 1; }
+.ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; overflow: auto; zoom: 1; }
 .ui-dialog .ui-dialog-content ul { list-style-type: none; }
 
 #about-tubalr p {
@@ -477,7 +477,7 @@ ul#playlists {
 ul#playlists li {
   display: inline-block;
   width: 257px;
-  padding: 15px 10px;
+  padding: 5px 10px;
   margin: 5px;
   background: #CCC;
   color: #464646;
@@ -486,6 +486,9 @@ ul#playlists li {
   -webkit-border-radius: 3px;
   text-align: center;
   cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 ul#playlists li:hover {
@@ -506,8 +509,10 @@ ul#playlists li:hover {
 #create-new-playlist #cancel-create-new-playlist-button {
   display: none;
 }
+#create-new-playlist #create-playlist-status {
+  line-height: 51px;
+}
 #create-new-playlist #create-playlist-status span {
-  padding: 15px 0 10px;
   display: none;
 }
 
@@ -519,4 +524,5 @@ ul#playlists li:hover {
 }
 #playlists-main ul li {
   font-size: 18px;
+  margin-bottom: 15px;
 }

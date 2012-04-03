@@ -557,20 +557,32 @@ function create_new_playlist (new_playlist_name) {
   
   $.ajax({
     type: 'POST',
-    url: '/create_new_playlist',
+    url: '/playlist/create',
     data: {
-      user_id:      userId,  
-      video_id:     videos[currenttrack].VideoID,
-      video_title:  videos[currenttrack].VideoTitle
+      user_id:        userId,  
+      playlist_name:  new_playlist_name
     },
     dataType: 'json',
     success: function(data) {
-      $('#create-playlist-form').show();
-      $('#creating-playlist').hide();
+      if (data.already_exist) {        
+        $('#creating-playlist').delay(1000).fadeOut(300);
+        $('#playlist-already-exist').delay(1300).fadeIn(300).delay(1600).fadeOut(300);
+        $('#create-playlist-form').delay(3520).fadeIn(0);
+      }
+      else {
+        $('#creating-playlist').delay(1000).fadeOut(300);
+        $('#playlist-created').delay(1300).fadeIn(300).delay(1600).fadeOut(300);
+        
+        setTimeout(function () {
+          $("#playlists").append("<li data-playlist-id='" + data.new_playlist_id + "'>" + data.new_playlist_name + "</li>");
+          $("#create-new-playlist-button").val('Create New Playlist');
+          $("#new-playlist-name").val('').hide();
+          $("#cancel-create-new-playlist-button").hide();
+          $('#create-playlist-form').show();
+        }, 3510);
+      }
     }
   });
-  
-  console.log(new_playlist_name);
 }
 
 $(document).ready(function () { 
