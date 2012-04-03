@@ -46,7 +46,6 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   background: #333;
   background: -moz-linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)) !important;
   background: -webkit-linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)) !important;
-  border: solid 1px #464646;
   width: 200px;
   padding: 10px;
   border-radius: 3px;
@@ -89,7 +88,7 @@ h2 {
   font-size: 26px;
   margin-top: 10px;
   margin-bottom: 20px;
-  color: Chartreuse;
+  color: #ADDE4E;
 }
 
 #listenForm { text-align: center; margin-left: 0px; }
@@ -470,17 +469,18 @@ nav a {
 
 ul#playlists {
   list-style: none;
-  margin: 25px 0px;
+  margin: 25px 0px 8px;
+  min-height: 60px;
   padding: 0;
 }
 
 ul#playlists li {
   display: inline-block;
-  width: 257px;
+  width: 160px;
   padding: 5px 10px;
   margin: 5px;
-  background: #CCC;
-  color: #464646;
+  background: #464646;
+  color: #fff;
   border-radius: 3px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -492,12 +492,14 @@ ul#playlists li {
 }
 
 ul#playlists li:hover {
-  background: #555;
-  color: #fff;
+  background: #ADDE4E;
+  color: #000;
 }
 
 #playlists-dialog #no-playlists {
-  margin: 25px 0px;
+  margin-top: 25px;
+  position: absolute;
+  height: 60px;
 }
 
 #create-new-playlist {

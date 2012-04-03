@@ -31,4 +31,24 @@ class PlaylistsController < ApplicationController
     
     render :json => response
   end
+  
+  def add_video
+    playlist  = Playlist.find(params[:playlist_id])
+    
+    video     = playlist.videos.where("video_id = ?", params[:video_id]).first
+    
+    if video.present?
+      response = { 
+        :already_in_playlist  => true 
+      }
+    else
+      playlist.videos.create(:video_id => params[:video_id], :video_title => params[:video_title])
+    
+      response = {
+        :added_to_playlist    => true
+      }
+    end
+    
+    render :json => response
+  end
 end

@@ -17,7 +17,8 @@ Tubalr::Application.routes.draw do
   
   get "/:username/playlists"                  => "playlists#index"
   get "/:username/playlist/:playlist_name"    => "playlists#listen"
-  match "/playlist/create"                     => "playlists#create"
+  match "/playlist/create"                    => "playlists#create"
+  match "/playlist/add_video"                 => "playlists#add_video"
   
   post "/check_banned"                        => "bannedVideos#check"
   post "/ban_video"                           => "bannedVideos#ban_video"

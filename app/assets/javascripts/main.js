@@ -574,13 +574,35 @@ function create_new_playlist (new_playlist_name) {
         $('#playlist-created').delay(1300).fadeIn(300).delay(1600).fadeOut(300);
         
         setTimeout(function () {
+          $("#no-playlists").remove();
           $("#playlists").append("<li data-playlist-id='" + data.new_playlist_id + "'>" + data.new_playlist_name + "</li>");
           $("#create-new-playlist-button").val('Create New Playlist');
           $("#new-playlist-name").val('').hide();
           $("#cancel-create-new-playlist-button").hide();
-          $('#create-playlist-form').show();
+          $("#create-playlist-form").show();
         }, 3510);
       }
+    }
+  });
+}
+
+function add_video_to_playlist (playlist_id, playlist_name, video_id, video_title) {
+  $.ajax({
+    type: 'POST',
+    url: '/playlist/add_video',
+    data: {
+      playlist_id:    playlist_id,
+      video_id:       video_id,  
+      video_title:    video_title
+    },
+    dataType: 'json',
+    success: function(data) {
+      $('#playlists-dialog').dialog('close');
+      $('#notices').append('<aside class="video-added-notice">' + '"<b>' + video_title + '</b>" was added to your "<b>' + playlist_name + '</b>" playlist' + "</aside>");
+   
+      $('.video-added-notice').delay(5000).slideUp(500, function () {
+        $(this).remove();
+      });
     }
   });
 }
@@ -650,10 +672,11 @@ $(document).ready(function () {
     draggable: false,
     title: 'Add Video to Playlist'    
   });
+  
   $('#playlists-opener').click(function () { 
     $('#playlists-dialog').dialog('open'); 
     $('#video-to-add-to-playlist-title').text(videos[currenttrack].VideoTitle);
-    $('#playlists-dialog').data('data-video-to-add-to-playlist', { VideoID: videos[currenttrack].VideoID, VideoTitle: videos[currenttrack].VideoTitle });
+    $('#playlists-dialog').data('video-to-add-to-playlist', { VideoID: videos[currenttrack].VideoID, VideoTitle: videos[currenttrack].VideoTitle });
   });
   
   $('#create-new-playlist-button').click(function () {
@@ -674,6 +697,15 @@ $(document).ready(function () {
     $("#create-new-playlist-button").val('Create New Playlist');
     $("#new-playlist-name").toggle();
     $("#cancel-create-new-playlist-button").toggle();
+  });
+  
+  $('#playlists').delegate('li', 'click', function () {
+    add_video_to_playlist(
+      $(this).data('playlist-id'), 
+      $(this).text(),
+      $('#playlists-dialog').data('video-to-add-to-playlist').VideoID,
+      $('#playlists-dialog').data('video-to-add-to-playlist').VideoTitle
+    );
   });
   
 	$('#share-video').dialog({
