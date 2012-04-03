@@ -648,7 +648,7 @@ $(document).ready(function () {
     autoOpen: false,
     width: 600,
     draggable: false,
-    title: 'Playlists Manager'    
+    title: 'Add Video to Playlist'    
   });
   $('#playlists-opener').click(function () { 
     $('#playlists-dialog').dialog('open'); 

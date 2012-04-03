@@ -502,6 +502,7 @@ ul#playlists li:hover {
 
 #create-new-playlist {
   text-align: center;
+  height: 51px;
 }
 #create-new-playlist input[type=text] {
   display: none;
