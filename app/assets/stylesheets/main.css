@@ -499,6 +499,12 @@ ul#playlists li:hover {
   color: #000;
 }
 
+ul#playlists li.already-in-playlist {
+  background: #ADDE4E;
+  color: #000;
+  cursor: default;
+}
+
 #playlists-dialog #no-playlists {
   margin-top: 25px;
   position: absolute;

@@ -692,6 +692,20 @@ $(document).ready(function () {
   });
   
   $('#playlists-opener').click(function () { 
+    $.ajax({
+      type: 'POST',
+      url: '/get_playlists_video_belongs_to',
+      data: {
+        video_id: videos[currenttrack].VideoID,  
+      },
+      dataType: 'json',
+      success: function(data) {
+        $.each(data.playlists_video_belongs_to, function () {
+          $('#playlists li[data-playlist-id=' + this + ']').addClass('already-in-playlist');
+        });
+      }
+    });
+    
     $('#playlists-dialog').dialog('open'); 
     $('#video-to-add-to-playlist-title').text(videos[currenttrack].VideoTitle);
     $('#playlists-dialog').data('video-to-add-to-playlist', { VideoID: videos[currenttrack].VideoID, VideoTitle: videos[currenttrack].VideoTitle });
@@ -718,12 +732,14 @@ $(document).ready(function () {
   });
   
   $('#playlists').delegate('li', 'click', function () {
-    add_video_to_playlist(
-      $(this).data('playlist-id'), 
-      $(this).text(),
-      $('#playlists-dialog').data('video-to-add-to-playlist').VideoID,
-      $('#playlists-dialog').data('video-to-add-to-playlist').VideoTitle
-    );
+    if (!$(this).hasClass('already-in-playlist')) {
+      add_video_to_playlist(
+        $(this).data('playlist-id'), 
+        $(this).text(),
+        $('#playlists-dialog').data('video-to-add-to-playlist').VideoID,
+        $('#playlists-dialog').data('video-to-add-to-playlist').VideoTitle
+      );
+    }
   });
   
 	$('#share-video').dialog({

@@ -67,4 +67,19 @@ class PlaylistsController < ApplicationController
     
     render :json => response
   end
+  
+  def get_playlists_video_belongs_to
+    playlists_video_belongs_to  = []
+    playlists                   = current_user.playlists
+    
+    if playlists.present?
+      playlists.each do | playlist |
+        video = playlist.videos.where(:video_id => params[:video_id]).first
+        
+        playlists_video_belongs_to << playlist.id if video.present?
+      end
+    end
+    
+    render :json => { :playlists_video_belongs_to => playlists_video_belongs_to }
+  end 
 end
