@@ -390,11 +390,14 @@ nav a {
   border-bottom: none;
 }
 
-#stats-main table#general thead tr {
-  font-size: 22px;
-}
 #stats-main table#general tbody tr {
   font-size: 18px;
+}
+#stats-main table#general tbody tr td:first-child {
+  font-weight: bold;
+}
+#stats-main table#general tbody tr td:last-child {
+  text-align: right;
 }
 #stats-main table#general tr td {
   border: none;
