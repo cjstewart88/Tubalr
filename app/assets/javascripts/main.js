@@ -692,6 +692,8 @@ $(document).ready(function () {
   });
   
   $('#playlists-opener').click(function () { 
+    $('#playlists li').removeClass('already-in-playlist');
+    
     $.ajax({
       type: 'POST',
       url: '/get_playlists_video_belongs_to',
