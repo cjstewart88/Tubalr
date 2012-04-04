@@ -3,6 +3,8 @@ namespace :db  do
   task :convert_user_favorites_to_playlists => :environment do
     User.all.each do | user |
       user_favorites = Favorites.where(:user_id => user.id)
+
+      Rails.logger.info user.id
       
       if user_favorites.count != 0
         favorites_playlist = user.playlists.create(:playlist_name => "Favorites")
