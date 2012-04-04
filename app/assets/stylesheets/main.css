@@ -190,7 +190,7 @@ nav a {
 
 #player #icons {
   position: absolute;
-  margin-left: 505px;
+  margin-left: 510px;
   display: block;
 }
 #player #icons a {
@@ -431,7 +431,7 @@ nav a {
 .social { position: fixed; bottom: 10px; left: 10px; }
 .social .twitter { display: block; margin-bottom: 7px; width: 90px; }
 
-#info { display: none; margin-top: 25px; }
+#info { display: none; margin-top: 28px; }
 
 #info h3 {
   font-size: 16px;
