@@ -167,7 +167,7 @@ function video (video_id) {
 		var single_vid = data.entry;
     if (typeof single_vid !== "undefined") {      
       var video_is_good = false;
-      if (!video_is_good && !is_blocked(single_vid) && is_not_banned(single_vid.id.$t.split(":")[3])) {
+      if (!video_is_good && !is_blocked(single_vid)) {
 				videos.push({ 
 				  VideoID: single_vid.id.$t.split(":")[3], 
 				  VideoTitle: single_vid.title.$t
@@ -313,15 +313,6 @@ function initPlaylist () {
       	  prev_search = search;
       	}
     	
-      	if (search_type == 'playlist') {
-      	  $('#info-icon').hide();
-      	  $('#remove-video').hide();
-      	}
-      	else {
-      	  $('#info-icon').show();
-      	  $('#remove-video').show();
-      	} 
-    	
       	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+(search_type == 'playlist' ? playlist_owner.replace(/[ +]/g,"%2B")+"%2Fplaylist%2F"+search.replace(/[ +]/g,"%2B") : search_type+"%2F"+search.replace(/[ +]/g,"%2B")));
 		
       	currentVideo(videos[currenttrack]);
@@ -331,14 +322,19 @@ function initPlaylist () {
   		    getInfo();
   	    }
 		  	
+		  	if (search_type == 'playlist' || search_type == 'video') {
+		  	  $('#info-icon').hide();
+		  	}
+		  	else {
+		  	  $('#info-icon').show();
+		  	}
+		  	
 				if (search_type == 'video') {
 					$('#player-controls').hide();
-					$('#info-icon').hide();
 					$('#share').hide();
 				}
 				else {
 					$('#player-controls').show();
-					$('#info-icon').show();
 					$('#share').show();
 				}
 				
@@ -486,21 +482,43 @@ function remove_from_list () {
 
 function remove_video () {
   if (userId != 0) {
-    $.ajax({
-      type: 'POST',
-      url: '/ban_video',
-      data: {
-        user_id:  userId,  
-        video_id: videos[currenttrack].VideoID
-      },
-      dataType: 'json',
-      success: function(data) {
-        bannedVideos.push(videos[currenttrack].VideoID);
-        $("#the-list #"+videos[currenttrack].VideoID).remove();
-        videos.splice(currenttrack, 1);
-        remove_from_list();
-      }
-    });
+    if (userUsername == playlist_owner) {
+      $.ajax({
+        type: 'POST',
+        url: '/playlist/delete_video',
+        data: {
+          user_id:        userId,  
+          playlist_name:  search,
+          video_id:       videos[currenttrack].VideoID
+        },
+        dataType: 'json',
+        success: function(data) {
+          console.log(data);
+          if (data.success) {
+            $("#the-list #"+videos[currenttrack].VideoID).remove();
+            videos.splice(currenttrack, 1);
+            remove_from_list();
+          }
+        }
+      }); 
+    }
+    else {
+      $.ajax({
+        type: 'POST',
+        url: '/ban_video',
+        data: {
+          user_id:  userId,  
+          video_id: videos[currenttrack].VideoID
+        },
+        dataType: 'json',
+        success: function(data) {
+          bannedVideos.push(videos[currenttrack].VideoID);
+          $("#the-list #"+videos[currenttrack].VideoID).remove();
+          videos.splice(currenttrack, 1);
+          remove_from_list();
+        }
+      });
+    }
   }
   else {
     $("#the-list #"+videos[currenttrack].VideoID).remove();

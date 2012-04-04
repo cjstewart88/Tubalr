@@ -6,14 +6,15 @@ class PlaylistsController < ApplicationController
   end
   
   def listen
-    @username       = params[:username]
-    @playlist_name  = params[:playlist_name]
+    @username           = params[:username]
+    @playlist_name      = params[:playlist_name]
+    @is_playlist_owner  = true if current_user.present? && current_user.username == params[:username]
     
     render :layout => "application", :template => "index"
   end  
   
   def create
-    user      = User.where(:id => params[:user_id]).first
+    user      = User.find(params[:user_id])
     playlist  = user.playlists.where("lower(playlist_name) = ?", params[:playlist_name].downcase).first
   
     if playlist.present?
@@ -47,6 +48,21 @@ class PlaylistsController < ApplicationController
       response = {
         :added_to_playlist    => true
       }
+    end
+    
+    render :json => response
+  end
+  
+  def delete_video
+    if params[:user_id].to_i == current_user.id
+      user      = User.find(params[:user_id])
+      playlist  = user.playlists.where("lower(playlist_name) = ?", params[:playlist_name].downcase).first
+    
+      playlist.videos.where(:video_id => params[:video_id]).first.delete
+      
+      response = { :success => true }
+    else
+      response = { :success => false }
     end
     
     render :json => response
