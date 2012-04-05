@@ -67,7 +67,7 @@ class StatsController < ApplicationController
         :owner  => playlist.user.username,
         :date   => playlist.created_at,
         :url  => "/#{playlist.user.username}/playlist/#{playlist.playlist_name.gsub(" ","+")}"
-      } 
+      } if playlist.user.username.present?
     end
     
     return @recent_playlists
