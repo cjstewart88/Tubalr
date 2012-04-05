@@ -4,6 +4,7 @@ class StatsController < ApplicationController
     self.past_7_days_stats
     self.today_stats
     self.recent_searches
+    self.recent_playlists
     
     render :layout => "application", :template => "stats"
   end
@@ -54,5 +55,21 @@ class StatsController < ApplicationController
     end
     
     return @recent_searches
+  end
+  
+  def recent_playlists
+    @recent_playlists     = []
+    tmp_recent_playlists  = Playlist.find(:all, :limit => 100, :order => "created_at DESC")
+    
+    tmp_recent_playlists.each do | playlist |
+      @recent_playlists << {
+        :name   => playlist.playlist_name,
+        :owner  => playlist.user.username,
+        :date   => playlist.created_at,
+        :url  => "/#{playlist.user.username}/playlist/#{playlist.playlist_name.gsub(" ","+")}"
+      } 
+    end
+    
+    return @recent_playlists
   end
 end

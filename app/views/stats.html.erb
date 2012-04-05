@@ -59,4 +59,17 @@
       <% end %>
     </tbody>
   </table>
+  
+  <h2>
+    Recently Created Playlists
+  </h2>
+  <table>
+    <tbody>
+      <% @recent_playlists.each do | playlist | %>
+        <tr url="<%= playlist[:url] %>">
+          <td><%= "#{playlist[:owner]} created #{playlist[:name]} #{time_ago_in_words(playlist[:date])} ago" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>  
 </section>
