@@ -7,7 +7,6 @@ gem 'httparty'
 gem 'rake'
 gem 'devise'
 gem 'jquery-rails', '1.0.12'
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 
 group :production do
   gem 'therubyracer-heroku', '0.8.1.pre3'
