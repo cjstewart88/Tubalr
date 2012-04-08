@@ -10,7 +10,7 @@
       
       <ul>
         <% @user.playlists.each do | playlist | %>
-          <li><a href="<%= "/#{@user.username}/playlist/#{playlist.playlist_name}" %>"><%= playlist.playlist_name %></li>
+          <li><a href="<%= "/#{@user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></li>
         <% end %>
       </ul>
     <% else %>

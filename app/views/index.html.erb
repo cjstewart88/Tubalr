@@ -82,5 +82,5 @@
   <%= "just('#{escape_javascript(params[:artist_band])}');"                                       if request.path.index("just") || request.path.index("genre")  %>
   <%= "video('#{escape_javascript(params[:video_id])}');"                                         if request.path.index("video")                                %>
   <%= "similarTo('#{escape_javascript(params[:artist_band])}');"                                  if request.path.index("similar")                              %>
-  <%= "userPlaylist('#{escape_javascript(@username)}','#{escape_javascript(@playlist_name)}');"   if @playlist_name                                             %>
+  <%= "userPlaylist('#{escape_javascript(@username)}','#{url_encode(escape_javascript(@playlist_name))}');"   if @playlist_name                                             %>
 </script>
