@@ -278,7 +278,9 @@ function onYouTubePlayerAPIReady () {
 }
 
 // start the playlist
-function initPlaylist () {  
+function initPlaylist () {
+  push_search(search);
+    
   if (videos.length == 0) {
     $('#about').hide();
     $('.loading-button').removeClass('loading-button');

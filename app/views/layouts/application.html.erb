@@ -3,7 +3,7 @@
   <head>
     <title>Tubalr</title>
     <%= stylesheet_link_tag     "http://fonts.googleapis.com/css?family=Pacifico",  "application" %>
-    <%= javascript_include_tag  "http://connect.facebook.net/en_US/all.js",         "application" %>
+    <%= javascript_include_tag  "http://connect.facebook.net/en_US/all.js",         "http://tubalr.nodejitsu.com/socket.io/socket.io.js", "application"  %>
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <%= csrf_meta_tag %>
   </head>
@@ -65,8 +65,5 @@
         </p>
       </div>
     </div>
-    
-    <script type="text/javascript" src="http://tubalr.nodejitsu.com/socket.io/socket.io.js"></script>
-    <script type="text/javascript">var socket = io.connect('http://tubalr.nodejitsu.com');</script>
   </body>
 </html>
