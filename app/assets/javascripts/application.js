@@ -4,4 +4,3 @@
 //= require ga
 //= require main
 //= require slimScroll
-//= require real-time
