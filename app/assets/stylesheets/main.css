@@ -304,6 +304,12 @@ nav a {
 	background: #4099FF;
 }
 
+#share-video .url {
+  width: 150px;
+  margin: 0 auto;
+  display: block;
+}
+
 #player {
 	width: 500px;
 	padding-bottom: 3px;

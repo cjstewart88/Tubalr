@@ -567,6 +567,7 @@ function share_single (video_id, video_title) {
 	$('#share-video div.facebook').data('video-title', video_title);	
 	$('#share-video div.twitter').data('video-id', video_id);
 	$('#share-video div.twitter').data('video-title', video_title);
+	$('.url').val('http://www.tubalr.com/video/' + video_id);
 }
 
 function create_new_playlist (new_playlist_name) {
@@ -749,7 +750,7 @@ $(document).ready(function () {
     autoOpen: false,
     width: 200,
     draggable: false,
-		height: 128,
+		height: 158,
 		title: "Share Video"
   });
 
@@ -819,6 +820,8 @@ $(document).ready(function () {
   $('.similar').click(function() {
     similarTo($('#q').val());
   });
+
+  $('.url').click(function () { $(this).select(); });
 
   $('input#q').keypress(function(e) {
     var code = (e.keyCode ? e.keyCode : e.which);
