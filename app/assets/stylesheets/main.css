@@ -440,7 +440,7 @@ nav a {
 .social { position: fixed; bottom: 10px; left: 10px; }
 .social .twitter { display: block; margin-bottom: 7px; width: 90px; }
 
-#info { display: none; margin-top: 28px; }
+#info { display: none; margin: 0 auto; margin-top: 28px; width: 500px; }
 
 #info h3 {
   font-size: 16px;
