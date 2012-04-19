@@ -724,13 +724,13 @@ $(document).ready(function () {
     }
     
     $("#create-new-playlist-button").val('Create!'); 
-    $("#new-playlist-name").toggle();
+    $("#new-playlist-name").toggle().focus();
     $("#cancel-create-new-playlist-button").toggle();
   });
   
   $('#cancel-create-new-playlist-button').click(function () {
     $("#create-new-playlist-button").val('Create New Playlist');
-    $("#new-playlist-name").toggle();
+    $("#new-playlist-name").val('').toggle();
     $("#cancel-create-new-playlist-button").toggle();
   });
   
