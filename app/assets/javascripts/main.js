@@ -799,8 +799,8 @@ $(document).ready(function () {
   $('#the-list').delegate('a', 'click', function () { jumpTo($(this).index('#the-list a')); return false; });   
   
   $('table tbody tr').click(function() {
-    if ($(this).parent().parent().attr("id") != 'general') {
-      window.open(window.location.protocol+"//"+window.location.host+$(this).attr('url'));
+    if ($(this).data('url')) {
+      window.open(window.location.protocol+"//"+window.location.host+$(this).data('url'));
     }
   });
   

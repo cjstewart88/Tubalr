@@ -51,7 +51,7 @@
     </thead>
     <tbody>
       <% @recent_searches.each do | search | %>
-        <tr url="<%= search[:url] %>">
+        <tr data-url="<%= search[:url] %>" class="clickable-row">
           <td><%= search[:what] %></td>
           <td><%= search[:type] %></td>
           <td><%= time_ago_in_words(search[:date]) %> ago</td>
@@ -66,8 +66,8 @@
   <table>
     <tbody>
       <% @recent_playlists.each do | playlist | %>
-        <tr url="<%= playlist[:url] %>">
-          <td><%= "#{playlist[:owner]} created <b>#{playlist[:name]}</b> #{time_ago_in_words(playlist[:date])} ago".html_safe %></td>
+        <tr>
+          <td><%= "<a href='#{playlist[:owner_url]}' target='_blank'><b>#{playlist[:owner]}</b></a> created <a href='#{playlist[:url]}' target='_blank'><b>#{playlist[:name]}</b></a> #{time_ago_in_words(playlist[:date])} ago".html_safe %></td>
         </tr>
       <% end %>
     </tbody>
@@ -79,8 +79,8 @@
   <table>
     <tbody>
       <% @recent_videos_added_to_playlists.each do | video | %>
-        <tr url="<%= video[:url] %>">
-          <td><%= "#{video[:owner]} added <b>#{video[:title]}</b> to their <b>#{video[:playlist_name]}</b> playlist #{time_ago_in_words(video[:date])} ago".html_safe %></td>
+        <tr>
+          <td><%= "<a href='#{video[:owner_url]}' target='_blank'><b>#{video[:owner]}</b></a> added <a href='#{video[:url]}' target='_blank'><b>#{video[:title]}</b></a> to their <a href='#{video[:playlist_url]}' target='_blank'><b>#{video[:playlist_name]}</b></a> playlist #{time_ago_in_words(video[:date])} ago".html_safe %></td>
         </tr>
       <% end %>
     </tbody>

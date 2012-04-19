@@ -64,10 +64,11 @@ class StatsController < ApplicationController
     
     tmp_recent_playlists.each do | playlist |
       @recent_playlists << {
-        :name   => playlist.playlist_name,
-        :owner  => playlist.user.username,
-        :date   => playlist.created_at,
-        :url  => "/#{playlist.user.username}/playlist/#{playlist.playlist_name.gsub(" ","+")}"
+        :name       => playlist.playlist_name,
+        :owner      => playlist.user.username,
+        :date       => playlist.created_at,
+        :url        => "/#{playlist.user.username}/playlist/#{playlist.playlist_name.gsub(" ","+").gsub("/","%2F")}",
+        :owner_url  => "/#{playlist.user.username}/playlists"
       } if playlist.user.present?
     end
     
@@ -84,7 +85,9 @@ class StatsController < ApplicationController
         :playlist_name  => video.playlist.playlist_name,
         :owner          => video.playlist.user.username,
         :date           => video.created_at,
-        :url            => "/video/#{video.video_id}"
+        :url            => "/video/#{video.video_id}",
+        :owner_url      => "/#{video.playlist.user.username}/playlists",
+        :playlist_url   => "/#{video.playlist.user.username}/playlist/#{video.playlist.playlist_name.gsub(" ","+").gsub("/","%2F")}"
       } if video.playlist.user.present?
     end
     

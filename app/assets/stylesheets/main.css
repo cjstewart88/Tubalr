@@ -370,11 +370,9 @@ nav a {
   width: 100%;
   border-spacing: 0;
 }
-#stats-main table tr {
-  cursor: pointer;
-}
-#stats-main table tr:hover {
+#stats-main table tr.clickable-row:hover {
   background: #F1EFD3;
+  cursor: pointer;
 }
 #stats-main table tr td {
   padding: 5px;
@@ -387,10 +385,6 @@ nav a {
 }
 #stats-main table thead {
   font-weight: bold;
-}
-#stats-main table thead tr:hover {
-  cursor: default;
-  background: none;
 }
 #stats-main table tbody tr:last-child td {
   border-bottom: none;
@@ -407,10 +401,6 @@ nav a {
 }
 #stats-main table#general tr td {
   border: none;
-}
-#stats-main table#general tr:hover {
-  cursor: default;
-  background: none;
 }
 
 #users-main h2, #genres-main h2 {
