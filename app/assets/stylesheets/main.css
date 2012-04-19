@@ -375,7 +375,7 @@ nav a {
   cursor: pointer;
 }
 #stats-main table tr td {
-  padding: 5px;
+  padding: 10px 5px;
   border-right: dotted 1px #ababab;
   border-bottom: dotted 1px #ababab;
 }
