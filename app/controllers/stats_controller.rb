@@ -5,6 +5,7 @@ class StatsController < ApplicationController
     self.today_stats
     self.recent_searches
     self.recent_playlists
+    self.recent_videos_added_to_playlists
     
     render :layout => "application", :template => "stats"
   end
@@ -71,5 +72,22 @@ class StatsController < ApplicationController
     end
     
     return @recent_playlists
+  end
+  
+  def recent_videos_added_to_playlists
+    @recent_videos_added_to_playlists     = []
+    tmp_recent_videos_added_to_playlists  = Video.find(:all, :limit => 100, :order => "created_at DESC")
+    
+    tmp_recent_videos_added_to_playlists.each do | video |
+      @recent_videos_added_to_playlists << {
+        :title          => video.video_title,
+        :playlist_name  => video.playlist.playlist_name,
+        :owner          => video.playlist.user.username,
+        :date           => video.created_at,
+        :url            => "/video/#{video.video_id}"
+      } if video.playlist.user.present?
+    end
+    
+    return @recent_videos_added_to_playlists
   end
 end

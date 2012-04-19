@@ -67,7 +67,20 @@
     <tbody>
       <% @recent_playlists.each do | playlist | %>
         <tr url="<%= playlist[:url] %>">
-          <td><%= "#{playlist[:owner]} created #{playlist[:name]} #{time_ago_in_words(playlist[:date])} ago" %></td>
+          <td><%= "#{playlist[:owner]} created <b>#{playlist[:name]}</b> #{time_ago_in_words(playlist[:date])} ago".html_safe %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <h2>
+    Recent Videos Added to Playlists
+  </h2>
+  <table>
+    <tbody>
+      <% @recent_videos_added_to_playlists.each do | video | %>
+        <tr url="<%= video[:url] %>">
+          <td><%= "#{video[:owner]} added <b>#{video[:title]}</b> to their <b>#{video[:playlist_name]}</b> playlist #{time_ago_in_words(video[:date])} ago".html_safe %></td>
         </tr>
       <% end %>
     </tbody>
