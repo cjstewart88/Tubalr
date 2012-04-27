@@ -87,7 +87,7 @@ class StatsController < ApplicationController
         :date           => video.created_at,
         :url            => "/video/#{video.video_id}",
         :owner_url      => "/#{video.playlist.user.username}/playlists",
-        :playlist_url   => "/#{video.playlist.user.username}/playlist/#{video.playlist.playlist_name.gsub(" ","+").gsub("/","%2F")}"
+        :playlist_url   => "/#{video.playlist.user.username}/playlist/#{video.playlist.playlist_name.gsub("/","%2F")}"
       } if video.playlist.user.present?
     end
     
