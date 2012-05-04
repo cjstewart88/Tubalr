@@ -265,8 +265,8 @@ function userPlaylist (un, playlist_name) {
 function onYouTubePlayerAPIReady () {
   thePlayer = new YT.Player('ytplayerid', {
     videoId: videos[currenttrack].VideoID,
-    width: 498,
-    height: 280,
+    width: 800,
+    height: 400,
     version: 3,
     playerVars: { 'autoplay': 1, 'rel': 0, 'theme': 'dark', 'showinfo': 0, 'autohide': 1, 'wmode': 'opaque', 'allowScriptAccess': 'always', 'version': 3, 'restriction': 'US' },
     events: {
@@ -300,14 +300,14 @@ function initPlaylist () {
     $('#empty-playlist').fadeOut();
     $('#about').fadeOut(500, function(){
       $("#main").animate({
-        marginTop: ($('#main').css('marginTop') == '20px' ? 20 : 100)
+        marginTop: 20
       }, 500, function () {  
         videosCopy = "";
         $.each(videos, function(i) {
-          videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'">'+this.VideoTitle+'<div class="share-video" data-video-id="' + this.VideoID + '" data-video-title="' + this.VideoTitle + '">share video</div></a>';
+          videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'"><div class="share-video" data-video-id="' + this.VideoID + '" data-video-title="' + this.VideoTitle + '">Share Video</div>'+this.VideoTitle+'</a>';
         });
-      	$('#the-list').html(videosCopy);
-
+      	$('#playlist').html(videosCopy);
+        
         if (prev_search != search) {  
         	$.get('/insert_search/' + search_type + '/' + escape(search));
       	  prev_search = search;
@@ -339,15 +339,6 @@ function initPlaylist () {
 				}
 				
       	$('#player').fadeIn(1000);
-      	$('nav').animate({ right: 220 }, 500, function() {
-      	  $('#playlist').fadeIn(1000);
-        	$('.slimScrollDiv').fadeIn(1000);
-
-          $('#playlist').slimScroll({
-            height: '100%',
-            width: '200px'
-          });
-      	});
       });
     });
   }
@@ -364,7 +355,7 @@ function currentVideo (video) {
     thePlayer.loadVideoById(video.VideoID, 0);
   }
 	
-	$('#the-list .active').removeClass('active');
+	$('#playlist .active').removeClass('active');
 	$('#'+video.VideoID).addClass('active');
 }
 
@@ -495,7 +486,7 @@ function remove_video () {
         success: function(data) {
           console.log(data);
           if (data.success) {
-            $("#the-list #"+videos[currenttrack].VideoID).remove();
+            $("#playlist #"+videos[currenttrack].VideoID).remove();
             videos.splice(currenttrack, 1);
             remove_from_list();
           }
@@ -513,7 +504,7 @@ function remove_video () {
         dataType: 'json',
         success: function(data) {
           bannedVideos.push(videos[currenttrack].VideoID);
-          $("#the-list #"+videos[currenttrack].VideoID).remove();
+          $("#playlist #"+videos[currenttrack].VideoID).remove();
           videos.splice(currenttrack, 1);
           remove_from_list();
         }
@@ -521,7 +512,7 @@ function remove_video () {
     }
   }
   else {
-    $("#the-list #"+videos[currenttrack].VideoID).remove();
+    $("#playlist #"+videos[currenttrack].VideoID).remove();
     videos.splice(currenttrack, 1);
     remove_from_list();
   }
@@ -652,22 +643,17 @@ $(document).ready(function () {
 	  window.open(url, 'twitter', opts);
 	});
 	
-	$('#the-list').delegate('.share-video', 'click', function (e) {
+	$('#playlist').delegate('.share-video', 'click', function (e) {
 		e.stopImmediatePropagation();
 		share_single($(this).data('video-id'), $(this).data('video-title'));
 		$('#share-video').dialog('open');
 	});
 
-	var share_single_timer;
-	$("#the-list").delegate('a', 'mouseenter', function () {
-		var playlist_item = $(this);
-		share_single_timer = setTimeout(function () {
-      playlist_item.find('.share-video').stop(true, true).slideDown();
-    }, 800);		
+	$("#playlist").delegate('a', 'mouseenter', function () {
+		$(this).find('.share-video').show();		
 	});
-	$("#the-list").delegate('a', 'mouseleave', function () {
-		clearTimeout(share_single_timer);
-		$(this).find('.share-video').stop(true, true).slideUp();
+	$("#playlist").delegate('a', 'mouseleave', function () {
+		$(this).find('.share-video').hide();
 	});
 	
   $('#remove-video').click(function () {
@@ -776,15 +762,10 @@ $(document).ready(function () {
   $('#info-icon').click(function(){
     if ($('#main').css('marginTop') == '20px') {
       $('#info').slideToggle(function(){
-        $("#main").animate({ marginTop: 100 }, 500);
       });
     }
     else {
-      $("#main").animate({
-        marginTop: 20
-      }, 500, function () {
-        $('#info').slideToggle();
-      });
+      $('#info').slideToggle();
     }
   });
   
@@ -796,7 +777,7 @@ $(document).ready(function () {
     }, 5000);
   }
     
-  $('#the-list').delegate('a', 'click', function () { jumpTo($(this).index('#the-list a')); return false; });   
+  $('#playlist').delegate('a', 'click', function () { jumpTo($(this).index('#playlist a')); });   
   
   $('table tbody tr').click(function() {
     if ($(this).data('url')) {

@@ -59,7 +59,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 
 #main {
   display: none;
-  width: 500px;
+  width: 800px;
   margin: 0 auto;
   margin-top: 200px;
 }
@@ -70,9 +70,6 @@ h1 {
   cursor: default; 
   font: 60px 'Pacifico';
   text-align: center; 
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-  -webkit-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-  -moz-text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
 h1 a { 
   text-decoration: none; 
@@ -91,7 +88,7 @@ h2 {
   color: #ADDE4E;
 }
 
-#listenForm { text-align: center; margin-left: 0px; }
+#listenForm { text-align: center; margin-left: 0px; margin-bottom: 20px; margin-top: 10px; }
 
 #discover { padding-left: 78px; }
 
@@ -178,7 +175,7 @@ nav a {
   color: blueviolet;
 }
 .middle-tooltip {
-  width: 312px;
+  width: 400px;
   margin: 0 auto;
   margin-top: 13px;
   text-align: center;
@@ -190,7 +187,7 @@ nav a {
 
 #player #icons {
   position: absolute;
-  margin-left: 510px;
+  margin-left: 810px;
   display: block;
 }
 #player #icons a {
@@ -209,80 +206,46 @@ nav a {
 
 #remove-video {
   position: absolute;
-  margin-left: 212px; 
+  margin-left: 360px;
 }
 #remove-video:hover {
   color: red;
 }
 
-#share { color: #efefef; 	border-bottom: groove 2px #555; padding: 10px 42px; }
-#share a {
-  width: 16px;
-  height: 16px;
-  border: none;
-  position: absolute;
-  margin-top: -3px;
-	text-shadow: 1px 1px #222;
-	-moz-text-shadow: 1px 1px #222;
-	-webkit-text-shadow: 1px 1px #222;
+#playlist-header {
+  margin: 20px 0px;
 }
-#share a#facebook {
-  background: url(/assets/facebook.png) no-repeat;
-  margin-left: 3px;
-  margin-top: -1px;
+#playlist-header #share {
+  float: right;
+  font-size: 11px;
+  font-weight: normal;
 }
-#share a#twitter {
-  background: url(/assets/twitter.png) no-repeat;
-  margin-left: 20px;
-  margin-top: -1px;
+#playlist-header #share a {
+  color: blueviolet;
 }
-
-.slimScrollDiv {
-  position: fixed !important;
-  -moz-box-shadow: 0 0 5px 1px #888;
-  -webkit-box-shadow: 0 0 5px 1px#888;
-  box-shadow: 0 0 5px 1px #888;
-  border-left: groove 2px #555;
-  z-index: 900;
-}
-
 #playlist {
-  display: none;
-  background: #333;
-  background: -moz-linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)) !important;
-  background: -webkit-linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)) !important;
-  border: solid 1px #464646;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-	width: 200px;
-	font-size: 11px;
-	height: 100%;
-	overflow: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
-#playlist #the-list a {
+#playlist a:first-child {
+  border-top: dotted 1px #ccc;
+}
+#playlist a {
   display: block;
-  color: #ccc;
+  color: #666;
 	text-decoration: none;
-	padding: 10px 15px;
-	border-bottom: groove 2px #555;
-	text-shadow: 1px 1px #222;
-	-moz-text-shadow: 1px 1px #222;
-	-webkit-text-shadow: 1px 1px #222;
+	padding: 20px 0px;
+  border-bottom: dotted 1px #ccc;
 }
-#playlist #the-list a.active {
-	color: #efefef;
-  background: url(/assets/active.png) center left;
-  background-repeat: no-repeat;
+#playlist a.active {
+	color: blueviolet;
 }
-#playlist #the-list a:hover {
-  color: #efefef !important;
+#playlist a:hover {
+  color: blueviolet !important;
 }
 .share-video {
 	display: none;
-	width: 100%;
-	text-align: center;
-	margin-top: 8px;
+	float: right;
 }
 #share-video {
 	overflow: hidden;
@@ -311,27 +274,22 @@ nav a {
 }
 
 #player {
-	width: 500px;
-	padding-bottom: 3px;
+  position: relative;
 	margin: 0 auto;
 	display: none;
-	margin-top: 15px;
-	position: relative;
 }
 #ytplayerid {
-	height: 281px;
-	width: 100%;
+	height: 400px;
+	width: 800px;
 	background: #000;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
+	margin-bottom: 10px;
 }
 
-#player { text-align: center; }
+#player { }
 
 #player-controls {
-  text-align: left;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 #player-controls #next, #player-controls #previous {
   display: inline-block;
@@ -430,7 +388,7 @@ nav a {
 .social { position: fixed; bottom: 10px; left: 10px; }
 .social .twitter { display: block; margin-bottom: 7px; width: 90px; }
 
-#info { display: none; margin: 0 auto; margin-top: 28px; width: 500px; }
+#info { line-height: 18px; display: none; margin: 0 auto; margin-top: 20px; margin-bottom: 10px; }
 
 #info h3 {
   font-size: 16px;

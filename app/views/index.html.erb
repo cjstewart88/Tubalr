@@ -23,19 +23,26 @@
     <% if user_signed_in? %><a href="#" id="playlists-opener"></a><% end %>
     <a href="#" id="info-icon"></a>
 	</aside>
+	
 	<div id="ytplayerid"></div> 
+	
 	<div id="player-controls">
     <a href="#" id="remove-video">remove video</a>
 	  <a href="#" id="next">next</a>
     <a href="#" id="previous">previous</a>
 	</div>
-</section>
-
-<section id="playlist">
-  <aside id="share">
-    Share this playlist: <a href="#" id="facebook" onClick="facebook()"></a> <a href="" id="twitter"></a>
-	</aside>
-	<div id="the-list"></div>
+	
+	<aside id="info"></aside>
+	
+	<h3 id="playlist-header">
+	  <aside id="share">
+      Share this playlist on <a href="#" id="facebook" onClick="facebook()">facebook</a> or <a href="" id="twitter">twitter</a>!
+  	</aside>
+  	
+	  The Playlist
+	</h3>
+	
+	<div id="playlist"></div>
 </section>
 
 <div id="share-video">
@@ -43,8 +50,6 @@
   <div class='twitter'>tweet on twitter</div>
   <input type='text' class='url' readonly></div>
 </div>
-
-<aside id="info"></aside>
 
 <% if user_signed_in? %>
   <div id="playlists-dialog" data-video-to-add-to-playlist="">    
