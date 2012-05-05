@@ -170,6 +170,14 @@ nav a {
   margin-left: 8px;
 }
 
+#mobile-main-nav {
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: 15px;
+  text-align: center;
+  font-size: 10px;
+}
+
 #q:focus, input:focus, textarea:focus {  
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);

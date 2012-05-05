@@ -627,9 +627,10 @@ function detect_mobile () {
    ) {
     $('.social').remove();
     $('#share').remove();
-    $('#main').css('marginTop', 20);
-    $('nav').css({'textAlign': 'center', 'width': '500px', 'margin': '0 auto', 'position': 'relative', 'marginBottom': '15px', 'top': 5, 'fontSize': '10px'});
-    $('#about').text('Howdy mobile user, enter a band below and select just or similar!')
+    $('#notices').remove();
+    $('#main').css('marginTop', 0);
+    $('nav').addClass('mobile-main-nav');
+    $('#about').text('Howdy mobile user, enter a band below and select just or similar!');
   }
 }
 
