@@ -171,11 +171,10 @@ nav a {
 }
 
 #mobile-main-nav {
-  margin: 0 auto;
-  position: relative;
-  margin-bottom: 15px;
-  text-align: center;
-  font-size: 10px;
+  margin: 0 auto !important;
+  margin-bottom: 15px !important;
+  position: relative !important;
+  text-align: center !important;
 }
 
 #q:focus, input:focus, textarea:focus {  
