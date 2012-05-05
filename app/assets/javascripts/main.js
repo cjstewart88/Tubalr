@@ -617,7 +617,22 @@ function add_video_to_playlist (playlist_id, playlist_name, video_id, video_titl
   });
 }
 
+function detect_mobile () {
+  if ( navigator.userAgent.match(/Android/i)
+   || navigator.userAgent.match(/webOS/i)
+   || navigator.userAgent.match(/iPhone/i)
+   || navigator.userAgent.match(/iPad/i)
+   || navigator.userAgent.match(/iPod/i)
+   || navigator.userAgent.match(/BlackBerry/i)
+   ) {
+    $('.social').hide();
+    $('#share').hide();
+  }
+}
+
 $(document).ready(function () { 
+  detect_mobile();
+  
 	FB.init({ 
     appId   : '239275546125436', 
     status  : true, 
