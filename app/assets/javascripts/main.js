@@ -625,8 +625,9 @@ function detect_mobile () {
    || navigator.userAgent.match(/iPod/i)
    || navigator.userAgent.match(/BlackBerry/i)
    ) {
-    $('.social').hide();
-    $('#share').hide();
+    $('.social').remove();
+    $('#share').remove();
+    $('#main').css('marginTop', 20);
   }
 }
 
