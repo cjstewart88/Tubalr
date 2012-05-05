@@ -170,7 +170,7 @@ nav a {
   margin-left: 8px;
 }
 
-#mobile-main-nav {
+.mobile-main-nav {
   margin: 0 auto !important;
   margin-bottom: 15px !important;
   position: relative !important;
