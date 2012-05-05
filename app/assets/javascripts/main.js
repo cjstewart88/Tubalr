@@ -629,6 +629,7 @@ function detect_mobile () {
     $('#share').remove();
     $('#main').css('marginTop', 20);
     $('nav').css('textAlign', 'center');
+    window.scrollTo(0, 1);
   }
 }
 

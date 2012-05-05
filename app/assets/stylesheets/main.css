@@ -67,8 +67,9 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 }
 
 h1 { 
-  width: 100%;
+  width: 400px;
   height: 90px;
+  margin: 0 auto;
   display: block;
   cursor: default; 
   font: 60px 'Pacifico';
@@ -91,7 +92,7 @@ h2 {
   color: #ADDE4E;
 }
 
-#listenForm { width: 100%; text-align: center; margin-left: 0px; margin-bottom: 20px; margin-top: 10px; }
+#listenForm { width: 400px; text-align: center; margin: 0 auto; margin-bottom: 20px; margin-top: 10px; }
 
 #discover { padding-left: 78px; }
 
