@@ -65,9 +65,10 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   margin: 0 auto;
   margin-top: 200px;
 }
-
-.mobile-main {
+.mobile-body {
   overflow-x: hidden !important;
+}
+.mobile-main {
   margin-top: 0px !important;
 }
 
