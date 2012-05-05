@@ -629,17 +629,9 @@ function detect_mobile () {
     $('#share').remove();
     $('#main').css('marginTop', 20);
     $('nav').css('textAlign', 'center');
+    $('#about').text('Howdy mobile user, enter a band below and select just or similar!')
   }
 }
-
-// When ready...
-window.addEventListener("load",function() {
-  // Set a timeout...
-  setTimeout(function(){
-    // Hide the address bar!
-    window.scrollTo(0, 1);
-  }, 0);
-});
 
 $(document).ready(function () { 
   detect_mobile();
