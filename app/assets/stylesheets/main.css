@@ -67,6 +67,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 }
 
 h1 { 
+  width: 100%;
   height: 90px;
   display: block;
   cursor: default; 
@@ -90,7 +91,7 @@ h2 {
   color: #ADDE4E;
 }
 
-#listenForm { text-align: center; margin-left: 0px; margin-bottom: 20px; margin-top: 10px; }
+#listenForm { width: 100%; text-align: center; margin-left: 0px; margin-bottom: 20px; margin-top: 10px; }
 
 #discover { padding-left: 78px; }
 
@@ -158,9 +159,11 @@ input[type=button]:hover, input[type=submit]:hover {
 }
 
 nav { 
+  width: 100%;
   position: absolute;
-  top: 10px;
   right: 10px;
+  top: 10px;
+  text-align: right;
 }
 nav a {
   margin-left: 8px;
