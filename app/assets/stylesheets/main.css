@@ -59,7 +59,9 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 
 #main {
   display: none;
-  width: 800px;
+  width: 100%;
+  padding: 10px;
+  max-width: 800px;
   margin: 0 auto;
   margin-top: 200px;
 }
@@ -205,8 +207,10 @@ nav a {
 }
 
 #remove-video {
-  position: absolute;
-  margin-left: 360px;
+  width: 100px;
+  margin: 0 auto;
+  margin-top: -13px;
+  display: block;
 }
 #remove-video:hover {
   color: red;
@@ -280,7 +284,7 @@ nav a {
 }
 #ytplayerid {
 	height: 400px;
-	width: 800px;
+	width: 100%;
 	background: #000;
 	margin-bottom: 10px;
 }

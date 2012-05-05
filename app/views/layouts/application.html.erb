@@ -11,58 +11,60 @@
     <div id="fb-root"></div>
         
     <div id="main" <%= "style='margin-top: 20px;'" if request.path.index("stats") || request.path.index("genres") || request.env['PATH_INFO'].include?("users") || request.env['PATH_INFO'].include?("playlists") %>>
-      <div id="notices">
-        <%= "<aside class='flash-msg'>#{flash[:alert]}</aside>".html_safe    if !flash[:alert].nil?  %>
-        <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
-      </div>
+      <div style='margin-right: 3.8%'>
+        <div id="notices">
+          <%= "<aside class='flash-msg'>#{flash[:alert]}</aside>".html_safe    if !flash[:alert].nil?  %>
+          <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
+        </div>
       
-      <nav> 
-        <%= link_to('Home', '/') %> 
-        <%= link_to('Stats', '/stats') %>  
-        <%= link_to('Blog', 'http://www.tubalr.tumblr.com/', :target => '_blank') %>  
-        <%= link_to('About', '#', :class => 'about-tubalr') %>    
-        <%= link_to('Genres', '/genres') %>      
-        <% if user_signed_in? %>
-          <%= link_to('My Playlists', "/#{current_user.username}/playlists") %>  
-          <%= link_to('Settings', '/users/edit') %>  
-          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-        <% else %>  
-          <%= link_to('Register', '/users/sign_up') %> 
-          <%= link_to('Login', '/users/sign_in') %>
-        <% end %>
-      </nav>
+        <nav> 
+          <%= link_to('Home', '/') %> 
+          <%= link_to('Stats', '/stats') %>  
+          <%= link_to('Blog', 'http://www.tubalr.tumblr.com/', :target => '_blank') %>  
+          <%= link_to('About', '#', :class => 'about-tubalr') %>    
+          <%= link_to('Genres', '/genres') %>      
+          <% if user_signed_in? %>
+            <%= link_to('My Playlists', "/#{current_user.username}/playlists") %>  
+            <%= link_to('Settings', '/users/edit') %>  
+            <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+          <% else %>  
+            <%= link_to('Register', '/users/sign_up') %> 
+            <%= link_to('Login', '/users/sign_in') %>
+          <% end %>
+        </nav>
     
-      <h1>
-        <a href='/'>tubalr</a>
-      </h1>
+        <h1>
+          <a href='/'>tubalr</a>
+        </h1>
 
-      <%= yield %>
+        <%= yield %>
 
-      <aside class="social">
-        <a href="https://twitter.com/tubalr" target="_blank" class="twitter">Follow @tubalr!</a>        
-        <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/pages/Tubalr/154359441249128&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
-      </aside>
+        <aside class="social">
+          <a href="https://twitter.com/tubalr" target="_blank" class="twitter">Follow @tubalr!</a>        
+          <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/pages/Tubalr/154359441249128&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+        </aside>
       
-      <div id="about-tubalr">
-        <p>
-          Tubalr is an app that was crafted out of curiosity and passion, Sept 12th 2010. I 
-          released it into the wild and have been iterating ever since. I built Tubalr because
-          I kept running across great high quality videos wishing I had a simple app to play those
-          videos back to back, while working or doing other things. 
-        </p>
+        <div id="about-tubalr">
+          <p>
+            Tubalr is an app that was crafted out of curiosity and passion, Sept 12th 2010. I 
+            released it into the wild and have been iterating ever since. I built Tubalr because
+            I kept running across great high quality videos wishing I had a simple app to play those
+            videos back to back, while working or doing other things. 
+          </p>
         
-        <p>
-          I mentioned that I've been 
-          tweaking Tubalr since its creation, and thats largely due to the amazing feedback
-          and support given by its supporters and users. So with that said, if you have ANY 
-          feedback or just wanna chat... please shoot an e-mail to 
-          <a href='mailto:listen.to.tubalr@gmail.com'>listen.to.tubalr@gmail.com</a>.
-        </p>
+          <p>
+            I mentioned that I've been 
+            tweaking Tubalr since its creation, and thats largely due to the amazing feedback
+            and support given by its supporters and users. So with that said, if you have ANY 
+            feedback or just wanna chat... please shoot an e-mail to 
+            <a href='mailto:listen.to.tubalr@gmail.com'>listen.to.tubalr@gmail.com</a>.
+          </p>
         
-        <p>
-          Oh, by the way, my name's Cody Stewart, the founder and crafter of Tubalr. If ya need anything
-          at all, you can find me on twitter: <a href='http://www.twitter.com/codyjackstewart' target="_blank">@codyjackstewart</a>.
-        </p>
+          <p>
+            Oh, by the way, my name's Cody Stewart, the founder and crafter of Tubalr. If ya need anything
+            at all, you can find me on twitter: <a href='http://www.twitter.com/codyjackstewart' target="_blank">@codyjackstewart</a>.
+          </p>
+        </div>
       </div>
     </div>
   </body>
