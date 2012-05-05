@@ -9,6 +9,8 @@ var search_type       = "";
 var videosCopy        = "";
 var direction         = "forward";
 
+var is_mobile = false;
+
 var userId            = 0;
 var userUsername      = null;
 var bannedVideos      = [];
@@ -625,6 +627,7 @@ function detect_mobile () {
    || navigator.userAgent.match(/iPod/i)
    || navigator.userAgent.match(/BlackBerry/i)
    ) {
+    is_mobile = true;
     $('.social').remove();
     $('#share').remove();
     $('#notices').remove();
@@ -670,10 +673,10 @@ $(document).ready(function () {
 	});
 
 	$("#playlist").delegate('a', 'mouseenter', function () {
-		$(this).find('.share-video').show();		
+	  if (!is_mobile) $(this).find('.share-video').show();		
 	});
 	$("#playlist").delegate('a', 'mouseleave', function () {
-		$(this).find('.share-video').hide();
+		if (!is_mobile) $(this).find('.share-video').hide();
 	});
 	
   $('#remove-video').click(function () {
@@ -693,7 +696,7 @@ $(document).ready(function () {
   $('#playlists-dialog').dialog({
     modal: true,
     autoOpen: false,
-    width: 600,
+    width: (is_mobile ? 500 : 600),
     draggable: false,
     title: 'Add Video to Playlist'    
   });
@@ -763,7 +766,7 @@ $(document).ready(function () {
   $('#about-tubalr').dialog({
     modal: true,
     autoOpen: false,
-    width: 600,
+    width: (is_mobile ? 500 : 600),
     draggable: false,
     title: 'About Tubalr'
   });
@@ -772,7 +775,7 @@ $(document).ready(function () {
   $('#about-genre').dialog({
     modal: true,
     autoOpen: false,
-    width: 600,
+    width: (is_mobile ? 500 : 600),
     draggable: false
   });
   $('#genres-main ul li i').click(function () {
