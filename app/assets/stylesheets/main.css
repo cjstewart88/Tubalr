@@ -66,6 +66,11 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   margin-top: 200px;
 }
 
+.mobile-main {
+  overflow-x: hidden !important;
+  margin-top: 0px !important;
+}
+
 h1 { 
   width: 400px;
   height: 90px;

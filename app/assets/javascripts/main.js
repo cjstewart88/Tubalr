@@ -628,7 +628,7 @@ function detect_mobile () {
     $('.social').remove();
     $('#share').remove();
     $('#notices').remove();
-    $('#main').css('marginTop', 0);
+    $('#main').addClass('mobile-main');
     $('nav').addClass('mobile-main-nav');
     $('#about').text('Howdy mobile user, enter a band below and select just or similar!');
   }
