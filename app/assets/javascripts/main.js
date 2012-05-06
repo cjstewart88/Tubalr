@@ -634,6 +634,7 @@ function detect_mobile () {
     $('.about-tubalr').remove();
     $('.blog-link').remove();
     $('#genres-main i').remove();
+    $('#ytplayerid').addClass('mobile-ytplayerid')
     $('body').addClass('mobile-body');
     $('#main').addClass('mobile-main');
     $('nav').addClass('mobile-main-nav');

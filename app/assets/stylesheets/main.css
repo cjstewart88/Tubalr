@@ -305,6 +305,9 @@ nav a {
 	background: #000;
 	margin-bottom: 10px;
 }
+.mobile-ytplayerid {
+  height: 250px !important;
+}
 
 #player { }
 
