@@ -631,6 +631,9 @@ function detect_mobile () {
     $('.social').remove();
     $('#share').remove();
     $('#notices').remove();
+    $('.about-tubalr').remove();
+    $('.blog-link').remove();
+    $('#genres-main i').remove();
     $('body').addClass('mobile-body');
     $('#main').addClass('mobile-main');
     $('nav').addClass('mobile-main-nav');
