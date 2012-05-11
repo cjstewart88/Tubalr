@@ -6,7 +6,7 @@ html, body { width: 100%; }
 
 body {
 	background: url('/assets/bg.png'); 
-	font:  11px 'lucida grande', tahoma, verdana, arial, sans-serif; 
+	font:  12px 'lucida grande', tahoma, verdana, arial, sans-serif; 
 	color: #464646;
 	margin-bottom: 20px;
 }	
@@ -14,11 +14,11 @@ body {
 header, footer, aside, nav, article, section { display: block; } 
 
 a         { color: #464646; text-decoration: none; }
-a:hover   { color: tomato; }
+a:hover   { color: #ff6347; }
 a:active  { outline: none; }
 a:focus   { -moz-outline-style: none; }
 
-p a { color: tomato !important; }
+p a { color: #ff6347 !important; }
 
 button::-moz-focus-inner {
   border: 0;
@@ -54,7 +54,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	border: groove 2px #555;
 }
 #notices aside a {
-  color: tomato !important;
+  color: #ff6347 !important;
 }
 
 #main {
@@ -86,20 +86,39 @@ h1 a {
   color: #464646; 
 }
 h1 a:hover { 
-  color: tomato; 
+  color: #ff6347; 
 }
 nav {
-  margin-top: 11px;
+  margin-top: 24px;
   font-size: 12px;
   font-weight: bold;
   letter-spacing: 1px;  
 }
+nav a {
+  background: url('/assets/glyphs.png');
+  background-repeat: no-repeat;
+  padding-top: 30px;
+}
+nav a:hover {
+  background: url('/assets/glyphs-hover.png');
+  background-repeat: no-repeat;
+}
+.genre-link { background-position: center 0px !important; }
+.my-playlists-link { background-position: center -158px !important; }
+.stats-link { background-position: center -38px !important; }
+.blog-link { background-position: center -76px !important; }
+.about-link { background-position: center -204px !important; }
+.settings-link { background-position: center -114px !important; }
+.sign-up-link { background-position: center -354px !important; }
+.sign-in-link { background-position: center -304px !important; }
+.sign-out-link { background-position: center -254px !important; }
+
 #left-nav {
   float: left;
   margin-left: 20px;
 }
 #left-nav a {
-  margin-right: 15px;
+  margin-right: 20px;
 }
 #right-nav {
   float: right;
@@ -116,71 +135,53 @@ h2 {
   text-transform: lowercase;
 }
 
-#listenForm { text-align: center; margin-bottom: 30px; }
-#listenForm input {
-  font-size: 14px;
-  font-weight: bold;
-  line-height: normal;
-  padding: 15px 25px;
-  height: auto;
-}
-#listenForm input[type=text] {
-  width: 400px;
-  padding: 15px;
-}
-
 #discover { padding-left: 78px; }
 
-form br { line-height: 18px; }
-form div { margin-top: 10px; }
+form input[type=text], form input[type=email], form input[type=password] { margin-top: 15px; margin-bottom: 15px; }
+form div i { font-size: 12px; }
 form div input[type=submit] { margin: 0px; }
 form .field_with_errors { margin-top: 0px; display: inline-block; }
 form .error { color: red; }
-form a { display: inline-block; margin-top: 10px; }
-label { font-weight: bold; text-transform: lowercase; }
+form a { display: inline-block; margin-top: 15px; }
+form .remember-me { margin-bottom: 15px; }
+label { font-weight: bold; text-transform: lowercase; font-size: 14px }
 
 input[type=text], input[type=email], input[type=password], textarea {
-  width: 200px;
-  height: 27px;
-  padding: 0px 8px;
+  width: 250px;
   border: solid 1px #cecfd1;
-  border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: normal;
+  padding: 15px;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
   moz-transition: all .218s;
   -o-transition: all .218s;
   -webkit-transition: all .218s;
   transition: all .218s;
 }
 
-textarea { 
-  height: 70px; 
-  padding: 8px;
-  color: #464646;
-}
-
 input[type=button], input[type=submit] { 
   text-transform: lowercase;
-  height: 29px;
-  margin: 11px 0px 11px 6px;
-  padding: 0 12px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: normal;
+  padding: 15px 25px;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
   background-image: -webkit-gradient(linear,left top,left bottom,from(white),to(#e6e6e6));
   background-image: -webkit-linear-gradient(top,white,#e6e6e6);
   background-color: whiteSmoke;
   background-image: linear-gradient(top,white,#e6e6e6);
   background-image: -o-linear-gradient(top,white,#e6e6e6);
   border: 1px solid #cecfd1;
-  border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -webkit-user-select: none;
-  -moz-border-radius: 3px;
-  line-height: 27px;
   cursor: pointer;
   moz-transition: all .218s;
   -o-transition: all .218s;
   -webkit-transition: all .218s;
   transition: all .218s;
-  font-weight: bold;
 }
 input[type=button]:hover, input[type=submit]:hover {
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
@@ -195,6 +196,12 @@ input[type=button]:hover, input[type=submit]:hover {
   color: rgba(0, 0, 0, 0.0);
 }
 
+#listenForm { text-align: center; margin-bottom: 30px; }
+#listenForm input { margin-right: 10px; }
+
+#q {
+  width: 400px;
+}
 #q:focus, input:focus, textarea:focus {  
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
@@ -203,7 +210,7 @@ input[type=button]:hover, input[type=submit]:hover {
 }
 
 .middle-tooltip a {
-  color: tomato;
+  color: #ff6347;
 }
 .middle-tooltip {
   width: 400px;
@@ -222,8 +229,8 @@ input[type=button]:hover, input[type=submit]:hover {
   display: block;
 }
 #player #icons a {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   display: block;
 }
 #info-icon {
@@ -254,7 +261,7 @@ input[type=button]:hover, input[type=submit]:hover {
   font-weight: normal;
 }
 #playlist-header #share a {
-  color: tomato;
+  color: #ff6347;
 }
 #playlist {
   margin-top: 10px;
@@ -271,10 +278,10 @@ input[type=button]:hover, input[type=submit]:hover {
   border-bottom: dotted 1px #ccc;
 }
 #playlist a.active {
-	color: tomato;
+	color: #ff6347;
 }
 #playlist a:hover {
-  color: tomato !important;
+  color: #ff6347 !important;
 }
 .share-video {
 	display: none;
@@ -416,7 +423,7 @@ input[type=button]:hover, input[type=submit]:hover {
 }
 #genres-main ul li i:hover {
   cursor: pointer;
-  color: tomato;
+  color: #ff6347;
 }
 
 .social { position: fixed; bottom: 10px; left: 10px; }
@@ -447,7 +454,7 @@ input[type=button]:hover, input[type=submit]:hover {
   font-size: 12px;
 }
 #about-tubalr p a {
-  color: tomato;
+  color: #ff6347;
 }
 #about-tubalr h3 {
   font-size: 17px;
@@ -461,15 +468,15 @@ input[type=button]:hover, input[type=submit]:hover {
 
 ul#playlists {
   list-style: none;
-  margin: 25px 0px 8px;
+  margin: 25px 0px;
   min-height: 60px;
   padding: 0;
 }
 
 ul#playlists li {
   display: inline-block;
-  width: 160px;
-  padding: 5px 10px;
+  width: 158px;
+  padding: 8px 10px;
   margin: 5px;
   background: #464646;
   color: #fff;
@@ -481,6 +488,7 @@ ul#playlists li {
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  font-size: 14px;
 }
 
 ul#playlists li:hover {

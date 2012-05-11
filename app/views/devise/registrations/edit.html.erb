@@ -12,7 +12,7 @@
   </div>
 
   <div>
-    <%= f.label :password %><br />
+    <%= f.label :password %>
     <i>(leave blank if you don't want to change it)</i><br />
     <%= f.password_field :password %> <%= "<span class='error'>#{resource.errors[:password][0]}</span>".html_safe if resource.errors[:password][0] %>
   </div>
@@ -23,7 +23,7 @@
   </div>
 
   <div>
-    <%= f.label :current_password %><br />
+    <%= f.label :current_password %>
     <i>(needed to confirm your changes)</i><br />
     <%= f.password_field :current_password %> <%= "<span class='error'>#{resource.errors[:current_password][0]}</span>".html_safe if resource.errors[:current_password][0] %>
   </div>
