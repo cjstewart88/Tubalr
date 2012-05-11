@@ -1,31 +1,31 @@
 *:focus { outline: none !important; }
 * { margin: 0px; padding: 0px; }
 
-html { overflow-x: hidden; overflow-y: scroll; overflow: -moz-scrollbars-vertical; }
+html { }
 html, body { width: 100%; }
 
 body {
-	background: #efefef; 
+	background: url('/assets/bg.png'); 
 	font:  11px 'lucida grande', tahoma, verdana, arial, sans-serif; 
-	color: #666;
+	color: #464646;
 	margin-bottom: 20px;
 }	
 
 header, footer, aside, nav, article, section { display: block; } 
 
-a         { color: #666; text-decoration: none; }
-a:hover   { color: blueviolet; }
+a         { color: #464646; text-decoration: none; }
+a:hover   { color: tomato; }
 a:active  { outline: none; }
 a:focus   { -moz-outline-style: none; }
 
-p a { color: blueviolet !important; }
+p a { color: tomato !important; }
 
 button::-moz-focus-inner {
   border: 0;
 }
 
 input { 
-  color: #666; font: 11px 'lucida grande', tahoma, verdana, arial, sans-serif; 
+  color: #464646; font: 11px 'lucida grande', tahoma, verdana, arial, sans-serif; 
 }
 input:focus, button:focus { outline: 0; }
 input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; }
@@ -54,7 +54,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 	border: groove 2px #555;
 }
 #notices aside a {
-  color: blueviolet !important;
+  color: tomato !important;
 }
 
 #main {
@@ -72,33 +72,62 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   margin-top: 0px !important;
 }
 
-h1 { 
-  width: 400px;
-  height: 90px;
-  margin: 0 auto;
-  display: block;
-  cursor: default; 
-  font: 60px 'Pacifico';
-  text-align: center; 
+header {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 30px;
 }
-h1 a { 
-  text-decoration: none; 
+h1 { 
+  float: left;
+  font: 30px 'PT Sans';
+  font-weight: 700;
+}
+h1 a {  
   color: #464646; 
-  padding: 0 8px; 
 }
 h1 a:hover { 
-  text-decoration: none; 
-  color: blueviolet; 
+  color: tomato; 
+}
+nav {
+  margin-top: 11px;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;  
+}
+#left-nav {
+  float: left;
+  margin-left: 20px;
+}
+#left-nav a {
+  margin-right: 15px;
+}
+#right-nav {
+  float: right;
+}
+#right-nav a {
+  margin-left: 15px;
 }
 
 h2 {
-  font-size: 26px;
+  font-size: 20px;
   margin-top: 10px;
   margin-bottom: 20px;
   color: #ADDE4E;
+  text-transform: lowercase;
 }
 
-#listenForm { width: 400px; text-align: center; margin: 0 auto; margin-bottom: 20px; margin-top: 10px; }
+#listenForm { text-align: center; margin-bottom: 30px; }
+#listenForm input {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: normal;
+  padding: 15px 25px;
+  height: auto;
+}
+#listenForm input[type=text] {
+  width: 400px;
+  padding: 15px;
+}
 
 #discover { padding-left: 78px; }
 
@@ -107,8 +136,8 @@ form div { margin-top: 10px; }
 form div input[type=submit] { margin: 0px; }
 form .field_with_errors { margin-top: 0px; display: inline-block; }
 form .error { color: red; }
-form a { display: inline-block; margin-top: 5px; }
-label { font-weight: bold; }
+form a { display: inline-block; margin-top: 10px; }
+label { font-weight: bold; text-transform: lowercase; }
 
 input[type=text], input[type=email], input[type=password], textarea {
   width: 200px;
@@ -127,10 +156,11 @@ input[type=text], input[type=email], input[type=password], textarea {
 textarea { 
   height: 70px; 
   padding: 8px;
-  color: #666;
+  color: #464646;
 }
 
 input[type=button], input[type=submit] { 
+  text-transform: lowercase;
   height: 29px;
   margin: 11px 0px 11px 6px;
   padding: 0 12px;
@@ -165,24 +195,6 @@ input[type=button]:hover, input[type=submit]:hover {
   color: rgba(0, 0, 0, 0.0);
 }
 
-nav { 
-  width: 100%;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  text-align: right;
-}
-nav a {
-  margin-left: 8px;
-}
-
-.mobile-main-nav {
-  margin: 0 auto !important;
-  margin-bottom: 15px !important;
-  position: relative !important;
-  text-align: center !important;
-}
-
 #q:focus, input:focus, textarea:focus {  
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
   -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
@@ -191,7 +203,7 @@ nav a {
 }
 
 .middle-tooltip a {
-  color: blueviolet;
+  color: tomato;
 }
 .middle-tooltip {
   width: 400px;
@@ -206,7 +218,7 @@ nav a {
 
 #player #icons {
   position: absolute;
-  margin-left: 780px;
+  margin-left: 810px;
   display: block;
 }
 #player #icons a {
@@ -242,7 +254,7 @@ nav a {
   font-weight: normal;
 }
 #playlist-header #share a {
-  color: blueviolet;
+  color: tomato;
 }
 #playlist {
   margin-top: 10px;
@@ -253,16 +265,16 @@ nav a {
 }
 #playlist a {
   display: block;
-  color: #666;
+  color: #464646;
 	text-decoration: none;
 	padding: 20px 0px;
   border-bottom: dotted 1px #ccc;
 }
 #playlist a.active {
-	color: blueviolet;
+	color: tomato;
 }
 #playlist a:hover {
-  color: blueviolet !important;
+  color: tomato !important;
 }
 .share-video {
 	display: none;
@@ -326,14 +338,10 @@ nav a {
 #stats-main h2 {
   margin-left: 0px;
   margin-top: 0px;
-  border-top: dashed 2px #CCC;
-  padding-top: 40px;
 }
-#stats-main h2:first-child {
-  border-top: none;
-} 
+
 #stats-main h3 {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
 }
 
@@ -373,7 +381,8 @@ nav a {
 }
 
 #stats-main table#general tbody tr {
-  font-size: 18px;
+  font-size: 16px;
+  padding: 0px;
 }
 #stats-main table#general tbody tr td:first-child {
   font-weight: bold;
@@ -383,6 +392,7 @@ nav a {
 }
 #stats-main table#general tr td {
   border: none;
+  padding: 5px 0px;
 }
 
 #users-main h2, #genres-main h2 {
@@ -406,11 +416,12 @@ nav a {
 }
 #genres-main ul li i:hover {
   cursor: pointer;
-  color: blueviolet;
+  color: tomato;
 }
 
 .social { position: fixed; bottom: 10px; left: 10px; }
-.social .twitter { display: block; margin-bottom: 7px; width: 90px; }
+.social .twitter {}
+.social iframe { display: block; margin-top: 10px}
 
 #info { line-height: 18px; display: none; margin: 0 auto; margin-top: 20px; margin-bottom: 10px; }
 
@@ -424,7 +435,7 @@ nav a {
 .ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #aaaaaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -khtml-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }
 .ui-dialog { box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 15px; -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 15px; -moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 15px; position: absolute; padding: .2em; width: 300px; overflow: hidden; padding: 10px; background: #efefef; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
 .ui-dialog .ui-dialog-titlebar { padding: .4em 1em; position: relative;  }
-.ui-dialog .ui-dialog-title { float: left; margin-bottom: 5px; height: 20px; width: 100%; font-size: 17px; font-weight: bold; } 
+.ui-dialog .ui-dialog-title { float: left; text-transform: lowercase; margin-bottom: 5px; height: 20px; width: 100%; font-size: 17px; font-weight: bold; } 
 .ui-dialog .ui-dialog-titlebar-close { position: absolute; right: 10px; font-style: italic; }
 .ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; overflow: auto; zoom: 1; }
 .ui-dialog .ui-dialog-content ul { list-style-type: none; }
@@ -436,7 +447,7 @@ nav a {
   font-size: 12px;
 }
 #about-tubalr p a {
-  color: blueviolet;
+  color: tomato;
 }
 #about-tubalr h3 {
   font-size: 17px;
@@ -513,6 +524,9 @@ ul#playlists li.already-in-playlist {
   margin-top: 20px;
 }
 #playlists-main ul li {
-  font-size: 18px;
-  margin-bottom: 15px;
+  font-size: 14px;
+  display: inline-block;
+  width: 250px;
+  float: left;
+  margin-bottom: 20px;
 }

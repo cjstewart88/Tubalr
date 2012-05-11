@@ -13,28 +13,28 @@ class StatsController < ApplicationController
   def overall_stats
     @overall_stats = []
     
-    @overall_stats << ["Searchs Made"               ,   Searches.count]
-    @overall_stats << ["Playlists Created"          ,   Playlist.count]
-    @overall_stats << ["Videos Added to Playlists"  ,      Video.count]
-    @overall_stats << ["Users Registered"           ,       User.count]
+    @overall_stats << ["searchs made"               ,   Searches.count]
+    @overall_stats << ["playlists created"          ,   Playlist.count]
+    @overall_stats << ["videos added to playlists"  ,      Video.count]
+    @overall_stats << ["users registered"           ,       User.count]
   end
   
   def past_7_days_stats
     @past_7_days_stats = []
     
-    @past_7_days_stats << ["Searches Made"              ,   Searches.where("created_at >= ?", Date.today-7).count]
-    @past_7_days_stats << ["Playlists Created"          ,   Playlist.where("created_at >= ?", Date.today-7).count]
-    @past_7_days_stats << ["Videos Added to Playlists"  ,      Video.where("created_at >= ?", Date.today-7).count]
-    @past_7_days_stats << ["Users Registered"           ,       User.where("created_at >= ?", Date.today-7).count]
+    @past_7_days_stats << ["searches made"              ,   Searches.where("created_at >= ?", Date.today-7).count]
+    @past_7_days_stats << ["playlists created"          ,   Playlist.where("created_at >= ?", Date.today-7).count]
+    @past_7_days_stats << ["videos added to playlists"  ,      Video.where("created_at >= ?", Date.today-7).count]
+    @past_7_days_stats << ["users registered"           ,       User.where("created_at >= ?", Date.today-7).count]
   end
   
   def today_stats
     @today_stats = []
     
-    @today_stats << ["Searches Made"              ,  Searches.where("created_at >= ?", Date.today).count]
-    @today_stats << ["Playlists Created"          ,  Playlist.where("created_at >= ?", Date.today).count]
-    @today_stats << ["Videos Added to Playlists"  ,     Video.where("created_at >= ?", Date.today).count]
-    @today_stats << ["Users Registered"           ,      User.where("created_at >= ?", Date.today).count]
+    @today_stats << ["searches made"              ,  Searches.where("created_at >= ?", Date.today).count]
+    @today_stats << ["playlists created"          ,  Playlist.where("created_at >= ?", Date.today).count]
+    @today_stats << ["videos added to playlists"  ,     Video.where("created_at >= ?", Date.today).count]
+    @today_stats << ["users registered"           ,      User.where("created_at >= ?", Date.today).count]
   end
   
   def recent_searches

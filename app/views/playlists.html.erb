@@ -1,6 +1,6 @@
 <section id="playlists-main">
   <% if @user.present? %>
-    <h2><%= user_signed_in? && @user.username == current_user.username ? "My" : "#{@user.username}'s" %> Playlists</h2>
+    <h2><%= user_signed_in? && @user.username == current_user.username ? "my" : "#{@user.username}'s" %> playlists</h2>
     
     <% if @user.playlists.count != 0 %>
       <% if user_signed_in? && @user.username == current_user.username %>
@@ -21,7 +21,7 @@
       <% end %>
     <% end %>
   <% else %>
-    <h2>User Missing In Action!</h2>
+    <h2>user missing in action!</h2>
     
     <p>
       Looks like there's no user with the name <b><%= params[:username] %></b>. 

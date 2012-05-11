@@ -1,18 +1,8 @@
 <form id="listenForm" onSubmit="return false;"> 
-  <input type="text" name="q" id="q" value="<%= (params[:artist_band] ? params[:artist_band].gsub('+',' ') : 'Enter Artist or Band Here') %>" tabindex="1"/>
-  <input type="button" name="just" value="Only" class="listen just" tabindex="2"/>
-  <input type="button" name="similar" value="Similar" class="listen similar" tabindex="3"/><br/>
+  <input type="text" name="q" id="q" value="<%= params[:artist_band].gsub('+',' ') if params[:artist_band].present? %>" tabindex="1" placeholder="search for artists or bands"/>
+  <input type="button" name="just" value="only" class="listen just" tabindex="2"/>
+  <input type="button" name="similar" value="similar" class="listen similar" tabindex="3"/><br/>
 </form>
-
-<section id="about" class='middle-tooltip <%= 'middle-tooltip-hide'.html_safe if request.path.index("just") || request.path.index("similar") || request.path.index("video") || request.path.index("genre") || request.env['PATH_INFO'].include?("playlist/") %>'>
-  <% if !user_signed_in? %>
-    Howdy, friend, wondering what Tubalr is? Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without
-    all the clutter YouTube brings. To get started just type a band's or artist's name into the search box and select
-    only or similar. <i>Oh, and if you're interested in making custom playlists videos, <a href='/users/sign_up'>register</a> an account, it's easy!</i> 
-  <% else %>
-    Welcome back, friend! Thanks for being a registered user.
-  <% end %>
-</section>
 
 <section id="empty-playlist" class='middle-tooltip'>
   o_O This playlist has 0 videos... this is kinda weird.
@@ -27,19 +17,19 @@
 	<div id="ytplayerid"></div> 
 	
 	<div id="player-controls">
-	  <a href="#" id="next">Next</a>
-    <a href="#" id="previous">Previous</a>
-    <a href="#" id="remove-video">Remove Video</a>
+	  <a href="#" id="next">next</a>
+    <a href="#" id="previous">previous</a>
+    <a href="#" id="remove-video">remove video</a>
 	</div>
 	
 	<aside id="info"></aside>
 	
 	<h3 id="playlist-header">
 	  <aside id="share">
-      Share this playlist on <a href="#" id="facebook" onClick="facebook()">facebook</a> or <a href="" id="twitter">twitter</a>!
+      share playlist on <a href="#" id="facebook" onClick="facebook()">facebook</a> or <a href="" id="twitter">twitter</a>
   	</aside>
   	
-	  The Playlist
+	  the playlist
 	</h3>
 	
 	<div id="playlist"></div>

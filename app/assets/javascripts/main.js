@@ -282,7 +282,6 @@ function onYouTubePlayerAPIReady () {
 // start the playlist
 function initPlaylist () {
   if (videos.length == 0) {
-    $('#about').hide();
     $('.loading-button').removeClass('loading-button');
     $('#empty-playlist').fadeIn();
   }
@@ -300,48 +299,47 @@ function initPlaylist () {
 
     $('.loading-button').removeClass('loading-button');
     $('#empty-playlist').fadeOut();
-    $('#about').fadeOut(500, function(){
-      $("#main").animate({
-        marginTop: 20
-      }, 500, function () {  
-        videosCopy = "";
-        $.each(videos, function(i) {
-          videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'"><div class="share-video" data-video-id="' + this.VideoID + '" data-video-title="' + this.VideoTitle + '">Share Video</div>'+this.VideoTitle+'</a>';
-        });
-      	$('#playlist').html(videosCopy);
-        
-        if (prev_search != search) {  
-        	$.get('/insert_search/' + search_type + '/' + escape(search));
-      	  prev_search = search;
-      	}
-    	
-      	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+(search_type == 'playlist' ? playlist_owner.replace(/[ +]/g,"%2B")+"%2Fplaylist%2F"+search.replace(/[ +]/g,"%2B") : search_type+"%2F"+search.replace(/[ +]/g,"%2B")));
-		
-      	currentVideo(videos[currenttrack]);
-  		  firstSearch = false;
-		  
-  		  if (search_type == 'just') {
-  		    getInfo();
-  	    }
-		  	
-		  	if (search_type == 'playlist' || search_type == 'video') {
-		  	  $('#info-icon').hide();
-		  	}
-		  	else {
-		  	  $('#info-icon').show();
-		  	}
-		  	
-				if (search_type == 'video') {
-					$('#player-controls').hide();
-					$('#share').hide();
-				}
-				else {
-					$('#player-controls').show();
-					$('#share').show();
-				}
-				
-      	$('#player').fadeIn(1000);
+
+    $("#main").animate({
+      marginTop: 20
+    }, 500, function () {  
+      videosCopy = "";
+      $.each(videos, function(i) {
+        videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'"><div class="share-video" data-video-id="' + this.VideoID + '" data-video-title="' + this.VideoTitle + '">Share Video</div>'+this.VideoTitle+'</a>';
       });
+    	$('#playlist').html(videosCopy);
+      
+      if (prev_search != search) {  
+      	$.get('/insert_search/' + search_type + '/' + escape(search));
+    	  prev_search = search;
+    	}
+  	
+    	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+(search_type == 'playlist' ? playlist_owner.replace(/[ +]/g,"%2B")+"%2Fplaylist%2F"+search.replace(/[ +]/g,"%2B") : search_type+"%2F"+search.replace(/[ +]/g,"%2B")));
+	
+    	currentVideo(videos[currenttrack]);
+		  firstSearch = false;
+	  
+		  if (search_type == 'just') {
+		    getInfo();
+	    }
+	  	
+	  	if (search_type == 'playlist' || search_type == 'video') {
+	  	  $('#info-icon').hide();
+	  	}
+	  	else {
+	  	  $('#info-icon').show();
+	  	}
+	  	
+			if (search_type == 'video') {
+				$('#player-controls').hide();
+				$('#share').hide();
+			}
+			else {
+				$('#player-controls').show();
+				$('#share').show();
+			}
+			
+    	$('#player').fadeIn(1000);
     });
   }
 }
@@ -671,9 +669,9 @@ $(document).ready(function () {
 	});
 	
 	$('#playlist').delegate('.share-video', 'click', function (e) {
-		e.stopImmediatePropagation();
 		share_single($(this).data('video-id'), $(this).data('video-title'));
 		$('#share-video').dialog('open');
+	  return false;
 	});
 
 	$("#playlist").delegate('a', 'mouseenter', function () {
@@ -772,7 +770,7 @@ $(document).ready(function () {
     autoOpen: false,
     width: (is_mobile ? 500 : 600),
     draggable: false,
-    title: 'About Tubalr'
+    title: 'about tubalr'
   });
   $('.about-tubalr').click(function () { $('#about-tubalr').dialog('open'); });
     
@@ -788,8 +786,7 @@ $(document).ready(function () {
    
   $('#info-icon').click(function(){
     if ($('#main').css('marginTop') == '20px') {
-      $('#info').slideToggle(function(){
-      });
+      $('#info').slideToggle();
     }
     else {
       $('#info').slideToggle();
@@ -813,20 +810,12 @@ $(document).ready(function () {
   });
   
   $('#main').delay(500).fadeIn();
-  $('#footer').delay(500).fadeIn();
-  
-  $('#q').focus(function() {
-    if ($(this).val() == "Enter Artist or Band Here") $(this).val("");
-  });
-  $('#q').blur(function() {
-    if ($(this).val() == "") $(this).val("Enter Artist or Band Here");
-  });
 
   $('.just').click(function() {
-    just($('#q').val());
+    if ($('#q').val() != "") just($('#q').val());
   });
   $('.similar').click(function() {
-    similarTo($('#q').val());
+    if ($('#q').val() != "") similarTo($('#q').val());
   });
 
   $('.url').click(function () { $(this).select(); });
