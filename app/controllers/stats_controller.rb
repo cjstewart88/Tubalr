@@ -13,7 +13,7 @@ class StatsController < ApplicationController
   def overall_stats
     @overall_stats = []
     
-    @overall_stats << ["searchs made"               ,   Searches.count]
+    @overall_stats << ["searches made"              ,   Searches.count]
     @overall_stats << ["playlists created"          ,   Playlist.count]
     @overall_stats << ["videos added to playlists"  ,      Video.count]
     @overall_stats << ["users registered"           ,       User.count]
