@@ -13,66 +13,64 @@
     <div id="fb-root"></div>
         
     <div id="main" <%= "style='margin-top: 20px;'" if request.path.index("stats") || request.path.index("genres") || request.env['PATH_INFO'].include?("users") || request.env['PATH_INFO'].include?("playlists") %>>
-      <div>
-        <div id="notices">
-          <%= "<aside class='flash-msg'>#{flash[:alert]}</aside>".html_safe    if !flash[:alert].nil?  %>
-          <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
-        </div>
-        
-        <header>
-          <h1>
-            <a href='/'>tubalr</a>
-          </h1>
-          
-          <nav id="left-nav">  
-            <%= link_to('genres', '/genres') %>   
-            <%= link_to('stats', '/stats') %>  
-            <%= link_to('blog', 'http://www.tubalr.tumblr.com/', :target => '_blank', :class=> 'blog-link') %>  
-            <%= link_to('about', '#', :class => 'about-tubalr') %>    
-          </nav>
-          
-          <nav id="right-nav">
-            <% if user_signed_in? %>
-              <%= link_to('my playlists', "/#{current_user.username}/playlists") %>  
-              <%= link_to('settings', '/users/edit') %>  
-              <%= link_to('logout', destroy_user_session_path, :method => :delete) %>
-            <% else %>  
-              <%= link_to('register', '/users/sign_up') %> 
-              <%= link_to('login', '/users/sign_in') %>
-            <% end %>
-          </nav>
-        </header>
-        
-
-        <%= yield %>
-
-        <aside class="social">
-          <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/pages/Tubalr/154359441249128&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
-          <a href="https://twitter.com/tubalr" class="twitter-follow-button" data-show-count="true">Follow @tubalr</a>
-          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-        </aside>
+      <div id="notices">
+        <%= "<aside class='flash-msg'>#{flash[:alert]}</aside>".html_safe    if !flash[:alert].nil?  %>
+        <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
+      </div>
       
-        <div id="about-tubalr">
-          <p>
-            Tubalr is an app that was crafted out of curiosity and passion, Sept 12th 2010. I 
-            released it into the wild and have been iterating ever since. I built Tubalr because
-            I kept running across great high quality videos wishing I had a simple app to play those
-            videos back to back, while working or doing other things. 
-          </p>
+      <header>
+        <h1>
+          <a href='/'>tubalr</a>
+        </h1>
         
-          <p>
-            I mentioned that I've been 
-            tweaking Tubalr since its creation, and thats largely due to the amazing feedback
-            and support given by its supporters and users. So with that said, if you have ANY 
-            feedback or just wanna chat... please shoot an e-mail to 
-            <a href='mailto:listen.to.tubalr@gmail.com'>listen.to.tubalr@gmail.com</a>.
-          </p>
+        <nav id="left-nav">  
+          <%= link_to('genres', '/genres') %>   
+          <%= link_to('stats', '/stats') %>  
+          <%= link_to('blog', 'http://www.tubalr.tumblr.com/', :target => '_blank', :class=> 'blog-link') %>  
+          <%= link_to('about', '#', :class => 'about-tubalr') %>    
+        </nav>
         
-          <p>
-            Oh, by the way, my name's Cody Stewart, the founder and crafter of Tubalr. If ya need anything
-            at all, you can find me on twitter: <a href='http://www.twitter.com/codyjackstewart' target="_blank">@codyjackstewart</a>.
-          </p>
-        </div>
+        <nav id="right-nav">
+          <% if user_signed_in? %>
+            <%= link_to('my playlists', "/#{current_user.username}/playlists") %>  
+            <%= link_to('settings', '/users/edit') %>  
+            <%= link_to('logout', destroy_user_session_path, :method => :delete) %>
+          <% else %>  
+            <%= link_to('register', '/users/sign_up') %> 
+            <%= link_to('login', '/users/sign_in') %>
+          <% end %>
+        </nav>
+      </header>
+      
+
+      <%= yield %>
+
+      <aside class="social">
+        <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/pages/Tubalr/154359441249128&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+        <a href="https://twitter.com/tubalr" class="twitter-follow-button" data-show-count="true">Follow @tubalr</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      </aside>
+    
+      <div id="about-tubalr">
+        <p>
+          Tubalr is an app that was crafted out of curiosity and passion, Sept 12th 2010. I 
+          released it into the wild and have been iterating ever since. I built Tubalr because
+          I kept running across great high quality videos wishing I had a simple app to play those
+          videos back to back, while working or doing other things. 
+        </p>
+      
+        <p>
+          I mentioned that I've been 
+          tweaking Tubalr since its creation, and thats largely due to the amazing feedback
+          and support given by its supporters and users. So with that said, if you have ANY 
+          feedback or just wanna chat... please shoot an e-mail to 
+          <a href='mailto:listen.to.tubalr@gmail.com'>listen.to.tubalr@gmail.com</a>.
+        </p>
+      
+        <p>
+          Oh, by the way, my name's Cody Stewart, the founder and crafter of Tubalr. If ya need anything
+          at all, you can find me on twitter: <a href='http://www.twitter.com/codyjackstewart' target="_blank">@codyjackstewart</a>.
+        </p>
       </div>
     </div>
   </body>
