@@ -131,7 +131,7 @@ h2 {
   font-size: 20px;
   margin-top: 10px;
   margin-bottom: 20px;
-  color: #ADDE4E;
+  color: #ABA8B5;
   text-transform: lowercase;
 }
 
@@ -442,7 +442,7 @@ input[type=button]:hover, input[type=submit]:hover {
 .ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #aaaaaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -khtml-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }
 .ui-dialog { box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 15px; -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 15px; -moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 15px; position: absolute; padding: .2em; width: 300px; overflow: hidden; padding: 10px; background: #efefef; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
 .ui-dialog .ui-dialog-titlebar { padding: .4em 1em; position: relative;  }
-.ui-dialog .ui-dialog-title { float: left; text-transform: lowercase; margin-bottom: 5px; height: 20px; width: 100%; font-size: 17px; font-weight: bold; } 
+.ui-dialog .ui-dialog-title { float: left; text-transform: lowercase; margin-bottom: 5px; height: 20px; width: 100%; font-size: 18px; color: #ABA8B5; font-weight: bold; } 
 .ui-dialog .ui-dialog-titlebar-close { position: absolute; right: 10px; font-style: italic; }
 .ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; overflow: auto; zoom: 1; }
 .ui-dialog .ui-dialog-content ul { list-style-type: none; }
@@ -492,12 +492,12 @@ ul#playlists li {
 }
 
 ul#playlists li:hover {
-  background: #ADDE4E;
+  background: #ABA8B5;
   color: #000;
 }
 
 ul#playlists li.already-in-playlist {
-  background: #ADDE4E;
+  background: #ABA8B5;
   color: #000;
   cursor: default;
 }
