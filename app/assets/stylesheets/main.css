@@ -311,6 +311,8 @@ input[type=button]:hover, input[type=submit]:hover {
 }
 
 #player {
+  padding: 0;
+  background: none;
   position: relative;
 	margin: 0 auto;
 	display: none;
