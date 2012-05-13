@@ -1,32 +1,34 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<section>
+  <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do | f | %>
-  <div>
-    <%= f.label :username %><br />
-    <%= f.text_field :username %> <%= "<span class='error'>#{resource.errors[:username][0]}</span>".html_safe if resource.errors[:username][0] %>
-  </div>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do | f | %>
+    <div>
+      <%= f.label :username %><br />
+      <%= f.text_field :username %> <%= "<span class='error'>#{resource.errors[:username][0]}</span>".html_safe if resource.errors[:username][0] %>
+    </div>
 
-  <div>
-    <%= f.label :email %><br />
-    <%= f.email_field :email %> <%= "<span class='error'>#{resource.errors[:email][0]}</span>".html_safe if resource.errors[:email][0] %>
-  </div>
+    <div>
+      <%= f.label :email %><br />
+      <%= f.email_field :email %> <%= "<span class='error'>#{resource.errors[:email][0]}</span>".html_safe if resource.errors[:email][0] %>
+    </div>
 
-  <div>
-    <%= f.label :password %>
-    <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password %> <%= "<span class='error'>#{resource.errors[:password][0]}</span>".html_safe if resource.errors[:password][0] %>
-  </div>
+    <div>
+      <%= f.label :password %>
+      <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password %> <%= "<span class='error'>#{resource.errors[:password][0]}</span>".html_safe if resource.errors[:password][0] %>
+    </div>
 
-  <div>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %> <%= "<span class='error'>#{resource.errors[:password_confirmation][0]}</span>".html_safe if resource.errors[:password_confirmation][0] %>
-  </div>
+    <div>
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %> <%= "<span class='error'>#{resource.errors[:password_confirmation][0]}</span>".html_safe if resource.errors[:password_confirmation][0] %>
+    </div>
 
-  <div>
-    <%= f.label :current_password %>
-    <i>(needed to confirm your changes)</i><br />
-    <%= f.password_field :current_password %> <%= "<span class='error'>#{resource.errors[:current_password][0]}</span>".html_safe if resource.errors[:current_password][0] %>
-  </div>
+    <div>
+      <%= f.label :current_password %>
+      <i>(needed to confirm your changes)</i><br />
+      <%= f.password_field :current_password %> <%= "<span class='error'>#{resource.errors[:current_password][0]}</span>".html_safe if resource.errors[:current_password][0] %>
+    </div>
 
-  <div><%= f.submit "Update" %></div>
-<% end %>
+    <div><%= f.submit "Update" %></div>
+  <% end %>
+</section>

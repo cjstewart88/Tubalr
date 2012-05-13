@@ -60,7 +60,6 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 #main {
   display: none;
   width: 100%;
-  padding: 10px;
   max-width: 800px;
   margin: 0 auto;
   margin-top: 200px;
@@ -74,13 +73,15 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 
 header {
   width: 100%;
+  height: 40px;
   margin-bottom: 20px;
 }
 h1 { 
-  text-align: center;
+  float: left;
   font: 30px 'PT Sans';
   font-weight: 700;
-  margin-bottom: 45px;
+  margin-top: 3px;
+  margin-left: 25px;
 }
 h1 a {  
   color: #464646; 
@@ -89,7 +90,9 @@ h1 a:hover {
   color: #ff6347; 
 }
 nav {
-  text-align: center;
+  float: right;
+  margin-top: 24px;
+  margin-right: 25px;
   font-size: 12px;
   font-weight: bold;
   letter-spacing: 1px;  
@@ -98,7 +101,7 @@ nav a {
   background: url('/assets/glyphs.png');
   background-repeat: no-repeat;
   padding-top: 30px;
-  margin: 0 15px;
+  margin-left: 30px;
 }
 nav a:hover {
   background: url('/assets/glyphs-hover.png');
@@ -116,7 +119,6 @@ nav a:hover {
 
 h2 {
   font-size: 20px;
-  margin-top: 10px;
   margin-bottom: 20px;
   color: #ABA8B5;
   text-transform: lowercase;
@@ -183,7 +185,15 @@ input[type=button]:hover, input[type=submit]:hover {
   color: rgba(0, 0, 0, 0.0);
 }
 
-#listenForm { text-align: center; margin-bottom: 30px; }
+#listenForm { 
+  text-align: center; 
+  margin-bottom: 30px; 
+  background: #efefef;
+  background: rgba(255, 255, 255, .3);
+  padding: 25px;
+  border-radius: 8px;
+  
+}
 #listenForm input { margin-right: 10px; }
 
 #q {
@@ -389,6 +399,13 @@ input[type=button]:hover, input[type=submit]:hover {
   padding: 5px 0px;
 }
 
+section {
+  background: #efefef;
+  background: rgba(255, 255, 255, .3);
+  padding: 25px;
+  border-radius: 8px;
+}
+
 #users-main h2, #genres-main h2 {
   margin-left: 0px;
 }
@@ -400,8 +417,7 @@ input[type=button]:hover, input[type=submit]:hover {
 }
 #genres-main ul li {
   display: inline-block;
-  width: 250px;
-  float: left;
+  width: 247px;
   margin-bottom: 20px;
 }
 #genres-main ul li a {
@@ -521,7 +537,6 @@ ul#playlists li.already-in-playlist {
 #playlists-main ul li {
   font-size: 14px;
   display: inline-block;
-  width: 250px;
-  float: left;
+  width: 247px;
   margin-bottom: 20px;
 }
