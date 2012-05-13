@@ -23,16 +23,13 @@
           <a href='/'>tubalr</a>
         </h1>
         
-        <nav id="left-nav">  
+        <nav>  
           <%= link_to('genres', '/genres', :class => 'genre-link') %>   
           <%= link_to('stats', '/stats', :class => 'stats-link') %>  
           <%= link_to('blog', 'http://www.tubalr.tumblr.com/', :target => '_blank', :class => 'blog-link') %>  
           <%= link_to('about', '#', :class => 'about-link about-tubalr') %>    
-        </nav>
-        
-        <nav id="right-nav">
           <% if user_signed_in? %>
-            <%= link_to('my playlists', "/#{current_user.username}/playlists", :class => 'my-playlists-link') %>  
+            <%= link_to('playlists', "/#{current_user.username}/playlists", :class => 'my-playlists-link') %>  
             <%= link_to('settings', '/users/edit', :class => 'settings-link') %>  
             <%= link_to('logout', destroy_user_session_path, :method => :delete, :class => 'sign-out-link') %>
           <% else %>  

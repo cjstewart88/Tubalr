@@ -74,13 +74,13 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 
 header {
   width: 100%;
-  height: 40px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 h1 { 
-  float: left;
+  text-align: center;
   font: 30px 'PT Sans';
   font-weight: 700;
+  margin-bottom: 45px;
 }
 h1 a {  
   color: #464646; 
@@ -89,7 +89,7 @@ h1 a:hover {
   color: #ff6347; 
 }
 nav {
-  margin-top: 24px;
+  text-align: center;
   font-size: 12px;
   font-weight: bold;
   letter-spacing: 1px;  
@@ -98,6 +98,7 @@ nav a {
   background: url('/assets/glyphs.png');
   background-repeat: no-repeat;
   padding-top: 30px;
+  margin: 0 15px;
 }
 nav a:hover {
   background: url('/assets/glyphs-hover.png');
@@ -112,20 +113,6 @@ nav a:hover {
 .sign-up-link { background-position: center -354px !important; }
 .sign-in-link { background-position: center -304px !important; }
 .sign-out-link { background-position: center -254px !important; }
-
-#left-nav {
-  float: left;
-  margin-left: 20px;
-}
-#left-nav a {
-  margin-right: 20px;
-}
-#right-nav {
-  float: right;
-}
-#right-nav a {
-  margin-left: 15px;
-}
 
 h2 {
   font-size: 20px;
