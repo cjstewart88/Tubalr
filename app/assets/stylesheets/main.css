@@ -452,7 +452,7 @@ section {
 .ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; overflow: auto; zoom: 1; }
 .ui-dialog .ui-dialog-content ul { list-style-type: none; }
 
-#about-tubalr { display: none; }
+#about-tubalr, #playlists-dialog { display: none; }
 
 #about-tubalr p {
   display: block;
