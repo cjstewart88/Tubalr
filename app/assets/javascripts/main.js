@@ -762,7 +762,7 @@ $(document).ready(function () {
     autoOpen: false,
     width: 200,
     draggable: false,
-		height: 158,
+		height: 170,
 		title: "Share Video"
   });
 
