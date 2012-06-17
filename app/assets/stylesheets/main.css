@@ -141,10 +141,10 @@ input[type=text], input[type=email], input[type=password], textarea {
   font-size: 14px;
   font-weight: bold;
   line-height: normal;
-  padding: 15px;
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
+  padding: 8px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   moz-transition: all .218s;
   -o-transition: all .218s;
   -webkit-transition: all .218s;
@@ -156,10 +156,10 @@ input[type=button], input[type=submit] {
   font-size: 14px;
   font-weight: bold;
   line-height: normal;
-  padding: 15px 25px;
-  border-radius: 6px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
+  padding: 8px 25px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   background-image: -webkit-gradient(linear,left top,left bottom,from(white),to(#e6e6e6));
   background-image: -webkit-linear-gradient(top,white,#e6e6e6);
   background-color: whiteSmoke;
@@ -190,8 +190,8 @@ input[type=button]:hover, input[type=submit]:hover {
   margin-bottom: 30px; 
   background: #efefef;
   background: rgba(255, 255, 255, .3);
-  padding: 25px;
-  border-radius: 8px;
+  padding: 15px;
+  border-radius: 3px;
   
 }
 #listenForm input { margin-right: 10px; }
