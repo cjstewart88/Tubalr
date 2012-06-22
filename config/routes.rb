@@ -4,6 +4,7 @@ Tubalr::Application.routes.draw do
   root :to => "application#index"
   
   get "/insert_search/:search_type/:search"     => "api#search"
+  get "/video_viewed/:video_id"                 => "api#video_viewed"
   get "/:username/playlist/:playlist_name.json" => "api#user_playlist"
   
   get "/stats"                                => "stats#index"

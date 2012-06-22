@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  video_id: MyString
+  who: MyString
+
+two:
+  video_id: MyString
+  who: MyString

@@ -408,6 +408,7 @@ function previousSong () {
 function onPlayerStateChange (newState) {
   // if track ended
 	if (newState.data == 0) {
+	  $.get('/video_viewed/' + videos[currenttrack].VideoID);
     nextSong();
   }
 }

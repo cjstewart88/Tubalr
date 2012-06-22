@@ -11,18 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120404034836) do
+ActiveRecord::Schema.define(:version => 20120622013455) do
 
   create_table "banned_videos", :force => true do |t|
     t.integer  "user_id"
     t.string   "video_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "playlist", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,9 +30,9 @@ ActiveRecord::Schema.define(:version => 20120404034836) do
   create_table "searches", :force => true do |t|
     t.string   "what"
     t.string   "who"
+    t.string   "search_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "search_type"
   end
 
   create_table "users", :force => true do |t|
@@ -56,16 +49,14 @@ ActiveRecord::Schema.define(:version => 20120404034836) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "username"
-    t.boolean  "premium"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
-  create_table "video", :force => true do |t|
-    t.integer  "playlist_id"
+  create_table "video_views", :force => true do |t|
     t.string   "video_id"
-    t.string   "video_title"
+    t.string   "who"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

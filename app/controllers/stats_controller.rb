@@ -14,6 +14,7 @@ class StatsController < ApplicationController
     @overall_stats = []
     
     @overall_stats << ["searches made"              ,   Searches.count]
+    @overall_stats << ["videos watched in full"     ,  VideoView.count]
     @overall_stats << ["playlists created"          ,   Playlist.count]
     @overall_stats << ["videos added to playlists"  ,      Video.count]
     @overall_stats << ["users registered"           ,       User.count]
@@ -23,6 +24,7 @@ class StatsController < ApplicationController
     @past_7_days_stats = []
     
     @past_7_days_stats << ["searches made"              ,   Searches.where("created_at >= ?", Date.today-7).count]
+    @past_7_days_stats << ["videos watched in full"     ,  VideoView.where("created_at >= ?", Date.today-7).count]
     @past_7_days_stats << ["playlists created"          ,   Playlist.where("created_at >= ?", Date.today-7).count]
     @past_7_days_stats << ["videos added to playlists"  ,      Video.where("created_at >= ?", Date.today-7).count]
     @past_7_days_stats << ["users registered"           ,       User.where("created_at >= ?", Date.today-7).count]
@@ -32,6 +34,7 @@ class StatsController < ApplicationController
     @today_stats = []
     
     @today_stats << ["searches made"              ,  Searches.where("created_at >= ?", Date.today).count]
+    @today_stats << ["videos watched in full"     , VideoView.where("created_at >= ?", Date.today).count]
     @today_stats << ["playlists created"          ,  Playlist.where("created_at >= ?", Date.today).count]
     @today_stats << ["videos added to playlists"  ,     Video.where("created_at >= ?", Date.today).count]
     @today_stats << ["users registered"           ,      User.where("created_at >= ?", Date.today).count]

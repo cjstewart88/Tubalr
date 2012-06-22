@@ -9,6 +9,15 @@ class ApiController < ActionController::Base
     render :json => ""
   end
   
+  def video_viewed
+    VideoView.create({  
+      :video_id => params[:video_id],
+      :who      => request.remote_ip
+    })
+    
+    render :json => ""
+  end
+  
   def user_playlist
     response      = []
     user          = User.where(:username => params[:username]).first
