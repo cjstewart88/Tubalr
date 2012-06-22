@@ -234,21 +234,6 @@ input[type=button]:hover, input[type=submit]:hover {
   background: url(/assets/info.png) no-repeat;
 }
 
-#playlists-opener {
-  margin-bottom: 5px;
-  background: url(/assets/playlist-icon.png) no-repeat;
-}
-
-#remove-video {
-  width: 100px;
-  margin: 0 auto;
-  margin-top: -13px;
-  display: block;
-}
-#remove-video:hover {
-  color: red;
-}
-
 #playlist-header {
   margin: 20px 0px;
 }
@@ -333,13 +318,20 @@ input[type=button]:hover, input[type=submit]:hover {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-#player-controls #next, #player-controls #previous {
-  display: inline-block;
-  cursor: pointer;
+#player-controls input {
+  padding: 8px 12px;
 }
-#player-controls #next {
+#player-controls-right {
   float: right;
 }
+#player-controls #next, #player-controls #previous {
+}
+#player-controls #next {
+}
+#remove-video:hover {
+  color: red;
+}
+
 
 #stats-main h2 {
   margin-left: 0px;
