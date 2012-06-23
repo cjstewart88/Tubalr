@@ -485,7 +485,6 @@ function remove_video () {
         },
         dataType: 'json',
         success: function(data) {
-          console.log(data);
           if (data.success) {
             $("#playlist #"+videos[currenttrack].VideoID).remove();
             videos.splice(currenttrack, 1);
@@ -632,13 +631,13 @@ function detect_mobile () {
     $('#notices').remove();
     $('.about-tubalr').remove();
     $('.blog-link').remove();
+    $('.stats-link').remove();
+    $('.settings-link').remove();
     $('#genres-main i').remove();
     $('aside#icons').remove();
     $('#ytplayerid').addClass('mobile-ytplayerid')
     $('body').addClass('mobile-body');
     $('#main').addClass('mobile-main');
-    $('nav').addClass('mobile-main-nav');
-    $('#about').text('Howdy mobile user, enter a band below and select just or similar!');
   }
 }
 
@@ -697,7 +696,7 @@ $(document).ready(function () {
     return false;
   });
   
-  $('#playlists-dialog').dialog({
+  $('#register-to-use-playlists').dialog({
     modal: true,
     autoOpen: false,
     width: (is_mobile ? 500 : 600),
@@ -705,26 +704,39 @@ $(document).ready(function () {
     title: 'Add Video to Playlist'    
   });
   
+  $('#playlists-dialog').dialog({
+    modal: true,
+    autoOpen: false,
+    width: (is_mobile ? 500 : 600),
+    draggable: false,
+    title: 'Register to Use Custom Playlists!'    
+  });
+  
   $('#playlists-opener').click(function () { 
-    $('#playlists li').removeClass('already-in-playlist');
-    
-    $.ajax({
-      type: 'POST',
-      url: '/get_playlists_video_belongs_to',
-      data: {
-        video_id: videos[currenttrack].VideoID,  
-      },
-      dataType: 'json',
-      success: function(data) {
-        $.each(data.playlists_video_belongs_to, function () {
-          $('#playlists li[data-playlist-id=' + this + ']').addClass('already-in-playlist');
-        });
-      }
-    });
-    
-    $('#playlists-dialog').dialog('open'); 
-    $('#video-to-add-to-playlist-title').text(videos[currenttrack].VideoTitle);
-    $('#playlists-dialog').data('video-to-add-to-playlist', { VideoID: videos[currenttrack].VideoID, VideoTitle: videos[currenttrack].VideoTitle });
+    if (userId == 0) {
+      $('#register-to-use-playlists').dialog('open');
+    }
+    else {
+      $('#playlists li').removeClass('already-in-playlist');
+
+      $.ajax({
+        type: 'POST',
+        url: '/get_playlists_video_belongs_to',
+        data: {
+          video_id: videos[currenttrack].VideoID,  
+        },
+        dataType: 'json',
+        success: function(data) {
+          $.each(data.playlists_video_belongs_to, function () {
+            $('#playlists li[data-playlist-id=' + this + ']').addClass('already-in-playlist');
+          });
+        }
+      });
+
+      $('#playlists-dialog').dialog('open'); 
+      $('#video-to-add-to-playlist-title').text(videos[currenttrack].VideoTitle);
+      $('#playlists-dialog').data('video-to-add-to-playlist', { VideoID: videos[currenttrack].VideoID, VideoTitle: videos[currenttrack].VideoTitle }); 
+    }
   });
   
   $('#create-new-playlist-button').click(function () {

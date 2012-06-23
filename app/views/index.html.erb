@@ -19,9 +19,7 @@
     <div id="player-controls-left">
       <input type="button" id="remove-video" value="remove"/>
       <input type="button" id="info-icon" value="info"/>
-      <% if user_signed_in? %>
-        <input type="button" id="playlists-opener" value="add to playlist"/>
-      <% end %>
+      <input type="button" id="playlists-opener" value="add to playlist"/>
     <div>
 	</div>
 	
@@ -73,6 +71,10 @@
         <input type="button"  id="cancel-create-new-playlist-button" value="Cancel">
       </div>
     </div>
+  </div>
+<% else %>
+  <div id="register-to-use-playlists">
+    You must <a href="/users/sign_up"><b>register</b></a> an account or <a href="/users/sign_in"><b>login</b></a> to save videos to custom playlists!
   </div>
 <% end %>
 
