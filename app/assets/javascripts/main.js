@@ -637,7 +637,7 @@ function detect_mobile () {
     $('aside#icons').remove();
     $('#ytplayerid').addClass('mobile-ytplayerid')
     $('body').addClass('mobile-body');
-    $('#main').addClass('mobile-main');
+    $('#inner-main').addClass('mobile-inner-main');
   }
 }
 
