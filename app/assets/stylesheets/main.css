@@ -66,7 +66,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 }
 .mobile-body {
   overflow-x: hidden !important;
-  padding: 15px;
+  margin: 15px;
 }
 .mobile-main {
 }
