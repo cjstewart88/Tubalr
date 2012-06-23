@@ -69,6 +69,7 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
 }
 .mobile-main {
   margin: 10px !important;
+  padding-right: 10px !important;
 }
 
 header {
