@@ -638,6 +638,7 @@ function detect_mobile () {
     $('#ytplayerid').addClass('mobile-ytplayerid')
     $('body').addClass('mobile-body');
     $('#inner-main').addClass('mobile-inner-main');
+    $('#listenForm input').addClass('mobile');
   }
 }
 

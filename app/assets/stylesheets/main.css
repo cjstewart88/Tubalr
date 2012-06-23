@@ -107,7 +107,7 @@ nav a:hover {
   background: url('/assets/glyphs-hover.png');
   background-repeat: no-repeat;
 }
-.genre-link { background-position: center 0px !important; }
+.genre-link { background-position: center 1px !important; }
 .my-playlists-link { background-position: center -158px !important; }
 .stats-link { background-position: center -37px !important; }
 .blog-link { background-position: center -75px !important; }
@@ -195,7 +195,12 @@ input[type=button]:hover, input[type=submit]:hover {
   
 }
 #listenForm input { margin-right: 10px; }
-
+#listenForm input[type=button].mobile {
+  width: 25% !important;
+}
+#listenForm #q.mobile {
+  width: 50% !important;
+}  
 #q {
   width: 400px;
 }
