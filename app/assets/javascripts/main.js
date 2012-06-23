@@ -305,7 +305,7 @@ function initPlaylist () {
     }, 500, function () {  
       videosCopy = "";
       $.each(videos, function(i) {
-        videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'"><div class="share-video" data-video-id="' + this.VideoID + '" data-video-title="' + this.VideoTitle + '">Share Video</div>'+this.VideoTitle+'</a>';
+        videosCopy = videosCopy + '<a href="#" id="'+this.VideoID+'"><input type="button" class="share-video" data-video-id="' + this.VideoID + '" data-video-title="' + this.VideoTitle + '" value="Share Video"/>'+this.VideoTitle+'</a>';
       });
     	$('#playlist').html(videosCopy);
       

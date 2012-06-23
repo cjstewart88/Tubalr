@@ -9,19 +9,16 @@
 </section>
 
 <section id="player">
-  <aside id="icons">
-    <a href="#" id="info-icon"></a>
-	</aside>
-	
 	<div id="ytplayerid"></div> 
 	
 	<div id="player-controls">
 	  <div id="player-controls-right">
-      <input type="button" id="previous" value="&larr;"/>
-        <input type="button" id="next" value="&rarr;"/>
+      <input type="button" id="previous" value="&#8249; prev"/>
+        <input type="button" id="next" value="next &#8250;"/>
     </div>
     <div id="player-controls-left">
       <input type="button" id="remove-video" value="remove"/>
+      <input type="button" id="info-icon" value="info"/>
       <% if user_signed_in? %>
         <input type="button" id="playlists-opener" value="add to playlist"/>
       <% end %>

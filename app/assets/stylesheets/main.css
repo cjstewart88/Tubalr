@@ -220,20 +220,6 @@ input[type=button]:hover, input[type=submit]:hover {
 
 #empty-playlist { display: none; }
 
-#player #icons {
-  position: absolute;
-  margin-left: 810px;
-  display: block;
-}
-#player #icons a {
-  width: 18px;
-  height: 18px;
-  display: block;
-}
-#info-icon {
-  background: url(/assets/info.png) no-repeat;
-}
-
 #playlist-header {
   margin: 20px 0px;
 }
@@ -268,6 +254,10 @@ input[type=button]:hover, input[type=submit]:hover {
 .share-video {
 	display: none;
 	float: right;
+	margin-top: -5px;
+	font-size: 12px;
+	font-weight: normal;
+	padding: 4px 12px;
 }
 #share-video {
 	overflow: hidden;
@@ -312,25 +302,17 @@ input[type=button]:hover, input[type=submit]:hover {
   height: 250px !important;
 }
 
-#player { }
-
 #player-controls {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 #player-controls input {
-  padding: 8px 12px;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight:  normal;
 }
-#player-controls-right {
-  float: right;
-}
-#player-controls #next, #player-controls #previous {
-}
-#player-controls #next {
-}
-#remove-video:hover {
-  color: red;
-}
+#player-controls-right { float: right; }
+#remove-video:hover { color: red; }
 
 
 #stats-main h2 {
