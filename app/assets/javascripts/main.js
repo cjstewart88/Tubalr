@@ -635,6 +635,7 @@ function detect_mobile () {
     $('.settings-link').remove();
     $('#genres-main i').remove();
     $('aside#icons').remove();
+    $('#playlists-opener').remove();
     $('#ytplayerid').addClass('mobile-ytplayerid')
     $('body').addClass('mobile-body');
     $('#inner-main').addClass('mobile-inner-main');
@@ -702,7 +703,7 @@ $(document).ready(function () {
     autoOpen: false,
     width: (is_mobile ? 500 : 600),
     draggable: false,
-    title: 'Add Video to Playlist'    
+    title: 'Register to Use Custom Playlists!'    
   });
   
   $('#playlists-dialog').dialog({
@@ -710,7 +711,7 @@ $(document).ready(function () {
     autoOpen: false,
     width: (is_mobile ? 500 : 600),
     draggable: false,
-    title: 'Register to Use Custom Playlists!'    
+    title: 'Add Video to Playlist'    
   });
   
   $('#playlists-opener').click(function () { 
