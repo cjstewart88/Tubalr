@@ -196,7 +196,7 @@ input[type=button]:hover, input[type=submit]:hover {
 }
 #listenForm input { margin-right: 10px; }
 #listenForm input[type=button].mobile {
-  width: 15% !important;
+  padding: 8px !important;
 }
 #listenForm #q.mobile {
   width: 50% !important;
