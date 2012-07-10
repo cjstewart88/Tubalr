@@ -350,6 +350,8 @@ function currentVideo (video) {
     getInfo();
   }
   
+  document.title = video.VideoTitle;
+  
   if (!firstSearch) {
     firstSearch = false;
     thePlayer.loadVideoById(video.VideoID, 0);
