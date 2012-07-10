@@ -44,8 +44,8 @@ function is_blocked (video) {
   var blocked = false;
 
   if (video.author[0].name.$t.toLowerCase().search('vevo') >= 0) blocked = true;
-  if (typeof video.app$control  !== "undefined" && video.app$control.yt$state.$t == "Syndication of this video was restricted by the content owner.") blocked = true;
-  if (typeof video.app$control  !== "undefined" && video.app$control.yt$state.$t == "Syndication of this video was restricted by its owner.") blocked = true;
+  if (typeof video.app$control !== "undefined" && video.app$control.yt$state.$t == "Syndication of this video was restricted by the content owner.") blocked = true;
+  if (typeof video.app$control !== "undefined" && video.app$control.yt$state.$t == "Syndication of this video was restricted by its owner.") blocked = true;
   
   return blocked;
 }
@@ -463,15 +463,18 @@ function remove_from_list () {
   if (videos.length == 0) {
     thePlayer.stopVideo();
     $('#player').fadeOut();
-    $('.slimScrollDiv').fadeOut(500, function() {
-      $('#main').animate({ marginTop: 200 }, 500);
-      $('#main nav').animate({ right: 20 }, 500);
-    });
+    $('#main').animate({ marginTop: 200 }, 500);
     $('#empty-playlist').fadeIn();
   }
   else {
     nextSong("removedFromList");
   }
+}
+
+function remove_from_playlist () {
+  $("#playlist #"+videos[currenttrack].VideoID).remove();
+  videos.splice(currenttrack, 1);
+  remove_from_list();
 }
 
 function remove_video () {
@@ -488,9 +491,7 @@ function remove_video () {
         dataType: 'json',
         success: function(data) {
           if (data.success) {
-            $("#playlist #"+videos[currenttrack].VideoID).remove();
-            videos.splice(currenttrack, 1);
-            remove_from_list();
+            remove_from_playlist();
           }
         }
       }); 
@@ -506,17 +507,13 @@ function remove_video () {
         dataType: 'json',
         success: function(data) {
           bannedVideos.push(videos[currenttrack].VideoID);
-          $("#playlist #"+videos[currenttrack].VideoID).remove();
-          videos.splice(currenttrack, 1);
-          remove_from_list();
+          remove_from_playlist();
         }
       });
     }
   }
   else {
-    $("#playlist #"+videos[currenttrack].VideoID).remove();
-    videos.splice(currenttrack, 1);
-    remove_from_list();
+    remove_from_playlist();
   }
 }
 
@@ -803,12 +800,7 @@ $(document).ready(function () {
   });
    
   $('#info-icon').click(function(){
-    if ($('#main').css('marginTop') == '20px') {
-      $('#info').slideToggle();
-    }
-    else {
-      $('#info').slideToggle();
-    }
+    $('#info').slideToggle();
   });
   
   if ($('.flash-msg')) {

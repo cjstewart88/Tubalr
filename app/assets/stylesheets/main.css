@@ -1,14 +1,12 @@
 *:focus { outline: none !important; }
 * { margin: 0px; padding: 0px; }
 
-html { }
-html, body { width: 100%; }
+html { overflow-y: scroll; }
 
 body {
 	background: url('/assets/bg.png'); 
 	font:  12px 'lucida grande', tahoma, verdana, arial, sans-serif; 
 	color: #464646;
-	margin-bottom: 20px;
 }	
 
 header, footer, aside, nav, article, section { display: block; } 
@@ -16,19 +14,19 @@ header, footer, aside, nav, article, section { display: block; }
 a         { color: #464646; text-decoration: none; }
 a:hover   { color: #ff6347; }
 a:active  { outline: none; }
-a:focus   { -moz-outline-style: none; }
-
-p a { color: #ff6347 !important; }
-
-button::-moz-focus-inner {
-  border: 0;
-}
 
 input { 
-  color: #464646; font: 11px 'lucida grande', tahoma, verdana, arial, sans-serif; 
+  color: #464646; 
+  font: 11px 'lucida grande', tahoma, verdana, arial, sans-serif; 
 }
 input:focus, button:focus { outline: 0; }
-input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner { border : 0px; }
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #ABA8B5;
+  text-transform: lowercase;
+}
 
 #notices {
   position: absolute;
@@ -53,9 +51,6 @@ input[type="submit"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner {
   -moz-border-radius: 3px;
 	border: groove 2px #555;
 }
-#notices aside a {
-  color: #ff6347 !important;
-}
 
 #main {
   display: none;
@@ -78,10 +73,10 @@ header {
 }
 h1 { 
   float: left;
-  font: 30px 'PT Sans';
-  font-weight: 700;
   margin-top: 3px;
   margin-left: 25px;
+  font: 30px 'PT Sans';
+  font-weight: 700;
 }
 h1 a {  
   color: #464646; 
@@ -107,25 +102,17 @@ nav a:hover {
   background: url('/assets/glyphs-hover.png');
   background-repeat: no-repeat;
 }
-.genre-link { background-position: center 1px !important; }
-.my-playlists-link { background-position: center -158px !important; }
-.stats-link { background-position: center -37px !important; }
-.blog-link { background-position: center -75px !important; }
-.about-link { background-position: center -204px !important; }
-.settings-link { background-position: center -114px !important; }
-.sign-up-link { background-position: center -354px !important; }
-.sign-in-link { background-position: center -304px !important; }
-.sign-out-link { background-position: center -254px !important; }
+.genre-link         { background-position: center 1px     !important; }
+.my-playlists-link  { background-position: center -158px  !important; }
+.stats-link         { background-position: center -37px   !important; }
+.blog-link          { background-position: center -75px   !important; }
+.about-link         { background-position: center -204px  !important; }
+.settings-link      { background-position: center -114px  !important; }
+.sign-up-link       { background-position: center -354px  !important; }
+.sign-in-link       { background-position: center -304px  !important; }
+.sign-out-link      { background-position: center -254px  !important; }
 
-h2 {
-  font-size: 20px;
-  margin-bottom: 20px;
-  color: #ABA8B5;
-  text-transform: lowercase;
-}
-
-#discover { padding-left: 78px; }
-
+/* Stuff for devise forms */
 form input[type=text], form input[type=email], form input[type=password] { margin-top: 15px; margin-bottom: 15px; }
 form div i { font-size: 12px; }
 form div input[type=submit] { margin: 0px; }
@@ -211,19 +198,13 @@ input[type=button]:hover, input[type=submit]:hover {
   border-color: #999;
 }
 
-.middle-tooltip a {
-  color: #ff6347;
-}
-.middle-tooltip {
+#empty-playlist { 
+  display: none; 
   width: 400px;
   margin: 0 auto;
   margin-top: 13px;
   text-align: center;
-  line-height: 18px;
 }
-.middle-tooltip-hide { display: none; }  
-
-#empty-playlist { display: none; }
 
 #playlist-header {
   margin: 20px 0px;
@@ -240,15 +221,12 @@ input[type=button]:hover, input[type=submit]:hover {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-#playlist a:first-child {
-  border-top: dotted 1px #ccc;
-}
 #playlist a {
   display: block;
   color: #464646;
 	text-decoration: none;
 	padding: 20px 0px;
-  border-bottom: dotted 1px #ccc;
+  border-top: dotted 1px #ccc;
 }
 #playlist a.active {
 	color: #ff6347;

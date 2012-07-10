@@ -4,7 +4,7 @@
   <input type="button" name="similar" value="similar" class="listen similar" tabindex="3"/><br/>
 </form>
 
-<section id="empty-playlist" class='middle-tooltip'>
+<section id="empty-playlist">
   o_O This playlist has 0 videos... this is kinda weird.
 </section>
 
@@ -79,9 +79,9 @@
 <% end %>
 
 <script>
-  <%= "setUserInfo(#{current_user.id}, '#{escape_javascript(current_user.username)}')"            if user_signed_in?                                            %>
-  <%= "just('#{escape_javascript(params[:artist_band])}');"                                       if request.path.index("just") || request.path.index("genre")  %>
-  <%= "video('#{escape_javascript(params[:video_id])}');"                                         if request.path.index("video")                                %>
-  <%= "similarTo('#{escape_javascript(params[:artist_band])}');"                                  if request.path.index("similar")                              %>
-  <%= "userPlaylist('#{escape_javascript(@username)}','#{url_encode(escape_javascript(@playlist_name))}');"   if @playlist_name                                             %>
+  <%= "setUserInfo(#{current_user.id}, '#{escape_javascript(current_user.username)}')"                      if user_signed_in?                                            %>
+  <%= "just('#{escape_javascript(params[:artist_band])}');"                                                 if request.path.index("just") || request.path.index("genre")  %>
+  <%= "video('#{escape_javascript(params[:video_id])}');"                                                   if request.path.index("video")                                %>
+  <%= "similarTo('#{escape_javascript(params[:artist_band])}');"                                            if request.path.index("similar")                              %>
+  <%= "userPlaylist('#{escape_javascript(@username)}','#{url_encode(escape_javascript(@playlist_name))}');" if @playlist_name                                             %>
 </script>

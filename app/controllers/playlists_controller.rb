@@ -56,8 +56,8 @@ class PlaylistsController < ApplicationController
   def delete_video
     if params[:user_id].to_i == current_user.id
       user      = User.find(params[:user_id])
-      playlist  = user.playlists.where("lower(playlist_name) = ?", params[:playlist_name].downcase).first
-    
+      playlist  = user.playlists.where("lower(playlist_name) = ?", CGI::unescape(params[:playlist_name]).downcase).first
+
       playlist.videos.where(:video_id => params[:video_id]).first.delete
       
       response = { :success => true }
