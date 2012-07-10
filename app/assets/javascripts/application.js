@@ -3,4 +3,3 @@
 //= require rails
 //= require ga
 //= require main
-//= require slimScroll
