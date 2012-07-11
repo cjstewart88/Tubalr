@@ -644,13 +644,15 @@ function detect_mobile () {
 
 $(document).ready(function () { 
   detect_mobile();
-  
-	FB.init({ 
-    appId   : '239275546125436', 
-    status  : true, 
-    cookie  : true, 
-    xfbml   : true 
-  });
+
+  if (typeof FB !== "undefined") {
+    FB.init({ 
+      appId   : '239275546125436', 
+      status  : true, 
+      cookie  : true, 
+      xfbml   : true 
+    });
+	}
 	
 	$('#share-video div.facebook').click(function () {
 		share_video_facebook($(this).data('video-id'), $(this).data('video-title'));
