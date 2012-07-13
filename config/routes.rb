@@ -9,7 +9,8 @@ Tubalr::Application.routes.draw do
   
   get "/stats"                                => "stats#index"
   
-  get "/genres"                               => "application#genres"
+  get "/explore"                              => "application#explore"
+  get "/genres"                               => "application#explore"
   
   get "/genre/:artist_band"                   => "application#index"
   get "/just/:artist_band"                    => "application#index"

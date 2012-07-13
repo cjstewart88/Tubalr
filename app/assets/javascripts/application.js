@@ -3,3 +3,5 @@
 //= require rails
 //= require ga
 //= require main
+//= require trending-artists
+//= require top-genres

@@ -11,20 +11,34 @@ body {
 
 header, footer, aside, nav, article, section { display: block; } 
 
-a         { color: #464646; text-decoration: none; }
-a:hover   { color: #ff6347; }
-a:active  { outline: none; }
+a { 
+  color: #464646; 
+  text-decoration: none; 
+  
+  &:hover {
+    color: #ff6347;
+  }
+  
+  &:active {
+    outline: none;
+  }
+}
 
 input { 
   color: #464646; 
-  font: 11px 'lucida grande', tahoma, verdana, arial, sans-serif; 
+  font: 11px 'lucida grande', tahoma, verdana, arial, sans-serif;
+  
+  &:focus {
+    outline: 0;
+  } 
 }
-input:focus, button:focus { outline: 0; }
+
+button:focus { outline: 0; }
 
 h2 {
   font-size: 20px;
   margin-bottom: 20px;
-  color: #ABA8B5;
+  color: #464646;
   text-transform: lowercase;
 }
 
@@ -33,23 +47,24 @@ h2 {
   top: 10px;
   left: 10px;
   width: 300px;
-}
-#notices aside {
-  display: block;
-  margin-bottom: 10px;
-  text-shadow: 1px 1px #222;
-  -moz-text-shadow: 1px 1px #222;
-  -webkit-text-shadow: 1px 1px #222;
-  color: #fff;
-  background: #333;
-  background: -moz-linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)) !important;
-  background: -webkit-linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)) !important;
-  width: 200px;
-  padding: 10px;
-  border-radius: 3px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-	border: groove 2px #555;
+  
+  aside {
+    display: block;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px #222;
+    -moz-text-shadow: 1px 1px #222;
+    -webkit-text-shadow: 1px 1px #222;
+    color: #fff;
+    background: #333;
+    background: -moz-linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)) !important;
+    background: -webkit-linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)) !important;
+    width: 200px;
+    padding: 10px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+  	border: groove 2px #555;
+  }
 }
 
 #main {
@@ -57,7 +72,7 @@ h2 {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  margin-top: 200px;
+  margin-top: 20px;
 }
 .mobile-body {
   overflow-x: hidden !important;
@@ -70,47 +85,54 @@ header {
   width: 100%;
   height: 40px;
   margin-bottom: 20px;
+  
+  h1 {
+    float: left;
+    margin-top: 3px;
+    margin-left: 25px;
+    font: 30px 'PT Sans';
+    font-weight: 700;
+    
+    a {
+      color: #464646;
+      
+      &:hover {
+        color: #ff6347;
+      } 
+    }
+  }
+  
+  nav {
+    float: right;
+    margin-top: 24px;
+    margin-right: 25px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;  
+    
+    a {
+      background: url('/assets/glyphs.png');
+      background-repeat: no-repeat;
+      padding-top: 30px;
+      margin-left: 30px;
+      
+      &:hover {
+        background: url('/assets/glyphs-hover.png');
+        background-repeat: no-repeat;
+      }
+    }
+    
+    .explore-link       { background-position: center 1px     !important; }
+    .my-playlists-link  { background-position: center -158px  !important; }
+    .stats-link         { background-position: center -37px   !important; }
+    .blog-link          { background-position: center -75px   !important; }
+    .about-link         { background-position: center -204px  !important; }
+    .settings-link      { background-position: center -114px  !important; }
+    .sign-up-link       { background-position: center -354px  !important; }
+    .sign-in-link       { background-position: center -304px  !important; }
+    .sign-out-link      { background-position: center -254px  !important; }
+  }
 }
-h1 { 
-  float: left;
-  margin-top: 3px;
-  margin-left: 25px;
-  font: 30px 'PT Sans';
-  font-weight: 700;
-}
-h1 a {  
-  color: #464646; 
-}
-h1 a:hover { 
-  color: #ff6347; 
-}
-nav {
-  float: right;
-  margin-top: 24px;
-  margin-right: 25px;
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 1px;  
-}
-nav a {
-  background: url('/assets/glyphs.png');
-  background-repeat: no-repeat;
-  padding-top: 30px;
-  margin-left: 30px;
-}
-nav a:hover {
-  background: url('/assets/glyphs-hover.png');
-  background-repeat: no-repeat;
-}
-.genre-link         { background-position: center 1px     !important; }
-.my-playlists-link  { background-position: center -158px  !important; }
-.stats-link         { background-position: center -37px   !important; }
-.blog-link          { background-position: center -75px   !important; }
-.about-link         { background-position: center -204px  !important; }
-.settings-link      { background-position: center -114px  !important; }
-.sign-up-link       { background-position: center -354px  !important; }
-.sign-in-link       { background-position: center -304px  !important; }
-.sign-out-link      { background-position: center -254px  !important; }
 
 /* Stuff for devise forms */
 form input[type=text], form input[type=email], form input[type=password] { margin-top: 15px; margin-bottom: 15px; }
@@ -297,12 +319,6 @@ input[type=button]:hover, input[type=submit]:hover {
 #player-controls-right { float: right; }
 #remove-video:hover { color: red; }
 
-
-#stats-main h2 {
-  margin-left: 0px;
-  margin-top: 0px;
-}
-
 #stats-main h3 {
   font-size: 18px;
   font-weight: bold;
@@ -365,29 +381,9 @@ section {
   border-radius: 8px;
 }
 
-#users-main h2, #genres-main h2 {
-  margin-left: 0px;
-}
-#users-main p, #genres-main p {
+#users-main p {
   margin-bottom: 15px;
 }
-#genres-main ul {
-  list-style-type: none;
-}
-#genres-main ul li {
-  display: inline-block;
-  width: 247px;
-  margin-bottom: 20px;
-}
-#genres-main ul li a {
-  font-weight: bold;
-  font-size: 14px;
-}
-#genres-main ul li i:hover {
-  cursor: pointer;
-  color: #ff6347;
-}
-
 .social { position: fixed; bottom: 10px; left: 10px; }
 .social .twitter {}
 .social iframe { display: block; margin-top: 10px}
@@ -500,4 +496,39 @@ ul#playlists li.already-in-playlist {
   display: inline-block;
   width: 247px;
   margin-bottom: 20px;
+}
+
+#explore {
+  section {
+    float: left;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    
+    &:last-child {
+      margin-right: 0;
+    }
+    
+    ul {
+      width: 340px;
+      list-style-type: none;
+      min-height: 150px;
+      
+      &.loading-list {
+        background: url("/assets/loading-list.gif") no-repeat center center;
+      }
+      
+      li {
+        margin-top: 10px;
+        cursor: pointer;
+        
+        &:first-child {
+          margin-top: 0px;
+        }
+        
+        &:hover {
+          color: #ff6347;
+        }
+      }
+    }
+  }
 }

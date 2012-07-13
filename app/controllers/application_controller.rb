@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     render :layout => "application", :template => "index"
   end
     
-  def genres
-    render :layout => "application", :template => "genres"
+  def explore
+    render :layout => "application", :template => "explore"
   end
 end
