@@ -508,14 +508,15 @@ ul#playlists li.already-in-playlist {
       margin-right: 0;
     }
     
+    &.mobile {
+      float: none;
+      margin-right: none;
+    }
+    
     ul {
       width: 340px;
       list-style-type: none;
       min-height: 150px;
-      
-      &.mobile {
-        width: 500px;
-      }
       
       &.loading-list {
         background: url("/assets/loading-list.gif") no-repeat center center;
