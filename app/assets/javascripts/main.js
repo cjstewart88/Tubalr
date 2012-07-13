@@ -614,7 +614,8 @@ function detect_mobile () {
     $('.settings-link').remove();
     $('aside#icons').remove();
     $('#playlists-opener').remove();
-    $('#ytplayerid').addClass('mobile-ytplayerid')
+    $('#ytplayerid').addClass('mobile-ytplayerid');
+    $('#explore ul').addClass('mobile');
     $('body').addClass('mobile-body');
     $('#inner-main').addClass('mobile-inner-main');
     $('#listenForm input').addClass('mobile');
