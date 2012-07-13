@@ -7,6 +7,7 @@ body {
 	background: url('/assets/bg.png'); 
 	font:  12px 'lucida grande', tahoma, verdana, arial, sans-serif; 
 	color: #464646;
+	padding-bottom: 20px;
 }	
 
 header, footer, aside, nav, article, section { display: block; } 
@@ -37,7 +38,7 @@ button:focus { outline: 0; }
 
 h2 {
   font-size: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #464646;
   text-transform: lowercase;
 }
@@ -89,7 +90,7 @@ header {
   h1 {
     float: left;
     margin-top: 3px;
-    margin-left: 25px;
+    margin-left: 20px;
     font: 30px 'PT Sans';
     font-weight: 700;
     
@@ -105,7 +106,7 @@ header {
   nav {
     float: right;
     margin-top: 24px;
-    margin-right: 25px;
+    margin-right: 20px;
     font-size: 12px;
     font-weight: bold;
     letter-spacing: 1px;  
@@ -199,10 +200,11 @@ input[type=button]:hover, input[type=submit]:hover {
   margin-bottom: 30px; 
   background: #efefef;
   background: rgba(255, 255, 255, .3);
-  padding: 15px;
+  padding: 10px;
   border-radius: 3px;
-  
+  border: solid 1px #ccc;
 }
+
 #listenForm input { margin-right: 10px; }
 #listenForm input[type=button].mobile {
   padding: 8px !important;
@@ -335,7 +337,7 @@ input[type=button]:hover, input[type=submit]:hover {
 }
 
 #stats-main table {
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   width: 100%;
   border-spacing: 0;
 }
@@ -363,9 +365,6 @@ input[type=button]:hover, input[type=submit]:hover {
   font-size: 16px;
   padding: 0px;
 }
-#stats-main table#general tbody tr td:first-child {
-  font-weight: bold;
-}
 #stats-main table#general tbody tr td:last-child {
   text-align: right;
 }
@@ -377,8 +376,9 @@ input[type=button]:hover, input[type=submit]:hover {
 section {
   background: #efefef;
   background: rgba(255, 255, 255, .3);
-  padding: 25px;
-  border-radius: 8px;
+  padding: 15px 20px;
+  border-radius: 3px;
+  border: solid 1px #ccc;
 }
 
 #users-main p {
@@ -501,6 +501,7 @@ ul#playlists li.already-in-playlist {
 #explore {
   section {
     float: left;
+    width: 348px;
     margin-right: 20px;
     margin-bottom: 20px;
     
@@ -514,7 +515,6 @@ ul#playlists li.already-in-playlist {
     }
     
     ul {
-      width: 340px;
       list-style-type: none;
       min-height: 150px;
       
