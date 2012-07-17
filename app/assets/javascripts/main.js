@@ -299,6 +299,7 @@ function initPlaylist () {
 
     $('.loading-button').removeClass('loading-button');
     $('#empty-playlist').fadeOut();
+    $('#explore').fadeOut();
      
     videosCopy = "";
     $.each(videos, function(i) {
