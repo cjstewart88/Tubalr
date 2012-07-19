@@ -835,8 +835,7 @@ $(document).ready(function () {
   
   // Scroll to Top
   $('#to-top').topLink({
-    min: 400,
-    fadeSpeed: 500
+    min: 400
   });
   $('#to-top').click(function(e) {
     e.preventDefault();
