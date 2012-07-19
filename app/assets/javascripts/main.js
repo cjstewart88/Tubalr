@@ -620,6 +620,7 @@ function detect_mobile () {
     $('body').addClass('mobile-body');
     $('#inner-main').addClass('mobile-inner-main');
     $('#listenForm input').addClass('mobile');
+    $('.why-register').remove();
   }
 }
 
