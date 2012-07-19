@@ -768,7 +768,7 @@ $(document).ready(function () {
     autoOpen: false,
     width: (is_mobile ? 500 : 600),
     draggable: false,
-    title: 'about tubalr'
+    title: 'About Tubalr'
   });
   $('.about-tubalr').click(function () { $('#about-tubalr').dialog('open'); });
    
@@ -828,4 +828,6 @@ $(document).ready(function () {
  
     return false;
   });
+  
+  $('.tooltip').tipsy({gravity: 'n'});
 });

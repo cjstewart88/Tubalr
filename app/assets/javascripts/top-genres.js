@@ -19,7 +19,7 @@
             $("#explore").fadeOut();
           }
           else {
-            window.open(window.location.protocol+"//"+window.location.host+"/genre/"+genre.name);
+            window.location = window.location.protocol+"//"+window.location.host+"/genre/"+genre.name;
           }
         });
       });

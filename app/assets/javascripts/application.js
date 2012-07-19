@@ -5,3 +5,4 @@
 //= require main
 //= require trending-artists
 //= require top-genres
+//= require jquery.tipsy

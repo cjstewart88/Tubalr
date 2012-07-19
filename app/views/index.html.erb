@@ -1,7 +1,7 @@
 <form id="listenForm" onSubmit="return false;"> 
   <input type="text" name="q" id="q" value="<%= params[:artist_band].gsub('+',' ') if params[:artist_band].present? %>" tabindex="1" placeholder="search for artists or bands"/>
-  <input type="button" name="just" value="only" class="listen just" tabindex="2"/>
-  <input type="button" name="similar" value="similar" class="listen similar" tabindex="3"/><br/>
+  <input type="button" name="just" value="only" class="listen just tooltip" tabindex="2" original-title="This search method is to search for a single artist or band."/>
+  <input type="button" name="similar" value="similar" class="listen similar tooltip" tabindex="3" original-title="This search method will find artists and bands similar to your search."/><br/>
 </form>
 
 <% if !request.path.index("similar") && !request.path.index("just") && !request.path.index("video") && !request.path.index("genre") && !@playlist_name  %>
@@ -33,7 +33,7 @@
         <input type="button" id="next" value="next &#8250;"/>
     </div>
     <div id="player-controls-left">
-      <input type="button" id="remove-video" value="remove"/>
+      <input type="button" id="remove-video" value="remove" class="tooltip" original-title="Remove the current video from your playlist. If you're logged in it will never play again!"/>
       <input type="button" id="info-icon" value="info"/>
       <input type="button" id="playlists-opener" value="add to playlist"/>
     <div>

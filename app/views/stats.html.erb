@@ -1,44 +1,5 @@
 <section id="stats-main">
   <h2>
-    overall stats
-  </h2>
-  <table id="general">
-    <tbody>
-      <% @overall_stats.each do | stat | %>
-        <tr>
-          <td><%= stat[0] %></td><td><%= number_with_delimiter(stat[1], :delimiter => ',') %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  
-  <h2>
-    past 7 days
-  </h2>
-  <table id="general">
-    <tbody>
-      <% @past_7_days_stats.each do | stat | %>
-        <tr>
-          <td><%= stat[0] %></td><td><%= number_with_delimiter(stat[1], :delimiter => ',') %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-    
-  <h2>
-    today
-  </h2>
-  <table id="general">
-    <tbody>
-      <% @today_stats.each do | stat | %>
-        <tr>
-          <td><%= stat[0] %></td><td><%= number_with_delimiter(stat[1], :delimiter => ',') %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-    
-  <h2>
     most recent search history
   </h2>
   <table>
@@ -81,6 +42,45 @@
       <% @recent_videos_added_to_playlists.each do | video | %>
         <tr>
           <td><%= "<a href='#{video[:owner_url]}' target='_blank'><b>#{video[:owner]}</b></a> added <a href='#{video[:url]}' target='_blank'><b>#{video[:title]}</b></a> to their <a href='#{video[:playlist_url]}' target='_blank'><b>#{video[:playlist_name]}</b></a> playlist #{time_ago_in_words(video[:date])} ago".html_safe %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <h2>
+    overall stats
+  </h2>
+  <table id="general">
+    <tbody>
+      <% @overall_stats.each do | stat | %>
+        <tr>
+          <td><%= stat[0] %></td><td><%= number_with_delimiter(stat[1], :delimiter => ',') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <h2>
+    past 7 days
+  </h2>
+  <table id="general">
+    <tbody>
+      <% @past_7_days_stats.each do | stat | %>
+        <tr>
+          <td><%= stat[0] %></td><td><%= number_with_delimiter(stat[1], :delimiter => ',') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+    
+  <h2>
+    today
+  </h2>
+  <table id="general">
+    <tbody>
+      <% @today_stats.each do | stat | %>
+        <tr>
+          <td><%= stat[0] %></td><td><%= number_with_delimiter(stat[1], :delimiter => ',') %></td>
         </tr>
       <% end %>
     </tbody>
