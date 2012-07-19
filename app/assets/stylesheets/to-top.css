@@ -1,0 +1,28 @@
+#to-top  { 
+  display: none; 
+  position: fixed; 
+  right: 52px; 
+  bottom: 52px; 
+  color: #666;
+  font-size: 36px; 
+  font-weight: bold; 
+  text-decoration: none; 
+  background: #efefef;
+  background: rgba(255, 255, 255, .3); 
+  padding: 10px 18px 12px; 
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: solid 1px #ccc;
+  moz-transition: all .218s;
+  -o-transition: all .218s;
+  -webkit-transition: all .218s;
+  transition: all .218s;
+}
+#to-top:hover {
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  border-color: #999; 
+  color: #464646; 
+}

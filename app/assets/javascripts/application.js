@@ -6,3 +6,5 @@
 //= require trending-artists
 //= require top-genres
 //= require jquery.tipsy
+//= require to-top
+//= require scroll-to

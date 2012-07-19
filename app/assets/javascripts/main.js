@@ -830,5 +830,16 @@ $(document).ready(function () {
     return false;
   });
   
+  // Tooltips
   $('.tooltip').tipsy({gravity: 'n'});
+  
+  // Scroll to Top
+  $('#to-top').topLink({
+    min: 400,
+    fadeSpeed: 500
+  });
+  $('#to-top').click(function(e) {
+    e.preventDefault();
+    $.scrollTo(0,300);
+  });
 });

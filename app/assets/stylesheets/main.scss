@@ -379,6 +379,8 @@ section {
   background: rgba(255, 255, 255, .3);
   padding: 15px 20px;
   border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   border: solid 1px #ccc;
 }
 
