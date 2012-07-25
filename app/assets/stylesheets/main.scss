@@ -5,7 +5,7 @@ html { overflow-y: scroll; }
 
 body {
 	background: url('/assets/bg.png'); 
-	font:  12px 'lucida grande', tahoma, verdana, arial, sans-serif; 
+	font:  11px HelveticaNeue, Helvetica, Arial, sans-serif; 
 	color: #464646;
 	padding-bottom: 20px;
 }	
@@ -17,7 +17,7 @@ a {
   text-decoration: none; 
   
   &:hover {
-    color: #ff6347;
+    color: #716EB2;
   }
   
   &:active {
@@ -37,7 +37,7 @@ input {
 button:focus { outline: 0; }
 
 h2 {
-  font-size: 20px;
+  font-size: 16px;
   margin-bottom: 10px;
   color: #464646;
   text-transform: capitalize;
@@ -89,49 +89,20 @@ header {
   
   h1 {
     float: left;
-    margin-top: 3px;
     margin-left: 20px;
     font: 30px 'PT Sans';
     font-weight: 700;
-    
-    a {
-      color: #464646;
-      
-      &:hover {
-        color: #ff6347;
-      } 
-    }
   }
   
   nav {
     float: right;
-    margin-top: 24px;
     margin-right: 20px;
+    margin-top: 15px;
     font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 1px;  
     
     a {
-      background: url('/assets/glyphs.png');
-      background-repeat: no-repeat;
-      padding-top: 30px;
       margin-left: 30px;
-      
-      &:hover {
-        background: url('/assets/glyphs-hover.png');
-        background-repeat: no-repeat;
-      }
     }
-    
-    .explore-link       { background-position: center 1px     !important; }
-    .my-playlists-link  { background-position: center -158px  !important; }
-    .stats-link         { background-position: center -37px   !important; }
-    .blog-link          { background-position: center -75px   !important; }
-    .about-link         { background-position: center -204px  !important; }
-    .settings-link      { background-position: center -114px  !important; }
-    .sign-up-link       { background-position: center -354px  !important; }
-    .sign-in-link       { background-position: center -304px  !important; }
-    .sign-out-link      { background-position: center -254px  !important; }
   }
 }
 
@@ -143,12 +114,11 @@ form .field_with_errors { margin-top: 0px; display: inline-block; }
 form .error { color: red; }
 form a { display: inline-block; margin-top: 15px; }
 form .remember-me { margin-bottom: 15px; }
-label { font-weight: bold; text-transform: lowercase; font-size: 14px }
 
 input[type=text], input[type=email], input[type=password], textarea {
   width: 250px;
   border: solid 1px #cecfd1;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   line-height: normal;
   padding: 8px;
@@ -163,7 +133,7 @@ input[type=text], input[type=email], input[type=password], textarea {
 
 input[type=button], input[type=submit] { 
   text-transform: lowercase;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   line-height: normal;
   padding: 8px 25px;
@@ -239,7 +209,7 @@ input[type=button]:hover, input[type=submit]:hover {
   font-weight: normal;
 }
 #playlist-header #share a {
-  color: #ff6347;
+  color: #716EB2;
 }
 #playlist {
   margin-top: 10px;
@@ -253,10 +223,10 @@ input[type=button]:hover, input[type=submit]:hover {
   border-top: dotted 1px #ccc;
 }
 #playlist a.active {
-	color: #ff6347;
+	color: #716EB2;
 }
 #playlist a:hover {
-  color: #ff6347 !important;
+  color: #716EB2 !important;
 }
 .share-video {
 	display: none;
@@ -399,11 +369,11 @@ section {
 }
 
 .ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-.ui-widget-overlay { background: #000; opacity: .30;filter:Alpha(Opacity=30); }
+.ui-widget-overlay { background: #000; background: -webkit-radial-gradient(50% 50%, ellipse closest-corner, rgba(0, 0, 0, 0.3) 1%, rgba(0, 0, 0, 0.725) 100%); background: -moz-radial-gradient(50% 50%, ellipse closest-corner, rgba(0, 0, 0, 0.3) 1%, rgba(0, 0, 0, 0.725) 100%); filter: Alpha(Opacity=30); }
 .ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #aaaaaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -khtml-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }
-.ui-dialog { box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 15px; -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 15px; -moz-box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 15px; position: absolute; padding: .2em; width: 300px; overflow: hidden; padding: 10px; background: #efefef; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
+.ui-dialog { box-shadow: 0 7px 27px rgba(0, 0, 0, 0.45); -webkit-box-shadow: 0 7px 27px rgba(0, 0, 0, 0.45); -moz-box-shadow: 0 7px 27px rgba(0, 0, 0, 0.45); position: absolute; padding: .2em; width: 300px; overflow: hidden; padding: 10px; background: #efefef; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
 .ui-dialog .ui-dialog-titlebar { padding: .4em 1em; position: relative;  }
-.ui-dialog .ui-dialog-title { float: left; margin-bottom: 5px; height: 20px; width: 100%; font-size: 18px; color: #ABA8B5; font-weight: bold; } 
+.ui-dialog .ui-dialog-title { float: left; margin-bottom: 5px; height: 20px; width: 100%; font-size: 18px; color: #464646; font-weight: bold; } 
 .ui-dialog .ui-dialog-titlebar-close { position: absolute; right: 10px; font-style: italic; }
 .ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; overflow: auto; zoom: 1; }
 .ui-dialog .ui-dialog-content ul { list-style-type: none; }
@@ -417,7 +387,7 @@ section {
   font-size: 12px;
 }
 #about-tubalr p a {
-  color: #ff6347;
+  color: #716EB2;
 }
 #about-tubalr h3 {
   font-size: 17px;
@@ -535,7 +505,7 @@ ul#playlists li.already-in-playlist {
         }
         
         &:hover {
-          color: #ff6347;
+          color: #716EB2;
         }
       }
     }
