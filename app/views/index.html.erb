@@ -25,29 +25,26 @@
 </section>
 
 <section id="player">
+  <div id="share">
+    <img src="/assets/facebook.png" id="facebook"> <img src="/assets/twitter.png" id="twitter">
+	</div>
+	
 	<div id="ytplayerid"></div> 
 	
 	<div id="player-controls">
 	  <div id="player-controls-right">
       <input type="button" id="previous" value="&#8249; prev"/>
-        <input type="button" id="next" value="next &#8250;"/>
+      <input type="button" id="next" value="next &#8250;"/>
     </div>
+    
     <div id="player-controls-left">
       <input type="button" id="remove-video" value="remove" class="tooltip" original-title="Remove the current video from your playlist. If you're logged in it will never play again!"/>
-      <input type="button" id="info-icon" value="info"/>
+      <input type="button" id="info-button" value="info"/>
       <input type="button" id="playlists-opener" value="add to playlist"/>
     <div>
 	</div>
 	
-	<aside id="info"></aside>
-	
-	<h3 id="playlist-header">
-	  <aside id="share">
-      share playlist on <a href="#" id="facebook" onClick="facebook()">facebook</a> or <a href="" id="twitter">twitter</a>
-  	</aside>
-  	
-	  the playlist
-	</h3>
+	<div id="info"></div>
 	
 	<div id="playlist"></div>
 </section>

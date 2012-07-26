@@ -437,6 +437,7 @@ function facebook () {
     function (response) {
     }
   );
+  
   return false;
 }
 
@@ -524,11 +525,12 @@ function getInfo () {
   
   $.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&artist='+tmpWho+'&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
 		if (data.error == 6 || data.artist.bio.content == "") {
+		  $('#info').dialog({ title: "No Info" });
 		  $('#info').html('No information could be found for the artist/band you supplied.');
 		}
 		else {
+		  $('#info').dialog({ title: tmpWho.replace(/[+]/g,' ') });
 		  $('#info').html(data.artist.bio.content.replace(/[\n]/g,"<br/>"));
-		  $('#info').prepend("<h3>"+tmpWho.replace(/[+]/g,' ')+"</h3>")
 		}
 	});
 }
@@ -755,6 +757,15 @@ $(document).ready(function () {
     }
   });
   
+  $('#info').dialog({
+    modal: true,
+    autoOpen: false,
+    width: 600,
+    draggable: false,
+		height: 400    
+  });
+  $('#info-button').click(function () { $('#info').dialog('open'); });
+  
 	$('#share-video').dialog({
     modal: true,
     autoOpen: false,
@@ -772,10 +783,6 @@ $(document).ready(function () {
     title: 'About Tubalr'
   });
   $('.about-tubalr').click(function () { $('#about-tubalr').dialog('open'); });
-   
-  $('#info-icon').click(function(){
-    $('#info').slideToggle();
-  });
   
   if ($('.flash-msg')) {
     setTimeout(function () {
@@ -793,7 +800,9 @@ $(document).ready(function () {
     }
   });
   
-  $('#main').delay(500).fadeIn();
+  $('#main').delay(500).fadeIn(500, function () {
+    if ($('#q').val() == "") $("#q").focus();
+  });
 
   $('.just').click(function() {
     if ($('#q').val() != "") just($('#q').val());
@@ -841,4 +850,6 @@ $(document).ready(function () {
     e.preventDefault();
     $.scrollTo(0,300);
   });
+  
+  $('#facebook').click(function () { facebook(); });
 });

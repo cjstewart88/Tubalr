@@ -15,9 +15,13 @@ header, footer, aside, nav, article, section { display: block; }
 a { 
   color: #464646; 
   text-decoration: none; 
+  moz-transition: all .3s;
+  -o-transition: all .3s;
+  -webkit-transition: all .3s;
+  transition: all .3s;
   
   &:hover {
-    color: #716EB2;
+    color: #2667D4;
   }
   
   &:active {
@@ -137,9 +141,9 @@ input[type=button], input[type=submit] {
   font-weight: bold;
   line-height: normal;
   padding: 8px 25px;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
   background-image: -webkit-gradient(linear,left top,left bottom,from(white),to(#e6e6e6));
   background-image: -webkit-linear-gradient(top,white,#e6e6e6);
   background-color: whiteSmoke;
@@ -147,10 +151,10 @@ input[type=button], input[type=submit] {
   background-image: -o-linear-gradient(top,white,#e6e6e6);
   border: 1px solid #cecfd1;
   cursor: pointer;
-  moz-transition: all .218s;
-  -o-transition: all .218s;
-  -webkit-transition: all .218s;
-  transition: all .218s;
+  moz-transition: all .3s;
+  -o-transition: all .3s;
+  -webkit-transition: all .3s;
+  transition: all .3s;
 }
 input[type=button]:hover, input[type=submit]:hover {
   box-shadow: 0 1px 1px rgba(0,0,0,.1);
@@ -158,19 +162,33 @@ input[type=button]:hover, input[type=submit]:hover {
   -moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
   border-color: #999;  
 }
+#listenForm {
+  input[type=button], input[type=submit] {
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#548FF4),to(#2667D4));
+    background-image: -webkit-linear-gradient(top,#548FF4,#2667D4);
+    background-color: #2667D4;
+    background-image: linear-gradient(top,#548FF4,#2667D4);
+    background-image: -o-linear-gradient(top,#548FF4,#2667D4);
+    border: 1px solid #2667D4;
+    color: #fff;
+    
+    &:hover {
+      border-color: #2052A7; 
+    }
+  }
+}
 .loading-button {
   background-image: url(/assets/loading.gif) !important;
   background-position: center center;
   background-repeat: no-repeat;
-  color: rgba(0, 0, 0, 0.0);
+  color: rgba(0, 0, 0, 0.0) !important;
 }
 
 #listenForm { 
   text-align: center; 
-  margin-bottom: 30px; 
+  margin-bottom: 20px; 
   background: #efefef;
   background: rgba(255, 255, 255, .3);
-  padding: 10px;
   border-radius: 3px;
   border: solid 1px #ccc;
 }
@@ -200,34 +218,43 @@ input[type=button]:hover, input[type=submit]:hover {
   text-align: center;
 }
 
-#playlist-header {
-  margin: 20px 0px;
+#share {
+  text-align: right;
+  margin-bottom: 10px;
+
+  img {
+    width: 16px;
+    cursor: pointer;
+    vertical-align: middle;
+  }
 }
-#playlist-header #share {
-  float: right;
-  font-size: 11px;
-  font-weight: normal;
-}
-#playlist-header #share a {
-  color: #716EB2;
-}
+
 #playlist {
   margin-top: 10px;
   margin-bottom: 10px;
+  
+  a {
+    display: block;
+    color: #464646;
+  	text-decoration: none;
+  	padding: 20px 0px;
+    border-top: dotted 1px #ccc;
+
+    &:first-child {
+      border-top: none;
+      padding-top: 10px;
+    }
+
+    &.active {
+    	color: #2667D4;
+    }
+
+    &:hover {
+      color: #2667D4 !important;
+    }
+  }
 }
-#playlist a {
-  display: block;
-  color: #464646;
-	text-decoration: none;
-	padding: 20px 0px;
-  border-top: dotted 1px #ccc;
-}
-#playlist a.active {
-	color: #716EB2;
-}
-#playlist a:hover {
-  color: #716EB2 !important;
-}
+
 .share-video {
 	display: none;
 	float: right;
@@ -361,12 +388,7 @@ section {
 .social .twitter {}
 .social iframe { display: block; margin-top: 10px}
 
-#info { line-height: 18px; display: none; margin: 0 auto; margin-top: 20px; margin-bottom: 10px; }
-
-#info h3 {
-  font-size: 16px;
-  margin-bottom:10px;
-}
+#info { line-height: 18px; }
 
 .ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 .ui-widget-overlay { background: #000; background: -webkit-radial-gradient(50% 50%, ellipse closest-corner, rgba(0, 0, 0, 0.3) 1%, rgba(0, 0, 0, 0.725) 100%); background: -moz-radial-gradient(50% 50%, ellipse closest-corner, rgba(0, 0, 0, 0.3) 1%, rgba(0, 0, 0, 0.725) 100%); filter: Alpha(Opacity=30); }
@@ -387,7 +409,7 @@ section {
   font-size: 12px;
 }
 #about-tubalr p a {
-  color: #716EB2;
+  color: #2667D4;
 }
 #about-tubalr h3 {
   font-size: 17px;
@@ -499,13 +521,17 @@ ul#playlists li.already-in-playlist {
       li {
         margin-top: 10px;
         cursor: pointer;
+        moz-transition: all .3s;
+        -o-transition: all .3s;
+        -webkit-transition: all .3s;
+        transition: all .3s;
         
         &:first-child {
           margin-top: 0px;
         }
         
         &:hover {
-          color: #716EB2;
+          color: #2667D4;
         }
       }
     }
