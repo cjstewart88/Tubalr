@@ -312,7 +312,7 @@ function initPlaylist () {
   	  prev_search = search;
   	}
 	
-  	$('#twitter').attr('href',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+(search_type == 'playlist' ? playlist_owner.replace(/[ +]/g,"%2B")+"%2Fplaylist%2F"+search.replace(/[ +]/g,"%2B") : search_type+"%2F"+search.replace(/[ +]/g,"%2B")));
+  	$('#twitter').data('url',"https://twitter.com/share?text=I%27m%20listening%20to%20"+(search_type == 'similar' ? 'artists%2Fbands%20similar%20to%20' : '')+search.replace(/ /g,"%20")+"%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2F"+(search_type == 'playlist' ? playlist_owner.replace(/[ +]/g,"%2B")+"%2Fplaylist%2F"+search.replace(/[ +]/g,"%2B") : search_type+"%2F"+search.replace(/[ +]/g,"%2B")));
 
   	currentVideo(videos[currenttrack]);
 	  firstSearch = false;
@@ -827,13 +827,13 @@ $(document).ready(function () {
         height = 400,
         left   = ($(window).width()  - width)  / 2,
         top    = ($(window).height() - height) / 2,
-        url    = this.href,
+        url    = $(this).data("url"),
         opts   = 'status=1' +
                  ',width='  + width  +
                  ',height=' + height +
                  ',top='    + top    +
                  ',left='   + left;
-    
+
     window.open(url, 'twitter', opts);
  
     return false;
