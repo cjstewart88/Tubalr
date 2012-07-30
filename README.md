@@ -7,3 +7,7 @@ http://www.tubalr.com/similar/Fleet+Foxes
 
 Discover genres:
 http://www.tubalr.com/genres
+
+# Contributions Welcome!
+Please go for it if you're interested in pitching in to make Tubalr better. 
+Tubalr's source is under the GNU GENERAL PUBLIC LICENSE, please refer to the `LICENSE.md` file for any further reading.
