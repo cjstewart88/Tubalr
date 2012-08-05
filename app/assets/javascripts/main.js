@@ -120,30 +120,34 @@ function prepare_search (who, type_of_search) {
 function genreSearch (who) {
   prepare_search(who, "genre");
   
-	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag='+who+'&api_key=b25b959554ed76058ac220b7b2e0a026&limit=20&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
-		$.each(data, function(i,artists) {
-			var ajaxs = $.map(artists.artist, function(artist) {
-				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+artist.name+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?', function(data) {
-					$.each(data.feed.entry, function(i,video) {
-						var video_is_good = false;
+	$.getJSON('http://developer.echonest.com/api/v4/artist/search?api_key=OYJRQNQMCGIOZLFIW&format=jsonp&callback=?&results=20&style='+who, function(data) {
+		var ajaxs = [];
+
+		$.each(data.response.artists, function (i, artist) {
+      ajaxs.push(
+        $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+artist.name+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?', function(data) {
+  		  	$.each(data.feed.entry, function (i,video) {
+    			  var video_is_good = false;
+          
             if (!video_is_good && !is_blocked(video) && is_music(video) && !is_cover_or_remix(video)) {
-						  videos.push({ 
+  					  videos.push({ 
   							VideoID: video.id.$t.split(":")[3], 
   							VideoTitle: video.title.$t,
   							ArtistName: artist.name 
   						});
   					  video_is_good = true;
   					}
-					});
-				});
-			});
-			$.when.apply($,ajaxs).then(initPlaylist);
-		});
+    			});
+  		  })
+  	  )
+  	});
+		
+		$.when.apply($,ajaxs).then(initPlaylist);
 	});  
 }
 
-// artist wasnt found in last.fm artist data store
-function not_lastfm_artist (who) {
+// artist wasnt found in echonest artist data store
+function not_echonest_artist (who) {
   prepare_search(who, "just");
   
   $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
@@ -185,26 +189,27 @@ function video (video_id) {
 
 // just artist/band
 function just (who) {
-  // check if the users input is a last.fm top tag
   if ($.inArray(who.replace(/[ +]/g, ""), genres) > -1) {
     genreSearch(who);
   }
   else {
     prepare_search(who, "just");
     
-    $.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist='+escape(who)+'&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
-      if (data.error == 6 || data.toptracks.total == 0) {
-        not_lastfm_artist(who);
+    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name='+escape(who)+'&format=jsonp&callback=?&start=0&results=40' , function(data) {
+      if (data.response.status.code == 5) {
+        not_echonest_artist(who);
       }
       else {
-        $.each(data, function(i, tracks) {
-          var ajaxs = $.map(tracks.track, function(track) {
-            if (track.name.toLowerCase().search("cover") == -1 && track.name.toLowerCase().search("remix") == -1 && track.name.toLowerCase().search("alternate") == -1) {
-              return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'%20%2D$20'+escape(track.name)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?', function(data) {
+        var ajaxs = [];
+        
+        $.each(data.response.songs, function (i, track) {
+          if (track.title.toLowerCase().search("cover") == -1 && track.title.toLowerCase().search("remix") == -1) {
+            ajaxs.push(
+              $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'%20%2D$20'+escape(track.title)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?', function(data) {
                 if (typeof data.feed.entry !== "undefined") {
                   $.each(data.feed.entry, function(i,video) {
                     var video_is_good = false;
-                    if (!video_is_good && !is_blocked(video) && !is_live(video) && is_music(video) && is_unique(track.name, video) && !is_cover_or_remix(video) && is_not_banned(video.id.$t.split(":")[3])) {
+                    if (!video_is_good && !is_blocked(video) && !is_live(video) && is_music(video) && is_unique(track.title, video) && !is_cover_or_remix(video) && is_not_banned(video.id.$t.split(":")[3])) {
                       videos.push({ 
                         VideoID: video.id.$t.split(":")[3], 
                         VideoTitle: video.title.$t
@@ -213,11 +218,12 @@ function just (who) {
                     }
                   });
                 }
-              });
-            }
-          });
-          $.when.apply($,ajaxs).then(initPlaylist);
+              })
+            );
+          }
         });
+        
+        $.when.apply($,ajaxs).then(initPlaylist);
       }
     });
   } 
@@ -227,26 +233,30 @@ function just (who) {
 function similarTo (who) {
   prepare_search(who, "similar");
   
-	$.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getsimilar&artist='+escape(who)+'&limit=20&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
-		$.each(data, function(i,similars) {
-			var ajaxs = $.map(similars.artist, function(artist) {
-				return $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(artist.name)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?&format=5', function(data) {
+	$.getJSON('http://developer.echonest.com/api/v4/artist/similar?api_key=OYJRQNQMCGIOZLFIW&name='+escape(who)+'&format=jsonp&callback=?&results=20&start=0', function(data) {
+		var ajaxs = [];
+		
+		$.each(data.response.artists, function (i, artist) {
+			ajaxs.push($.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(artist.name)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?&format=5', function(data) {
 					$.each(data.feed.entry, function(i,video) {
 						var video_is_good = false;
+            
             if (!video_is_good && !is_blocked(video) && is_music(video) && !is_cover_or_remix(video) && is_not_banned(video.id.$t.split(":")[3])) {
 					  	videos.push({ 
   							VideoID: video.id.$t.split(":")[3], 
   							VideoTitle: video.title.$t,
   							ArtistName: artist.name 
   						});
+  						
   						video_is_good = true;
   					}
 					});
-				});
-			});
-			$.when.apply($,ajaxs).then(initPlaylist);
-		});
-	});
+				})
+			)
+	  });
+	  
+	  $.when.apply($,ajaxs).then(initPlaylist);
+  });
 }
 
 // user playlist
@@ -516,21 +526,22 @@ function remove_video () {
 
 function getInfo () {
   var tmpWho = "";
-  if (search_type == 'similar' || search_type == 'genre') {
+  if (search_type == 'similar') {
     tmpWho = videos[currenttrack].ArtistName;
   }
   else {
    tmpWho = search; 
   }
   
-  $.getJSON('http://ws.audioscrobbler.com/2.0/?method=artist.getInfo&artist='+tmpWho+'&api_key=b25b959554ed76058ac220b7b2e0a026&format=json&callback=?', function(data) {
-		if (data.error == 6 || data.artist.bio.content == "") {
+  $.getJSON('http://developer.echonest.com/api/v4/artist/biographies?api_key=OYJRQNQMCGIOZLFIW&name=' + tmpWho + '&format=jsonp&callback=?&results=1&start=0&license=cc-by-sa', function(data) {
+		if (data.response.status.code == 5) {
 		  $('#info').dialog({ title: "No Info" });
 		  $('#info').html('No information could be found for the artist/band you supplied.');
 		}
 		else {
+		  console.log(data);
 		  $('#info').dialog({ title: tmpWho.replace(/[+]/g,' ') });
-		  $('#info').html(data.artist.bio.content.replace(/[\n]/g,"<br/>"));
+		  $('#info').html(data.response.biographies[0].text.replace(/[\n]/g,"<br/>"));
 		}
 	});
 }

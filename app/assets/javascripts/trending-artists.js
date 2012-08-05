@@ -3,8 +3,8 @@
     var self = this;
     var number_of_artists = options.limit;
 
-    $.getJSON("http://ws.audioscrobbler.com/2.0/?method=chart.gethypedartists&api_key=b25b959554ed76058ac220b7b2e0a026&limit=" + number_of_artists + "&format=json&callback=?", function(data) {
-      $.each(data.artists.artist, function() {
+    $.getJSON("http://developer.echonest.com/api/v4/artist/top_hottt?api_key=OYJRQNQMCGIOZLFIW&format=jsonp&results=" + number_of_artists + "&start=0&bucket=hotttnesss&callback=?", function(data) {
+      $.each(data.response.artists, function() {
         var artist = this;
         
         var artist_list_item = $("<li>");

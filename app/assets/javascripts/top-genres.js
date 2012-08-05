@@ -3,8 +3,8 @@
     var self = this;
     var number_of_genres = options.limit;
     
-    $.getJSON("http://ws.audioscrobbler.com/2.0/?method=chart.gettoptags&api_key=b25b959554ed76058ac220b7b2e0a026&limit=" + number_of_genres + "&format=json&callback=?", function(data) {
-      $.each(data.tags.tag, function() {
+    $.getJSON("http://developer.echonest.com/api/v4/artist/top_terms?api_key=OYJRQNQMCGIOZLFIW&format=jsonp&callback=?&results=" + number_of_genres, function(data) {
+      $.each(data.response.terms, function() {
         var genre = this;
         
         var genre_list_item = $("<li>");
