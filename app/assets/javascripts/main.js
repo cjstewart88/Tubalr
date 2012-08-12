@@ -420,7 +420,7 @@ function jumpTo (VideoID) {
 // next
 function nextSong (removedFromList) {
   direction = "forward";
-  console.log(currenttrack);
+
   if (removedFromList) {
     if (currenttrack == videos.length) {
       currenttrack = 0;
@@ -582,7 +582,6 @@ function getInfo () {
 		  $('#info').html('No information could be found for the artist/band you supplied.');
 		}
 		else {
-		  console.log(data);
 		  $('#info').dialog({ title: tmpWho.replace(/[+]/g,' ') });
 		  $('#info').html(data.response.biographies[0].text.replace(/[\n]/g,"<br/>"));
 		}
