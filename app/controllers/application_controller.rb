@@ -18,4 +18,8 @@ class ApplicationController < ActionController::Base
   def explore
     render :layout => "application", :template => "explore"
   end
+  
+  def rain
+    render :layout => "application", :template => "rain"
+  end
 end

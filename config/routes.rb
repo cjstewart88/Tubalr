@@ -7,6 +7,8 @@ Tubalr::Application.routes.draw do
   get "/video_viewed/:video_id"                 => "api#video_viewed"
   get "/:username/playlist/:playlist_name.json" => "api#user_playlist"
   
+  get "/rain"                                 => "application#rain"
+  
   get "/stats"                                => "stats#index"
   
   get "/explore"                              => "application#explore"
