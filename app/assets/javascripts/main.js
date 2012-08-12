@@ -187,6 +187,49 @@ function video (video_id) {
 	});
 }
 
+function rain () {
+  firstSearch = false;
+  videos = [{ VideoID: '1pSyYhRYeIM', VideoTitle: 'rain' }];
+  
+  var tag = document.createElement('script');
+  tag.src = "http://www.youtube.com/player_api?version=3";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  
+  $.get('/insert_search/relaxation/rain');
+}
+
+function share_rain_on_facebook () {
+  FB.ui({
+      method: 'stream.publish',
+      attachment: {
+        name: "Relaxing rain, brought to you by tubalr!",
+        href: "http://www.tubalr.com/rain",
+        description: ("Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without all the clutter YouTube brings.")
+      },
+      display: 'popup'
+    },
+    function (response) {
+    }
+  );
+  return false;
+}
+
+function share_rain_on_twitter () {
+  var width  = 575,
+      height = 400,
+      left   = ($(window).width()  - width)  / 2,
+      top    = ($(window).height() - height) / 2,
+      url    = "https://twitter.com/share?text=I%27m%20listening%20to%20relaxing%20rain%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2Frain",
+      opts   = 'status=1' +
+               ',width='  + width  +
+               ',height=' + height +
+               ',top='    + top    +
+               ',left='   + left;
+
+  window.open(url, 'twitter', opts);
+}
+
 // just artist/band
 function just (who) {
   if ($.inArray(who.replace(/[ +]/g, ""), genres) > -1) {
@@ -377,7 +420,7 @@ function jumpTo (VideoID) {
 // next
 function nextSong (removedFromList) {
   direction = "forward";
-  
+  console.log(currenttrack);
   if (removedFromList) {
     if (currenttrack == videos.length) {
       currenttrack = 0;
@@ -634,6 +677,7 @@ function detect_mobile () {
     $('#inner-main').addClass('mobile-inner-main');
     $('#listenForm input').addClass('mobile');
     $('.why-register').remove();
+    $('#rain').addClass('mobile');
   }
 }
 

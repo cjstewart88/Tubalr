@@ -551,8 +551,15 @@ ul#playlists li.already-in-playlist {
 #rain {
   text-align: center;
   
-  #rain-player {
+  #ytplayerid {
     display: none;
+  }
+  
+  &.mobile {
+    #ytlayerid {
+      display: block;
+      margin-top: 20px;
+    }
   }
   
   #share-rain {
