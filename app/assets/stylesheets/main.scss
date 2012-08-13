@@ -384,9 +384,12 @@ section {
 #users-main p {
   margin-bottom: 15px;
 }
+.social { opacity: .5; }
 .social { position: fixed; bottom: 10px; left: 10px; }
 .social .twitter {}
 .social iframe { display: block; margin-top: 10px}
+.social #beer-button { margin-top: 10px; padding: 2px 10px; font-size: 10px; }
+
 
 #info { line-height: 18px; }
 
@@ -402,18 +405,36 @@ section {
 
 #about-tubalr, #playlists-dialog { display: none; }
 
-#about-tubalr p {
-  display: block;
-  margin-bottom: 15px;
-  line-height: 16px;
-  font-size: 12px;
-}
-#about-tubalr p a {
-  color: #2667D4;
-}
-#about-tubalr h3 {
-  font-size: 17px;
-  margin-bottom: 10px;
+#about-tubalr {
+  p {
+    display: block;
+    margin-bottom: 15px;
+    line-height: 16px;
+    font-size: 12px;
+    
+    a {
+      color: #2667D4;
+    }
+  }
+  
+  h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+  
+  h4 {
+    font-size: 14px;
+    text-align: center;
+  }
+  
+  form {
+    text-align: center;
+    font-style: italic;
+    
+    input {
+      margin: 0 10px;
+    }
+  }
 }
 
 #users-main ul  { list-style-type: none; }

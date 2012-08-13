@@ -232,6 +232,10 @@ function share_rain_on_twitter () {
 
 // just artist/band
 function just (who) {
+  if (who == "rain" || who == "relaxing rain" || who == "rain recording") {
+    window.location = "/rain";
+  }
+  
   if ($.inArray(who.replace(/[ +]/g, ""), genres) > -1) {
     genreSearch(who);
   }
@@ -906,4 +910,14 @@ $(document).ready(function () {
   });
   
   $('#facebook').click(function () { facebook(); });
+  
+  $('.social').mouseenter(function () {
+    $(this).animate({
+      opacity: '1'
+    });
+  }).mouseleave(function () {
+    $(this).animate({
+      opacity: '.5'
+    });
+  });
 });
