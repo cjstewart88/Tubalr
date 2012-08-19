@@ -11,8 +11,8 @@ Tubalr::Application.routes.draw do
   
   get "/stats"                                => "stats#index"
   
-  get "/explore"                              => "application#explore"
-  get "/genres"                               => "application#explore"
+  get "/explore"                              => "explore#index"
+  get "/recently_watched/:limit"              => "explore#recently_watched"
   
   get "/genre/:artist_band"                   => "application#index"
   get "/just/:artist_band"                    => "application#index"

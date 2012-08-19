@@ -7,15 +7,30 @@
 <% if !request.path.index("similar") && !request.path.index("just") && !request.path.index("video") && !request.path.index("genre") && !@playlist_name  %>
   <div id="explore">
     <section id="trending-artists">
-      <h2>trending artists</h2>
+      <h2>
+        <a href="/explore">more...</a>
+        trending artists
+      </h2>
       <ul id="trending-artists-list" class="loading-list"></ul>
-      <script>$('#trending-artists-list').trendingArtists({ limit: 10, font_page: true });</script>
+      <script>$('#trending-artists-list').trendingArtists({ limit: 15, font_page: true });</script>
     </section>
     
     <section id="top-genres">
-      <h2>top genres</h2>
+      <h2>
+        <a href="/explore">more...</a>
+        top genres
+      </h2>
       <ul id="top-genres-list" class="loading-list"></ul>
-      <script>$('#top-genres-list').topGenres({ limit: 10, font_page: true });</script>
+      <script>$('#top-genres-list').topGenres({ limit: 15, font_page: true });</script>
+    </section>
+    
+    <section id="recently-watched">
+      <h2>
+        <a href="/explore">more...</a>
+        Recently Watched
+      </h2>
+      <ul id="recently-watched-list" class="loading-list"></ul>
+      <script>$('#recently-watched-list').recentlyWatched({ limit: 15, font_page: true });</script>
     </section>
   </div>
 <% end %>

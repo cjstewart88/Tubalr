@@ -14,10 +14,6 @@ class ApplicationController < ActionController::Base
   def index
     render :layout => "application", :template => "index"
   end
-    
-  def explore
-    render :layout => "application", :template => "explore"
-  end
   
   def rain
     render :layout => "application", :template => "rain"

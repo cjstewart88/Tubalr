@@ -319,54 +319,39 @@ input[type=button]:hover, input[type=submit]:hover {
 #player-controls-right { float: right; }
 #remove-video:hover { color: red; }
 
-#stats-main h3 {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-#stats-main ol {
-  margin-left: 28px;
-  font-size: 16px;
-  margin-top: 15px;
-  margin-bottom: 30px;
-}
-#stats-main ol li {
-  margin-bottom: 10px;
-}
-
-#stats-main table {
+table {
   margin-bottom: 20px;
   width: 100%;
   border-spacing: 0;
 }
-#stats-main table tr.clickable-row:hover {
+table tr.clickable-row:hover {
   background: #F1EFD3;
   cursor: pointer;
 }
-#stats-main table tr td {
+table tr td {
   padding: 10px 5px;
   border-right: dotted 1px #ababab;
   border-bottom: dotted 1px #ababab;
 }
-#stats-main table tr td:last-child {
+table tr td:last-child {
   border-right: none;  
   width: 130px;
 }
-#stats-main table thead {
+table thead {
   font-weight: bold;
 }
-#stats-main table tbody tr:last-child td {
+table tbody tr:last-child td {
   border-bottom: none;
 }
 
-#stats-main table#general tbody tr {
+table#general tbody tr {
   font-size: 16px;
   padding: 0px;
 }
-#stats-main table#general tbody tr td:last-child {
+table#general tbody tr td:last-child {
   text-align: right;
 }
-#stats-main table#general tr td {
+table#general tr td {
   border: none;
   padding: 5px 0px;
 }
@@ -379,16 +364,32 @@ section {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   border: solid 1px #ccc;
+  margin-bottom: 20px;
 }
 
 #users-main p {
   margin-bottom: 15px;
 }
-.social { opacity: .5; }
-.social { position: fixed; bottom: 10px; left: 10px; }
-.social .twitter {}
-.social iframe { display: block; margin-top: 10px}
-.social #beer-button { margin-top: 10px; padding: 2px 10px; font-size: 10px; }
+
+.social { 
+  max-width: 250px;
+  overflow: hidden;
+  opacity: .5;
+  position: fixed; 
+  bottom: 10px; 
+  left: 10px; 
+  
+  iframe {
+    display: block; 
+    margin-top: 10px
+  }
+  
+  #beer-button {
+    margin-top: 10px; 
+    padding: 2px 10px; 
+    font-size: 10px;
+  }
+}
 
 
 #info { line-height: 18px; }
@@ -515,11 +516,23 @@ ul#playlists li.already-in-playlist {
 }
 
 #explore {
+  vertical-align: top;
+  
   section {
     float: left;
-    width: 348px;
+    width: 211px;
     margin-right: 20px;
     margin-bottom: 20px;
+    
+    h2 {
+      a { 
+        float: right; 
+        line-height: 19px;
+        text-transform: lowercase;
+        font-size: 10px;
+        font-weight: normal;
+      }
+    }
     
     &:last-child {
       margin-right: 0;
@@ -537,6 +550,10 @@ ul#playlists li.already-in-playlist {
       
       &.loading-list {
         background: url("/assets/loading-list.gif") no-repeat center center;
+
+        li {
+          display: none;
+        }
       }
       
       li {
@@ -546,6 +563,9 @@ ul#playlists li.already-in-playlist {
         -o-transition: all .3s;
         -webkit-transition: all .3s;
         transition: all .3s;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         
         &:first-child {
           margin-top: 0px;

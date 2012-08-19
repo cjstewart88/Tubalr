@@ -379,7 +379,7 @@ function initPlaylist () {
     }
   	
   	if (search_type == 'playlist' || search_type == 'video') {
-  	  $('#info-icon').hide();
+  	  $('#info-button').hide();
   	}
   	else {
   	  $('#info-icon').show();
@@ -670,7 +670,6 @@ function detect_mobile () {
     $('#notices').remove();
     $('.about-tubalr').remove();
     $('.blog-link').remove();
-    $('.stats-link').remove();
     $('.settings-link').remove();
     $('aside#icons').remove();
     $('#playlists-opener').remove();
