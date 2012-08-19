@@ -573,7 +573,7 @@ function remove_video () {
 
 function getInfo () {
   var tmpWho = "";
-  if (search_type == 'similar') {
+  if (search_type == 'similar' || search_type == 'genre') {
     tmpWho = videos[currenttrack].ArtistName;
   }
   else {
