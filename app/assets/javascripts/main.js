@@ -112,7 +112,7 @@ function prepare_search (who, type_of_search) {
   $('#player').hide();
   $('#empty-playlist').hide();
   $('#explore').hide();
-  $('#loading-playlist').fadeIn();
+  $('#loading-playlist').show();
 
   videos        = []; 
   currenttrack  = 0;
@@ -155,7 +155,7 @@ function not_echonest_artist (who) {
   prepare_search(who, "just");
   
   $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
-    $.each(data.feed.entry, function(i,video) {
+    $.each(data.feed.entry, function (i, video) {
       if (!is_blocked(video) && is_not_banned(video.id.$t.split(":")[3])) {
         videos.push({ 
           VideoID: video.id.$t.split(":")[3], 
@@ -163,6 +163,7 @@ function not_echonest_artist (who) {
         });
       }
     });
+    
     initPlaylist();
   });
 }
@@ -417,7 +418,7 @@ function initPlaylist () {
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
-
+    console.log($('#loading-playlist').css('display'))
     $('#loading-playlist').hide();
     $('#explore').fadeOut();
      
