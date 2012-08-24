@@ -743,6 +743,7 @@ function detect_mobile () {
     $('#listenForm input').addClass('mobile');
     $('.why-register').remove();
     $('#rain').addClass('mobile');
+    $('#searching-info').hide();
   }
 }
 
