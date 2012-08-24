@@ -368,7 +368,6 @@ section {
 .social { 
   max-width: 250px;
   overflow: hidden;
-  opacity: .5;
   position: fixed; 
   bottom: 10px; 
   left: 10px; 
@@ -376,12 +375,6 @@ section {
   iframe {
     display: block; 
     margin-top: 10px
-  }
-  
-  #beer-button {
-    margin-top: 10px; 
-    padding: 2px 10px; 
-    font-size: 10px;
   }
 }
 
@@ -415,20 +408,6 @@ section {
   h3 {
     font-size: 17px;
     margin-bottom: 10px;
-  }
-  
-  h4 {
-    font-size: 14px;
-    text-align: center;
-  }
-  
-  form {
-    text-align: center;
-    font-style: italic;
-    
-    input {
-      margin: 0 10px;
-    }
   }
 }
 
@@ -656,4 +635,34 @@ ul#playlists li.already-in-playlist {
   height: 200px;
   background: url('/assets/loading.gif') no-repeat center center;
   border: none;
+}
+
+#searching-info {
+  position: absolute;
+  margin-top: 25px;
+  width: 14px;
+  cursor: pointer;
+}
+
+#searching-info-dialog {
+  ol {
+    margin-left: 15px;
+    line-height: 18px;
+    
+    li {
+      margin-bottom: 15px;
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+      
+      h3 {
+        font-size: 14px;
+      }
+      
+      i {
+        font-weight: bold;
+      }
+    }
+  }
 }

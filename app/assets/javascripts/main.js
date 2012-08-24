@@ -973,13 +973,13 @@ $(document).ready(function () {
   
   $('#facebook').click(function () { facebook(); });
   
-  $('.social').mouseenter(function () {
-    $(this).animate({
-      opacity: '1'
-    });
-  }).mouseleave(function () {
-    $(this).animate({
-      opacity: '.5'
-    });
+  // searching info
+  $('#searching-info-dialog').dialog({
+    modal: true,
+    autoOpen: false,
+    width: (is_mobile ? 500 : 600),
+    draggable: false,
+    title: 'Search Methods'
   });
+  $('#searching-info').click(function () { $('#searching-info-dialog').dialog('open'); });
 });
