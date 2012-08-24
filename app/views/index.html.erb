@@ -4,7 +4,7 @@
   <input type="button" name="similar" value="similar" class="listen similar tooltip" tabindex="3" original-title="This search method will find artists and bands similar to your search."/><br/>
 </form>
 
-<% if !request.path.index("similar") && !request.path.index("just") && !request.path.index("video") && !request.path.index("genre") && !@playlist_name  %>
+<% if !request.path.index("similar") && !request.path.index("just") && !request.path.index("video") && !request.path.index("genre") && !request.path.index("multi") && !@playlist_name  %>
   <div id="explore">
     <section id="trending-artists">
       <h2>
@@ -34,6 +34,8 @@
     </section>
   </div>
 <% end %>
+
+<section id="loading-playlist"></section>
 
 <section id="empty-playlist">
   o_O This playlist has 0 videos... this is kinda weird.
@@ -108,6 +110,7 @@
 
 <script>
   <%= "setUserInfo(#{current_user.id}, '#{escape_javascript(current_user.username)}')"                      if user_signed_in?                                            %>
+  <%= "multi('#{escape_javascript(params[:artist_band])}');"                                                if request.path.index("multi")                                %>
   <%= "just('#{escape_javascript(params[:artist_band])}');"                                                 if request.path.index("just") || request.path.index("genre")  %>
   <%= "video('#{escape_javascript(params[:video_id])}');"                                                   if request.path.index("video")                                %>
   <%= "similarTo('#{escape_javascript(params[:artist_band])}');"                                            if request.path.index("similar")                              %>

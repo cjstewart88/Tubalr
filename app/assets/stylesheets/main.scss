@@ -177,12 +177,6 @@ input[type=button]:hover, input[type=submit]:hover {
     }
   }
 }
-.loading-button {
-  background-image: url(/assets/loading.gif) !important;
-  background-position: center center;
-  background-repeat: no-repeat;
-  color: rgba(0, 0, 0, 0.0) !important;
-}
 
 #listenForm { 
   text-align: center; 
@@ -655,4 +649,11 @@ ul#playlists li.already-in-playlist {
   -moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
   border-color: #999; 
   color: #464646; 
+}
+
+#loading-playlist {
+  display: none;
+  height: 200px;
+  background: url('/assets/loading.gif') no-repeat center center;
+  border: none;
 }

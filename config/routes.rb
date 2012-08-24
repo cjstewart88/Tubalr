@@ -15,6 +15,7 @@ Tubalr::Application.routes.draw do
   get "/recently_watched/:limit"              => "explore#recently_watched"
   
   get "/genre/:artist_band"                   => "application#index"
+  get "/multi/:artist_band"                   => "application#index"
   get "/just/:artist_band"                    => "application#index"
   get "/similar/:artist_band"                 => "application#index"
   get "/video/:video_id"                      => "application#index"

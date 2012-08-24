@@ -23,7 +23,7 @@ class ExploreController < ApplicationController
     tmp_recent_searches = Searches.find(:all, :limit => 100, :order => "created_at DESC")
   
     tmp_recent_searches.each do | search |
-      if search.search_type == 'just' || search.search_type == 'genre' || search.search_type == 'similar'
+      if search.search_type == 'just' || search.search_type == 'genre' || search.search_type == 'similar' || search.search_type == 'multi'
         if @recent_searches.select {|s| s[:what] == search.what.gsub("+"," ") && s[:who] == search.who }.length == 0
           @recent_searches << {
             :what => search.what.gsub("+"," "),

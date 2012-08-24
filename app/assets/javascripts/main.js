@@ -108,7 +108,11 @@ function is_not_banned (video_id) {
 }
 
 function prepare_search (who, type_of_search) {
-  $('.' + type_of_search).addClass('loading-button');
+  if (thePlayer) thePlayer.stopVideo();
+  $('#player').hide();
+  $('#empty-playlist').hide();
+  $('#explore').hide();
+  $('#loading-playlist').fadeIn();
 
   videos        = []; 
   currenttrack  = 0;
@@ -230,6 +234,59 @@ function share_rain_on_twitter () {
   window.open(url, 'twitter', opts);
 }
 
+// multi search
+function is_multi_search (who) {
+  if (who.split(";").length > 1) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+function multi (who) {
+  var artists = [];
+  
+  $.each(who.split(";"), function (i, artist) {
+    artists.push($.trim(artist));
+  });
+  
+  prepare_search(artists.join(";"), "multi");
+
+  var get_artist_tracks_calls = [];
+  var get_videos_calls        = [];
+  
+  $.each(artists, function (i, artist) {
+    get_artist_tracks_calls.push($.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name='+escape(artist)+'&format=jsonp&callback=?&start=0&results=15' , function (data) {
+      if (data.response.status.code != 5) {
+        $.each(data.response.songs, function (i, track) {
+          get_videos_calls.push($.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(artist)+'%20%2D$20'+escape(track.title)+'&orderby=relevance&start-index=1&max-results=5&v=2&alt=json-in-script&callback=?&format=5', function (data) {            
+  					if (typeof data.feed.entry !== "undefined") {
+    					var video_is_good = false;
+
+      				$.each(data.feed.entry, function (i, video) {
+                if (!video_is_good && !is_blocked(video) && is_music(video) && !is_cover_or_remix(video) && is_not_banned(video.id.$t.split(":")[3])) {
+      				  	videos.push({ 
+      							VideoID: video.id.$t.split(":")[3], 
+      							VideoTitle: video.title.$t,
+      							ArtistName: artist 
+      						});
+    						
+      						video_is_good = true;
+      					}
+      				});
+            }
+    			}));
+        });
+      }
+    }));
+  });
+  
+  $.when.apply($, get_artist_tracks_calls).then(function () {
+    $.when.apply($, get_videos_calls).then(initPlaylist);      
+  });
+}
+
 // just artist/band
 function just (who) {
   if (who == "rain" || who == "relaxing rain" || who == "rain recording") {
@@ -240,6 +297,11 @@ function just (who) {
     genreSearch(who);
   }
   else {
+    if (is_multi_search(who)) {
+      multi(who);
+      return;
+    } 
+    
     prepare_search(who, "just");
     
     $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name='+escape(who)+'&format=jsonp&callback=?&start=0&results=40' , function(data) {
@@ -254,13 +316,15 @@ function just (who) {
             ajaxs.push(
               $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'%20%2D$20'+escape(track.title)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?', function(data) {
                 if (typeof data.feed.entry !== "undefined") {
+                  var video_is_good = false;
+                  
                   $.each(data.feed.entry, function(i,video) {
-                    var video_is_good = false;
                     if (!video_is_good && !is_blocked(video) && !is_live(video) && is_music(video) && is_unique(track.title, video) && !is_cover_or_remix(video) && is_not_banned(video.id.$t.split(":")[3])) {
                       videos.push({ 
                         VideoID: video.id.$t.split(":")[3], 
                         VideoTitle: video.title.$t
                       }); 
+                      
                       video_is_good = true;
                     }
                   });
@@ -285,9 +349,9 @@ function similarTo (who) {
 		
 		$.each(data.response.artists, function (i, artist) {
 			ajaxs.push($.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(artist.name)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?&format=5', function(data) {
-					$.each(data.feed.entry, function(i,video) {
-						var video_is_good = false;
-            
+					var video_is_good = false;
+					
+					$.each(data.feed.entry, function (i, video) {  
             if (!video_is_good && !is_blocked(video) && is_music(video) && !is_cover_or_remix(video) && is_not_banned(video.id.$t.split(":")[3])) {
 					  	videos.push({ 
   							VideoID: video.id.$t.split(":")[3], 
@@ -339,7 +403,7 @@ function onYouTubePlayerAPIReady () {
 // start the playlist
 function initPlaylist () {
   if (videos.length == 0) {
-    $('.loading-button').removeClass('loading-button');
+    $('#loading-playlist').hide();
     $('#empty-playlist').fadeIn();
   }
   else {
@@ -354,8 +418,7 @@ function initPlaylist () {
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
 
-    $('.loading-button').removeClass('loading-button');
-    $('#empty-playlist').fadeOut();
+    $('#loading-playlist').hide();
     $('#explore').fadeOut();
      
     videosCopy = "";
@@ -400,7 +463,7 @@ function initPlaylist () {
 
 // denote current song in the ui
 function currentVideo (video) {
-  if (search_type == 'similar' || search_type == 'genre') {
+  if (search_type == 'similar' || search_type == 'genre' || search_type == 'multi') {
     getInfo();
   }
   
@@ -573,7 +636,7 @@ function remove_video () {
 
 function getInfo () {
   var tmpWho = "";
-  if (search_type == 'similar' || search_type == 'genre') {
+  if (search_type == 'similar' || search_type == 'genre' || search_type == 'multi') {
     tmpWho = videos[currenttrack].ArtistName;
   }
   else {
