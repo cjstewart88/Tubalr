@@ -418,7 +418,7 @@ function initPlaylist () {
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     }
-    console.log($('#loading-playlist').css('display'))
+
     $('#loading-playlist').hide();
     $('#explore').fadeOut();
      
@@ -549,7 +549,7 @@ function facebook () {
   FB.ui({
       method: 'stream.publish',
       attachment: {
-        name: (search_type == 'similar' ? 'Artists/Bands similar to ' : '')+search.replace(/[+]/g," ")+", brought to you by tubalr!",
+        name: (search_type == 'similar' ? 'Artists/Bands similar to ' : '')+unescape(search.replace(/[+]/g," "))+", brought to you by tubalr!",
         href: "http://www.tubalr.com/"+(search_type == 'playlist' ? playlist_owner.replace(/ /g,"+")+'/playlist/'+search.replace(/ /g,"+") : search_type+"/"+search.replace(/ /g,"+")),
         description: ("Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without all the clutter YouTube brings.")
       },
@@ -984,4 +984,6 @@ $(document).ready(function () {
     title: 'Search Methods'
   });
   $('#searching-info').click(function () { $('#searching-info-dialog').dialog('open'); });
+
+  $('#q').autoArtist();
 });

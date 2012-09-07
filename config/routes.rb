@@ -13,7 +13,8 @@ Tubalr::Application.routes.draw do
   
   get "/explore"                              => "explore#index"
   get "/recently_watched/:limit"              => "explore#recently_watched"
-  
+  get "/get_random_playlists/:limit"          => "explore#get_random_playlists"
+
   get "/genre/:artist_band"                   => "application#index"
   get "/multi/:artist_band"                   => "application#index"
   get "/just/:artist_band"                    => "application#index"
@@ -26,6 +27,7 @@ Tubalr::Application.routes.draw do
   match "/playlist/add_video"                 => "playlists#add_video"
   match "/playlist/delete_video"              => "playlists#delete_video"
   match "/get_playlists_video_belongs_to"     => "playlists#get_playlists_video_belongs_to"
+  
   
   post "/check_banned"                        => "bannedVideos#check"
   post "/ban_video"                           => "bannedVideos#ban_video"
