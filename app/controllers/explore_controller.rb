@@ -83,6 +83,7 @@ class ExploreController < ApplicationController
                                                                               FROM videos 
                                                                               GROUP BY videos.playlist_id 
                                                                               HAVING COUNT(*) > 5"))
+                                .where("playlist_name != :playlist_name", {:playlist_name => "Favorites"})
                                 .order("random()")
                                 .limit(params[:limit])
     
@@ -92,7 +93,7 @@ class ExploreController < ApplicationController
       playlists << {
         :playlist_url   => "/#{playlist_owner[:username]}/playlist/#{playlist[:playlist_name]}",
         :playlist_name  => playlist[:playlist_name]
-      } if playlist[:playlist_name] != "Favorites"
+      }
     end
     
     render :json => playlists
