@@ -5,7 +5,6 @@
 
     $.getJSON("/get_random_playlists/" + number_of_playlists, function (playlists) {
       $.each(playlists, function(i, playlist) {
-        console.log(playlist);
         var the_playlist = {
           url:  playlist["playlist_url"],
           name: playlist["playlist_name"]
