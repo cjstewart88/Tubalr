@@ -78,15 +78,21 @@ class ExploreController < ApplicationController
   def get_random_playlists
     playlists = []
     
-    playlists_records = Playlist.includes(:videos).where(:id => Video.connection.select_values("SELECT playlist_id FROM videos GROUP BY videos.playlist_id HAVING COUNT(*) > 5")).order("random()").limit(params[:limit])
+    playlists_records = Playlist.includes(:videos)
+                                .where(:id => Video.connection.select_values("SELECT playlist_id 
+                                                                              FROM videos 
+                                                                              GROUP BY videos.playlist_id 
+                                                                              HAVING COUNT(*) > 5"))
+                                .order("random()")
+                                .limit(params[:limit])
     
     playlists_records.each do | playlist |
       playlist_owner = User.find(playlist[:user_id])
       
       playlists << {
         :playlist_url   => "/#{playlist_owner[:username]}/playlist/#{playlist[:playlist_name]}",
-        :playlist_name  => (playlist[:playlist_name] == "Favorites" ? "#{playlist_owner[:username]}'s Favorites" : playlist[:playlist_name])
-      }
+        :playlist_name  => playlist[:playlist_name]
+      } if playlist[:playlist_name] != "Favorites"
     end
     
     render :json => playlists
