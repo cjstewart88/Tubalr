@@ -306,7 +306,7 @@ function just (who) {
     prepare_search(who, "just");
     
     $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name='+escape(who)+'&format=jsonp&callback=?&start=0&results=40' , function(data) {
-      if (data.response.status.code == 5) {
+      if (data.response.status.code == 5 || data.response.songs.length <= 10) {
         not_echonest_artist(who);
       }
       else {
