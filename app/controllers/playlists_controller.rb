@@ -22,7 +22,9 @@ class PlaylistsController < ApplicationController
         :already_exist  => true 
       }
     else
-      new_playlist = user.playlists.create(:playlist_name => params[:playlist_name])
+      playlist_name = params[:playlist_name].gsub("'","").gsub('"',"")
+      
+      new_playlist = user.playlists.create(:playlist_name => playlist_name)
     
       response = {
         :new_playlist_id    => new_playlist.id,
