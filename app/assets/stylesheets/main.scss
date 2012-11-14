@@ -3,20 +3,26 @@
 *:focus { outline: none !important; }
 * { margin: 0px; padding: 0px; }
 
-html { overflow-y: scroll; }
+html { 
+  overflow-y: scroll; 
+  background: url(/assets/bg6.jpg) no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
 
 body {
-	background: url('/assets/bg.png'); 
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
-	color: #000;
+	color: #fff;
 	padding-bottom: 20px;
 }	
 
 header, footer, aside, nav, article, section { display: block; } 
 
 a { 
-  color: #464646; 
+  color: #fff; 
   text-decoration: none; 
   moz-transition: all .3s;
   -o-transition: all .3s;
@@ -24,7 +30,7 @@ a {
   transition: all .3s;
   
   &:hover {
-    color: #2667D4;
+    text-decoration: underline;
   }
   
   &:active {
@@ -33,7 +39,7 @@ a {
 }
 
 input { 
-  color: #464646; 
+  color: #000; 
   font: 12px 'Open Sans', sans-serif;
   
   &:focus {
@@ -46,7 +52,7 @@ button:focus { outline: 0; }
 h2 {
   font-size: 16px;
   margin-bottom: 10px;
-  color: #464646;
+  color: #CFFFFF;
   text-transform: capitalize;
 }
 
@@ -59,19 +65,13 @@ h2 {
   aside {
     display: block;
     margin-bottom: 10px;
-    text-shadow: 1px 1px #222;
-    -moz-text-shadow: 1px 1px #222;
-    -webkit-text-shadow: 1px 1px #222;
     color: #fff;
-    background: #333;
-    background: -moz-linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)) !important;
-    background: -webkit-linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.8)) !important;
+    background: #000;
+    background: rgba(0,0,0,.5);
     width: 200px;
     padding: 10px;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-  	border: groove 2px #555;
+    @include border-radius(3px);
+    border: solid 1px #000;
   }
 }
 
@@ -102,36 +102,22 @@ form .remember-me { margin-bottom: 15px; }
 input[type=text], input[type=email], input[type=password], textarea {
   padding: 8px;
   width: 250px;
-  border: solid 1px #ccc;
+  border: none;
   font-size: 12px;
   font-weight: bold;
   @include border-radius(3px);
   background: #FFFFFF;
-  
-  &:focus {
-    box-shadow: 0 1px 1px rgba(0,0,0,.1);
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
-    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
-    border-color: #999;
-  }
 }
 
 input[type=button], input[type=submit], a.button { 
-  text-transform: lowercase;
   font-size: 12px;
-  color: #464646;
+  color: #000;
   font-weight: bold;
   line-height: normal;
   padding: 8px 25px;
-  border-radius: 2px;
-  -moz-border-radius: 2px;
-  -webkit-border-radius: 2px;
-  background-image: -webkit-gradient(linear,left top,left bottom,from(white),to(#e6e6e6));
-  background-image: -webkit-linear-gradient(top,white,#e6e6e6);
+  @include border-radius(3px);
   background-color: whiteSmoke;
-  background-image: linear-gradient(top,white,#e6e6e6);
-  background-image: -o-linear-gradient(top,white,#e6e6e6);
-  border: 1px solid #cecfd1;
+  border: none;
   cursor: pointer;
   moz-transition: all .3s;
   -o-transition: all .3s;
@@ -139,10 +125,7 @@ input[type=button], input[type=submit], a.button {
   transition: all .3s;
   
   &:hover {
-    box-shadow: 0 1px 1px rgba(0,0,0,.1);
-    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
-    -moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
-    border-color: #999;
+    text-decoration: none;
   }
   
   &.has-icon-left span {
@@ -159,23 +142,16 @@ input[type=button], input[type=submit], a.button {
 #listenForm { 
   text-align: center; 
   margin-bottom: 20px; 
-  background: #efefef;
-  background: rgba(255, 255, 255, .3);
-  border-radius: 3px;
-  border: solid 1px #ccc;
+  background: #000;
+  background: rgba(0, 0, 0, .5);
+  @include border-radius(5px);
+  @include box-shadow(0 0 5px rgba(0,0,0,.5));
+  border: solid 1px #000;
   
   input[type=button], input[type=submit] {
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#548FF4),to(#2667D4));
-    background-image: -webkit-linear-gradient(top,#548FF4,#2667D4);
-    background-color: #2667D4;
-    background-image: linear-gradient(top,#548FF4,#2667D4);
-    background-image: -o-linear-gradient(top,#548FF4,#2667D4);
-    border: 1px solid #2667D4;
+    background: #548FF4;
+    border: none;
     color: #fff;
-    
-    &:hover {
-      border-color: #2052A7; 
-    }
   }
 }
 
@@ -206,27 +182,17 @@ input[type=button], input[type=submit], a.button {
     font-size: 18px;
     cursor: pointer;
     margin-left: 10px;
-    
-    &#facebook:hover {
-      color: #3B5999;
-    }
-    
-    &#twitter:hover {
-      color: #4099FF;
-    }
   }
 }
 
 #playlist {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
   
   a {
     display: block;
-    color: #464646;
   	text-decoration: none;
   	padding: 20px 0px;
-    border-top: dotted 1px #ccc;
+    border-top: dotted 1px #000;
 
     &:first-child {
       border-top: none;
@@ -234,11 +200,7 @@ input[type=button], input[type=submit], a.button {
     }
 
     &.active {
-    	color: #2667D4;
-    }
-
-    &:hover {
-      color: #2667D4 !important;
+    	text-decoration: underline;
     }
   }
 }
@@ -263,12 +225,14 @@ input[type=button], input[type=submit], a.button {
 	color: #fff;
 	font-size: 16px;
 	cursor: pointer;
-}
-#share-video div.facebook {
-	background: #3B5998;
-}
-#share-video div.twitter {
-	background: #4099FF;
+	
+	&.facebook {
+	  background: #3B5998;
+	}
+
+	&.twitter {
+	  background: #4099FF;
+	}
 }
 
 #share-video .url {
@@ -284,6 +248,7 @@ input[type=button], input[type=submit], a.button {
 	margin: 0 auto;
 	display: none;
 	border: none;
+	@include box-shadow(none);
 }
 #ytplayerid {
 	height: 400px;
@@ -299,10 +264,16 @@ input[type=button], input[type=submit], a.button {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-#player-controls input {
-  padding: 4px 12px;
-  font-size: 12px;
-  font-weight:  normal;
+#player-controls, #playlist {
+  input {
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight:  normal;
+    color: #fff;
+    background: #000;
+    background: rgba(0, 0, 0, 0.5);
+    border: solid 1px #000; 
+  }
 }
 #player-controls-right { float: right; }
 
@@ -312,13 +283,12 @@ table {
   border-spacing: 0;
 }
 table tr.clickable-row:hover {
-  background: #F1EFD3;
+  background: #000;
+  background: rgba(0,0,0,.3);
   cursor: pointer;
 }
 table tr td {
   padding: 10px 5px;
-  border-right: dotted 1px #ababab;
-  border-bottom: dotted 1px #ababab;
 }
 table tr td:last-child {
   border-right: none;  
@@ -344,13 +314,12 @@ table#general tr td {
 }
 
 section {
-  background: #efefef;
-  background: rgba(255, 255, 255, .3);
+  background: #000;
+  background: rgba(0, 0, 0, .5);
   padding: 15px 20px;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border: solid 1px #ccc;
+  @include border-radius(5px);
+  @include box-shadow(0 0 5px rgba(0,0,0,.5));
+  border: solid 1px #000;
   margin-bottom: 20px;
 }
 
@@ -377,14 +346,25 @@ section {
 .ui-widget-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 .ui-widget-overlay { background: #000; background: -webkit-radial-gradient(50% 50%, ellipse closest-corner, rgba(0, 0, 0, 0.3) 1%, rgba(0, 0, 0, 0.725) 100%); background: -moz-radial-gradient(50% 50%, ellipse closest-corner, rgba(0, 0, 0, 0.3) 1%, rgba(0, 0, 0, 0.725) 100%); filter: Alpha(Opacity=30); }
 .ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #aaaaaa url(images/ui-bg_flat_0_aaaaaa_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -khtml-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }
-.ui-dialog { box-shadow: 0 7px 27px rgba(0, 0, 0, 0.45); -webkit-box-shadow: 0 7px 27px rgba(0, 0, 0, 0.45); -moz-box-shadow: 0 7px 27px rgba(0, 0, 0, 0.45); position: absolute; padding: .2em; width: 300px; overflow: hidden; padding: 10px; background: #efefef; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
+.ui-dialog { box-shadow: 0 7px 27px rgba(0, 0, 0, 0.45); -webkit-box-shadow: 0 7px 27px rgba(0, 0, 0, 0.45); -moz-box-shadow: 0 7px 27px rgba(0, 0, 0, 0.45); position: absolute; padding: .2em; width: 300px; overflow: hidden; padding: 10px; background: #efefef; @include border-radius(3px); }
 .ui-dialog .ui-dialog-titlebar { padding: .4em 1em; position: relative;  }
-.ui-dialog .ui-dialog-title { float: left; margin-bottom: 5px; height: 20px; width: 100%; font-size: 18px; color: #464646; font-weight: bold; } 
-.ui-dialog .ui-dialog-titlebar-close { position: absolute; right: 10px; font-style: italic; }
-.ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; overflow: auto; zoom: 1; }
+.ui-dialog .ui-dialog-title { float: left; margin-bottom: 5px; height: 20px; width: 100%; font-size: 18px; color: #000; font-weight: bold; } 
+.ui-dialog .ui-dialog-titlebar-close { position: absolute; right: 10px; font-style: italic; color: #000; }
+.ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; overflow: auto; zoom: 1; color: #000; }
 .ui-dialog .ui-dialog-content ul { list-style-type: none; }
 
 #about-tubalr, #playlists-dialog { display: none; }
+
+.ui-dialog {
+  input[type=button] {
+    background: #464646;
+    color: #fff;
+  }
+  
+  a {
+    color: #2667D4;
+  }
+}
 
 #about-tubalr {
   p {
@@ -392,10 +372,6 @@ section {
     margin-bottom: 15px;
     line-height: 16px;
     font-size: 12px;
-    
-    a {
-      color: #2667D4;
-    }
   }
   
   h3 {
@@ -421,11 +397,9 @@ ul#playlists li {
   width: 158px;
   padding: 8px 10px;
   margin: 5px;
-  background: #464646;
+  background: #548FF4;
   color: #fff;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
+  @include border-radius(3px);
   text-align: center;
   cursor: pointer;
   white-space: nowrap;
@@ -435,13 +409,13 @@ ul#playlists li {
 }
 
 ul#playlists li:hover {
-  background: #ABA8B5;
-  color: #000;
+  background: #000;
+  background: rgba(0,0,0,.5);
 }
 
 ul#playlists li.already-in-playlist {
-  background: #ABA8B5;
-  color: #000;
+  background: #464646;
+  color: #fff;
   cursor: default;
 }
 
@@ -477,7 +451,7 @@ ul#playlists li.already-in-playlist {
 #playlists-main ul li {
   font-size: 14px;
   display: inline-block;
-  width: 247px;
+  width: 244px;
   margin-bottom: 20px;
 }
 
@@ -538,7 +512,7 @@ ul#playlists li.already-in-playlist {
         }
         
         &:hover {
-          color: #2667D4;
+          text-decoration: underline;
         }
       }
     }
@@ -599,35 +573,28 @@ ul#playlists li.already-in-playlist {
   position: fixed; 
   right: 52px; 
   bottom: 52px; 
-  color: #666;
+  color: #fff;
   font-size: 36px; 
   font-weight: bold; 
   text-decoration: none; 
-  background: #efefef;
-  background: rgba(255, 255, 255, .3); 
-  padding: 10px 18px 12px; 
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border: solid 1px #ccc;
-  moz-transition: all .218s;
-  -o-transition: all .218s;
-  -webkit-transition: all .218s;
-  transition: all .218s;
-}
-#to-top:hover {
-  box-shadow: 0 1px 1px rgba(0,0,0,.1);
-  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.1);
-  -moz-box-shadow: 0 1px 1px rgba(0,0,0,.1);
-  border-color: #999; 
-  color: #464646; 
+  padding: 6px 25px 10px; 
+  background: #000;
+  background: rgba(0, 0, 0, .5);
+  @include border-radius(5px);
+  @include box-shadow(0 0 5px rgba(0,0,0,.5));
+  border: solid 1px #000;
 }
 
 #loading-playlist {
   display: none;
   height: 200px;
-  background: url('/assets/loading.gif') no-repeat center center;
+  margin-top: 80px;
+  text-align: center;
+  font-size: 16px;
+  text-shadow: 0 0 5px rgba(0, 0, 0, .5);
   border: none;
+  background: none;
+  @include box-shadow(none);
 }
 
 #searching-info {

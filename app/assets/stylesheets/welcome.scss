@@ -5,7 +5,7 @@
 }
 
 #welcome-main-message {
-  font-size: 25px;
+  font-size: 22px;
   font-weight: bold;
   text-align: center;
 }
@@ -17,7 +17,7 @@
     float: left;
     width: 206px;
     padding: 20px;
-    font-size: 18px;
+    font-size: 14px;
     @include border-radius(3px);
     
     span {
@@ -39,8 +39,7 @@
     width: 60%;
     margin: 0 auto;
     margin-bottom: 20px;
-    font-size: 14px;
-    font-weight: bold;
+    font-size: 12px;
     line-height: 22px;
   }
   
