@@ -2,38 +2,57 @@
   <input type="text" name="q" autocomplete="off" id="q" value="<%= params[:artist_band].gsub('+',' ') if params[:artist_band].present? %>" tabindex="1" placeholder="search for artists or bands"/>
   <input type="button" name="just" value="only" class="listen just tooltip" tabindex="2" original-title="This search method is to search for a single artist or band."/>
   <input type="button" name="similar" value="similar" class="listen similar tooltip" tabindex="3" original-title="This search method will find artists and bands similar to your search."/>
-  <img id="searching-info" class="tooltip" src='/assets/info-icon.png' original-title="See what we provide as search options!">
+  <span id="searching-info" class="icon-info-sign tooltip" original-title="See what we provide as search options!"></span>
 </form>
 
-<% if !request.path.index("similar") && !request.path.index("just") && !request.path.index("video") && !request.path.index("genre") && !request.path.index("multi") && !@playlist_name  %>
-  <div id="explore">
-    <section id="random-playlists">
-      <h2>
-        <a href="/explore#bottom">more...</a>
-        random playlists
-      </h2>
-      <ul id="random-playlists-list" class="loading-list"></ul>
-      <script>$('#random-playlists-list').randomPlaylists({ limit: 15, font_page: true });</script>
-    </section>
-    
-    <section id="top-genres">
-      <h2>
-        <a href="/explore#bottom">more...</a>
-        top genres
-      </h2>
-      <ul id="top-genres-list" class="loading-list"></ul>
-      <script>$('#top-genres-list').topGenres({ limit: 15, font_page: true });</script>
-    </section>
-    
-    <section id="recently-watched">
-      <h2>
-        <a href="/explore#bottom">more...</a>
-        Recently Watched
-      </h2>
-      <ul id="recently-watched-list" class="loading-list"></ul>
-      <script>$('#recently-watched-list').recentlyWatched({ limit: 15, font_page: true });</script>
-    </section>
-  </div>
+<% if !request.path.index("similar") && !request.path.index("just") && !request.path.index("video") && !request.path.index("genre") && !request.path.index("multi") && !@playlist_name %>
+  <section id="welcome">
+    <div id="welcome-main-message">
+      Lets take advantage of YouTube's music videos.
+    </div>
+  
+    <div id="welcome-overview">
+      <div>
+        <span class="icon-music"></span>
+        Enjoy just the music content YouTube has to offer, leave the rest behind.
+      </div> 
+  
+      <div>
+        <span class="icon-list"></span>
+        Create custom playlists, making sure your favorite videos are at your every need.
+      </div>
+  
+      <div>
+        <span class="icon-share-alt"></span>
+        Share your custom playlists or searches, everyone deserves the experience! 
+      </div>
+    </div>
+  
+    <div id="welcome-sign-in">
+      <% if !user_signed_in? %>
+        <div id="welcome-instructions">
+          Get started by searching above. If you interested in creating account, please 
+          register below, or login if you already have one!
+        </div>
+        <%= link_to('<span class="icon-flag"></span> Register'.html_safe, '/users/sign_up', :class => 'sign-up-link button has-icon-left') %> 
+        <%= link_to('<span class="icon-user"></span> Login'.html_safe, '/users/sign_in', :class => 'sign-in-link button has-icon-left') %>
+      <% else %>
+        <div id="welcome-instructions">
+          Get started by searching above or accessing your playlists.
+        </div>
+        <%= link_to('<span class="icon-list"></span> Your Playlists'.html_safe, "/#{current_user.username}/playlists", :class => 'my-playlists-link button has-icon-left') %>  
+      <% end %>
+      <!-- 
+        <a href="/auth/facebook" id="sign-in" class="button has-icon large facebook">
+          <span class="icon-facebook"></span> Sign in with Facebook
+        </a>
+
+        <a href="/auth/twitter" id="sign-in" class="button has-icon large twitter">
+          <span class="icon-twitter"></span> Sign in with Twitter
+        </a> 
+      -->
+    </div>
+  </section>
 <% end %>
 
 <section id="loading-playlist"></section>
@@ -44,7 +63,8 @@
 
 <section id="player">
   <div id="share">
-    <img src="/assets/facebook.png" id="facebook"> <img src="/assets/twitter.png" id="twitter">
+    <span id="facebook" class="icon-facebook-sign" ></span>
+    <span id="twitter" class="icon-twitter-sign"></span>
 	</div>
 	
 	<div id="ytplayerid"></div> 

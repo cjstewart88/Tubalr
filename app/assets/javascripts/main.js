@@ -111,7 +111,7 @@ function prepare_search (who, type_of_search) {
   if (thePlayer) thePlayer.stopVideo();
   $('#player').hide();
   $('#empty-playlist').hide();
-  $('#explore').hide();
+  $('#welcome').hide();
   $('#loading-playlist').show();
 
   videos        = []; 
@@ -420,7 +420,7 @@ function initPlaylist () {
     }
 
     $('#loading-playlist').hide();
-    $('#explore').fadeOut();
+    $('#welcome').fadeOut();
      
     videosCopy = "";
     $.each(videos, function(i) {
@@ -740,7 +740,6 @@ function detect_mobile () {
     $('#ytplayerid').addClass('mobile-ytplayerid');
     $('#explore section').addClass('mobile');
     $('body').addClass('mobile-body');
-    $('#inner-main').addClass('mobile-inner-main');
     $('#listenForm input').addClass('mobile');
     $('.why-register').remove();
     $('#rain').addClass('mobile');
@@ -984,6 +983,4 @@ $(document).ready(function () {
     title: 'Search Methods'
   });
   $('#searching-info').click(function () { $('#searching-info-dialog').dialog('open'); });
-
-  $('#q').autoArtist();
 });

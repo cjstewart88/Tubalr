@@ -1,3 +1,5 @@
 /*
+  *= require_tree ../../../vendor/assets/stylesheets/
   *= require main
+  *= require_tree
 */
