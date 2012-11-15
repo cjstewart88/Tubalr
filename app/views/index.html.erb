@@ -34,8 +34,8 @@
           Get started by searching above. If you're interested in creating account, please 
           register below, or login if you already have one!
         </div>
-        <%= link_to('<span class="icon-flag"></span> Register'.html_safe, '/users/sign_up', :class => 'sign-up-link button has-icon-left') %> 
-        <%= link_to('<span class="icon-user"></span> Login'.html_safe, '/users/sign_in', :class => 'sign-in-link button has-icon-left') %>
+        <%= link_to('Register', '/users/sign_up', :class => 'sign-up-link button') %> 
+        <%= link_to('Login', '/users/sign_in', :class => 'sign-in-link button') %>
       <% else %>
         <div id="welcome-instructions">
           Get started by searching above or accessing your playlists.
