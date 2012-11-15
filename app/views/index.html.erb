@@ -8,7 +8,7 @@
 <% if !request.path.index("similar") && !request.path.index("just") && !request.path.index("video") && !request.path.index("genre") && !request.path.index("multi") && !@playlist_name %>
   <section id="welcome">
     <div id="welcome-main-message">
-      Lets take advantage of YouTube's music videos.
+      A new way to experience music.
     </div>
   
     <div id="welcome-overview">
@@ -40,7 +40,7 @@
         <div id="welcome-instructions">
           Get started by searching above or accessing your playlists.
         </div>
-        <%= link_to('<span class="icon-list"></span> Your Playlists'.html_safe, "/#{current_user.username}/playlists", :class => 'my-playlists-link button has-icon-left') %>  
+        <%= link_to('Your Playlists', "/#{current_user.username}/playlists", :class => 'my-playlists-link button') %>  
       <% end %>
       <!-- 
         <a href="/auth/facebook" id="sign-in" class="button has-icon large facebook">

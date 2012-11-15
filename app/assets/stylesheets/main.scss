@@ -30,7 +30,7 @@ a {
   transition: all .3s;
   
   &:hover {
-    text-decoration: underline;
+    color: #CFFFFF;
   }
   
   &:active {
@@ -190,17 +190,18 @@ input[type=button], input[type=submit], a.button {
   
   a {
     display: block;
-  	text-decoration: none;
-  	padding: 20px 0px;
-    border-top: dotted 1px #000;
-
-    &:first-child {
-      border-top: none;
-      padding-top: 10px;
-    }
+  	padding: 15px 10px;
 
     &.active {
-    	text-decoration: underline;
+      background: #000;
+      background: rgba(0,0,0,.3);
+    }
+    
+    &:hover {
+      color: #fff;
+  	  text-decoration: none;
+      background: #000;
+      background: rgba(0,0,0,.3); 
     }
   }
 }
@@ -281,6 +282,12 @@ table {
   margin-bottom: 20px;
   width: 100%;
   border-spacing: 0;
+}
+table tr.clickable-row {
+  moz-transition: all .3s;
+  -o-transition: all .3s;
+  -webkit-transition: all .3s;
+  transition: all .3s;
 }
 table tr.clickable-row:hover {
   background: #000;
