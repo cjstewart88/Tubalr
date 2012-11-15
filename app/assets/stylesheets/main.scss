@@ -100,7 +100,7 @@ form a { display: inline-block; margin-top: 15px; }
 form .remember-me { margin-bottom: 15px; }
 
 input[type=text], input[type=email], input[type=password], textarea {
-  padding: 8px;
+  padding: 8px 14px;
   width: 250px;
   border: none;
   font-size: 12px;
@@ -114,7 +114,7 @@ input[type=button], input[type=submit], a.button {
   color: #000;
   font-weight: bold;
   line-height: normal;
-  padding: 8px 25px;
+  padding: 8px 20px;
   @include border-radius(3px);
   background-color: whiteSmoke;
   border: none;
@@ -129,7 +129,7 @@ input[type=button], input[type=submit], a.button {
   }
   
   &.has-icon-left span {
-    margin-right: 10px; 
+    margin-right: 5px; 
     line-height: normal;
   }
   
