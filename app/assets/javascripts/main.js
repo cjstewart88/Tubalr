@@ -678,6 +678,7 @@ function detect_mobile () {
     $('.blog-link').remove();
     $('.settings-link').remove();
     $('aside#icons').remove();
+    $('#s2id_add-to-playlist-dropdown').remove();
     $('#ytplayerid').addClass('mobile-ytplayerid');
     $('#explore section').addClass('mobile');
     $('body').addClass('mobile-body');
