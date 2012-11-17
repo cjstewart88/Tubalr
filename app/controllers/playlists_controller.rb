@@ -16,39 +16,34 @@ class PlaylistsController < ApplicationController
   def create
     user      = User.find(params[:user_id])
     playlist  = user.playlists.where("lower(playlist_name) = ?", params[:playlist_name].downcase).first
-  
+    
+    to_return = {}
+    
     if playlist.present?
-      response = { 
-        :already_exist  => true 
-      }
+      playlist.videos.create(:video_id => params[:video_id], :video_title => params[:video_title])
     else
       playlist_name = params[:playlist_name].gsub("'","").gsub('"',"")
       
       new_playlist = user.playlists.create(:playlist_name => playlist_name)
     
-      response = {
-        :new_playlist_id    => new_playlist.id,
-        :new_playlist_name  => new_playlist.playlist_name
-      }
+      new_playlist.videos.create(:video_id => params[:video_id], :video_title => params[:video_title])
+
+      to_return[:id]    = new_playlist.id
+      to_return[:name]  = new_playlist.playlist_name
     end
-    
-    render :json => response
+
+    render :json => to_return
   end
   
   def add_video
     playlist  = Playlist.find(params[:playlist_id])
-    
     video     = playlist.videos.where("video_id = ?", params[:video_id]).first
     
-    if video.present?
-      response = { 
-        :already_in_playlist  => true 
-      }
-    else
+    if !video.present?
       playlist.videos.create(:video_id => params[:video_id], :video_title => params[:video_title])
     
       response = {
-        :added_to_playlist    => true
+        :added_to_playlist => true
       }
     end
     
@@ -68,20 +63,5 @@ class PlaylistsController < ApplicationController
     end
     
     render :json => response
-  end
-  
-  def get_playlists_video_belongs_to
-    playlists_video_belongs_to  = []
-    playlists                   = current_user.playlists
-    
-    if playlists.present?
-      playlists.each do | playlist |
-        video = playlist.videos.where(:video_id => params[:video_id]).first
-        
-        playlists_video_belongs_to << playlist.id if video.present?
-      end
-    end
-    
-    render :json => { :playlists_video_belongs_to => playlists_video_belongs_to }
   end
 end

@@ -26,8 +26,6 @@ Tubalr::Application.routes.draw do
   match "/playlist/create"                    => "playlists#create"
   match "/playlist/add_video"                 => "playlists#add_video"
   match "/playlist/delete_video"              => "playlists#delete_video"
-  match "/get_playlists_video_belongs_to"     => "playlists#get_playlists_video_belongs_to"
-  
   
   post "/check_banned"                        => "bannedVideos#check"
   post "/ban_video"                           => "bannedVideos#ban_video"

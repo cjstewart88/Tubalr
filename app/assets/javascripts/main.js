@@ -578,7 +578,11 @@ function share_video_facebook (video_id, video_title) {
   return false;
 }
 
-function remove_from_list () {
+function remove_from_playlist () {
+  $("#playlist #"+videos[currenttrack].VideoID).remove();
+  videos.splice(currenttrack, 1);
+
+  
   if (videos.length == 0) {
     thePlayer.stopVideo();
     $('#player').fadeOut();
@@ -587,12 +591,6 @@ function remove_from_list () {
   else {
     nextSong("removedFromList");
   }
-}
-
-function remove_from_playlist () {
-  $("#playlist #"+videos[currenttrack].VideoID).remove();
-  videos.splice(currenttrack, 1);
-  remove_from_list();
 }
 
 function remove_video () {
@@ -664,62 +662,6 @@ function share_single (video_id, video_title) {
 	$('.url').val('http://www.tubalr.com/video/' + video_id);
 }
 
-function create_new_playlist (new_playlist_name) {
-  $('#create-playlist-form').hide();
-  $('#creating-playlist').show();
-  
-  $.ajax({
-    type: 'POST',
-    url: '/playlist/create',
-    data: {
-      user_id:        userId,  
-      playlist_name:  new_playlist_name
-    },
-    dataType: 'json',
-    success: function(data) {
-      if (data.already_exist) {        
-        $('#creating-playlist').delay(1000).fadeOut(300);
-        $('#playlist-already-exist').delay(1300).fadeIn(300).delay(1600).fadeOut(300);
-        $('#create-playlist-form').delay(3520).fadeIn(0);
-      }
-      else {
-        $('#creating-playlist').delay(1000).fadeOut(300);
-        $('#playlist-created').delay(1300).fadeIn(300).delay(1600).fadeOut(300);
-        
-        setTimeout(function () {
-          $("#no-playlists").remove();
-          $("#playlists").append("<li data-playlist-id='" + data.new_playlist_id + "'>" + data.new_playlist_name + "</li>");
-          $("#create-new-playlist-button").val('Create New Playlist');
-          $("#new-playlist-name").val('').hide();
-          $("#cancel-create-new-playlist-button").hide();
-          $("#create-playlist-form").show();
-        }, 3510);
-      }
-    }
-  });
-}
-
-function add_video_to_playlist (playlist_id, playlist_name, video_id, video_title) {
-  $.ajax({
-    type: 'POST',
-    url: '/playlist/add_video',
-    data: {
-      playlist_id:    playlist_id,
-      video_id:       video_id,  
-      video_title:    video_title
-    },
-    dataType: 'json',
-    success: function(data) {
-      $('#playlists-dialog').dialog('close');
-      $('#notices').append('<aside class="video-added-notice">' + '"<b>' + video_title + '</b>" was added to your "<b>' + playlist_name + '</b>" playlist' + "</aside>");
-   
-      $('.video-added-notice').delay(5000).slideUp(500, function () {
-        $(this).remove();
-      });
-    }
-  });
-}
-
 function detect_mobile () {
   if ( navigator.userAgent.match(/Android/i)
    || navigator.userAgent.match(/webOS/i)
@@ -736,7 +678,6 @@ function detect_mobile () {
     $('.blog-link').remove();
     $('.settings-link').remove();
     $('aside#icons').remove();
-    $('#playlists-opener').remove();
     $('#ytplayerid').addClass('mobile-ytplayerid');
     $('#explore section').addClass('mobile');
     $('body').addClass('mobile-body');
@@ -802,80 +743,6 @@ $(document).ready(function () {
   $('#previous').click(function () {
     previousSong();
     return false;
-  });
-  
-  $('#register-to-use-playlists').dialog({
-    modal: true,
-    autoOpen: false,
-    width: (is_mobile ? 500 : 600),
-    draggable: false,
-    title: 'Register to Use Custom Playlists!'    
-  });
-  
-  $('#playlists-dialog').dialog({
-    modal: true,
-    autoOpen: false,
-    width: (is_mobile ? 500 : 600),
-    draggable: false,
-    title: 'Add Video to Playlist'    
-  });
-  
-  $('#playlists-opener').click(function () { 
-    if (userId == 0) {
-      $('#register-to-use-playlists').dialog('open');
-    }
-    else {
-      $('#playlists li').removeClass('already-in-playlist');
-
-      $.ajax({
-        type: 'POST',
-        url: '/get_playlists_video_belongs_to',
-        data: {
-          video_id: videos[currenttrack].VideoID,  
-        },
-        dataType: 'json',
-        success: function(data) {
-          $.each(data.playlists_video_belongs_to, function () {
-            $('#playlists li[data-playlist-id=' + this + ']').addClass('already-in-playlist');
-          });
-        }
-      });
-
-      $('#playlists-dialog').dialog('open'); 
-      $('#video-to-add-to-playlist-title').text(videos[currenttrack].VideoTitle);
-      $('#playlists-dialog').data('video-to-add-to-playlist', { VideoID: videos[currenttrack].VideoID, VideoTitle: videos[currenttrack].VideoTitle }); 
-    }
-  });
-  
-  $('#create-new-playlist-button').click(function () {
-    if ($("#create-new-playlist-button").val() == 'Create!' && !$("#new-playlist-name").val()) {
-      return false;
-    }
-    else if ($("#new-playlist-name").val()) {
-      create_new_playlist($("#new-playlist-name").val());
-      return false;
-    }
-    
-    $("#create-new-playlist-button").val('Create!'); 
-    $("#new-playlist-name").toggle().focus();
-    $("#cancel-create-new-playlist-button").toggle();
-  });
-  
-  $('#cancel-create-new-playlist-button').click(function () {
-    $("#create-new-playlist-button").val('Create New Playlist');
-    $("#new-playlist-name").val('').toggle();
-    $("#cancel-create-new-playlist-button").toggle();
-  });
-  
-  $('#playlists').delegate('li', 'click', function () {
-    if (!$(this).hasClass('already-in-playlist')) {
-      add_video_to_playlist(
-        $(this).data('playlist-id'), 
-        $(this).text(),
-        $('#playlists-dialog').data('video-to-add-to-playlist').VideoID,
-        $('#playlists-dialog').data('video-to-add-to-playlist').VideoTitle
-      );
-    }
   });
   
   $('#info').dialog({

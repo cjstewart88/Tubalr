@@ -186,22 +186,27 @@ input[type=button], input[type=submit], a.button {
 }
 
 #playlist {
-  margin-top: 20px;
+  background: none;
+  border: none;
+  padding: 0;
+  @include box-shadow(none);
   
   a {
     display: block;
   	padding: 15px 10px;
+    color: #fff;
 
     &.active {
       background: #000;
       background: rgba(0,0,0,.3);
+      @include border-radius(3px);
     }
     
     &:hover {
-      color: #fff;
   	  text-decoration: none;
       background: #000;
       background: rgba(0,0,0,.3); 
+      @include border-radius(3px);
     }
   }
 }
@@ -243,14 +248,12 @@ input[type=button], input[type=submit], a.button {
 }
 
 #player {
-  padding: 0;
-  background: none;
+  padding: 20px;
   position: relative;
 	margin: 0 auto;
 	display: none;
-	border: none;
-	@include box-shadow(none);
 }
+
 #ytplayerid {
 	height: 400px;
 	width: 100%;
@@ -262,21 +265,28 @@ input[type=button], input[type=submit], a.button {
 }
 
 #player-controls {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
 }
 #player-controls, #playlist {
-  input {
-    padding: 4px 12px;
+  input, a.button {
+    padding: 6px 12px;
+    margin-right: 8px;
     font-size: 12px;
     font-weight:  normal;
     color: #fff;
     background: #000;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3);
     border: solid 1px #000; 
   }
 }
-#player-controls-right { float: right; }
+#player-controls-right { 
+  float: right;
+  
+  input {
+    margin-left: 8px;
+    margin-right: 0px;
+  }
+}
 
 table {
   margin-bottom: 20px;
@@ -360,7 +370,7 @@ section {
 .ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; overflow: auto; zoom: 1; color: #000; }
 .ui-dialog .ui-dialog-content ul { list-style-type: none; }
 
-#about-tubalr, #playlists-dialog { display: none; }
+#about-tubalr { display: none; }
 
 .ui-dialog {
   input[type=button] {
@@ -385,68 +395,6 @@ section {
     font-size: 17px;
     margin-bottom: 10px;
   }
-}
-
-#users-main ul  { list-style-type: none; }
-#users-main li  { margin-bottom: 10px; line-height: 16px; }
-#users-main a   { font-size: 14px; font-weight: bold; }
-#users-main p   { margin-top: 5px; }
-
-ul#playlists {
-  list-style: none;
-  margin: 25px 0px;
-  min-height: 60px;
-  padding: 0;
-}
-
-ul#playlists li {
-  display: inline-block;
-  width: 158px;
-  padding: 8px 10px;
-  margin: 5px;
-  background: #548FF4;
-  color: #fff;
-  @include border-radius(3px);
-  text-align: center;
-  cursor: pointer;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-size: 14px;
-}
-
-ul#playlists li:hover {
-  background: #000;
-  background: rgba(0,0,0,.5);
-}
-
-ul#playlists li.already-in-playlist {
-  background: #464646;
-  color: #fff;
-  cursor: default;
-}
-
-#playlists-dialog #no-playlists {
-  margin-top: 25px;
-  position: absolute;
-  height: 60px;
-}
-
-#create-new-playlist {
-  text-align: center;
-  height: 51px;
-}
-#create-new-playlist input[type=text] {
-  display: none;
-}
-#create-new-playlist #cancel-create-new-playlist-button {
-  display: none;
-}
-#create-new-playlist #create-playlist-status {
-  line-height: 51px;
-}
-#create-new-playlist #create-playlist-status span {
-  display: none;
 }
 
 #playlists-main ul {
@@ -629,5 +577,17 @@ ul#playlists li.already-in-playlist {
         font-weight: bold;
       }
     }
+  }
+}
+
+#add-to-playlist-dropdown {
+  width: 300px;
+}
+
+#create-new-playlist {
+  display: none;
+  
+  #create-new-playlist-name {
+    width: 150px;
   }
 }

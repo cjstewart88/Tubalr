@@ -42,15 +42,6 @@
         </div>
         <%= link_to('Your Playlists', "/#{current_user.username}/playlists", :class => 'my-playlists-link button') %>  
       <% end %>
-      <!-- 
-        <a href="/auth/facebook" id="sign-in" class="button has-icon large facebook">
-          <span class="icon-facebook"></span> Sign in with Facebook
-        </a>
-
-        <a href="/auth/twitter" id="sign-in" class="button has-icon large twitter">
-          <span class="icon-twitter"></span> Sign in with Twitter
-        </a> 
-      -->
     </div>
   </section>
 <% end %>
@@ -71,63 +62,34 @@
 	
 	<div id="player-controls">
 	  <div id="player-controls-right">
-      <input type="button" id="previous" value="&#8249; prev"/>
-      <input type="button" id="next" value="next &#8250;"/>
+      <input type="button" id="previous" value="&#8249; Prev"/>
+      <input type="button" id="next" value="Next &#8250;"/>
     </div>
     
     <div id="player-controls-left">
-      <input type="button" id="remove-video" value="remove" class="tooltip" original-title="Remove the current video from your playlist. If you're logged in it will never play again!"/>
-      <input type="button" id="info-button" value="info"/>
-      <input type="button" id="playlists-opener" value="add to playlist"/>
+      <input type="button" id="remove-video" value="Remove" class="tooltip" original-title="Remove the current video from your playlist. If you're logged in it will never play again!"/>
+      <input type="button" id="info-button" value="Info"/>
+      <% if user_signed_in? %>
+        <%= select_tag "add-to-playlist-dropdown", options_for_select([[nil, nil],['(+) Create New Playlist', 'new']] + current_user.playlists.map{ | p | [p.playlist_name, p.id, { "data-test" => "derp" }]}), { "data-placeholder" => "Add to Playlist" } %>       
+        <span id="create-new-playlist">
+          <input type="text"    id="create-new-playlist-name"   placeholder="Enter New Playlist Name..."/>
+          <input type="button"  id="create-new-playlist-submit" value="Create"/>
+          <input type="button"  id="create-new-playlist-cancel" value="Cancel"/>
+        </span>
+      <% end %>
     </div>
 	</div>
 	
-	<div id="info"></div>
-	
 	<section id="playlist"></section>
 </section>
+
+<div id="info"></div>
 
 <div id="share-video">
   <div class='facebook'>share on facebook</div>
   <div class='twitter'>tweet on twitter</div>
   <input type='text' class='url' readonly></div>
 </div>
-
-<% if user_signed_in? %>
-  <div id="playlists-dialog" data-video-to-add-to-playlist="">    
-    Pick a playlist below to add "<b id="video-to-add-to-playlist-title"></b>" to.
-    
-    <% if current_user.playlists.count == 0 %>
-      <div id="no-playlists">
-        You currently have 0 playlist, create one below.
-      </div>
-    <% end %>
-    
-    <ul id="playlists">
-      <% current_user.playlists.each do | playlist | %>
-        <li data-playlist-id="<%= playlist.id %>"><%= playlist.playlist_name %></li>
-      <% end %>
-    </ul>  
-    
-    <div id="create-new-playlist">
-      <div id="create-playlist-status">
-        <span id="creating-playlist">We're creating your new playlist!</span>
-        <span id="playlist-created">Your new playlist is ready and should be above!</span>
-        <span id="playlist-already-exist">You already have a playlist with that name!</span>
-      </div>
-      
-      <div id="create-playlist-form">
-        <input type="text"    id="new-playlist-name" placeholder="Enter new playlist name here...">
-        <input type="button"  id="create-new-playlist-button" value="Create New Playlist">
-        <input type="button"  id="cancel-create-new-playlist-button" value="Cancel">
-      </div>
-    </div>
-  </div>
-<% else %>
-  <div id="register-to-use-playlists">
-    You must <a href="/users/sign_up"><b>register</b></a> an account or <a href="/users/sign_in"><b>login</b></a> to save videos to custom playlists!
-  </div>
-<% end %>
 
 <div id="searching-info-dialog">
   <ol>
