@@ -24,6 +24,10 @@
   &.select2-drop-above {
     @include box-shadow(none);
   }
+  
+  &.select2-drop-active {
+    @include box-shadow(none);
+  }
 }
 
 .select2-search {
