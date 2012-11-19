@@ -44,8 +44,7 @@ function is_blocked (video) {
   var blocked = false;
 
   if (video.author[0].name.$t.toLowerCase().search('vevo') >= 0) blocked = true;
-  if (typeof video.app$control !== "undefined" && video.app$control.yt$state.$t == "Syndication of this video was restricted by the content owner.") blocked = true;
-  if (typeof video.app$control !== "undefined" && video.app$control.yt$state.$t == "Syndication of this video was restricted by its owner.") blocked = true;
+  if (video.hasOwnProperty("app$control")) blocked = true;
   
   return blocked;
 }
@@ -315,7 +314,7 @@ function just (who) {
         $.each(data.response.songs, function (i, track) {
           if (track.title.toLowerCase().search("cover") == -1 && track.title.toLowerCase().search("remix") == -1) {
             ajaxs.push(
-              $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'%20%2D$20'+escape(track.title)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?', function(data) {
+              $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'%20%2D$20'+escape(track.title)+'&orderby=relevance&start-index=1&max-results=10&v=2&format=5&alt=json-in-script&callback=?', function(data) {
                 if (typeof data.feed.entry !== "undefined") {
                   var video_is_good = false;
                   
