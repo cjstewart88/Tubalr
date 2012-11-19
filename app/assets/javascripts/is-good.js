@@ -1,6 +1,6 @@
-var isGood = {
-  isBlocked: function (video) {
-    return video.hasOwnProperty("app$control");
+var validVideo = {
+  isNotBlocked: function (video) {
+    return !video.hasOwnProperty("app$control");
   },
 
   isMusic: function (video) {
@@ -10,7 +10,7 @@ var isGood = {
   isUnique: function (video) {
     var unique = true;
     
-    for (var i = 0; i < listen.videos.length; i++) {
+    for (var i = 0; i < videos.length; i++) {
       if (videos[i].VideoID === video.id.$t.split(":")[3]) {
         unique = false;
         break;
@@ -28,9 +28,13 @@ var isGood = {
     return unique;
   },
 
-  isCoverOrRemix: function (video) {
+  isNotCoverOrRemix: function (video) {
     var videoTitle = video.title.$t.toLowerCase();
 
-    return (videoTitle.search("cover") >= 0 || videoTitle.search("remix") >= 0 || videoTitle.search("alternate") >= 0);
+    return (videoTitle.search("cover") == -1 && videoTitle.search("remix") && -1 || videoTitle.search("alternate") && -1);
+  },
+
+  isNotUserBanned: function (video) {
+    return bannedVideos.indexOf(video.id.$t.split(":")[3]) == -1
   }
 };

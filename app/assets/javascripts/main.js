@@ -40,71 +40,6 @@ function setUserInfo (id, username) {
   });
 }
 
-function is_blocked (video) {
-  var blocked = false;
-
-  if (video.hasOwnProperty("app$control")) blocked = true;
-  
-  return blocked;
-}
-
-function is_music (video) {
-  var music = true;
-  
-  if (video.media$group.media$category[0].$t != "Music") music = false;
-  
-  return music;
-}
-
-function is_unique (track_name, video) {
-  var unique = true
-  
-  $.each(videos, function () {
-    if (this.VideoID == video.id.$t.split(":")[3]) unique = false;
-    
-    var tmp_title1 = this.VideoTitle.toLowerCase().replace(/ *\([^)]*\) */g, '').replace(/[^a-zA-Z ]/g, "");
-    var tmp_title2 = video.title.$t.toLowerCase().replace(/ *\([^)]*\) */g, '').replace(/[^a-zA-Z ]/g, "");
-    
-    if (tmp_title1 == tmp_title2) unique = false;
-  });
-   
-  return unique;
-}
-
-function is_cover_or_remix (video) {
-  var cover_or_remix = false;
-  
-  if (video.title.$t.toLowerCase().search("cover") != -1 || video.title.$t.toLowerCase().search("remix") != -1 || video.title.$t.toLowerCase().search("alternate") != -1) cover_or_remix = true;
-  
-  return cover_or_remix;
-}
-
-function is_live (video) {
-  var live_video = false;
-  
-  if (search.toLowerCase().search("live") > -1) return live_video;
-  
-  if (video.title.$t.toLowerCase().search("live") > -1 || video.title.$t.toLowerCase().search("@") > -1 || video.title.$t.toLowerCase().search("19") > -1 || video.title.$t.toLowerCase().search("200") > -1) live_video = true;
-  
-  if (!live_video) {
-    $.each(video.category, function () {
-      if (this.term.toLowerCase() == "live") live_video = true;
-    });
-  }
-
-  return live_video
-}
-
-function is_not_banned (video_id) {
-  var video_banned = true;
-
-  $.each(bannedVideos, function () {
-    if (this == video_id) video_banned = false;
-  });
-  
-  return video_banned;
-}
-
 function prepare_search (who, type_of_search) {
   if (thePlayer) thePlayer.stopVideo();
   $('#player').hide();
@@ -131,7 +66,7 @@ function genreSearch (who) {
   		  	$.each(data.feed.entry, function (i,video) {
     			  var video_is_good = false;
           
-            if (!video_is_good && !is_blocked(video) && is_music(video) && !is_cover_or_remix(video)) {
+            if (!video_is_good && validVideo.isNotBlocked(video) && validVideo.isMusic(video) && validVideo.isNotCoverOrRemix(video)) {
   					  videos.push({ 
   							VideoID: video.id.$t.split(":")[3], 
   							VideoTitle: video.title.$t,
@@ -154,7 +89,7 @@ function not_echonest_artist (who) {
   
   $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(who)+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function(data) {
     $.each(data.feed.entry, function (i, video) {
-      if (!is_blocked(video) && is_not_banned(video.id.$t.split(":")[3])) {
+      if (validVideo.isNotBlocked(video) && validVideo.isNotUserBanned(video)) {
         videos.push({ 
           VideoID: video.id.$t.split(":")[3], 
           VideoTitle: video.title.$t 
@@ -176,7 +111,7 @@ function video (video_id) {
 		var single_vid = data.entry;
     if (typeof single_vid !== "undefined") {      
       var video_is_good = false;
-      if (!video_is_good && !is_blocked(single_vid)) {
+      if (!video_is_good && validVideo.isNotBlocked(single_vid)) {
 				videos.push({ 
 				  VideoID: single_vid.id.$t.split(":")[3], 
 				  VideoTitle: single_vid.title.$t
@@ -200,37 +135,6 @@ function rain () {
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   
   $.get('/insert_search/relaxation/rain');
-}
-
-function share_rain_on_facebook () {
-  FB.ui({
-      method: 'stream.publish',
-      attachment: {
-        name: "Relaxing rain, brought to you by tubalr!",
-        href: "http://www.tubalr.com/rain",
-        description: ("Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without all the clutter YouTube brings.")
-      },
-      display: 'popup'
-    },
-    function (response) {
-    }
-  );
-  return false;
-}
-
-function share_rain_on_twitter () {
-  var width  = 575,
-      height = 400,
-      left   = ($(window).width()  - width)  / 2,
-      top    = ($(window).height() - height) / 2,
-      url    = "https://twitter.com/share?text=I%27m%20listening%20to%20relaxing%20rain%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com%2Frain",
-      opts   = 'status=1' +
-               ',width='  + width  +
-               ',height=' + height +
-               ',top='    + top    +
-               ',left='   + left;
-
-  window.open(url, 'twitter', opts);
 }
 
 // multi search
@@ -264,7 +168,7 @@ function multi (who) {
     					var video_is_good = false;
 
       				$.each(data.feed.entry, function (i, video) {
-                if (!video_is_good && !is_blocked(video) && is_music(video) && !is_cover_or_remix(video) && is_not_banned(video.id.$t.split(":")[3])) {
+                if (!video_is_good && validVideo.isNotBlocked(video) && validVideo.isMusic(video) && validVideo.isNotCoverOrRemix(video) && validVideo.isNotUserBanned(video)) {
       				  	videos.push({ 
       							VideoID: video.id.$t.split(":")[3], 
       							VideoTitle: video.title.$t,
@@ -318,7 +222,7 @@ function just (who) {
                   var video_is_good = false;
                   
                   $.each(data.feed.entry, function(i,video) {
-                    if (!video_is_good && !is_blocked(video) && !is_live(video) && is_music(video) && is_unique(track.title, video) && !is_cover_or_remix(video) && is_not_banned(video.id.$t.split(":")[3])) {
+                    if (!video_is_good && validVideo.isNotBlocked(video) && validVideo.isNotBlocked(video) && validVideo.isMusic(video) && validVideo.isUnique(video) && validVideo.isNotCoverOrRemix(video) && validVideo.isNotUserBanned(video)) {
                       videos.push({ 
                         VideoID: video.id.$t.split(":")[3], 
                         VideoTitle: video.title.$t
@@ -343,7 +247,7 @@ function just (who) {
 function similarTo (who) {
   prepare_search(who, "similar");
   
-	$.getJSON('http://developer.echonest.com/api/v4/artist/similar?api_key=OYJRQNQMCGIOZLFIW&name='+escape(who)+'&format=jsonp&callback=?&results=20&start=0', function(data) {
+	$.getJSON('http://developer.echonest.com/api/v4/artist/similar?api_key=OYJRQNQMCGIOZLFIW&name='+escape(who)+'&format=jsonp&callback=?&results=40&start=0', function(data) {
 		var ajaxs = [];
 		
 		$.each(data.response.artists, function (i, artist) {
@@ -351,7 +255,7 @@ function similarTo (who) {
 					var video_is_good = false;
 					
 					$.each(data.feed.entry, function (i, video) {  
-            if (!video_is_good && !is_blocked(video) && is_music(video) && !is_cover_or_remix(video) && is_not_banned(video.id.$t.split(":")[3])) {
+            if (!video_is_good && validVideo.isNotBlocked(video) && validVideo.isMusic(video) && validVideo.isNotCoverOrRemix(video) && validVideo.isNotUserBanned(video)) {
 					  	videos.push({ 
   							VideoID: video.id.$t.split(":")[3], 
   							VideoTitle: video.title.$t,
