@@ -5,7 +5,6 @@ var customPlaylistsDropdown = {
     originalSelect.select2({
       width: '170px'
     }).on('change', function changeEvent (e) {
-      console.log("BOOM:",e);
       customPlaylistsDropdown.change(e);
     }).select2('val', null);
   },

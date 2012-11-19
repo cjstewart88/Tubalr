@@ -43,7 +43,6 @@ function setUserInfo (id, username) {
 function is_blocked (video) {
   var blocked = false;
 
-  if (video.author[0].name.$t.toLowerCase().search('vevo') >= 0) blocked = true;
   if (video.hasOwnProperty("app$control")) blocked = true;
   
   return blocked;
