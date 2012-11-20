@@ -1,6 +1,7 @@
 //= require_tree ../../../vendor/assets/javascripts/
 //= require main
-//= require is-good
+//= require dialogs
+//= require valid-video
 //= require random-playlists
 //= require top-genres
 //= require recently-watched
