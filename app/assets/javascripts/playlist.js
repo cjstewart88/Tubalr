@@ -27,6 +27,7 @@ var Playlist = {
     }
     
     Playlist.determineIfGenreSearch(); 
+    Playlist.report();
     
     Playlist[Playlist.options.searchType]();
   },
@@ -45,20 +46,36 @@ var Playlist = {
     $('#loading-playlist').fadeIn();
   },
 
+  report: function () {
+    var url;
+
+    if (Playlist.options.searchType == 'customPlaylist') {
+      url = [Playlist.options.customPlaylistOwner.replace(/[ ]/g,"+"), "playlist", Playlist.options.customPlaylistName.replace(/[ ]/g,"+")];
+    }
+    else if (Playlist.options.searchType == 'video') {
+      url = [Playlist.options.searchType, Playlist.options.videoID];
+    }
+    else {
+      url = [Playlist.options.searchType, Playlist.options.search.replace(/[ ]/g,"+")];
+    }
+
+    _gaq.push(['_trackPageview', url.join('/')]);
+  },
+
   determineIfGenreSearch: function () {
     var search = Playlist.options.search;
 
     if (Playlist.genres.indexOf(search.replace(/[ +]/g, '')) != -1) {
-      Playlist.options.searchType = 'genreSearch';
+      Playlist.options.searchType = 'genre';
     }
   },
 
-  justSearch: function () {
+  just: function () {
     var search = Playlist.options.search;
 
     $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name='+escape(search)+'&format=jsonp&callback=?&start=0&results=40' , function(data) {
       if (data.response.status.code == 5 || data.response.songs.length <= 10) {
-        Playlist.youtubeSearch();
+        Playlist.youtube();
       }
       else {
         var ajaxs = [];
@@ -89,7 +106,7 @@ var Playlist = {
     });
   },
 
-  similarSearch: function () {
+  similar: function () {
     var search = Playlist.options.search;
 
     $.getJSON('http://developer.echonest.com/api/v4/artist/similar?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&results=40&start=0', function (data) {
@@ -116,7 +133,7 @@ var Playlist = {
     });
   },
 
-  genreSearch: function () {
+  genre: function () {
     var search = Playlist.options.search;
 
     $.getJSON('http://developer.echonest.com/api/v4/artist/search?api_key=OYJRQNQMCGIOZLFIW&format=jsonp&callback=?&results=40&style=' + search, function(data) {
@@ -144,7 +161,7 @@ var Playlist = {
     });
   },
 
-  youtubeSearch: function () {
+  youtube: function () {
     var search = Playlist.options.search;
     
     $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(search)+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function (data) {
@@ -170,7 +187,7 @@ var Playlist = {
     });
   },
 
-  singleVideo: function () {
+  video: function () {
     $.getJSON('https://gdata.youtube.com/feeds/api/videos/' + Playlist.options.videoID + '?v=2&alt=json-in-script&callback=?', function (data) {
       var video = data.entry;
 
@@ -202,7 +219,7 @@ var Playlist = {
     
       Playlist.currentVideo();
       
-      if (Playlist.options.searchType == 'singleVideo') {
+      if (Playlist.options.searchType == 'video') {
         $('#player-controls').hide();
       }
       else {
@@ -321,7 +338,7 @@ $(document).ready(function () {
     if ($('#q').val() != "") {
       Playlist.init({
         search:     $('#q').val(),
-        searchType: $(this).attr('name') + 'Search'
+        searchType: $(this).attr('name')
       });
     }
   });
@@ -332,7 +349,7 @@ $(document).ready(function () {
     if (code == 13 && $('#q').val() != "") {
       Playlist.init({
         search:     $('#q').val(),
-        searchType: 'justSearch'
+        searchType: 'just'
       });
     }
   });

@@ -1,4 +1,5 @@
 var customPlaylistsDropdown = {
+
   init: function () {
     var originalSelect = $('#add-to-playlist-dropdown');
     
@@ -93,8 +94,11 @@ var customPlaylistsDropdown = {
       });
     }, 5000);
   }
+
 };
 
 $(document).ready(function () {
+
   customPlaylistsDropdown.init();
+
 });
