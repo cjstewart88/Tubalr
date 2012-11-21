@@ -1,23 +1,4 @@
 class ApiController < ActionController::Base
-  def search
-    Searches.create({  
-      :search_type  => params[:search_type],
-      :what         => params[:search],
-      :who          => request.remote_ip
-    })
-    
-    render :json => ""
-  end
-  
-  def video_viewed
-    VideoView.create({  
-      :video_id => params[:video_id],
-      :who      => request.remote_ip
-    })
-    
-    render :json => ""
-  end
-  
   def user_playlist
     response      = []
     user          = User.where(:username => params[:username]).first
@@ -27,7 +8,7 @@ class ApiController < ActionController::Base
       
       if playlist_data.present?
         playlist_data.videos.each do | video |
-          response.push(:VideoID => video["video_id"], :VideoTitle => video["video_title"])
+          response.push(:videoID => video["video_id"], :videoTitle => video["video_title"])
         end
       end
     end

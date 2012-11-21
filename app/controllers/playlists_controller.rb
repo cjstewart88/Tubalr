@@ -51,17 +51,10 @@ class PlaylistsController < ApplicationController
   end
   
   def delete_video
-    if params[:user_id].to_i == current_user.id
-      user      = User.find(params[:user_id])
-      playlist  = user.playlists.where("lower(playlist_name) = ?", CGI::unescape(params[:playlist_name]).downcase).first
+    playlist = current_user.playlists.where("lower(playlist_name) = ?", CGI::unescape(params[:playlist_name]).downcase).first
 
-      playlist.videos.where(:video_id => params[:video_id]).first.delete
-      
-      response = { :success => true }
-    else
-      response = { :success => false }
-    end
+    playlist.videos.where(:video_id => params[:video_id]).first.delete
     
-    render :json => response
+    render :json => { :success => true }
   end
 end

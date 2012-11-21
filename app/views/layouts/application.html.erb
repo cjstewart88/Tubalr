@@ -7,6 +7,13 @@
     <%= javascript_include_tag  "http://connect.facebook.net/en_US/all.js", "application" %>
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <meta name="viewport" content="width=500px, user-scalable=no">
+    <%= javascript_tag do %>
+      User.init({
+        id:           <%= current_user.id %>, 
+        username:     '<%= escape_javascript(current_user.username) %>', 
+        bannedVideos: <%= array_or_string_for_javascript(current_user.banned_videos.map(&:video_id)) %>
+      });
+    <% end if user_signed_in? %>
     <%= csrf_meta_tag %>
   </head>
   <body>
@@ -24,8 +31,7 @@
             <a href='/' class="tooltip" original-title="Pronounced: tuba-ler">tubalr</a>
           </h1>
         
-          <nav id="main-nav">  
-            <%= link_to('explore', '/explore', :class => 'explore-link') %>   
+          <nav id="main-nav">    
             <%= link_to('blog', 'http://www.tubalr.tumblr.com/', :target => '_blank', :class => 'blog-link') %>  
             <%= link_to('about', '#', :class => 'about-link about-tubalr') %>    
             <% if user_signed_in? %>
