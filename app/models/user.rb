@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :playlists
+  has_many :banned_videos
   
   validates_presence_of   :username
   validates_uniqueness_of :username

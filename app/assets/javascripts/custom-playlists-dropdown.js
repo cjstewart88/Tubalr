@@ -1,4 +1,5 @@
 var customPlaylistsDropdown = {
+
   init: function () {
     var originalSelect = $('#add-to-playlist-dropdown');
     
@@ -11,7 +12,6 @@ var customPlaylistsDropdown = {
   
   change: function (selectedOption) {
     if (selectedOption.val == 'new') {
-      console.log("ber")
       customPlaylistsDropdown.createNewPlaylist();
     }
     else {
@@ -47,10 +47,10 @@ var customPlaylistsDropdown = {
       type: 'POST',
       url: '/playlist/create',
       data: {
-        user_id:        userId,  
+        user_id:        User.id,  
         playlist_name:  playlistName,
-        video_id:       videos[currenttrack].VideoID,  
-        video_title:    videos[currenttrack].VideoTitle
+        video_id:       Playlist.videos[Playlist.currentTrack].videoID,  
+        video_title:    Playlist.videos[Playlist.currentTrack].videoTitle
       },
       dataType: 'json',
       success: function (data) {
@@ -60,7 +60,7 @@ var customPlaylistsDropdown = {
         $('#create-new-playlist').hide();
         $('#s2id_add-to-playlist-dropdown').show().select2('val', null);
 
-        $('#notices').append('<aside class="video-added-notice">' + '"<b>' + videos[currenttrack].VideoTitle + '</b>" was added to your "<b>' + data.name + '</b>" playlist' + "</aside>"); 
+        $('#notices').append('<aside class="video-added-notice">' + '"<b>' + Playlist.videos[Playlist.currentTrack].videoTitle + '</b>" was added to your "<b>' + data.name + '</b>" playlist' + "</aside>"); 
         
         customPlaylistsDropdown.removeNotices();
       }
@@ -75,12 +75,12 @@ var customPlaylistsDropdown = {
       url: '/playlist/add_video',
       data: {
         playlist_id:    playlistId,
-        video_id:       videos[currenttrack].VideoID,  
-        video_title:    videos[currenttrack].VideoTitle
+        video_id:       Playlist.videos[Playlist.currentTrack].videoID,  
+        video_title:    Playlist.videos[Playlist.currentTrack].videoTitle
       },
       dataType: 'json',
       success: function (data) {
-        $('#notices').append('<aside class="video-added-notice">' + '"<b>' + videos[currenttrack].VideoTitle + '</b>" was added to your "<b>' + playlistName + '</b>" playlist' + "</aside>"); 
+        $('#notices').append('<aside class="video-added-notice">' + '"<b>' + Playlist.videos[Playlist.currentTrack].videoTitle + '</b>" was added to your "<b>' + playlistName + '</b>" playlist' + "</aside>"); 
         $('#add-to-playlist-dropdown').select2('val', null);
         customPlaylistsDropdown.removeNotices();
       }
@@ -94,8 +94,11 @@ var customPlaylistsDropdown = {
       });
     }, 5000);
   }
+
 };
 
 $(document).ready(function () {
+
   customPlaylistsDropdown.init();
+
 });

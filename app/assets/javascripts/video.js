@@ -1,4 +1,5 @@
-var validVideo = {
+var Video = {
+
   isNotBlocked: function (video) {
     return !video.hasOwnProperty("app$control");
   },
@@ -10,13 +11,13 @@ var validVideo = {
   isUnique: function (video) {
     var unique = true;
     
-    for (var i = 0; i < videos.length; i++) {
-      if (videos[i].VideoID === video.id.$t.split(":")[3]) {
+    for (var i = 0; i < Playlist.videos.length; i++) {
+      if (Playlist.videos[i].videoID === video.id.$t.split(":")[3]) {
         unique = false;
         break;
       }
 
-      var tmpTitle1 = videos[i].VideoTitle.toLowerCase().replace(/ *\([^)]*\) */g, '').replace(/[^a-zA-Z ]/g, "");
+      var tmpTitle1 = Playlist.videos[i].videoTitle.toLowerCase().replace(/ *\([^)]*\) */g, '').replace(/[^a-zA-Z ]/g, "");
       var tmpTitle2 = video.title.$t.toLowerCase().replace(/ *\([^)]*\) */g, '').replace(/[^a-zA-Z ]/g, "");
       
       if (tmpTitle1 === tmpTitle2) {
@@ -35,6 +36,7 @@ var validVideo = {
   },
 
   isNotUserBanned: function (video) {
-    return bannedVideos.indexOf(video.id.$t.split(":")[3]) == -1
+    return User.bannedVideos.indexOf(video.id.$t.split(":")[3]) == -1
   }
+
 };

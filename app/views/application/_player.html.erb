@@ -1,15 +1,8 @@
 <section id="loading-playlist">Loading...</section>
 
-<section id="empty-playlist">
-  o_O This playlist has 0 videos... this is kinda weird.
-</section>
+<section id="empty-playlist">o_O This playlist has 0 videos... this is kinda weird.</section>
 
 <section id="player">
-  <div id="share">
-    <span id="facebook" class="icon-facebook-sign" ></span>
-    <span id="twitter" class="icon-twitter-sign"></span>
-  </div>
-  
   <div id="ytplayerid"></div> 
   
   <div id="player-controls">
@@ -20,7 +13,6 @@
     
     <div id="player-controls-left">
       <input type="button" id="remove-video" value="Remove" class="tooltip" original-title="Remove the current video from your playlist. If you're logged in it will never play again!"/>
-      <input type="button" id="info-button" value="Info"/>
       <% if user_signed_in? %>
         <%= select_tag "add-to-playlist-dropdown", options_for_select([[nil, nil],['(+) Create New Playlist', 'new']] + current_user.playlists.map{ | p | [p.playlist_name, p.id, { "data-test" => "derp" }]}), { "data-placeholder" => "Add to Playlist" } %>       
         <span id="create-new-playlist">
@@ -35,19 +27,7 @@
   <section id="playlist"></section>
 </section>
 
-<div id="info"></div>
-
-<div id="share-video">
-  <div class='facebook'>share on facebook</div>
-  <div class='twitter'>tweet on twitter</div>
-  <input type='text' class='url' readonly></div>
-</div>
-
-<script>
-  <%= "setUserInfo(#{current_user.id}, '#{escape_javascript(current_user.username)}')" if user_signed_in? %>
-  <%= "multi('#{escape_javascript(params[:artist_band])}');" if request.path.index("multi") %>
-  <%= "just('#{escape_javascript(params[:artist_band])}');" if request.path.index("just") || request.path.index("genre") %>
-  <%= "video('#{escape_javascript(params[:video_id])}');" if request.path.index("video") %>
-  <%= "similarTo('#{escape_javascript(params[:artist_band])}');" if request.path.index("similar") %>
-  <%= "userPlaylist('#{escape_javascript(@username)}','#{url_encode(escape_javascript(@playlist_name))}');" if@playlist_name %>
-</script>
+<%= javascript_tag do %>
+  Playlist.init(<%= search_options %> );
+<% end if request.path.index("similar") || request.path.index("video") || 
+          request.path.index("genre")  || request.path.index("just") || @playlist_name %>
