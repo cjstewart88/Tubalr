@@ -2,30 +2,4 @@
   <input type="text" name="q" autocomplete="off" id="q" value="<%= params[:artist_band].gsub('+',' ') if params[:artist_band].present? %>" tabindex="1" placeholder="search for artists or bands"/>
   <input type="button" name="just" value="only" class="listen just tooltip" tabindex="2" original-title="This search method is to search for a single artist or band."/>
   <input type="button" name="similar" value="similar" class="listen similar tooltip" tabindex="3" original-title="This search method will find artists and bands similar to your search."/>
-  <span id="searching-info" class="icon-info-sign tooltip" original-title="See what we provide as search options!"></span>
 </form>
-
-<div id="searching-info-dialog">
-  <ol>
-    <li>
-      <h3>Only</h3> 
-      <i>How To:</i> Enter a single artist or band and click the "only" button or press enter.<br/> 
-      <i>What it Does:</i> Retrieves the artist/band's top tracks and searches YouTube for the most relevant video for each.
-    </li>
-    <li>
-      <h3>Similar</h3> 
-      <i>How To:</i> Enter a single artist or band and click the "similar" button.<br/> 
-      <i>What it Does:</i> Retrieves similar artists/bands and searches YouTube for their number one video on YouTube.
-    </li>
-    <li>
-      <h3>Multi</h3> 
-      <i>How To:</i> Enter multiple artists or bands separated by semi-colons (;) and click the "only" button or press enter.<br/> 
-      <i>What it Does:</i> Retrieves the top 10 tracks for each artist/band, then searches YouTube for the most relevant video for each track.
-    </li>
-    <li>
-      <h3>Rain</h3> 
-      <i>How To:</i> Enter the word "rain" and click the "just" button or press enter.<br/> 
-      <i>What it Does:</i> Plays a relaxing thunderstorm for some serious relaxation.
-    </li>
-  </ol>
-</div>
