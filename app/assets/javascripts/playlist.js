@@ -21,14 +21,17 @@ var Playlist = {
     
     if (Player.self) {
       Player.self.stopVideo();
+      Playlist.playerReady();
     }
     else {
       Player.init();
     }
-    
+
     Playlist.determineIfGenreSearch(); 
     Playlist.report();
-    
+  },
+
+  playerReady: function () {
     Playlist[Playlist.options.searchType]();
   },
 
@@ -276,14 +279,7 @@ var Playlist = {
     $('#playlist .active').removeClass('active');
     $('#' + Playlist.videos[Playlist.currentTrack].videoID).addClass('active');
     
-    if (Player.self) {
-      Player.self.loadVideoById(Playlist.videos[Playlist.currentTrack].videoID, 0);
-    }
-    else {
-      setTimeout(function () {
-        Player.self.loadVideoById(Playlist.videos[Playlist.currentTrack].videoID, 0);
-      }, 2000)
-    }
+    Player.self.loadVideoById(Playlist.videos[Playlist.currentTrack].videoID, 0);
   },
 
   removeVideo: function () {

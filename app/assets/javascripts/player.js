@@ -23,7 +23,7 @@ var Player = {
   },
 
   onPlayerReady: function () {
-
+    Playlist.playerReady();
   },
 
   onPlayerStateChange: function (newState) {

@@ -31,9 +31,9 @@
             <a href='/' class="tooltip" original-title="Pronounced: tuba-ler">tubalr</a>
           </h1>
         
-          <nav id="main-nav">    
-            <%= link_to('blog', 'http://www.tubalr.tumblr.com/', :target => '_blank', :class => 'blog-link') %>  
+          <nav id="main-nav">  
             <%= link_to('about', '#', :class => 'about-link about-tubalr') %>    
+            <%= link_to('blog', 'http://www.tubalr.tumblr.com/', :target => '_blank', :class => 'blog-link') %>
             <% if user_signed_in? %>
               <%= link_to('your playlists', "/#{current_user.username}/playlists", :class => 'my-playlists-link') %>  
               <%= link_to('settings', '/users/edit', :class => 'settings-link') %>  
