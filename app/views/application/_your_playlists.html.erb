@@ -1,0 +1,17 @@
+<section id="playlists-main" class="landing">
+  <h2>Your Playlists</h2>
+  
+  <% if current_user.playlists.count != 0 %>
+    These are your current playlist, to make new ones just start using Tubalr and 
+    click the playlist dropdown under the video player.
+    
+    <ul>
+      <% current_user.playlists.each do | playlist | %>
+        <li><a href="<%= "/#{current_user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    Looks like you currently have 0 playlists, starting using tubalr and click the 
+    playlist dropdown under the video player to get started!
+  <% end %>
+</section>

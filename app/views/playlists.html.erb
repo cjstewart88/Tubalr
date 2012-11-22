@@ -5,7 +5,7 @@
     <% if @user.playlists.count != 0 %>
       <% if user_signed_in? && @user.username == current_user.username %>
         These are your current playlist, to make new ones just start using Tubalr and 
-        click the playlist icon to the right of the video player.
+        click the playlist dropdown under the video player.
       <% end %>
       
       <ul>
@@ -15,7 +15,8 @@
       </ul>
     <% else %>
       <% if user_signed_in? && @user.username == current_user.username %>
-        Looks like you currently have 0 playlists, starting using tubalr and click the playlist icon to the right of the video player to get started!
+        Looks like you currently have 0 playlists, starting using tubalr and click the 
+        playlist dropdown under the video player to get started!
       <% else %>
         This is a sad day, it turns out <%= "#{@user.username}" %> has 0 playlist.
       <% end %>

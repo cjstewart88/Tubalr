@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :playlists
+  has_many :playlists, :order => "lower(playlist_name) ASC"
   has_many :banned_videos
   
   validates_presence_of   :username

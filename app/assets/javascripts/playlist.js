@@ -43,7 +43,7 @@ var Playlist = {
     Playlist.options.customPlaylistName   = null;
     Playlist.options.videoID              = null;
 
-    $('#welcome').fadeOut();
+    $('.landing').fadeOut();
     $('#player').fadeOut();
     $('#empty-playlist').fadeOut();
     $('#loading-playlist').fadeIn();

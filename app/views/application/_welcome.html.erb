@@ -1,4 +1,4 @@
-<section id="welcome">
+<section id="welcome" class="landing">
   <div id="welcome-main-message">
     A new way to experience music.
   </div>
@@ -21,18 +21,11 @@
   </div>
 
   <div id="welcome-sign-in">
-    <% if !user_signed_in? %>
-      <div id="welcome-instructions">
-        Get started by searching above. If you're interested in creating account, please 
-        register below, or login if you already have one!
-      </div>
-      <%= link_to('Register', '/users/sign_up', :class => 'sign-up-link button') %> 
-      <%= link_to('Login', '/users/sign_in', :class => 'sign-in-link button') %>
-    <% else %>
-      <div id="welcome-instructions">
-        Get started by searching above or accessing your playlists.
-      </div>
-      <%= link_to('Your Playlists', "/#{current_user.username}/playlists", :class => 'my-playlists-link button') %>  
-    <% end %>
+    <div id="welcome-instructions">
+      Get started by searching above. If you're interested in creating account, please 
+      register below, or login if you already have one!
+    </div>
+    <%= link_to('Register', '/users/sign_up', :class => 'sign-up-link button') %> 
+    <%= link_to('Login', '/users/sign_in', :class => 'sign-in-link button') %>
   </div>
 </section>
