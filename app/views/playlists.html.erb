@@ -3,11 +3,6 @@
     <h2><%= user_signed_in? && @user.username == current_user.username ? "my" : "#{@user.username}'s" %> playlists</h2>
     
     <% if @user.playlists.count != 0 %>
-      <% if user_signed_in? && @user.username == current_user.username %>
-        These are your current playlist, to make new ones just start using Tubalr and 
-        click the playlist dropdown under the video player.
-      <% end %>
-      
       <ul>
         <% @user.playlists.each do | playlist | %>
           <li><a href="<%= "/#{@user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></li>
