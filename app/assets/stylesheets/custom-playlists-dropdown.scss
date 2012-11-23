@@ -31,5 +31,15 @@
 }
 
 .select2-search {
- display: none; 
+  .select2-input {
+    width: 160px;
+    padding-right: 36px;
+    background-image: url('/assets/search.png');
+    background-repeat: no-repeat;
+    background-position: 136px 8px;
+  }
+}
+
+.select2-results .select2-no-results {
+  background: none;
 }

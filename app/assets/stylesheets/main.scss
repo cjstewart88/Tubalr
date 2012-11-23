@@ -3,6 +3,24 @@
 *:focus { outline: none !important; }
 * { margin: 0px; padding: 0px; }
 
+::-webkit-scrollbar {
+  width: 12px;
+  background: #eee;
+}
+
+::-webkit-scrollbar:hover {
+  -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1), inset 0 -1px 0 rgba(0,0,0,0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbcbcb;
+  -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1), inset 0 -1px 0 rgba(0,0,0,0.1);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #919191;
+}
+
 html { 
   overflow-y: scroll; 
   background: url(/assets/bg6.jpg) no-repeat center center fixed; 
