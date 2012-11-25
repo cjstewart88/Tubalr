@@ -1,0 +1,5 @@
+<section>
+  <% @stats.each do | stat, stat_val | %>
+    <%= "<b>#{stat.to_s.gsub("_"," ")}</b>: #{number_with_delimiter(stat_val)}".html_safe %><br/>
+  <% end %>
+</section>

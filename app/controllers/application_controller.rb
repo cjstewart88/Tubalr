@@ -14,4 +14,17 @@ class ApplicationController < ActionController::Base
   def index
     render :layout => "application", :template => "index"
   end
+
+  def stats
+    @stats = {
+      :registered_users                 => User.count,
+      :playlists_created                => Playlist.count,
+      :videos_added_to_playlists        => Video.count,
+      :users_registered_today           => User.where("created_at >= ?", Date.today).count,
+      :playlists_created_today          => Playlist.where("created_at >= ?", Date.today).count,
+      :videos_added_to_playlists_today  => Video.where("created_at >= ?", Date.today).count
+    }
+
+    render :layout => "application", :template => "stats"
+  end
 end
