@@ -391,3 +391,13 @@ section {
     width: 150px;
   }
 }
+
+#echo {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+
+  img {
+    @include border-radius(5px);
+  }
+}
