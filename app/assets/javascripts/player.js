@@ -4,6 +4,16 @@ var Player = {
   init: function () {
     var tag = document.createElement('script');
     tag.src = "http://www.youtube.com/player_api?version=3";
+
+    //incoming ugly fix for YT not firing onReady if the player element is hidden
+    if($.browser.mozilla) {
+      tag.onload = function() {
+        if (!$("#player").is(':visible')) {
+          $('#loading-playlist').hide();
+          $('#player').show();
+        }
+      }
+    }
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);    
   },
