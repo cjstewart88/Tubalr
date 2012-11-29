@@ -8,12 +8,10 @@ var Player = {
     //incoming ugly fix for YT not firing onReady if the player element is hidden
     if($.browser.mozilla) {
       tag.onload = function() {
-        setTimeout(function() {
-          if (!$("#player").is(':visible')) {
-            $('#loading-playlist').hide();
-            $('#player').show(0, function(){$('#player').hide();});
-          }
-        }, 2000);
+        if (!$("#player").is(':visible')) {
+          $('#loading-playlist').hide();
+          $('#player').show();
+        }
       }
     }
     var firstScriptTag = document.getElementsByTagName('script')[0];
