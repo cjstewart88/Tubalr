@@ -32,13 +32,6 @@ $(document).ready(function () {
   $('.tooltip').tipsy({
     gravity: 'n'
   });
-  
-  // Scroll to Top
-  $('#to-top').topLink({
-    min: 400
-  }).click(function () {
-    $.scrollTo(0,300);
-  });
 
   // If Mobile do this shit, nasty
   if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i)    || navigator.userAgent.match(/BlackBerry/i)) {

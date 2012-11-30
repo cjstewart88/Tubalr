@@ -346,23 +346,6 @@ section {
   }
 }
 
-#to-top  { 
-  display: none; 
-  position: fixed; 
-  right: 52px; 
-  bottom: 52px; 
-  color: #fff;
-  font-size: 36px; 
-  font-weight: bold; 
-  text-decoration: none; 
-  padding: 6px 25px 10px; 
-  background: #000;
-  background: rgba(0, 0, 0, .5);
-  @include border-radius(5px);
-  @include box-shadow(0 0 5px rgba(0,0,0,.5));
-  border: solid 1px #000;
-}
-
 #loading-playlist {
   display: none;
   height: 200px;
