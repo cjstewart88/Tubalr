@@ -274,12 +274,16 @@ var Playlist = {
   },
 
   currentVideo: function () {
-    document.title = Playlist.videos[Playlist.currentTrack].videoTitle;
+    var currentVideo      = Playlist.videos[Playlist.currentTrack]
+    var currentVideoTitle = currentVideo.videoTitle;
+
+    document.title = currentVideoTitle;
+    $('#current-video-title').text(currentVideoTitle)
 
     $('#playlist .active').removeClass('active');
-    $('#' + Playlist.videos[Playlist.currentTrack].videoID).addClass('active');
+    $('#' + currentVideo.videoID).addClass('active');
     
-    Player.self.loadVideoById(Playlist.videos[Playlist.currentTrack].videoID, 0);
+    Player.self.loadVideoById(currentVideo.videoID, 0);
   },
 
   removeVideo: function () {

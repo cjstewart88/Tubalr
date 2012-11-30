@@ -401,3 +401,11 @@ section {
     @include border-radius(5px);
   }
 }
+
+#current-video-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 15px;
+  font-size: 12px;
+}
