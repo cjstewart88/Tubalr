@@ -8,6 +8,8 @@ Watch/Listen to bands similar to Fleet Foxes:
 # Contributing
 Please go for it if you're interested in pitching in to make Tubalr better. 
 
+Come hang out in #tubalr on irc.freenode.net!
+
 ## Get up and running
 
 1. install *postgres* if you don't have it
