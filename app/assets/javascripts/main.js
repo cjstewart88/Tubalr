@@ -1,7 +1,7 @@
 $(document).ready(function () { 
   if (typeof FB !== "undefined") {
     FB.init({ 
-      appId   : '138944396256424', 
+      appId   : '239275546125436', 
       status  : true, 
       cookie  : true, 
       xfbml   : true 
