@@ -12,7 +12,8 @@ var Playlist = {
     searchType:           null,
     customPlaylistOwner:  null,
     customPlaylistName:   null,
-    videoID:              null,
+    persistentSorting:    false,
+    videoID:              null
   },
 
   init: function (options) {
@@ -36,12 +37,13 @@ var Playlist = {
   },
 
   reset: function () {
-    Playlist.videos                       = [];
-    Playlist.currentTrack                 = 0;
-    Playlist.direction                    = 'forward';
-    Playlist.options.customPlaylistOwner  = null;
-    Playlist.options.customPlaylistName   = null;
-    Playlist.options.videoID              = null;
+    Playlist.videos = [];
+    Playlist.currentTrack = 0;
+    Playlist.direction = 'forward';
+    Playlist.options.customPlaylistOwner = null;
+    Playlist.options.customPlaylistName = null;
+    Playlist.options.persistentSorting = false;
+    Playlist.options.videoID = null;
 
     $('.landing').fadeOut();
     $('#player').fadeOut();
@@ -210,16 +212,18 @@ var Playlist = {
 
     if (Playlist.videos.length == 0) {
       $('#empty-playlist').fadeIn();
-    }
-    else {
-      Playlist.videos.sort(function () { return (Math.round(Math.random())-0.5); });
-      
-      videosCopy = "";
+    } else {
+      //don't sort a user playlist.
+      if (Playlist.options.customPlaylistOwner == null || Playlist.options.customPlaylistOwner.length == 0) {
+        Playlist.videos.sort(function () {
+          return (Math.round(Math.random()) - 0.5);
+        });
+      }
+      var playlistContainer = $('#playlist').empty();
       $.each(Playlist.videos, function(i) {
-        videosCopy = videosCopy + '<a href="#" id="'+this.videoID+'">'+this.videoTitle+'</a>';
+        playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
       });
-      $('#playlist').html(videosCopy);
-    
+
       Playlist.currentVideo();
       
       if (Playlist.options.searchType == 'video') {
@@ -284,6 +288,28 @@ var Playlist = {
     $('#' + currentVideo.videoID).addClass('active');
     
     Player.self.loadVideoById(currentVideo.videoID, 0);
+  },
+
+  sortVideo: function () {
+    var positions = [];
+    var currentPlayingVideo = Playlist.videos[Playlist.currentTrack].videoID;
+    $('#playlist li').each(function(index, item) {
+      positions.push({track_number: index, videoID: $(item).data('videoId'), videoTitle: $(item).data('videoTitle')});
+      if ($(item).data('videoId') == currentPlayingVideo) {
+        Playlist.currentTrack = index;
+      }
+    });
+    Playlist.videos = positions;
+
+    if (Playlist.options.persistentSorting) {
+      $.ajax({
+        type: 'POST',
+        url: '/' + User.username + '/playlist/' + Playlist.options.customPlaylistName + '/sort',
+        dataType: 'json',
+        contentType: 'application/json',
+        data: JSON.stringify({tracks: positions})
+      });
+    }
   },
 
   removeVideo: function () {
@@ -457,4 +483,7 @@ $(document).ready(function () {
     Playlist.shareOnFacebook();
   });
 
+  $('#playlist').sortable({
+    stop: Playlist.sortVideo
+  });
 });

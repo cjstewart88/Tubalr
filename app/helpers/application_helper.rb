@@ -6,6 +6,7 @@ module ApplicationHelper
       options[:searchType]          = array_or_string_for_javascript('customPlaylist')
       options[:customPlaylistOwner] = array_or_string_for_javascript(escape_javascript(@username))
       options[:customPlaylistName]  = array_or_string_for_javascript(url_encode(escape_javascript(@playlist_name)))
+      options[:persistentSorting]   = @is_playlist_owner
     elsif request.path.index('just')
       options[:searchType] = array_or_string_for_javascript('just')
     elsif request.path.index('similar')
