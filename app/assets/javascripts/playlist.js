@@ -349,7 +349,7 @@ var Playlist = {
       case 'customPlaylist':
         search = Playlist.options.customPlaylistName.replace(/[ +]/g,'%2B');
         url += search + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
-        url += '%2F' + Playlist.options.customPlaylistOwner.replace(/[ +]/g, '%2B') + '%2F' + search.replace(/%20/g, '%2B');
+        url += '%2F' + Playlist.options.customPlaylistOwner.replace(/[ +]/g, '%2B') + '%2Fplaylist%2F' + search.replace(/%20/g, '%2B');
         break;
       case 'video':
         url += Playlist.videos[Playlist.currentTrack].videoTitle.replace(/[ +]/g,"%20") + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
