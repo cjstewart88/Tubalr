@@ -3,7 +3,7 @@ source 'http://rubygems.org'
 gem 'rails', '3.1.4'
 
 gem 'pg'
-gem 'devise', '1.5.3'
+gem 'devise'
 
 gem 'jquery-rails', '1.0.12'
 gem 'compass-rails'
