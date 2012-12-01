@@ -20,4 +20,10 @@ class Playlist < ActiveRecord::Base
     end
   end
 
+  def reorder_tracks(tracks)
+
+    tracks.each do |item|
+      reorder(Video.find_by_video_id(item[:videoID]), item[:track_number])
+    end
+  end
 end

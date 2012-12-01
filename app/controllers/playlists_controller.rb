@@ -1,4 +1,5 @@
 class PlaylistsController < ApplicationController
+
   def index
     @user = User.where(:username =>  params[:username]).first
     
@@ -8,7 +9,7 @@ class PlaylistsController < ApplicationController
   def listen
     @username           = params[:username]
     @playlist_name      = params[:playlist_name]
-    @is_playlist_owner  = true if current_user.present? && current_user.username == params[:username]
+    @is_playlist_owner  = current_user.present? && current_user.username == params[:username]
     
     render :layout => "application", :template => "index"
   end  
@@ -49,12 +50,17 @@ class PlaylistsController < ApplicationController
     
     render :json => response
   end
-  
+
+  def sort
+    playlist = current_user.playlists.where("lower(playlist_name) = ?", CGI::unescape(params[:playlist_name]).downcase).first
+    Rails.logger.debug(params[:tracks])
+    playlist.reorder_tracks(params[:tracks])
+    render :json => { :success => true }
+  end
+
   def delete_video
     playlist = current_user.playlists.where("lower(playlist_name) = ?", CGI::unescape(params[:playlist_name]).downcase).first
-
     playlist.videos.where(:video_id => params[:video_id]).first.delete
-    
     render :json => { :success => true }
   end
 end
