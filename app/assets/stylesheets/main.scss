@@ -387,3 +387,14 @@ section {
   margin-bottom: 15px;
   font-size: 12px;
 }
+
+#share-playlist {
+  float: right;
+  margin-top: -3px;
+  
+  span {
+    margin-left: 15px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}

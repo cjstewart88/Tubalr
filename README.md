@@ -28,7 +28,7 @@ Come hang out in #tubalr on irc.freenode.net!
 
 1. Fork it    
 
-2. Make a branch for your fixes or new features: `git branch -d branch_name_here`
+2. Make a branch for your fixes or new features: `git branch -b branch_name_here`
 
 3. Make your changes, test to make sure they work and that no previous 
 functionality is broken.

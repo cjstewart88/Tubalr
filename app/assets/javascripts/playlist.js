@@ -19,6 +19,9 @@ var Playlist = {
     Playlist.reset();
     $.extend(Playlist.options, options);
     
+    Playlist.determineIfGenreSearch(); 
+    Playlist.report();
+
     if (Player.self) {
       Player.self.stopVideo();
       Playlist.playerReady();
@@ -26,9 +29,6 @@ var Playlist = {
     else {
       Player.init();
     }
-
-    Playlist.determineIfGenreSearch(); 
-    Playlist.report();
   },
 
   playerReady: function () {
@@ -328,6 +328,82 @@ var Playlist = {
     else {
       Playlist.nextSong("keepCurrentTrack");
     }
+  },
+
+  shareOnTwitter: function () {
+    var url     = "https://twitter.com/share?text=I%27m%20listening%20to%20";
+    var search  = "";
+
+    switch (Playlist.options.searchType) {
+      case 'genre':
+      case 'just':
+        search = Playlist.options.search.replace(/[ +]/g,"%20");
+        url += search + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
+        url += '%2Fjust%2F' + search.replace(/%20/g, '%2B');
+        break;
+      case 'similar':
+        search = Playlist.options.search.replace(/[ +]/g,"%20");
+        url += 'artists%2Fbands%20similar%20to%20' + search + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
+        url += '%2Fsimilar%2F' + search.replace(/%20/g,'%2B');
+        break;
+      case 'customPlaylist':
+        search = Playlist.options.customPlaylistName.replace(/[ +]/g,'%2B');
+        url += search + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
+        url += '%2F' + Playlist.options.customPlaylistOwner.replace(/[ +]/g, '%2B') + '%2F' + search.replace(/%20/g, '%2B');
+        break;
+      case 'video':
+        url += Playlist.videos[Playlist.currentTrack].videoTitle.replace(/[ +]/g,"%20") + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
+        url += '%2Fvideo%2F' + Playlist.videos[Playlist.currentTrack].videoID;
+        break;
+    }
+    
+    var opts = 'status=1'     +
+               ',width=575'   +
+               ',height=400'  +
+               ',top='        + ($(window).height() - 400)  / 2  +
+               ',left='       + ($(window).width()  - 575)  / 2;
+
+    window.open(url, 'twitter', opts);
+  },
+
+  shareOnFacebook: function () {
+    var url       = "http://www.tubalr.com/";
+    var shareText = "";
+
+    if (Playlist.options.search) {
+      if (Playlist.options.searchType == "similar") {
+        shareText += "Artists/Bands similar to ";
+      }
+      else {
+        url += "just/"
+      }
+
+      url += Playlist.options.search.replace(/ /g,"+");
+      shareText += unescape(Playlist.options.search.replace(/[+]/g," "));
+    }
+    else if (Playlist.options.videoID) {
+      url += "video/" + Playlist.videos[Playlist.currentTrack].videoID
+      shareText += unescape(Playlist.videos[Playlist.currentTrack].videoTitle.replace(/[+]/g," "));
+    }
+    else if (Playlist.options.customPlaylistOwner) {
+      url += Playlist.options.customPlaylistOwner.replace(/ /g,"+") + "/playlist/" + Playlist.options.customPlaylistName.replace(/ /g,"+");
+      shareText += unescape(Playlist.options.customPlaylistName.replace(/[+]/g," "));
+    }
+
+    shareText += ", brought to you by tubalr!";
+
+    FB.ui({
+        method: 'stream.publish',
+        attachment: {
+          name: shareText,
+          href: url,
+          description: ("Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without all the clutter YouTube brings.")
+        },
+        display: 'popup'
+      },
+      function (response) {
+      }
+    );
   }
 
 };
@@ -371,6 +447,14 @@ $(document).ready(function () {
 
   $('#playlist').delegate('a', 'click', function () { 
     Playlist.jumpToSong($(this).index('#playlist a')); 
+  });
+
+  $('#share-on-twitter').click(function () {
+    Playlist.shareOnTwitter();
+  });
+
+  $('#share-on-facebook').click(function () {
+    Playlist.shareOnFacebook();
   });
 
 });

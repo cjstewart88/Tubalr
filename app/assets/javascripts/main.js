@@ -1,4 +1,13 @@
 $(document).ready(function () { 
+  if (typeof FB !== "undefined") {
+    FB.init({ 
+      appId   : '138944396256424', 
+      status  : true, 
+      cookie  : true, 
+      xfbml   : true 
+    });
+  }
+
   // About Tubalr Dialog
   $('#about-tubalr').dialog({
     modal:      true,
