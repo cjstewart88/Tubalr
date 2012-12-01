@@ -78,7 +78,9 @@ var Playlist = {
   just: function () {
     var search = Playlist.options.search;
 
-    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name='+escape(search)+'&format=jsonp&callback=?&start=0&results=40' , function(data) {
+    var numberOfSongs = (Playlist.options.searchType == 'just' ? 40 : 20);
+
+    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&start=0&results=' + numberOfSongs , function (data) {
       if (data.response.status.code == 5 || data.response.songs.length <= 10) {
         Playlist.youtube();
       }
@@ -134,7 +136,7 @@ var Playlist = {
         );
       });
       
-      $.when.apply($,ajaxs).then(Playlist.start);
+      $.when.apply($,ajaxs).then(Playlist.just);
     });
   },
 
