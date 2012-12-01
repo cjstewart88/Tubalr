@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
-one:
-  playlist_name: MyString
-  user_id: 1
-
-two:
-  playlist_name: MyString
-  user_id: 1
