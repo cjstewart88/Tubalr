@@ -1,7 +1,9 @@
 @import "compass";
 
-*:focus { outline: none !important; }
 * { margin: 0px; padding: 0px; }
+
+*, object, embed { outline: none; }
+input::-moz-focus-inner { border: 0; }
 
 ::-webkit-scrollbar {
   width: 12px;
@@ -378,6 +380,7 @@ section {
 
   img {
     @include border-radius(5px);
+    border: none;
   }
 }
 
