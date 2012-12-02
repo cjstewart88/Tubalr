@@ -5,20 +5,15 @@ var Player = {
     var tag = document.createElement('script');
     tag.src = "http://www.youtube.com/player_api?version=3";
 
-    //incoming ugly fix for YT not firing onReady if the player element is hidden
-    if($.browser.mozilla) {
-      tag.onload = function() {
-        if (!$("#player").is(':visible')) {
-          $('#loading-playlist').hide();
-          $('#player').show();
-        }
-      }
-    }
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);    
   },
 
   youtubeAPIReady: function () {
+    // We have to make the youtube player visible for things
+    // to work, not sure why...
+    Playlist.togglePlayer();
+
     Player.self = new YT.Player('ytplayerid', {
       width:    800,
       height:   400,
@@ -33,7 +28,7 @@ var Player = {
   },
 
   onPlayerReady: function () {
-    Playlist.playerReady();
+    Playlist.start();
   },
 
   onPlayerStateChange: function (newState) {

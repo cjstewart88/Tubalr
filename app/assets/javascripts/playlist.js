@@ -23,20 +23,23 @@ var Playlist = {
     Playlist.determineIfGenreSearch(); 
     Playlist.report();
 
+    Playlist[Playlist.options.searchType]();
+  },
+
+  resultsReady: function () {
     if (Player.self) {
-      Player.self.stopVideo();
-      Playlist.playerReady();
+      Playlist.start();
     }
     else {
       Player.init();
     }
   },
 
-  playerReady: function () {
-    Playlist[Playlist.options.searchType]();
-  },
-
   reset: function () {
+    if (Player.self) { 
+      Player.self.stopVideo(); 
+    }
+
     Playlist.videos = [];
     Playlist.currentTrack = 0;
     Playlist.direction = 'forward';
@@ -108,7 +111,7 @@ var Playlist = {
           }
         });
         
-        $.when.apply($, ajaxs).then(Playlist.start);
+        $.when.apply($, ajaxs).then(Playlist.resultsReady);
       }
     });
   },
@@ -164,7 +167,7 @@ var Playlist = {
         )
       });
       
-      $.when.apply($, ajaxs).then(Playlist.start);
+      $.when.apply($, ajaxs).then(Playlist.resultsReady);
     });
   },
 
@@ -181,7 +184,7 @@ var Playlist = {
         }
       });
       
-      Playlist.start();
+      Playlist.resultsReady();
     });
   },
 
@@ -190,7 +193,7 @@ var Playlist = {
 
     $.getJSON(url, function (data) {
       Playlist.videos = data;
-      Playlist.start(); 
+      Playlist.resultsReady(); 
     });
   },
 
@@ -205,38 +208,39 @@ var Playlist = {
         });
       }
 
-      Playlist.start();
+      Playlist.resultsReady();
     });
   },
 
-  start: function () {
+  togglePlayer: function () {
     $('#loading-playlist').hide();
 
     if (Playlist.videos.length == 0) {
       $('#empty-playlist').fadeIn();
-    } else {
-      //don't sort a user playlist.
-      if (Playlist.options.customPlaylistOwner == null || Playlist.options.customPlaylistOwner.length == 0) {
-        Playlist.videos.sort(function () {
-          return (Math.round(Math.random()) - 0.5);
-        });
-      }
-      var playlistContainer = $('#playlist').empty();
-      $.each(Playlist.videos, function(i) {
-        playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
-      });
-
-      Playlist.currentVideo();
-      
-      if (Playlist.options.searchType == 'video') {
-        $('#player-controls').hide();
-      }
-      else {
-        $('#player-controls').show();
-      }
-      
+    } 
+    else {
       $('#player').fadeIn(1000);
     }
+  },
+
+  preparePlaylist: function () {
+    //don't sort a user playlist.
+    if (Playlist.options.customPlaylistOwner == null || Playlist.options.customPlaylistOwner.length == 0) {
+      Playlist.videos.sort(function () {
+        return (Math.round(Math.random()) - 0.5);
+      });
+    }
+
+    var playlistContainer = $('#playlist').empty();
+    $.each(Playlist.videos, function(i) {
+      playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
+    });
+  },
+
+  start: function () {
+    Playlist.preparePlaylist();
+    Playlist.togglePlayer();
+    Playlist.currentVideo();
   },
 
   nextSong: function (keepCurrentTrack) {
