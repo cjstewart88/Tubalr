@@ -6,3 +6,4 @@
 //= require player
 //= require playlist
 //= require video
+//= require import

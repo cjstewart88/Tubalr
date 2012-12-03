@@ -4,6 +4,7 @@ gem 'rails', '3.1.4'
 
 gem 'pg'
 gem 'devise'
+gem 'activerecord-import'
 
 gem 'jquery-rails', '1.0.12'
 gem 'compass-rails'

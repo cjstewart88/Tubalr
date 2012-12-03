@@ -149,13 +149,20 @@ input[type=button], input[type=submit], a.button {
   }
   
   &.has-icon-left span {
-    margin-right: 5px; 
+    margin-right: 8px; 
     line-height: normal;
   }
   
   &.has-icon-right span {
     margin-left: 10px; 
     line-height: normal;
+  }
+}
+
+.ui-dialog {
+  input[type=button], input[type=submit], a.button {
+    background: #548FF4;
+    color: #fff;
   }
 }
 
@@ -170,7 +177,6 @@ input[type=button], input[type=submit], a.button {
   
   input[type=button], input[type=submit] {
     background: #548FF4;
-    border: none;
     color: #fff;
   }
 }
@@ -400,5 +406,15 @@ section {
     margin-left: 15px;
     font-size: 16px;
     cursor: pointer;
+  }
+}
+
+#new-feature {
+  .icon-bullhorn {
+    margin-right: 15px;
+  }
+  
+  a {
+    font-weight: bold;
   }
 }

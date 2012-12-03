@@ -2,7 +2,7 @@ var User = {
 
   id:           null,
 
-  username:     [],
+  username:     null,
 
   bannedVideos: [],
 

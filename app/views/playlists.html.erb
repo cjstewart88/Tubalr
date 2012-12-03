@@ -1,7 +1,10 @@
-<section id="playlists-main">
-  <% if @user.present? %>
-    <h2><%= user_signed_in? && @user.username == current_user.username ? "my" : "#{@user.username}'s" %> playlists</h2>
-    
+
+<% if @user.present? %>
+  <%= render :partial => 'import_youtube_playlists' if @playlist_owner %>
+
+  <section id="playlists-main">
+    <h2><%= @playlist_owner ? "my" : "#{@user.username}'s" %> playlists</h2>
+
     <% if @user.playlists.count != 0 %>
       <ul>
         <% @user.playlists.each do | playlist | %>
@@ -9,9 +12,11 @@
         <% end %>
       </ul>
     <% else %>
-      <% if user_signed_in? && @user.username == current_user.username %>
-        Looks like you currently have 0 playlists, starting using tubalr and click the 
-        playlist dropdown under the video player to get started!
+      <% if @playlist_owner %>
+        <span id="no-playlists">
+          Looks like you currently have 0 playlists, starting using tubalr and click the 
+          playlist dropdown under the video player to get started!
+        </span>
       <% else %>
         This is a sad day, it turns out <%= "#{@user.username}" %> has 0 playlist.
       <% end %>
@@ -25,5 +30,5 @@
       still MIA, shoot and email to <a href="mailto:listen.to.tubalr@gmail.com">listen.to.tubalr@gmail.com</a> 
       and we'll see if we can track this user down!
     </p>
-  <% end %>
-</section>
+  </section>
+<% end %>
