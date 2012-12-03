@@ -25,7 +25,6 @@ var Import = {
   getPlaylistNames: function () {
     var ajax = $.getJSON('https://gdata.youtube.com/feeds/api/users/' + escape(Import.youtubeUsername) + '/playlists?v=2&alt=json-in-script&callback=?', function (data) {
       $.each(data.feed.entry, function () {
-        console.log(this);
         Import.youtubePlaylists.push({
           id:     this.id["$t"].split(":")[5],
           name:   this.title["$t"].replace(/[^a-z\d ]/ig,""),
