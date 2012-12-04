@@ -17,8 +17,6 @@ class PlaylistsController < ApplicationController
   end  
   
   def import_youtube_playlists
-    to_return         = {}
-
     params[:playlists].values.each do | youtube_playlist |
       playlist  = current_user.playlists.where("lower(playlist_name) = ?", youtube_playlist["name"].downcase).first
       
@@ -75,7 +73,6 @@ class PlaylistsController < ApplicationController
 
   def sort
     playlist = current_user.playlists.where("lower(playlist_name) = ?", CGI::unescape(params[:playlist_name]).downcase).first
-    Rails.logger.debug(params[:tracks])
     playlist.reorder_tracks(params[:tracks])
     render :json => { :success => true }
   end
@@ -84,5 +81,25 @@ class PlaylistsController < ApplicationController
     playlist = current_user.playlists.where("lower(playlist_name) = ?", CGI::unescape(params[:playlist_name]).downcase).first
     playlist.videos.where(:video_id => params[:video_id]).first.delete
     render :json => { :success => true }
+  end
+
+  def destroy
+    current_user.playlists.find(params[:id]).destroy
+    
+    render :json => {}
+  end
+
+  def update
+    to_return = {}
+
+    if current_user.playlists.where("lower(playlist_name) = ?", params[:name].downcase).present?
+      to_return[:name_taken] = true
+    else
+      playlist = current_user.playlists.find(params[:id])
+      playlist.playlist_name = params[:name]
+      playlist.save
+    end
+
+    render :json => to_return
   end
 end

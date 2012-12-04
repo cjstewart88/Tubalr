@@ -10,7 +10,9 @@
   <% if current_user.playlists.count != 0 %>
     <ul>
       <% current_user.playlists.each do | playlist | %>
-        <li><a href="<%= "/#{current_user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></a></li>
+        <li>
+          <a href="<%= "/#{current_user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></a>
+        </li>
       <% end %>
     </ul>
   <% else %>

@@ -91,43 +91,8 @@ var Import = {
   },
 
   done: function () {
-    Import.reloadPlaylistsUL();
-
-    $('#import-youtube-playlists').dialog('close');
-
-    $('#notices').append('<aside class="import-youtube-playlist-done-notice"><b>' + Import.youtubeUsername + '</b>\'s playlists successfully imported!</aside>');
-    setTimeout(function () {
-      $('.import-youtube-playlist-done-notice').slideUp(500, function () {
-        $(this).remove();
-      });
-    }, 5000); 
-
-    $('#import-youtube-playlists-form').show();
-    $('#import-youtube-playlists-importing').hide();
-    $('#import-youtube-playlists-username').val("");
+    location.reload();
   },
-
-  reloadPlaylistsUL: function () {
-    var playlistUL = $('#playlists-main ul');
-
-    if (playlistUL.length == 0) {
-      playlistUL = $("<ul>");
-      $('#no-playlists').replaceWith(playlistUL);
-    }
-    
-    $.each(Import.youtubePlaylists, function () {
-      if (playlistUL.find('a:contains("' + this.name + '")').length == 0) {
-        var newPlaylistLI   = $("<li>").text(this.name);
-        var newPlaylistLink = $("<a>").attr('href', '/' + User.username + '/playlist/' + this.name)
-                                      .text(this.name);
-
-        newPlaylistLI.html(newPlaylistLink);
-
-        playlistUL.append(newPlaylistLI);
-      }
-    });
-    
-  }
 
 };
 

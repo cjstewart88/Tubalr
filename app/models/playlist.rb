@@ -1,6 +1,6 @@
 class Playlist < ActiveRecord::Base
   belongs_to :user
-  has_many :videos, :order => "track_number ASC"
+  has_many :videos, :order => "track_number ASC", :dependent => :destroy
 
   def reorder(video, track_number)
     if track_number < 0

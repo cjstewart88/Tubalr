@@ -8,9 +8,16 @@
     <% if @user.playlists.count != 0 %>
       <ul>
         <% @user.playlists.each do | playlist | %>
-          <li><a href="<%= "/#{@user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></li>
+          <li id="<%= playlist.id %>" title="<%= playlist.playlist_name%>">
+            <a href="<%= "/#{@user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></a>
+            <% if @playlist_owner %> 
+              <span class='custom-playlist-settings-open-dialog icon-cog'></span>
+            <% end %>
+          </li>
         <% end %>
       </ul>
+
+      <%= render :partial => 'custom_playlist_settings' if @playlist_owner %>
     <% else %>
       <% if @playlist_owner %>
         <span id="no-playlists">

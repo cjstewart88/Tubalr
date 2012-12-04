@@ -7,3 +7,4 @@
 //= require playlist
 //= require video
 //= require import
+//= require custom-playlist-settings

@@ -17,6 +17,8 @@ Tubalr::Application.routes.draw do
   match "/playlist/add_video"                       => "playlists#add_video"
   match "/playlist/delete_video"                    => "playlists#delete_video"
   
+  resources :playlists, :only => [:destroy, :update]
+
   post "/import_youtube_playlists"                  => "playlists#import_youtube_playlists"
 
   post "/check_banned"                              => "bannedVideos#check"
