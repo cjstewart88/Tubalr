@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :banned_videos
   
   validates_presence_of   :username
-  validates_uniqueness_of :username
+  validates_uniqueness_of :username, :case_sensitive => false
     
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
