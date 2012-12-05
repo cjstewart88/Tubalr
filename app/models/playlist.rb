@@ -6,9 +6,11 @@ class Playlist < ActiveRecord::Base
     if track_number < 0
       track_number = 0
     end
+
     if track_number > (videos.count - 1)
       track_number = (videos.count - 1)
     end
+    
     video.update_attributes(track_number: track_number)
     videos_to_order = videos - [video]
     offset = 0
@@ -21,7 +23,6 @@ class Playlist < ActiveRecord::Base
   end
 
   def reorder_tracks(tracks)
-
     tracks.each do |item|
       reorder(Video.find_by_video_id(item[:videoID]), item[:track_number])
     end

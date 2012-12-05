@@ -16,14 +16,23 @@ var Import = {
   validYoutubeUsername: function () {
     $.getJSON('https://gdata.youtube.com/feeds/api/users/' + Import.youtubeUsername + '?v=2&alt=json-in-script&callback=?', function (data) {
       $('#import-youtube-playlists-form').hide();
+      $('#import-youtube-playlists-error').hide();
       $('#import-youtube-playlists-importing').show();
 
       Import.getPlaylistNames();
     })
   },
 
+  importError: function () {
+    $('#import-youtube-playlists-form').show();
+    $('#import-youtube-playlists-importing').hide();
+    $('#import-youtube-playlists-error').show();
+  },
+
   getPlaylistNames: function () {
     var ajax = $.getJSON('https://gdata.youtube.com/feeds/api/users/' + escape(Import.youtubeUsername) + '/playlists?v=2&alt=json-in-script&callback=?', function (data) {
+      if (data.feed.entry === undefined) { return false; }
+
       $.each(data.feed.entry, function () {
         Import.youtubePlaylists.push({
           id:     this.id["$t"].split(":")[5],
@@ -37,11 +46,20 @@ var Import = {
   },
 
   getPlaylistVideos: function () {
+    if (Import.youtubePlaylists.length == 0) {
+      Import.importError();
+      return false;
+    }
+
     var ajaxs = [];
 
     $.each(Import.youtubePlaylists, function (i, playlist) {
       ajaxs.push(
         $.getJSON('https://gdata.youtube.com/feeds/api/playlists/' + playlist.id + '?v=2&alt=json-in-script&callback=?', function (data) {
+          if (data.feed.entry === undefined) {
+            return false;
+          }
+          
           $.each(data.feed.entry, function (i, video) {
             if (Video.isNotBlocked(video)) {
               var videoID = video.link[0]["href"].toString().split('v=')[1];
