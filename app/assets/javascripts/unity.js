@@ -72,10 +72,7 @@ $(document).ready(function () {
 
   Unity.setCallbackObject({
     pause: function() {
-      if (Player.self.getPlayerState() === 1)
-        Player.self.pauseVideo();
-      else
-        Player.self.playVideo();
+      Playlist.playPause();
     },
     next: function() {
       Playlist.nextSong();

@@ -243,6 +243,15 @@ var Playlist = {
     Playlist.currentVideo();
   },
 
+  playPause: function () {
+    if (Player.self.getPlayerState() === 1) {
+      Player.self.pauseVideo();
+    }
+    else {
+      Player.self.playVideo();
+    }
+  },
+
   nextSong: function (keepCurrentTrack) {
     Playlist.direction = "forward";
 
@@ -465,6 +474,19 @@ $(document).ready(function () {
   $('#remove-video').click(function () {
     Playlist.removeVideo();
     return false;
+  });
+
+  Mousetrap.bind('space', function(e) {
+    Playlist.playPause();
+    e.preventDefault();
+  });
+
+  Mousetrap.bind('left', function() {
+    Playlist.previousSong();
+  });
+
+  Mousetrap.bind('right', function() {
+    Playlist.nextSong();
   });
 
   $('#next').click(function () { 
