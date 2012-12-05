@@ -89,10 +89,13 @@ $(document).ready(function () {
     var playing = Player.self.getPlayerState() === 1;
     var currentVideo      = Playlist.videos[Playlist.currentTrack]
     var currentVideoTitle = currentVideo.videoTitle;
+    var videoArt = "http://img.youtube.com/vi/"+currentVideo.videoID+"/0.jpg";
     Unity.sendState({
       playing: playing,
       title: currentVideoTitle,
-      artist: ""
+      artist: "",
+      albumArt: videoArt,
+      service: "Tubalr"
     }); 
   });
 });
