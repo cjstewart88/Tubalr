@@ -4,6 +4,7 @@
 //= require custom-playlists-dropdown
 //= require user
 //= require player
+//= require unity
 //= require playlist
 //= require video
 //= require import
