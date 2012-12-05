@@ -1,5 +1,6 @@
 var Player = {
   self: null,
+  listeners: [],
   
   init: function () {
     var tag = document.createElement('script');
@@ -35,6 +36,9 @@ var Player = {
     if (newState.data == 0) {
       Playlist.nextSong();
     }
+    for (var i = 0; i < Player.listeners.length; ++i) {
+      Player.listeners[i](newState);
+    }
   },
 
   onPlayerError: function (errorCode) {
@@ -44,6 +48,10 @@ var Player = {
     else {
       Playlist.nextSong();
     }
+  },
+
+  addStateListener: function(listener) {
+    Player.listeners.push(listener);
   }
 
 };
