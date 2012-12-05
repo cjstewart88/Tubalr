@@ -8,10 +8,10 @@
     <% if @user.playlists.count != 0 %>
       <ul>
         <% @user.playlists.each do | playlist | %>
-          <li id="<%= playlist.id %>" title="<%= playlist.playlist_name%>">
+          <li id="<%= playlist.id %>" data-playlist-name="<%= playlist.playlist_name%>">
             <a href="<%= "/#{@user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></a>
             <% if @playlist_owner %> 
-              <span class='custom-playlist-settings-open-dialog icon-cog'></span>
+              <span class='custom-playlist-settings-open-dialog icon-wrench tooltip' original-title="Edit Playlist"></span>
             <% end %>
           </li>
         <% end %>

@@ -68,7 +68,7 @@ var CustomPlaylistSettings = {
   renameDone: function (newPlaylistName) {
     var playlistLI = $('#playlists-main #' + CustomPlaylistSettings.playlistID);
 
-    playlistLI.attr('title', newPlaylistName)
+    playlistLI.data('playlist-name', newPlaylistName)
               .find('a').text(newPlaylistName);
 
     CustomPlaylistSettings.notice('<b>' + CustomPlaylistSettings.playlistName + '</b>, ranamed to <b>' + newPlaylistName + '</b>.');
@@ -101,7 +101,7 @@ $(document).ready(function () {
   $('.custom-playlist-settings-open-dialog').click(function () {
     CustomPlaylistSettings.init({
       playlistID:   $(this).parent().attr('id'),
-      playlistName: $(this).parent().attr('title')
+      playlistName: $(this).parent().data('playlist-name')
     });
 
     $('#custom-playlist-settings').dialog('open'); 
