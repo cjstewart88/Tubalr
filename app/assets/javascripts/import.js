@@ -62,11 +62,7 @@ var Import = {
           
           $.each(data.feed.entry, function (i, video) {
             if (Video.isNotBlocked(video)) {
-              var videoID = video.link[0]["href"].toString().split('v=')[1];
-              var ampersandPosition = videoID.indexOf('&');
-              if (ampersandPosition != -1) {
-                videoID = videoID.substring(0, ampersandPosition);
-              }
+              var videoID = video.link[0].href.match(/\b([A-Za-z0-9_-]{11})\b/)[1];
 
               playlist.videos.push({
                 id:    videoID, 
