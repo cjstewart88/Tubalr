@@ -308,36 +308,42 @@ var Playlist = {
     Player.self.loadVideoById(currentVideo.videoID, 0);
   },
 
-  throttleSort: function () {
-    if (Playlist.options.persistentSorting) {
-      clearTimeout(Playlist.sortThrottler);
-      Playlist.sortThrottler = setTimeout(Playlist.sortVideo, 5000);
-    }
-    else {
-      Playlist.sortVideo();
-    }
+  throttlePersistSort: function () {
+    clearTimeout(Playlist.sortThrottler);
+    Playlist.sortThrottler = setTimeout(Playlist.persistSort, 5000);
   },
 
-  sortVideo: function () {
-    var positions = [];
+  sortVideos: function () {
+    var positions           = [];
     var currentPlayingVideo = Playlist.videos[Playlist.currentTrack].videoID;
+
     $('#playlist li').each(function(index, item) {
-      positions.push({track_number: index, videoID: $(item).data('videoId'), videoTitle: $(item).data('videoTitle')});
+      positions.push({
+        track_number: index, 
+        videoID:      $(item).data('videoId'), 
+        videoTitle:   $(item).data('videoTitle')
+      });
+
       if ($(item).data('videoId') == currentPlayingVideo) {
         Playlist.currentTrack = index;
       }
     });
+
     Playlist.videos = positions;
 
     if (Playlist.options.persistentSorting) {
-      $.ajax({
-        type: 'POST',
-        url: '/' + User.username + '/playlist/' + Playlist.options.customPlaylistName + '/sort',
-        dataType: 'json',
-        contentType: 'application/json',
-        data: JSON.stringify({tracks: positions})
-      });
+      Playlist.throttlePersistSort();
     }
+  },
+
+  persistSort: function () {
+    $.ajax({
+      type:         'POST',
+      url:          '/' + User.username + '/playlist/' + Playlist.options.customPlaylistName + '/sort',
+      dataType:     'json',
+      contentType:  'application/json',
+      data:         JSON.stringify({tracks: Playlist.videos})
+    });
   },
 
   removeVideo: function () {
@@ -525,6 +531,6 @@ $(document).ready(function () {
   });
 
   $('#playlist').sortable({
-    stop: Playlist.throttleSort
+    stop: Playlist.sortVideos
   });
 });
