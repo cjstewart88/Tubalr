@@ -26,7 +26,7 @@ class Playlist < ActiveRecord::Base
     # Load all the videos from the database at once (but only the required fields)
     # Store them in a hash for fast in-memory lookup.
     videos_cache = {}.tap do |vc|
-      videos.select(:id, :video_id, :track_number).each { |v| vc[v[:video_id]] = v }
+      videos.select([:id, :video_id, :track_number]).each { |v| vc[v[:video_id]] = v }
     end
 
     # Iterate over list of video_ids, assigning a new track_number to each
