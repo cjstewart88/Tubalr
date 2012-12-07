@@ -3,8 +3,9 @@
 
   <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
     <div>
-      <%= f.label :email %><br />
-      <%= f.email_field :email %> <%= "<span class='error'>#{resource.errors[:email][0]}</span>".html_safe if resource.errors[:email][0] %>
+      <%= f.label :email %>
+      <%= "<span class='error'>#{resource.errors[:email][0]}</span>".html_safe if resource.errors[:email][0] %><br />
+      <%= f.email_field :email %> 
     </div>
 
     <div><%= f.submit "submit" %></div>

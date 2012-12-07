@@ -5,13 +5,15 @@
     <%= f.hidden_field :reset_password_token %>
 
     <div>
-      <%= f.label :password, "New password" %><br />
-      <%= f.password_field :password %> <%= "<span class='error'>#{resource.errors[:password][0]}</span>".html_safe if resource.errors[:password][0] %>
+      <%= f.label :password, "New password" %>
+      <%= "<span class='error'>#{resource.errors[:password][0]}</span>".html_safe if resource.errors[:password][0] %><br />
+      <%= f.password_field :password %> 
     </div>
 
     <div>
-      <%= f.label :password_confirmation, "Confirm new password" %><br />
-      <%= f.password_field :password_confirmation %> <%= "<span class='error'>#{resource.errors[:password_confirmation][0]}</span>".html_safe if resource.errors[:password_confirmation][0] %>
+      <%= f.label :password_confirmation, "Confirm new password" %>
+      <%= "<span class='error'>#{resource.errors[:password_confirmation][0]}</span>".html_safe if resource.errors[:password_confirmation][0] %><br />
+      <%= f.password_field :password_confirmation %> 
     </div>
 
     <div><%= f.submit "Change my password" %></div>
