@@ -29,22 +29,24 @@ class Playlist < ActiveRecord::Base
       videos.select([:id, :video_id, :track_number]).each { |v| vc[v[:video_id]] = v }
     end
 
-    # Iterate over list of video_ids, assigning a new track_number to each
-    current_index = 0
-    sorted_video_ids.each do |video_id|
-      next unless video = videos_cache[video_id]
-      video.update_attribute(:track_number, current_index)
-      current_index += 1
+    Playlist.transaction do
+      # Iterate over list of video_ids, assigning a new track_number to each
+      current_index = 0
+      sorted_video_ids.each do |video_id|
+        next unless video = videos_cache[video_id]
+        video.update_attribute(:track_number, current_index)
+        current_index += 1
 
-      videos_cache.delete(video_id)
-    end
+        videos_cache.delete(video_id)
+      end
 
-    # For any remaining videos, assign them at the end of the list.
-    # This should never be reached, but catches potential cases where
-    # the frontend may not have known about all playlist videos.
-    videos_cache.each do |video_id, video|
-      video.update_attribute(:track_number, current_index)
-      current_index += 1
+      # For any remaining videos, assign them at the end of the list.
+      # This should never be reached, but catches potential cases where
+      # the frontend may not have known about all playlist videos.
+      videos_cache.each do |video_id, video|
+        video.update_attribute(:track_number, current_index)
+        current_index += 1
+      end
     end
   end
 
