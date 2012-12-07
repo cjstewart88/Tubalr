@@ -1,11 +1,7 @@
-<section id="new-feature">
-  <span class="icon-bullhorn"></span>
-  You can now import YouTube playlists, head on over 
-  to <a href="<%= "#{current_user.username}/playlists" %>">your main playlists</a> page to get started!
-</section>
-
 <section  id="playlists-main" class="landing">
-  <h2>Your Playlists</h2>
+  
+
+  <h2><a href="<%= "/#{current_user.username}/playlists" %>"><span class="icon-download-alt"></span> Import From YouTube</a> Your Playlists</h2>
 
   <% if current_user.playlists.count != 0 %>
     <ul>

@@ -74,6 +74,16 @@ h2 {
   margin-bottom: 10px;
   color: #CFFFFF;
   text-transform: capitalize;
+
+  a {
+    float: right;
+    font-size: 10px;
+    font-weight: normal;
+
+    span {
+      margin-right: 6px;
+    }
+  }
 }
 
 #notices {
@@ -401,15 +411,5 @@ section {
     margin-left: 15px;
     font-size: 16px;
     cursor: pointer;
-  }
-}
-
-#new-feature {
-  .icon-bullhorn {
-    margin-right: 15px;
-  }
-  
-  a {
-    font-weight: bold;
   }
 }
