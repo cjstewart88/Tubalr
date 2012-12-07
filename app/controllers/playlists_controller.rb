@@ -73,7 +73,8 @@ class PlaylistsController < ApplicationController
 
   def sort
     playlist = current_user.playlists.where("lower(playlist_name) = ?", CGI::unescape(params[:playlist_name]).downcase).first
-    playlist.reorder_tracks(params[:tracks])
+    sorted_video_ids = params[:tracks].collect { |item| item[:videoID] }
+    playlist.reorder_tracks(sorted_video_ids)
     render :json => { :success => true }
   end
 
