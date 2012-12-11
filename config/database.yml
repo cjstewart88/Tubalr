@@ -4,7 +4,7 @@ development:
   database: tubalr
   pool: 5
   timeout: 5000
-  username: lesa
+  username: postgres
 
 test:
   adapter: postgresql
@@ -12,4 +12,4 @@ test:
   database: tubalr-test
   pool: 5
   timeout: 5000
-  username: lesa
+  username: postgres
