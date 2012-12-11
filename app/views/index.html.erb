@@ -4,6 +4,7 @@
       !request.path.index("video")    && !request.path.index("genre") && 
       !request.path.index("multi")    && !@playlist_name %>
   <%= render :partial => (user_signed_in? ? 'your_playlists': 'welcome')  %> 
+  <%= render :partial => 'bookmarklet' %> 
 <% end %>
 
 <%= render :partial => 'player' %>
