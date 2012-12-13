@@ -234,10 +234,17 @@ var Playlist = {
       });
     }
 
+    Playlist.buildPlaylistUI();
+  },
+
+  buildPlaylistUI: function () {
     var playlistContainer = $('#playlist').empty();
+
     $.each(Playlist.videos, function(i) {
       playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
     });
+    
+    $('#' + Playlist.videos[Playlist.currentTrack].videoID).addClass('active');
   },
 
   start: function () {
@@ -253,6 +260,20 @@ var Playlist = {
     else {
       Player.self.playVideo();
     }
+  },
+
+  shuffle: function () {
+    Playlist.options.persistentSorting = false;
+
+    var currentTrackVideoID = Playlist.videos[Playlist.currentTrack].videoID;
+    
+    Playlist.videos.sort(function () {
+      return (Math.round(Math.random()) - 0.5);
+    });
+    
+    Playlist.currentTrack = 0;
+    Playlist.currentVideo();
+    Playlist.buildPlaylistUI();
   },
 
   nextSong: function (keepCurrentTrack) {
@@ -532,5 +553,10 @@ $(document).ready(function () {
 
   $('#playlist').sortable({
     stop: Playlist.sortVideos
+  });
+
+  $('.shuffle').click(function () {
+    Playlist.shuffle();
+    return false;
   });
 });
