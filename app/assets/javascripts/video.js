@@ -32,11 +32,28 @@ var Video = {
   isNotCoverOrRemix: function (video) {
     var videoTitle = video.title.$t.toLowerCase();
 
-    return (videoTitle.search("cover") == -1 && videoTitle.search("remix") && -1 || videoTitle.search("alternate") && -1);
+    if (videoTitle.search('cover') >= 0 || videoTitle.search('remix') >= 0 || videoTitle.search('alternate') >= 0) {
+      return false;
+    }
+    else {
+      return true;
+    }
   },
 
   isNotUserBanned: function (video) {
     return User.bannedVideos.indexOf(video.id.$t.split(":")[3]) == -1
+  },
+
+  isNotLive: function (video) {
+    var videoDescription  = video.media$group.media$description.$t.toLowerCase();
+    var videoTitle        = video.title.$t.toLowerCase();
+
+    if (videoDescription.search('live') >= 0 || videoDescription.search('concert') >= 0 || videoTitle.search('live') >= 0 || videoTitle.search('concert') >= 0) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
 };

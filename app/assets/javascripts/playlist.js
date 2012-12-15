@@ -99,7 +99,7 @@ var Playlist = {
               $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '%20%2D$20' + escape(track.title) + '&orderby=relevance&start-index=1&max-results=10&v=2&format=5&alt=json-in-script&callback=?', function (data) {
                 if (typeof data.feed.entry !== "undefined") {
                   $.each(data.feed.entry, function (i, video) {
-                    if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video)) {
+                    if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video)) {
                       Playlist.videos.push({ 
                         videoID:    video.id.$t.split(":")[3], 
                         videoTitle: video.title.$t
@@ -129,7 +129,7 @@ var Playlist = {
         ajaxs.push(
           $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(artist.name)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?&format=5', function (data) {
             $.each(data.feed.entry, function (i, video) {  
-              if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video)) {
+              if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video)) {
                 Playlist.videos.push({ 
                   videoID: video.id.$t.split(":")[3], 
                   videoTitle: video.title.$t
@@ -156,7 +156,7 @@ var Playlist = {
         ajaxs.push(
           $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + artist.name + '&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?', function (data) {
             $.each(data.feed.entry, function (i,video) {
-              if (Video.isNotBlocked(video) && Video.isMusic(video)) {
+              if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotLive(video)) {
                 Playlist.videos.push({ 
                   videoID:    video.id.$t.split(":")[3], 
                   videoTitle: video.title.$t,
