@@ -412,7 +412,7 @@ var Playlist = {
   },
 
   shareOnTwitter: function () {
-    var url     = "https://twitter.com/share?text=I%27m%20listening%20to%20";
+    var url     = "http://twitter.com/share?text=I%27m%20listening%20to%20";
     var search  = "";
 
     switch (Playlist.options.searchType) {
@@ -429,15 +429,15 @@ var Playlist = {
         break;
       case 'customPlaylist':
         search = Playlist.options.customPlaylistName.replace(/[ +]/g,'%20');
-        url += search + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
-        url += '%2F' + Playlist.options.customPlaylistOwner.replace(/[ +]/g, '%20') + '%2Fplaylist%2F' + search.replace(/%20/g, '%2B');
+        var tubalrURL = "http://tubalr.com/"+Playlist.options.customPlaylistOwner+"/playlist/"+Playlist.options.customPlaylistName;
+        url += search + '%20on%20%40tubalr%21&url='+encodeURIComponent(tubalrURL);
         break;
       case 'video':
         url += Playlist.videos[Playlist.currentTrack].videoTitle.replace(/[ +]/g,"%20") + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
         url += '%2Fvideo%2F' + Playlist.videos[Playlist.currentTrack].videoID;
         break;
     }
-    
+
     var opts = 'status=1'     +
                ',width=575'   +
                ',height=400'  +
