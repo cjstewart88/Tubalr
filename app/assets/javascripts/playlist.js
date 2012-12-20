@@ -428,9 +428,9 @@ var Playlist = {
         url += '%2Fsimilar%2F' + search.replace(/%20/g,'%2B');
         break;
       case 'customPlaylist':
-        search = Playlist.options.customPlaylistName.replace(/[ +]/g,'%2B');
+        search = Playlist.options.customPlaylistName.replace(/[ +]/g,'%20');
         url += search + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
-        url += '%2F' + Playlist.options.customPlaylistOwner.replace(/[ +]/g, '%2B') + '%2Fplaylist%2F' + search.replace(/%20/g, '%2B');
+        url += '%2F' + Playlist.options.customPlaylistOwner.replace(/[ +]/g, '%20') + '%2Fplaylist%2F' + search.replace(/%20/g, '%2B');
         break;
       case 'video':
         url += Playlist.videos[Playlist.currentTrack].videoTitle.replace(/[ +]/g,"%20") + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
@@ -459,7 +459,7 @@ var Playlist = {
         url += "just/"
       }
 
-      url += Playlist.options.search.replace(/ /g,"+");
+      url += Playlist.options.search.replace(/ /g,"%20");
       shareText += unescape(Playlist.options.search.replace(/[+]/g," "));
     }
     else if (Playlist.options.videoID) {
@@ -467,7 +467,7 @@ var Playlist = {
       shareText += unescape(Playlist.videos[Playlist.currentTrack].videoTitle.replace(/[+]/g," "));
     }
     else if (Playlist.options.customPlaylistOwner) {
-      url += Playlist.options.customPlaylistOwner.replace(/ /g,"+") + "/playlist/" + Playlist.options.customPlaylistName.replace(/ /g,"+");
+      url += Playlist.options.customPlaylistOwner.replace(/ /g,"%20") + "/playlist/" + Playlist.options.customPlaylistName.replace(/ /g,"%20");
       shareText += unescape(Playlist.options.customPlaylistName.replace(/[+]/g," "));
     }
 
