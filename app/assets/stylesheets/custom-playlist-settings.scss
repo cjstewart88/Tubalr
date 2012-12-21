@@ -8,16 +8,13 @@
     max-width: 200px;
     display: inline-block;  
   }
-  
-
-  .custom-playlist-settings-open-dialog {
+  .download-playlist,.custom-playlist-settings-open-dialog {
     display: none;
-    float: right;
-    margin-right: 10px;
+    vertical-align: top
   }
 
   &:hover {
-    .custom-playlist-settings-open-dialog {
+    .download-playlist,.custom-playlist-settings-open-dialog {
       display: inline-block;
       cursor: pointer;
     }

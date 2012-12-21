@@ -12,6 +12,9 @@ Tubalr::Application.routes.draw do
   
   get "/:username/playlists"                        => "playlists#index"
   get "/:username/playlist/:playlist_name"          => "playlists#listen"
+  get "/:username/download/:playlist_name"          => "playlists#download"
+
+
   post "/:username/playlist/:playlist_name/sort"    => "playlists#sort"
   match "/playlist/create"                          => "playlists#create"
   match "/playlist/add_video"                       => "playlists#add_video"
