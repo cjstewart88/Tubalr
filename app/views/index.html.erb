@@ -1,5 +1,7 @@
 <%= render :partial => 'search_form' %>
 
+<%= render :partial => 'announcement' %>
+
 <% if !request.path.index("similar")  && !request.path.index("just")  && 
       !request.path.index("video")    && !request.path.index("genre") && 
       !request.path.index("multi")    && !@playlist_name %>
