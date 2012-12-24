@@ -103,4 +103,17 @@ class PlaylistsController < ApplicationController
 
     render :json => to_return
   end
+  
+  def download
+    @user = User.where(:username =>  params[:username]).first
+    @playlist_name      = params[:playlist_name] 
+    @playlist_owner = user_signed_in? && @user.username == current_user.username
+    @playlist = Playlist.find_by_playlist_name_and_user_id(@playlist_name,@user.id)
+    send_data @playlist.videos.to_xml(:except => %w'id playlist_i
+    d created_at updated_at' ),
+    :type => 'text/xml; charset=UTF-8;',
+    :disposition => "attachment; filename=entries.xml" 
+  end 
+  
+
 end
