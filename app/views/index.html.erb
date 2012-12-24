@@ -5,6 +5,7 @@
       !request.path.index("multi")    && !@playlist_name %>
   <%= render :partial => 'explore' %>
   <%= render :partial => (user_signed_in? ? 'your_playlists': 'welcome')  %> 
+  <%= render :partial => 'bookmarklet' %> 
 <% end %>
 
 <%= render :partial => 'player' %>
