@@ -34,7 +34,7 @@
         
           <nav id="main-nav">  
             <%= link_to('about', '#', :class => 'about-link about-tubalr') %>    
-            <%= link_to('reddit music', '/r', :target => '_blank') %>
+            <%= link_to('reddit music', '/r') %>
             <% if user_signed_in? %>
               <%= link_to('your playlists', "/#{current_user.username}/playlists", :class => 'my-playlists-link') %>  
               <%= link_to('settings', '/users/edit', :class => 'settings-link') %>  
