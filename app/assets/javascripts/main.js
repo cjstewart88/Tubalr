@@ -47,7 +47,6 @@ $(document).ready(function () {
     $('.social').remove();
     $('#notices').remove();
     $('.about-tubalr').remove();
-    $('.blog-link').remove();
     $('.settings-link').remove();
     $('#s2id_add-to-playlist-dropdown').remove();
     $('#ytplayerid').addClass('mobile-ytplayerid');

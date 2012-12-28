@@ -9,7 +9,10 @@ Tubalr::Application.routes.draw do
   get "/just/:artist_band"                          => "application#index"
   get "/similar/:artist_band"                       => "application#index"
   get "/video/:video_id"                            => "application#index"
+  get "/r/:subreddit"                               => "application#index"
   
+  get "/r"                                          => "application#reddit"
+
   get "/:username/playlists"                        => "playlists#index"
   get "/:username/playlist/:playlist_name"          => "playlists#listen"
   post "/:username/playlist/:playlist_name/sort"    => "playlists#sort"

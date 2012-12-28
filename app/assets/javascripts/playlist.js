@@ -16,14 +16,15 @@ var Playlist = {
     customPlaylistOwner:  null,
     customPlaylistName:   null,
     persistentSorting:    false,
-    videoID:              null
+    videoID:              null,
+    subReddit:            null
   },
 
   init: function (options) {
     Playlist.reset();
     $.extend(Playlist.options, options);
     
-    Playlist.determineIfGenreSearch(); 
+    Playlist.determineIfSpecialSearch(); 
     Playlist.report();
 
     Playlist[Playlist.options.searchType]();
@@ -50,6 +51,7 @@ var Playlist = {
     Playlist.options.customPlaylistName = null;
     Playlist.options.persistentSorting = false;
     Playlist.options.videoID = null;
+    Playlist.options.subReddit = null;
 
     $('.landing').fadeOut();
     $('#player').fadeOut();
@@ -66,6 +68,9 @@ var Playlist = {
     else if (Playlist.options.searchType == 'video') {
       url = [Playlist.options.searchType, Playlist.options.videoID];
     }
+    else if (Playlist.options.searchType == 'reddit') {
+      url = ['r', Playlist.options.subReddit];
+    }
     else {
       url = [Playlist.options.searchType, Playlist.options.search.replace(/[ ]/g,"+")];
     }
@@ -73,11 +78,15 @@ var Playlist = {
     _gaq.push(['_trackPageview', url.join('/')]);
   },
 
-  determineIfGenreSearch: function () {
+  determineIfSpecialSearch: function () {
     var search = Playlist.options.search;
 
     if (Playlist.genres.indexOf(search.replace(/[ +]/g, '')) != -1) {
       Playlist.options.searchType = 'genre';
+    }
+    else if (search.match('/r/') != null) {
+      Playlist.options.searchType = 'reddit';
+      Playlist.options.subReddit = search.replace('/r/', '');
     }
   },
 
@@ -211,6 +220,32 @@ var Playlist = {
         });
       }
 
+      Playlist.resultsReady();
+    });
+  },
+
+  reddit: function () {
+    var redditError = setTimeout(function () {
+      Playlist.togglePlayer();
+    }, 6000);
+
+    $.getJSON("http://www.reddit.com/r/" + Playlist.options.subReddit + "/hot.json?jsonp=?&limit=100", function (data) {
+      $.each(data.data.children, function () {
+        var post = this.data;
+
+        if (post.domain == "youtube.com" && post.media != null && typeof post.media === 'object' && post.media.oembed.url !== undefined) {
+          var videoID = Import.getVideoID([{ href: post.media.oembed.url }]);
+
+          if (videoID.length == 11){
+            Playlist.videos.push({ 
+              videoID:    videoID,
+              videoTitle: post.media.oembed.title
+            });
+          }
+        }
+      });
+
+      clearTimeout(redditError);
       Playlist.resultsReady();
     });
   },
@@ -436,6 +471,10 @@ var Playlist = {
         url += Playlist.videos[Playlist.currentTrack].videoTitle.replace(/[ +]/g,"%20") + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
         url += '%2Fvideo%2F' + Playlist.videos[Playlist.currentTrack].videoID;
         break;
+      case 'reddit':
+        url += '%2Fr%2F' + Playlist.options.subReddit + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
+        url += '%2Fr%2F' + Playlist.options.subReddit;
+        break;
     }
 
     var opts = 'status=1'     +
@@ -451,7 +490,11 @@ var Playlist = {
     var url       = "http://www.tubalr.com/";
     var shareText = "";
 
-    if (Playlist.options.search) {
+    if (Playlist.options.searchType == "reddit") {
+      url += "r/" + Playlist.options.subReddit;
+      shareText += "/r/" + Playlist.options.subReddit;
+    }
+    else if (Playlist.options.search) {
       if (Playlist.options.searchType == "similar") {
         shareText += "Artists/Bands similar to ";
       }

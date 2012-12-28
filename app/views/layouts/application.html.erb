@@ -34,7 +34,7 @@
         
           <nav id="main-nav">  
             <%= link_to('about', '#', :class => 'about-link about-tubalr') %>    
-            <%= link_to('blog', 'http://www.tubalr.tumblr.com/', :target => '_blank', :class => 'blog-link') %>
+            <%= link_to('reddit music', '/r', :target => '_blank') %>
             <% if user_signed_in? %>
               <%= link_to('your playlists', "/#{current_user.username}/playlists", :class => 'my-playlists-link') %>  
               <%= link_to('settings', '/users/edit', :class => 'settings-link') %>  
@@ -61,6 +61,8 @@
             Tubalr is Pronounced: tuba-ler
           </p>
           
+          <p>Checkout Tubalr's <%= link_to('blog', 'http://www.tubalr.tumblr.com/', :target => '_blank') %> for updates<p>
+
           <p>
             Tubalr is an app that was crafted out of curiosity and passion, Sept 12th 2010. I 
             released it into the wild and have been iterating ever since. I built Tubalr because

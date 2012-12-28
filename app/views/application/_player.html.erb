@@ -37,5 +37,5 @@
 
 <%= javascript_tag do %>
   Playlist.init(<%= search_options %> );
-<% end if request.path.index("similar") || request.path.index("video") || 
+<% end if request.path.index("similar") || request.path.index("video") || request.path.index("r/") ||
           request.path.index("genre")  || request.path.index("just") || @playlist_name %>
