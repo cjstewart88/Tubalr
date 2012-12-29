@@ -71,7 +71,7 @@ var CustomPlaylistSettings = {
     playlistLI.data('playlist-name', newPlaylistName)
               .find('a').text(newPlaylistName);
 
-    CustomPlaylistSettings.notice('<b>' + CustomPlaylistSettings.playlistName + '</b>, ranamed to <b>' + newPlaylistName + '</b>.');
+    CustomPlaylistSettings.notice('<b>' + CustomPlaylistSettings.playlistName + '</b>, renamed to <b>' + newPlaylistName + '</b>.');
 
     $('#custom-playlist-settings').dialog('close');          
   },
