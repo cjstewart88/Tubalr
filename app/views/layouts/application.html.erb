@@ -40,7 +40,7 @@
               <%= link_to('settings', '/users/edit', :class => 'settings-link') %>  
               <%= link_to('logout', destroy_user_session_path, :method => :delete, :class => 'sign-out-link') %>
             <% else %>  
-              <%= link_to('register', '/users/sign_up', :class => 'sign-up-link') %> 
+              <%= link_to('register', '/users/sign_up', :class => 'sign-up-link tooltip', :"original-title" => 'Register an account to create custom playlists!') %> 
               <%= link_to('login', '/users/sign_in', :class => 'sign-in-link') %>
             <% end %>
           </nav>
