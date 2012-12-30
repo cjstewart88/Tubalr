@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
   end
   
   def index
+    flash[:notice] = "Thanks a ton for your support, it means a lot!" if params[:thanks]
+
     render :layout => "application", :template => "index"
   end
 
@@ -30,5 +32,9 @@ class ApplicationController < ActionController::Base
 
   def reddit
     render :layout => "application", :template => "r"
+  end
+
+  def support
+    render :layout => "application", :template => "support"
   end
 end

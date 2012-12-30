@@ -3,6 +3,8 @@ Tubalr::Application.routes.draw do
 
   root :to => "application#index"
   
+  get "/support"                                    => "application#support"
+
   get "/:username/playlist/:playlist_name.json"     => "api#user_playlist"
 
   get "/stats"                                      => "application#stats"

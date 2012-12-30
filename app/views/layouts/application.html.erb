@@ -33,6 +33,7 @@
           </h1>
         
           <nav id="main-nav">  
+            <%= link_to('donate', '/support', :class => 'donate-link') %>
             <%= link_to('about', '#', :class => 'about-link about-tubalr') %>    
             <%= link_to('reddit music', '/r') %>
             <% if user_signed_in? %>
