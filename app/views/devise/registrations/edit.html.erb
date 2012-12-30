@@ -10,6 +10,7 @@
 
     <div>
       <%= f.label :background %>
+      <i>(must be a url to a .png, .jpg, or .gif)</i>
       <%= "<span class='error'>#{resource.errors[:background][0]}</span>".html_safe if resource.errors[:background][0] %><br />
       <%= f.text_field :background %> 
     </div>
