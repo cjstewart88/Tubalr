@@ -11,7 +11,7 @@
     </ol>
   </div>
   
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :autocomplete => :off }) do |f| %>
     <div>
       <%= f.label :username %>
       <%= "<span class='error'>#{resource.errors[:username][0]}</span>".html_safe if resource.errors[:username][0] %><br />
