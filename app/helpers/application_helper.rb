@@ -27,9 +27,9 @@ module ApplicationHelper
   def show_user_bg
     # Show user background if user signed in and background not blank
     if @user && !(@user.background.blank?)
-      "background: #4C4C4C url(#{@user.background}) no-repeat center center fixed;" 
+      "background: #4C4C4C url('#{@user.background}') no-repeat center center fixed;" 
     elsif user_signed_in? && !(current_user.background.blank?) 
-      "background: #4C4C4C url(#{current_user.background}) no-repeat center center fixed;" 
+      "background: #4C4C4C url('#{current_user.background}') no-repeat center center fixed;" 
     end  
   end
 end
