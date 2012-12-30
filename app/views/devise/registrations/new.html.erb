@@ -26,12 +26,6 @@
     </div>
 
     <div>
-      <%= f.label :background %>
-      <%= "<span class='error'>#{resource.errors[:background][0]}</span>".html_safe if resource.errors[:background][0] %><br />
-      <%= f.text_field :background %> 
-    </div>
-
-    <div>
       <%= f.label :password %>
       <%= "<span class='error'>#{resource.errors[:password][0]}</span>".html_safe if resource.errors[:password][0] %><br />
       <%= f.password_field :password %> 
