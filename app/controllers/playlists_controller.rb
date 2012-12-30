@@ -9,6 +9,7 @@ class PlaylistsController < ApplicationController
   end
   
   def listen
+    @user               = User.where(:username =>  params[:username]).first
     @username           = params[:username]
     @playlist_name      = params[:playlist_name]
     @is_playlist_owner  = current_user.present? && current_user.username == params[:username]
