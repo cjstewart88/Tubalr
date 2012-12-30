@@ -23,4 +23,14 @@ module ApplicationHelper
 
     options_for_javascript(options)
   end
+
+  def show_user_bg
+    # Show user background if user signed in and background not blank
+    if user_signed_in? && !(current_user.background.blank?)
+      "background: #4C4C4C url(#{current_user.background}) no-repeat center center fixed;" 
+    # Otherwise, show a default background image
+    else
+      "background: #000 url('/assets/bg6.jpg') no-repeat center center fixed;" 
+    end
+  end
 end
