@@ -415,8 +415,11 @@ section {
 }
 
 #support-main {
-  div {
-    margin-bottom: 20px;
+  hr {
+    margin: 20px 0px;
+    background: #000;
+    height: 1px;
+    border: none;
   }
 
   h3 {
@@ -426,5 +429,27 @@ section {
   form {
     display: inline-block;
     margin: 10px 10px 10px 0;
+  }
+
+  ul {
+    margin-left: 20px;
+    margin-top: 10px;
+  }
+
+  .tee-container {
+    height: 200px;
+    margin-top: 20px;
+
+    p {
+      float: left;
+      width: 66%;
+      margin-left: 20px;
+    }
+
+    img {
+      float: left;
+      @include border-radius(3px);
+      width: 200px;
+    }
   }
 }
