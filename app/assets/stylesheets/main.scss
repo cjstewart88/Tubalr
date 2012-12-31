@@ -42,7 +42,7 @@ body {
 header, footer, aside, nav, article, section { display: block; } 
 
 a { 
-  color: #fff; 
+  color: #CFFFFF;
   text-decoration: none; 
   moz-transition: all .3s;
   -o-transition: all .3s;
@@ -50,7 +50,7 @@ a {
   transition: all .3s;
   
   &:hover {
-    color: #CFFFFF;
+    text-decoration: underline;
   }
   
   &:active {
@@ -415,6 +415,10 @@ section {
 }
 
 #support-main {
+  div {
+    margin-bottom: 20px;
+  }
+
   h3 {
     margin-top: 20px;
   }

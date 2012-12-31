@@ -33,8 +33,7 @@
           </h1>
         
           <nav id="main-nav">  
-            <%= link_to('donate', '/support', :class => 'donate-link') %>
-            <%= link_to('about', '#', :class => 'about-link about-tubalr') %>    
+            <%= link_to('support tubalr', '/support', :class => 'donate-link') %>
             <%= link_to('reddit music', '/r') %>
             <% if user_signed_in? %>
               <%= link_to('your playlists', "/#{current_user.username}/playlists", :class => 'my-playlists-link') %>  
@@ -78,9 +77,7 @@
             tweaking Tubalr since its creation, and thats largely due to the amazing feedback
             and support given by its supporters and users. So with that said, if you have ANY 
             feedback or just wanna chat... please shoot an e-mail to 
-            <a href='mailto:listen.to.tubalr@gmail.com'>listen.to.tubalr@gmail.com</a>. For coders, 
-            Tubalr can be found on <a href="https://github.com/cjstewart88/tubalr" target="_blank">github</a>, 
-            feel free to send a PR or submit an issue!
+            <a href='mailto:listen.to.tubalr@gmail.com'>listen.to.tubalr@gmail.com</a>. 
           </p>
       
           <p>
