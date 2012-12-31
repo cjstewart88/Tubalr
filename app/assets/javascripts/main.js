@@ -41,17 +41,4 @@ $(document).ready(function () {
   $('.tooltip').tipsy({
     gravity: 'n'
   });
-
-  // If Mobile do this shit, nasty
-  if (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i)    || navigator.userAgent.match(/BlackBerry/i)) {
-    $('.social').remove();
-    $('#notices').remove();
-    $('.about-tubalr').remove();
-    $('.settings-link').remove();
-    $('#s2id_add-to-playlist-dropdown').remove();
-    $('#ytplayerid').addClass('mobile-ytplayerid');
-    $('body').addClass('mobile-body');
-    $('#listenForm input').addClass('mobile');
-    $('.why-register').remove();
-  }
 });

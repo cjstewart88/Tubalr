@@ -10,13 +10,17 @@
 
   <h2 id="current-video-title"></h2>
 
-  <div id="ytplayerid"></div> 
-  
+  <div id="video-and-playlist">
+    <div id="ytplayerid"></div> 
+
+    <ul id="playlist"></ul>
+  </div>
+
   <div id="player-controls">
     <div id="player-controls-right">
-      <a href="#" class="shuffle button tooltip" original-title="Shuffle"><span class="icon-random"></a>
-      <input type="button" id="previous" value="&#8249; Prev"/>
-      <input type="button" id="next" value="Next &#8250;"/>
+      <a href="#" class="shuffle button tooltip" original-title="Shuffle"><span class="icon-random"></span></a>
+      <a href="#" id="previous" class="button tooltip" original-title="Previous">&nbsp;<span class="icon-step-backward"></span></a>
+      <a href="#" id="next" class="button tooltip" original-title="Next"><span class="icon-step-forward"></span>&nbsp;</a>
     </div>
     
     <div id="player-controls-left">
@@ -31,8 +35,6 @@
       <% end %>
     </div>
   </div>
-  
-  <ul id="playlist"></ul>
 </section>
 
 <%= javascript_tag do %>

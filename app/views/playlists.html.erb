@@ -1,8 +1,7 @@
-
 <% if @user.present? %>
   <%= render :partial => 'import_youtube_playlists' if @playlist_owner %>
 
-  <section id="playlists-main">
+  <section id="playlists-main" class="remove-when-searching">
     <h2><%= @playlist_owner ? "my" : "#{@user.username}'s" %> playlists</h2>
 
     <% if @user.playlists.count != 0 %>

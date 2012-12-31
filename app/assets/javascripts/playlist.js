@@ -53,7 +53,7 @@ var Playlist = {
     Playlist.options.videoID = null;
     Playlist.options.subReddit = null;
 
-    $('.landing').fadeOut();
+    $('.remove-when-searching').fadeOut();
     $('#player').fadeOut();
     $('#empty-playlist').fadeOut();
     $('#loading-playlist').fadeIn();

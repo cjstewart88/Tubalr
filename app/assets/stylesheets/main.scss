@@ -6,8 +6,8 @@
 input::-moz-focus-inner { border: 0; }
 
 ::-webkit-scrollbar {
-  width: 12px;
-  background: #eee;
+  width: 8px;
+  background: #333;
 }
 
 ::-webkit-scrollbar:hover {
@@ -15,16 +15,15 @@ input::-moz-focus-inner { border: 0; }
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbcbcb;
+  background: #464646;
   -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1), inset 0 -1px 0 rgba(0,0,0,0.1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #919191;
+  background: #666;
 }
 
 html { 
-  overflow-y: scroll; 
   background: #000 url(/assets/bg6.jpg) no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -108,16 +107,12 @@ h2 {
 #main {
   display: none;
   width: 100%;
-  max-width: 800px;
+  max-width: 1000px;
   margin: 25px auto;
   
   #inner-main {
     margin: 10px;
   }
-}
-
-.mobile-body {
-  overflow-x: hidden !important;
 }
 
 /* Stuff for devise forms */
@@ -176,32 +171,6 @@ input[type=button], input[type=submit], a.button {
   }
 }
 
-#listenForm { 
-  text-align: center; 
-  margin-bottom: 20px; 
-  background: #000;
-  background: rgba(0, 0, 0, .5);
-  @include border-radius(5px);
-  @include box-shadow(0 0 5px rgba(0,0,0,.5));
-  border: solid 1px #000;
-  
-  input[type=button], input[type=submit] {
-    background: #548FF4;
-    color: #fff;
-  }
-}
-
-#listenForm input { margin-right: 10px; }
-#listenForm input[type=button].mobile {
-  padding: 8px !important;
-}
-#listenForm #q.mobile {
-  width: 50% !important;
-}  
-#q {
-  width: 400px;
-}
-
 #empty-playlist { 
   display: none; 
   width: 400px;
@@ -210,17 +179,33 @@ input[type=button], input[type=submit], a.button {
   text-align: center;
 }
 
+#video-and-playlist {
+  height: 400px;
+}
+
 #playlist {
+  float: left;
+  height: 390px;
+  overflow: auto;
+  max-width: 295px;
+  float: left;
   list-style-type: none;
-  background: none;
-  border: none;
+  background: rgba(0,0,0, .4);
+  border: solid 1px #000;
   padding: 0;
   @include box-shadow(none);
-  
+  @include border-top-right-radius(3px);
+  @include border-bottom-right-radius(3px);
+
   a {
     display: block;
-  	padding: 15px 10px;
+  	padding: 9px 14px;
     color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #1D1D1D;
 
     &.active {
       background: #000;
@@ -235,6 +220,16 @@ input[type=button], input[type=submit], a.button {
       @include border-radius(3px);
     }
   }
+
+  li {
+    &:first-child {
+      a { border-top: none !important; }
+    }
+
+    &:last-child {
+      a { border-bottom: none; }
+    }
+  }
 }
 
 #player {
@@ -245,17 +240,19 @@ input[type=button], input[type=submit], a.button {
 }
 
 #ytplayerid {
-	height: 400px;
+  float: left;
+	height: 390px;
 	width: 100%;
+  max-width: 640px;
 	background: #000;
-	margin-bottom: 10px;
-}
-.mobile-ytplayerid {
-  height: 250px !important;
+  border: solid 1px #000;
+  border-right: none;
+  @include border-top-left-radius(3px);
+  @include border-bottom-left-radius(3px);
 }
 
 #player-controls {
-  margin-bottom: 20px;
+  margin-top: 10px;
 }
 #player-controls, #playlist {
   input, a.button {
@@ -271,9 +268,23 @@ input[type=button], input[type=submit], a.button {
 }
 #player-controls-right { 
   float: right;
+  line-height: 31px;
   
   input {
     margin-left: 8px;
+    margin-right: 0px;
+  }
+
+  #previous {
+    margin-right: 0px;
+    border-right: none;
+    @include border-top-right-radius(0px);
+    @include border-bottom-right-radius(0px);
+  }
+  #next {
+    @include border-top-left-radius(0px);
+    @include border-bottom-left-radius(0px);
+    margin-left: -3px;
     margin-right: 0px;
   }
 }
@@ -344,10 +355,13 @@ section {
   margin-top: 20px;
 }
 #playlists-main ul li {
-  font-size: 14px;
   display: inline-block;
   width: 244px;
   margin-bottom: 20px;
+
+  a {
+    color: #fff;
+  }
 }
 
 .why-register {
@@ -400,13 +414,15 @@ section {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 15px;
+  margin-left: 10px;
   font-size: 12px;
 }
 
 #share-playlist {
   float: right;
   margin-top: -3px;
-  
+  margin-right: 10px;
+
   span {
     margin-left: 15px;
     font-size: 16px;

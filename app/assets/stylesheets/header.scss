@@ -11,7 +11,7 @@
     margin-left: 20px;
     font: 30px 'PT Sans';
     font-weight: 700;
-    @include text-shadow(0 0 10px rgba(0, 0, 0, .8));
+    @include text-shadow(0 0 3px rgba(0, 0, 0, .8));
     
     a {
       color: #fff; 
@@ -23,17 +23,49 @@
   }
   
   #main-nav {
-    float: right;
-    margin-right: 20px;
+    float: left;
     font-size: 12px;
     
     a {
       color: #fff;
-      margin-left: 30px;
-      @include text-shadow(0 0 10px rgba(0, 0, 0, .8));
+      margin-left: 20px;
+      @include text-shadow(0 0 3px rgba(0, 0, 0, .8));
       
       &:hover {
        text-decoration: none; 
+      }
+    }
+  }
+
+  #listenForm { 
+    float: right;
+    margin-right: 20px;
+
+    input {
+      margin: 0;
+      @include border-radius(18px);
+    }
+
+    #q {
+      width: 250px;
+      padding-left: 18px;
+      @include border-top-right-radius(0px);
+      @include border-bottom-right-radius(0px);
+    }
+
+    input[type=button] {
+      margin-left: -3px;
+      background: #548FF4;
+      color: #fff;
+    
+      &.just {
+        border-right: solid 1px #4283F4;
+        @include border-radius(0);
+      }
+
+      &.similar {
+        @include border-top-left-radius(0px);
+        @include border-bottom-left-radius(0px);
       }
     }
   }

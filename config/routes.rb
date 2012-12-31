@@ -13,7 +13,7 @@ Tubalr::Application.routes.draw do
   get "/video/:video_id"                            => "application#index"
   get "/r/:subreddit"                               => "application#index"
   
-  get "/r"                                          => "application#reddit"
+  get "/r"                                          => "application#explore"
 
   get "/:username/playlists"                        => "playlists#index"
   get "/:username/playlist/:playlist_name"          => "playlists#listen"

@@ -30,8 +30,8 @@ class ApplicationController < ActionController::Base
     render :layout => "application", :template => "stats"
   end
 
-  def reddit
-    render :layout => "application", :template => "r"
+  def explore
+    render :layout => "application", :template => "explore"
   end
 
   def support
