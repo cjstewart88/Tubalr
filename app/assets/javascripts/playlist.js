@@ -240,8 +240,8 @@ var Playlist = {
     $.getJSON("http://www.reddit.com/r/" + Playlist.options.subReddit + "/hot.json?jsonp=?&limit=100", function (data) {
       $.each(data.data.children, function () {
         var post = this.data;
-
-        if (post.domain == "youtube.com" && post.media != null && typeof post.media === 'object' && post.media.oembed.url !== undefined) {
+        console.log(post);
+        if (post.domain == "youtube.com" && post.media != null && typeof post.media === 'object' && post.media.hasOwnProperty("oembed") && post.media.oembed.url !== undefined) {
           var videoID = Import.getVideoID([{ href: post.media.oembed.url }]);
 
           if (videoID.length == 11){
