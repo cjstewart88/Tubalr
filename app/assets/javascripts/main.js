@@ -30,12 +30,11 @@ $(document).ready(function () {
     }, 5000);
   }
 
-  // Fade in and focus the search input field.
-  $('#main').delay(500).fadeIn(500, function () {
-    if ($('#q').val() == "") {
-      $("#q").focus();
-    }
-  });
+  // focus the search input field.
+  if ($('#q').val() == "") {
+    $("#q").focus();
+  }
+  
 
   // Tooltips
   $('.tooltip').tipsy({

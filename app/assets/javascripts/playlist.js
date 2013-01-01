@@ -1,6 +1,6 @@
 var Playlist = {                                                                                                                                                                                                                                                                       
 
-  genres: ["rock","seenlive","alternative","indie","electronic","pop","metal","femalevocalists","classicrock","alternativerock","jazz","punk","indierock","folk","ambient","singer-songwriter","experimental","electronica","hardrock","hip-hop","80s","dance","hardcore","blackmetal","chillout","progressiverock","deathmetal","instrumental","heavymetal","british","punkrock","soundtrack","industrial","soul","blues","classical","emo","rap","90s","thrashmetal","metalcore","trance","japanese","favorites","reggae","acoustic","country","progressivemetal","trip-hop","hiphop","powermetal","funk","psychedelic","melodicdeathmetal","newwave","post-rock","electro","house","indiepop","techno","german","love","70s","rnb","britpop","american","gothicmetal","downtempo","piano","60s","00s","grunge","post-punk","albumsiown","beautiful","ska","gothic","screamo","mellow","chill","doommetal","french","guitar","oldies","idm","swedish","malevocalists","awesome","j-rock","numetal","symphonicmetal","finnish","lounge","polish","femalevocalist","grindcore","progressive","folkmetal","canadian","post-hardcore","world","drumandbass","synthpop","j-pop","newage","minimal","favourites","ebm","russian","poprock","cover","poppunk","latin","darkwave","favorite","female","darkambient","noise","industrialmetal","avant-garde","psychedelicrock","brutaldeathmetal","dub","disco","gothicrock","celtic","sexy","easylistening","alternativemetal","anime","christian","bluesrock","cool","favourite","classic","shoegaze","heardonpandora","folkrock","stonerrock","comedy","psytrance","christmas","sad","atmospheric","melancholy","fun","deathcore","jpop","deutsch","romantic","vikingmetal","fusion","femalefrontedmetal","irish","uk","visualkei","spanish","relax","hardcorepunk","acidjazz","relaxing","alt-country","amazing","covers","favoritesongs","italian","lo-fi","garagerock","happy","goth","melancholic","rockabilly","live","swing","ethereal","dark","norwegian","emocore","ballad","glamrock","australian","brazilian","malevocalist","good","americana","party","softrock","synthpop","political","melodicmetal","sludge","jrock","epic","hiphop","rocknroll","postrock","technicaldeathmetal","usa","favouritesongs","vocal","femalevocals","remix","speedmetal","club","electropop","contemporaryclassical","bossanova","funky","baroque","rhythmandblues","progressivetrance","electroclash","russianrock","brasil","neofolk","triphop","nu-metal","dancehall","industrialrock","rockandroll","guitarvirtuoso","worldmusic","drone","smoothjazz","dnb","breakbeat","catchy","rapcore","dubstep","artrock","loved","summer","thrash","drumnbass","darkelectro","psychobilly","mpb","undergroundhip-hop","skapunk","southernrock","medieval","vocaltrance","dreamy","christianrock","dreampop","paganmetal","minimaltechno","nujazz","breakcore","english"],
+  genres: ["acappella","acidhouse","acidjazz","acousticblues","afrobeat","albumrock","alternativecountry","alternativedance","alternativehiphop","alternativemetal","alternativerock","ambient","anti-folk","artrock","atmosphericblackmetal","australianhiphop","avant-garde","avant-gardejazz","avantgardemetal","bachata","bailefunk","banda","bassmusic","bebop","bhangra","bigband","bigbeat","blackmetal","blue-eyedsoul","bluegrass","blues","blues-rock","bolero","boogaloo","boogie-woogie","bossanova","brassband","brazilianpopmusic","breakbeat","breakcore","brillbuildingpop","britishblues","britishfolk","britishinvasion","britishpop","brokenbeat","brutaldeathmetal","bubblegumdance","bubblegumpop","cabaret","calypso","canterburyscene","ccm","celtic","celticrock","chamberpop","chanson","chicagoblues","chicagohouse","chicagosoul","children'smusic","chill-out","chillwave","chiptune","choro","chorus","christianalternativerock","christianhardcore","christianhiphop","christianmetal","christianmusic","christianpunk","christianrock","classicrock","classical","comedy","contemporarycountry","cooljazz","country","countryblues","countrygospel","countryrock","cowpunk","crossoverthrash","crunk","crustpunk","cumbia","dancepop","dancerock","dance-punk","dancehall","darkambient","darkwave","deathcore","deathmetal","deathgrind","deephouse","deltablues","desi","detroittechno","digitalhardcore","dirtysouthrap","disco","discohouse","djent","doo-wop","doommetal","downtempo","dreampop","drone","drumandbass","dub","dubstep","earlymusic","eastcoasthiphop","easylistening","ebm","electricblues","electro","electro-industrial","electroclash","electronic","emo","eurobeat","eurodance","europop","exotica","experimental","experimentalrock","fado","filmi","flamenco","folk","folkmetal","folkpunk","folkrock","folk-pop","freakfolk","freakbeat","freeimprovisation","freejazz","freestyle","funeraldoom","funk","funkmetal","funkrock","futurepop","gfunk","gabba","game","gangsterrap","garagerock","germanpop","glammetal","glamrock","glitch","goregrind","gospel","gothicmetal","gothicrock","gothicsymphonicmetal","grime","grindcore","groovemetal","grunge","gypsyjazz","happyhardcore","hardbop","hardhouse","hardrock","hardtrance","hardcore","hardcorehiphop","hardcoretechno","hardstyle","harmonicablues","hinrg","highlife","hiphop","hiphouse","horrorpunk","house","hyphy","icelandicpop","illbient","indianclassical","indiefolk","indiepop","indierock","indietronica","industrial","industrialmetal","industrialrock","intelligentdancemusic","irishfolk","italiandisco","jpop","jrock","jamband","janglepop","japanoise","jazz","jazzblues","jazzfunk","jazzfusion","judaica","jugband","juggalo","jumpblues","junglemusic","kpop","kiwirock","klezmer","kompa","krautrock","kwaito","laiko","latin","latinalternative","latinjazz","latinpop","lo-fi","louisianablues","lounge","loversrock","madchester","mambo","mariachi","martialindustrial","mathrock","mathcore","medieval","mellowgold","melodicdeathmetal","melodichardcore","melodicmetalcore","memphisblues","memphissoul","merengue","merseybeat","metal","metalcore","minimal","modernblues","modernclassical","motown","mpb","musiqueconcrete","nashvillesound","nativeamerican","neoclassicalmetal","neosoul","neo-progressive","neoclassical","neofolk","neuedeutscheharte","newage","newbeat","newjackswing","neworleansblues","neworleansjazz","newrave","newromantic","newwave","newweirdamerica","ninja","nowave","noisepop","noiserock","northernsoul","nujazz","numetal","nuskoolbreaks","nwobhm","oi","oldschoolhiphop","opera","oratory","outlawcountry","paganblackmetal","pianoblues","pianorock","piedmontblues","polka","pop","poppunk","poprap","poprock","portugueserock","postrock","post-grunge","post-hardcore","post-metal","post-punk","powerelectronics","powermetal","powernoise","powerpop","powerviolence","progressivebluegrass","progressivehouse","progressivemetal","progressiverock","progressivetrance","protopunk","psychedelicrock","psychedelictrance","psychobilly","punk","punkblues","quietstorm","r&b","ragtime","rai","ranchera","rap","rapmetal","raprock","reggae","reggaeton","renaissance","rock","rock'nroll","rockenespanol","rocksteady","rockabilly","rootsreggae","rootsrock","rumba","salsa","samba","screamo","sexy","shibuya-kei","shoegaze","showtunes","singer-songwriter","ska","skapunk","skatepunk","skiffle","slovenianrock","slowcore","sludgemetal","smoothjazz","soca","softrock","soukous","soul","soulblues","souljazz","soundtrack","southerngospel","southernhiphop","southernrock","southernsoul","spacerock","speedgarage","speedmetal","speedcore","stonermetal","stonerrock","straightedge","stride","suomirock","surfmusic","swampblues","swing","symphonicblackmetal","symphonicmetal","symphonicrock","synthpop","tango","techhouse","technicaldeathmetal","techno","teenpop","tejano","texasblues","texascountry","thaipop","thrashcore","thrashmetal","traditionalblues","traditionalcountry","traditionalfolk","trance","tribalhouse","triphop","turbofolk","turntablism","tweepop","ukgarage","undergroundhiphop","upliftingtrance","urbancontemporary","vallenato","videogamemusic","vikingmetal","visualkei","vocalhouse","vocaljazz","westcoastrap","westernswing","world","worship","zouk","zydeco"],
   
   currentTrack: 0,
 
@@ -106,7 +106,7 @@ var Playlist = {
           if (track.title.toLowerCase().search("cover") == -1 && track.title.toLowerCase().search("remix") == -1) {
             ajaxs.push(
               $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '%20%2D$20' + escape(track.title) + '&orderby=relevance&start-index=1&max-results=10&v=2&format=5&alt=json-in-script&callback=?', function (data) {
-                if (typeof data.feed.entry !== "undefined") {
+                if (data.feed.hasOwnProperty("entry")) {
                   $.each(data.feed.entry, function (i, video) {
                     if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video)) {
                       Playlist.videos.push({ 
@@ -137,16 +137,18 @@ var Playlist = {
       $.each(data.response.artists, function (i, artist) {
         ajaxs.push(
           $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(artist.name)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?&format=5', function (data) {
-            $.each(data.feed.entry, function (i, video) {  
-              if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video)) {
-                Playlist.videos.push({ 
-                  videoID: video.id.$t.split(":")[3], 
-                  videoTitle: video.title.$t
-                });
-                
-                return false;
-              }
-            });
+            if (data.feed.hasOwnProperty("entry")) {
+              $.each(data.feed.entry, function (i, video) {  
+                if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video)) {
+                  Playlist.videos.push({ 
+                    videoID: video.id.$t.split(":")[3], 
+                    videoTitle: video.title.$t
+                  });
+                  
+                  return false;
+                }
+              });
+            }
           })
         );
       });
@@ -158,23 +160,27 @@ var Playlist = {
   genre: function () {
     var search = Playlist.options.search;
 
-    $.getJSON('http://developer.echonest.com/api/v4/artist/search?api_key=OYJRQNQMCGIOZLFIW&format=jsonp&callback=?&results=40&style=' + search, function(data) {
+    $.getJSON('http://developer.echonest.com/api/v4/playlist/basic?api_key=OYJRQNQMCGIOZLFIW&genre=' + search + '&format=jsonp&callback=?&results=40&type=genre-radio' , function(data) {
       var ajaxs = [];
 
-      $.each(data.response.artists, function (i, artist) {
-        ajaxs.push(
-          $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + artist.name + '&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?', function (data) {
-            $.each(data.feed.entry, function (i,video) {
-              if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotLive(video)) {
-                Playlist.videos.push({ 
-                  videoID:    video.id.$t.split(":")[3], 
-                  videoTitle: video.title.$t,
-                  artistName: artist.name 
-                });
+      $.each(data.response.songs, function (i, song) {
+        var searchFor = song.artist_name + ' ' + song.title;
 
-                return false;
-              }
-            });
+        ajaxs.push(
+          $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + searchFor + '&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?', function (data) {
+            if (data.feed.hasOwnProperty("entry")) {
+              $.each(data.feed.entry, function (i,video) {
+                if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotLive(video)) {
+                  Playlist.videos.push({ 
+                    videoID:    video.id.$t.split(":")[3], 
+                    videoTitle: video.title.$t,
+                    artistName: song.artist_name 
+                  });
+
+                  return false;
+                }
+              });
+            }
           })
         )
       });
@@ -187,14 +193,16 @@ var Playlist = {
     var search = Playlist.options.search;
     
     $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(search)+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function (data) {
-      $.each(data.feed.entry, function (i, video) {
-        if (Video.isNotBlocked(video) && Video.isNotUserBanned(video)) {
-          Playlist.videos.push({ 
-            videoID:    video.id.$t.split(":")[3], 
-            videoTitle: video.title.$t 
-          });
-        }
-      });
+      if (data.feed.hasOwnProperty("entry")) {
+        $.each(data.feed.entry, function (i, video) {
+          if (Video.isNotBlocked(video) && Video.isNotUserBanned(video)) {
+            Playlist.videos.push({ 
+              videoID:    video.id.$t.split(":")[3], 
+              videoTitle: video.title.$t 
+            });
+          }
+        });
+      }
       
       Playlist.resultsReady();
     });
