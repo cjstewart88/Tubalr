@@ -209,6 +209,9 @@ input[type=button], input[type=submit], a.button {
     &.active {
       background: #000;
       background: rgba(0,0,0,.3);
+      background-image: url('/assets/active.png') !important;
+      background-position: left center !important;
+      background-repeat: no-repeat !important;
       @include border-radius(3px);
     }
     
