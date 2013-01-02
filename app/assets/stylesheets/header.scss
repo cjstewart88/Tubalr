@@ -34,6 +34,15 @@
       &:hover {
        text-decoration: none; 
       }
+
+      &.support-link {
+        color: #fff;
+        @include text-shadow(none);
+        border: solid 1px #000;
+        background: #000;
+        background: rgba(0,0,0,.3);
+        font-weight: normal;
+      }
     }
   }
 

@@ -1,6 +1,7 @@
 <% if !request.path.index("similar")  && !request.path.index("just")  && 
       !request.path.index("video")    && !request.path.index("genre") && 
       !request.path.index("r/")       && !@playlist_name %>
+  <%= render :partial => 'welcome' %>
   <%= render :partial => 'explore' %>
   <%= render :partial => 'your_playlists' if current_user %>
 <% end %>

@@ -32,16 +32,15 @@
             <a href='/' class="tooltip" original-title="Pronounced: tuba-ler">tubalr</a>
           </h1>
         
-          <nav id="main-nav">  
-            <%= link_to('support tubalr', '/support', :class => 'donate-link') %>
-            <%= link_to('explore', '/explore') %>
+          <nav id="main-nav">
+            <%= link_to('Explore', '/explore') %>
             <% if user_signed_in? %>
-              <%= link_to('your playlists', "/#{current_user.username}/playlists", :class => 'my-playlists-link') %>  
-              <%= link_to('settings', '/users/edit', :class => 'settings-link') %>  
-              <%= link_to('logout', destroy_user_session_path, :method => :delete, :class => 'sign-out-link') %>
+              <%= link_to('Your Playlists', "/#{current_user.username}/playlists", :class => 'my-playlists-link') %>  
+              <%= link_to('Settings', '/users/edit', :class => 'settings-link') %>  
+              <%= link_to('Logout', destroy_user_session_path, :method => :delete, :class => 'sign-out-link') %>
             <% else %>  
-              <%= link_to('register', '/users/sign_up', :class => 'sign-up-link') %> 
-              <%= link_to('login', '/users/sign_in', :class => 'sign-in-link') %>
+              <%= link_to('Register', '/users/sign_up', :class => 'sign-up-link') %> 
+              <%= link_to('Login', '/users/sign_in', :class => 'sign-in-link') %>
             <% end %>
           </nav>
 
