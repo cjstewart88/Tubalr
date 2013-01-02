@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.4'
-
+gem 'rails', '3.2'
+gem 'activesupport'
 gem 'pg'
 gem 'devise'
 gem 'activerecord-import'
