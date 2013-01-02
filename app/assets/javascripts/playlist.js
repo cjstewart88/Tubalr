@@ -170,7 +170,7 @@ var Playlist = {
           $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + searchFor + '&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?', function (data) {
             if (data.feed.hasOwnProperty("entry")) {
               $.each(data.feed.entry, function (i,video) {
-                if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotLive(video)) {
+                if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotLive(video) && Video.isNotUserBanned(video)) {
                   Playlist.videos.push({ 
                     videoID:    video.id.$t.split(":")[3], 
                     videoTitle: video.title.$t,
@@ -192,7 +192,7 @@ var Playlist = {
   youtube: function () {
     var search = Playlist.options.search;
     
-    $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(search)+'&orderby=relevance&start-index=1&max-results=20&v=2&alt=json-in-script&callback=?', function (data) {
+    $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(search)+'&orderby=relevance&start-index=1&max-results=40&v=2&alt=json-in-script&callback=?', function (data) {
       if (data.feed.hasOwnProperty("entry")) {
         $.each(data.feed.entry, function (i, video) {
           if (Video.isNotBlocked(video) && Video.isNotUserBanned(video)) {
