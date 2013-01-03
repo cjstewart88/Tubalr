@@ -179,23 +179,19 @@ input[type=button], input[type=submit], a.button {
 }
 
 #video-and-playlist {
-  height: 400px;
+  height: 390px;
+  border: solid 1px #000;
 }
 
 #playlist {
   float: left;
   height: 390px;
   overflow: auto;
-  max-width: 295px;
-  width: 295px;
-  float: left;
+  width: 32%;
   list-style-type: none;
   background: rgba(0,0,0, .4);
-  border: solid 1px #000;
   padding: 0;
   @include box-shadow(none);
-  @include border-top-right-radius(3px);
-  @include border-bottom-right-radius(3px);
 
   a {
     display: block;
@@ -245,17 +241,13 @@ input[type=button], input[type=submit], a.button {
 #ytplayerid {
   float: left;
 	height: 390px;
-	width: 100%;
-  max-width: 640px;
+	width: 68%;
 	background: #000;
-  border: solid 1px #000;
   border-right: none;
-  @include border-top-left-radius(3px);
-  @include border-bottom-left-radius(3px);
 }
 
 #player-controls {
-  margin-top: 10px;
+  margin-top: 20px;
 }
 #player-controls, #playlist {
   input, a.button {
