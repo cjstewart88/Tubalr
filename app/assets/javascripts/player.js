@@ -7,7 +7,13 @@ var Player = {
     tag.src = "http://www.youtube.com/player_api?version=3";
 
     var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);    
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    // lets keep the session active in google analytics to 
+    // track better avg visit duration
+    setInterval(function () {
+      _gaq.push(['_trackEvent', 'ping', 'pong']);
+    }, 60000);
   },
 
   youtubeAPIReady: function () {
@@ -34,8 +40,12 @@ var Player = {
 
   onPlayerStateChange: function (newState) {
     if (newState.data == 0) {
+      // track full video views
+      _gaq.push(['_trackEvent', 'video', 'watched in full', Playlist.videos[Playlist.currentTrack].videoID]);
+
       Playlist.nextSong();
     }
+
     for (var i = 0; i < Player.listeners.length; ++i) {
       Player.listeners[i](newState);
     }
