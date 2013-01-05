@@ -46,7 +46,7 @@
           <nav id="main-nav">
             <%= link_to('explore', '/explore') %>
             <% if user_signed_in? %>
-              <%= link_to('your playlists', "/#{current_user.username}/playlists") %>  
+              <%= link_to('my playlists', "/#{current_user.username}/playlists") %>  
               <%= link_to('settings', '/users/edit') %>  
               <%= link_to('logout', destroy_user_session_path, :method => :delete) %>
             <% else %>  

@@ -4,8 +4,6 @@ var Explore = {
 
   tabs: $('#tabs ul'),
 
-  tabsContents: $('#tabs-contents'),
-
   init: function (options) {
     Explore.youtubePlaylists = [];
     $.extend(Explore, options);
@@ -28,7 +26,7 @@ var Explore = {
 $(document).ready(function () {
   
   Explore.init({
-    activeTab: window.location.hash.replace('#','') || 'genres'
+    activeTab: $($('#tabs ul').children()[0]).data('tab-name')
   })
 
   $('#tabs .tab').click(function () { 
