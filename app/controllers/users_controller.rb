@@ -1,11 +1,19 @@
 class UsersController < ApplicationController
 
+  before_filter :ensure_path
+
   def index
     @user = User.where(:username =>  params[:username]).first
     
     @profile_owner = user_signed_in? && @user && @user.username == current_user.username
 
     render :layout => "application", :template => "profile"
+  end
+
+  private
+
+  def ensure_path
+    redirect_to "/#{params[:username]}/profile" if request.path.index("/playlists")
   end
 
 end
