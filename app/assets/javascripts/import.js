@@ -133,7 +133,7 @@ var Import = {
 
   done: function () {
     location.reload();
-  },
+  }
 
 };
 

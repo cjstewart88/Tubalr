@@ -36,6 +36,7 @@ body {
   font-size: 12px;
 	color: #fff;
 	padding-bottom: 20px;
+  overflow-y: scroll;
 }	
 
 header, footer, aside, nav, article, section { display: block; } 
@@ -78,6 +79,10 @@ h2 {
     span {
       margin-right: 6px;
     }
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 }
 
@@ -103,6 +108,7 @@ h2 {
 #main {
   width: 100%;
   max-width: 1000px;
+  min-width: 890px;
   margin: 25px auto;
   
   #inner-main {

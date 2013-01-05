@@ -8,4 +8,5 @@
 //= require playlist
 //= require video
 //= require import
+//= require explore
 //= require custom-playlist-settings
