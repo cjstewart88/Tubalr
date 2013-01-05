@@ -46,12 +46,12 @@
           <nav id="main-nav">
             <%= link_to('explore', '/explore') %>
             <% if user_signed_in? %>
-              <%= link_to('your playlists', "/#{current_user.username}/playlists", :class => 'my-playlists-link') %>  
-              <%= link_to('settings', '/users/edit', :class => 'settings-link') %>  
-              <%= link_to('logout', destroy_user_session_path, :method => :delete, :class => 'sign-out-link') %>
+              <%= link_to('your playlists', "/#{current_user.username}/playlists") %>  
+              <%= link_to('settings', '/users/edit') %>  
+              <%= link_to('logout', destroy_user_session_path, :method => :delete) %>
             <% else %>  
-              <%= link_to('register', '/users/sign_up', :class => 'sign-up-link') %> 
-              <%= link_to('login', '/users/sign_in', :class => 'sign-in-link') %>
+              <%= link_to('register', '/users/sign_up') %> 
+              <%= link_to('login', '/users/sign_in') %>
             <% end %>
           </nav>
 

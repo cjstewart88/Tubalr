@@ -1,40 +1,56 @@
 <section class="remove-when-searching">
-  <h2>Edit <%= resource_name.to_s.humanize %></h2>
+  <h2>Settings</h2>
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :autocomplete => :off }) do | f | %>
-    <div>
-      <%= f.label :email %>
-      <%= "<span class='error'>#{resource.errors[:email][0]}</span>".html_safe if resource.errors[:email][0] %><br />
-      <%= f.email_field :email %> 
+    <div id="left-col">
+      <div>
+        <%= f.label :email %>
+        <%= "<span class='error'>#{resource.errors[:email][0]}</span>".html_safe if resource.errors[:email][0] %><br />
+        <%= f.email_field :email %> 
+      </div>
+
+      <div>
+        <%= f.label :password %>
+        <i>(leave blank if you don't want to change it)</i>
+        <%= "<span class='error'>#{resource.errors[:password][0]}</span>".html_safe if resource.errors[:password][0] %><br />
+        <%= f.password_field :password %> 
+      </div>
+
+      <div>
+        <%= f.label :password_confirmation %>
+        <%= "<span class='error'>#{resource.errors[:password_confirmation][0]}</span>".html_safe if resource.errors[:password_confirmation][0] %><br />
+        <%= f.password_field :password_confirmation %> 
+      </div>
+
+      <div>
+        <%= f.label :background %>
+        <i>(must be a url to a .png, .jpg, or .gif)</i>
+        <%= "<span class='error'>#{resource.errors[:background][0]}</span>".html_safe if resource.errors[:background][0] %><br />
+        <%= f.text_field :background %> 
+      </div>
+
+      <div><%= f.submit "Update" %></div>
     </div>
 
-    <div>
-      <%= f.label :background %>
-      <i>(must be a url to a .png, .jpg, or .gif)</i>
-      <%= "<span class='error'>#{resource.errors[:background][0]}</span>".html_safe if resource.errors[:background][0] %><br />
-      <%= f.text_field :background %> 
+    <div id="right-col">
+      <div>
+        <%= f.label "favorite genres" %>
+        <p>
+          Select your favorite genres so we can help you and others discover music! We will use your favorite genre's to help you discover new artists and user generated playlists. Your custom playlists will also be discoverable by those with similar favorite genres.
+        </p>
+        <%= select_tag("favorite-genres-picker", options_for_select([''] + GENRES, current_user.favorite_genres), :name => 'user[favorite_genres][]', :multiple => true) %>
+      </div>
     </div>
 
-    <div>
-      <%= f.label :password %>
-      <i>(leave blank if you don't want to change it)</i>
-      <%= "<span class='error'>#{resource.errors[:password][0]}</span>".html_safe if resource.errors[:password][0] %><br />
-      <%= f.password_field :password %> 
-    </div>
-
-    <div>
-      <%= f.label :password_confirmation %>
-      <%= "<span class='error'>#{resource.errors[:password_confirmation][0]}</span>".html_safe if resource.errors[:password_confirmation][0] %><br />
-      <%= f.password_field :password_confirmation %> 
-    </div>
-
-    <div>
-      <%= f.label :current_password %>
-      <i>(needed to confirm your changes)</i>
-      <%= "<span class='error'>#{resource.errors[:current_password][0]}</span>".html_safe if resource.errors[:current_password][0] %><br />
-      <%= f.password_field :current_password %>
-    </div>
-
-    <div><%= f.submit "Update" %></div>
+    <div class="clear"></div>
   <% end %>
 </section>
+
+<script>
+  $(document).ready(function () {
+    $('#favorite-genres-picker').select2({
+      placeholder: 'Select Interests',
+      width: '410px'
+    });
+  });
+</script>

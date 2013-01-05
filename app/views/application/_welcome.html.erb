@@ -1,10 +1,19 @@
 <section class="welcome remove-when-searching">
   <div class="col">
-    <p>
-      Tubalr is a simple way to enjoy all the great music content on YouTube. Start by browsing below or searching for an artist/band above. Sign up to create custom playlists while you're at it.
-    </p>
+    <% if user_signed_in? %>
+      <p>
+        <b>ATTENTION!!</b><br/>
+        Update your favorite genres in your settings in preperation for a new feature coming down the road, thanks!
+      </p>
 
-    <a href="/users/sign_up" class="button has-icon-left"><span class="icon-flag"></span>Sign Up</a>
+      <a href="/users/edit" class="button has-icon-left"><span class="icon-music"></span>Update Your Favorite Genres</a>
+    <% else %>
+      <p>
+       Tubalr is a simple way to enjoy all the great music content on YouTube. Start by browsing below or searching for an artist/band above. Sign up to create custom playlists while you're at it.
+      </p>
+
+      <a href="/users/sign_up" class="button has-icon-left"><span class="icon-flag"></span>Sign Up</a>
+    <% end%>
   </div>
 
   <div class="col">

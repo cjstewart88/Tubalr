@@ -42,11 +42,7 @@ header, footer, aside, nav, article, section { display: block; }
 
 a { 
   color: #CFFFFF;
-  text-decoration: none; 
-  moz-transition: all .3s;
-  -o-transition: all .3s;
-  -webkit-transition: all .3s;
-  transition: all .3s;
+  text-decoration: none;
   
   &:hover {
     text-decoration: underline;
@@ -89,7 +85,7 @@ h2 {
   position: absolute;
   top: 10px;
   left: 10px;
-  width: 300px;
+  width: 180px;
   
   aside {
     display: block;
@@ -97,7 +93,7 @@ h2 {
     color: #fff;
     background: #000;
     background: rgba(0,0,0,.5);
-    width: 200px;
+    width: 180px;
     padding: 10px;
     @include border-radius(3px);
     border: solid 1px #000;
@@ -113,15 +109,6 @@ h2 {
     margin: 10px;
   }
 }
-
-/* Stuff for devise forms */
-form input[type=text], form input[type=email], form input[type=password] { margin-top: 15px; margin-bottom: 15px; }
-form div i { font-size: 12px; }
-form div input[type=submit] { margin: 0px; }
-form .field_with_errors { margin-top: 0px; display: inline-block; }
-form .error { color: red; margin-left: 10px; }
-form a { display: inline-block; margin-top: 15px; }
-form .remember-me { margin-bottom: 15px; }
 
 input[type=text], input[type=email], input[type=password], textarea {
   padding: 8px 14px;
@@ -343,25 +330,7 @@ section {
   }
 }
 
-#playlists-main ul {
-  list-style: none;
-}
-#playlists-main ul {
-  margin-top: 20px;
-}
-#playlists-main ul li {
-  display: inline-block;
-  width: 244px;
-  margin-bottom: 20px;
-
-  a {
-    color: #fff;
-  }
-}
-
 .why-register {
-  float: right;
-  
   ol {
     li {
       margin: 10px 20px;
@@ -477,6 +446,10 @@ section {
   p {
     margin-bottom: 15px;
     padding: 20px;
+
+    b {
+      color: #DDF556;
+    }
   }
 
   .button {

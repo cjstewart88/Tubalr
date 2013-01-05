@@ -5,6 +5,7 @@ gem 'activesupport'
 gem 'pg'
 gem 'devise'
 gem 'activerecord-import'
+gem 'acts-as-taggable-on'
 
 gem 'jquery-rails', '1.0.12'
 gem 'compass-rails'

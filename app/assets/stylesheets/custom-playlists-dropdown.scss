@@ -1,21 +1,5 @@
 @import "compass";
 
-.select2-container, .select2-container.select2-drop-above {
-  .select2-choice {
-    height: 29px;
-    line-height: 29px;
-    @include box-shadow(none);
-    background: rgba(0, 0, 0, .3);
-    border: solid 1px black !important;
-    color: #ffffff !important;
-
-    div {
-      background: rgba(0, 0, 0, .3);
-      border-left: solid 1px black;
-    }
-  } 
-}
-
 .select2-drop {
   background: rgba(0, 0, 0, .8);
   border: solid 1px black !important;
@@ -28,18 +12,36 @@
   &.select2-drop-active {
     @include box-shadow(none);
   }
-}
 
-.select2-search {
-  .select2-input {
-    width: 160px;
-    padding-right: 36px;
-    background-image: url('/assets/search.png');
-    background-repeat: no-repeat;
-    background-position: 136px 8px;
+  .select2-search {
+    .select2-input {
+      width: 160px;
+      padding-right: 36px;
+      background-image: url('/assets/search.png');
+      background-repeat: no-repeat;
+      background-position: 136px 8px;
+    }
   }
 }
 
-.select2-results .select2-no-results {
-  background: none;
+#s2id_add-to-playlist-dropdown {
+  &.select2-container, .select2-container.select2-drop-above {
+    .select2-choice {
+      height: 29px;
+      line-height: 29px;
+      @include box-shadow(none);
+      background: rgba(0, 0, 0, .3);
+      border: solid 1px black !important;
+      color: #ffffff !important;
+
+      div {
+        background: rgba(0, 0, 0, .3);
+        border-left: solid 1px black;
+      }
+    } 
+  }
+
+  &.select2-results .select2-no-results {
+    background: none;
+  }
 }

@@ -1,15 +1,25 @@
 @import "compass";
 
+#playlists-main ul {
+  list-style: none;
+  margin-top: 20px;
+}
+
 #playlists-main li {
+  display: inline-block;
+  width: 143px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+
   a {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 200px;
+    max-width: 115px;
     display: inline-block;  
+    color: #fff;
   }
   
-
   .custom-playlist-settings-open-dialog {
     display: none;
     float: right;

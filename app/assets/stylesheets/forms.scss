@@ -1,0 +1,88 @@
+@import "compass";
+
+.select2-drop.select2-drop-multi.select2-drop-active {
+  border: none !important;
+  @include box-shadow(none);
+  background: #fff;
+  color: #000;
+
+  margin-top: -2px;
+  @include border-bottom-left-radius(3px);
+  @include border-bottom-right-radius(3px);
+
+  &.select2-drop-above {
+    margin-top: 4px;
+    @include border-bottom-left-radius(3px);
+    @include border-bottom-right-radius(3px);
+  }
+}
+
+form {
+  #left-col, #right-col {
+    float: left;
+
+    &#right-col {
+      margin-left: 40px;
+    }
+  }
+
+  input[type=text], input[type=email], input[type=password] { margin-top: 15px; margin-bottom: 15px; }
+  div i { font-size: 12px; }
+  div p { width: 430px; margin-top: 15px; }
+  div label { font-size: 14px; font-weight: bold; text-transform: capitalize; }
+  div input[type=submit] { margin: 0px; margin-top: 15px; }
+  .field_with_errors { margin-top: 0px; display: inline-block; }
+  .error { color: red; margin-left: 10px; }
+  .form-link { display: inline-block; margin-top: 15px; }
+  .remember-me { margin-bottom: 15px; }
+
+  .select2-container, .select2-container-multi {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+    &.select2-container-active {
+      .select2-choices, .select2-drop {
+        border: none;
+        @include box-shadow(none);
+      } 
+    }
+    
+    .select2-choices, .select2-choice {
+      padding-top: 3px;
+      padding-bottom: 3px;
+      border: none;
+      @include border-radius(3px);
+      background: #fff;
+    }
+    
+    .select2-choices {
+      padding-left: 8px;
+      padding-right: 8px;
+
+      .select2-search-field input {
+        padding: 6px 5px 4px 5px;
+      }
+    }
+    
+    .select2-choice {
+      @include box-shadow(none);
+      padding-left: 12px;
+      
+      div {
+        background: none;
+        border-left: none;
+        
+        b {
+          background-position: -4px 6px;
+        }
+      }
+    }
+  }
+
+  .select2-dropdown-open { 
+    .select2-choice div b {
+      background-position: -22px 6px;
+    }
+  }
+}

@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   
   validates_presence_of   :username
   validates_uniqueness_of :username, :case_sensitive => false
+
+  acts_as_taggable
+  acts_as_taggable_on :favorite_genres
     
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
