@@ -19,9 +19,14 @@
       <div class="tab-content favorite-genres-tab-content">
         <h2>Favorite Genres</h2>
 
-        <% if current_user.favorite_genres.count != 0 %>  
+        <% if @profile_owner %>
+          <p>
+            You can update your favorite genres at any time, just head over to <a href="/users/edit">your settings</a> to update them!
+          </p>
+        <% end %>
+        <% if @user.favorite_genres.count != 0 %>  
           <ul class="list">
-            <% current_user.favorite_genres.each do | genre | %>
+            <% @user.favorite_genres.each do | genre | %>
               <li><a href='/just/<%= genre %>'><%= genre %></a></li>
             <% end %>
           </ul>
