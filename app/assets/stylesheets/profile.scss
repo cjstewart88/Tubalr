@@ -1,11 +1,18 @@
-@import "compass";
-
-#playlists-main ul {
-  list-style: none;
-  margin-top: 20px;
+#profile-main {
+  p {
+    margin-bottom: 15px;
+  }
 }
 
-#playlists-main li {
+/* Custom Playists Stuff */ 
+
+@import "compass";
+
+#profile-main ul {
+  list-style: none;
+}
+
+#profile-main li {
   display: inline-block;
   width: 143px;
   margin-bottom: 10px;

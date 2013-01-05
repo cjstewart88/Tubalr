@@ -1,12 +1,4 @@
 class PlaylistsController < ApplicationController
-
-  def index
-    @user = User.where(:username =>  params[:username]).first
-    
-    @playlist_owner = user_signed_in? && @user.username == current_user.username
-
-    render :layout => "application", :template => "playlists"
-  end
   
   def listen
     @user               = User.where(:username =>  params[:username]).first

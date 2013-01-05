@@ -1,0 +1,51 @@
+<%= render :partial => 'playlists/import_youtube_playlists' if @profile_owner %>
+
+<section id="profile-main" class="remove-when-searching">
+  <% if @user.present? %>
+    <h2>
+      <%= "#{@user.username}'s" %> Profile
+    </h2>
+    
+    <div id="tabs">
+      <ul>
+        <li class="tab playlists-tab" data-tab-name="playlists">Playlists<span class="icon-chevron-right"></span></li>
+        <li class="tab favorite-genres-tab" data-tab-name="favorite-genres">Favorite Genres <span class="icon-chevron-right"></span></li>
+      </ul>
+    </div>
+
+    <div id="tabs-contents">
+      <%= render :partial => 'playlists/playlists' %>
+
+      <div class="tab-content favorite-genres-tab-content">
+        <h2>Favorite Genres</h2>
+
+        <% if current_user.favorite_genres.count != 0 %>  
+          <ul class="list">
+            <% current_user.favorite_genres.each do | genre | %>
+              <li><a href='/just/<%= genre %>'><%= genre %></a></li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p>
+            <% if @profile_owner %>
+              You should pick some favorite genres, not only will they be handy in this section but they will help us suggest new music for you. Head over to <a href="/users/edit">your settings</a> and let us know your favorites!
+            <% else %>
+              This is a sad day, it turns out <%= "#{@user.username}" %> has 0 favorite playlists.
+            <% end %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+  <% else %>
+    <h2>user missing in action!</h2>
+    
+    <p>
+      Looks like there's no user with the name <b><%= params[:username] %></b>. 
+      Make sure you spelled it right and give it another go. If the user's 
+      still MIA, shoot and email to <a href="mailto:listen.to.tubalr@gmail.com">listen.to.tubalr@gmail.com</a> 
+      and we'll see if we can track this user down!
+    </p>
+  <% end %>
+</section>

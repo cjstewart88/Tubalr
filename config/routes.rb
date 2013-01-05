@@ -16,7 +16,9 @@ Tubalr::Application.routes.draw do
   get "/r"                                          => "application#explore"
   get "/explore"                                    => "application#explore"
 
-  get "/:username/playlists"                        => "playlists#index"
+  get "/:username/profile"                          => "users#index"
+  get "/:username/playlists"                        => "users#index"
+  
   get "/:username/playlist/:playlist_name"          => "playlists#listen"
   post "/:username/playlist/:playlist_name/sort"    => "playlists#sort"
   match "/playlist/create"                          => "playlists#create"
