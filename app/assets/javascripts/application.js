@@ -8,5 +8,5 @@
 //= require playlist
 //= require video
 //= require import
-//= require explore
+//= require tabs
 //= require custom-playlist-settings
