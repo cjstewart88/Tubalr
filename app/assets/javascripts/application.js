@@ -9,4 +9,5 @@
 //= require video
 //= require import
 //= require tabs
+//= require follow
 //= require custom-playlist-settings
