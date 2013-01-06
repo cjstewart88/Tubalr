@@ -31,6 +31,7 @@ form {
   div p { width: 430px; margin-top: 15px; }
   div label { font-size: 14px; font-weight: bold; text-transform: capitalize; }
   div input[type=submit] { margin: 0px; margin-top: 15px; }
+  div p.no-input-field { margin-bottom: 15px; }
   .field_with_errors { margin-top: 0px; display: inline-block; }
   .error { color: red; margin-left: 10px; }
   .form-link { display: inline-block; margin-top: 15px; }
