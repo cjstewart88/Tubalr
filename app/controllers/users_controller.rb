@@ -1,13 +1,15 @@
 class UsersController < ApplicationController
 
-  before_filter :ensure_path
+  before_filter :ensure_path, :only => :profile
 
-  def index
+  def profile
     @user = User.where(:username =>  params[:username]).first
     
     @profile_owner = user_signed_in? && @user && @user.username == current_user.username
+  end
 
-    render :layout => "application", :template => "profile"
+  def list
+    @users = User.paginate(:page => params[:page])
   end
 
   private

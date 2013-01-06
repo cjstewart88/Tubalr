@@ -1,0 +1,30 @@
+<section id="users-main" class="remove-when-searching">
+  <h2>Users</h2>
+
+  <ol id="users-list">
+    <% @users.each do | user | %>
+      <li class="user">
+        <a href="/<%= user.username %>/profile">
+          <img class="profile-picture" src="http://www.gravatar.com/avatar/<%= user.md5_email || 'false' %>">
+        </a>
+        <div class="info">
+          <h3 class="username"><a href="/<%= user.username %>/profile"><%= user.username %></a></h3>
+          <div class="favorite-genres">
+            <b>Favorite Genres:</b> 
+            <% if user.favorite_genres.count == 0 %>
+              none
+            <% else %>
+              <span class="tooltip" original-title="<%= user.favorite_genres.collect{|g|g.name}.join(', ') %>"><%= user.favorite_genres.collect{|g|g.name}.join(', ') %></span>
+            <% end %>
+          </div>
+          <ul class="counts">
+            <li><span class="count"><%= user.playlists.count %></span> Playlists</li>
+            <li><span class="count"><%= user.followers.count %></span> Followers</li>
+          </ul>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+
+  <%= will_paginate @users %>
+</section>

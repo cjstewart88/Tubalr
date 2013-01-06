@@ -2,7 +2,7 @@ Tubalr::Application.routes.draw do
   devise_for :users, :controllers => { :registrations => "registrations" }
 
   root :to => "application#index"
-  
+
   get "/support"                                    => "application#support"
 
   get "/:username/playlist/:playlist_name.json"     => "api#user_playlist"
@@ -16,8 +16,9 @@ Tubalr::Application.routes.draw do
   get "/r"                                          => "application#explore"
   get "/explore"                                    => "application#explore"
 
-  get "/:username/profile"                          => "users#index"
-  get "/:username/playlists"                        => "users#index"
+  get "/users"                                      => "users#list"
+  get "/:username/profile"                          => "users#profile"
+  get "/:username/playlists"                        => "users#profile"
   
   get "/:username/playlist/:playlist_name"          => "playlists#listen"
   post "/:username/playlist/:playlist_name/sort"    => "playlists#sort"

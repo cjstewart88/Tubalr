@@ -1,0 +1,52 @@
+@import "compass";
+
+#users-main {
+  #users-list {
+    list-style-type: none;
+
+    .user {
+      display: inline-block;
+      width: 49%;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+
+      .profile-picture {
+        float: left;
+        width: 80px;
+        height: 80px;
+        margin-right: 20px;
+        @include border-radius(5px);
+      }
+
+      .info {
+        .username {
+          margin-bottom: 5px;
+          font-size: 16px;
+        }
+
+        .favorite-genres {
+          margin-bottom: 5px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+
+        .counts {
+          list-style-type: none;
+
+          li {
+           display: inline-block;
+           margin-right: 15px;
+          }
+          
+          .count {
+            display: block;
+            font-weight: bold;
+          }
+        }  
+      }
+
+      
+    }
+  }
+}
