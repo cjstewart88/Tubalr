@@ -1,4 +1,29 @@
 class RegistrationsController < Devise::RegistrationsController
+  def create
+    resource_params["md5_hash"] = Digest::MD5.hexdigest(resource_params["email"])
+    
+    build_resource
+    
+    if resource.save
+      if resource.active_for_authentication?
+        set_flash_message :notice, :signed_up if is_navigational_format?
+        sign_up(resource_name, resource)
+        respond_with resource, :location => after_sign_up_path_for(resource)
+      else
+        set_flash_message :notice, :"signed_up_but_#{resource.inactive_message}" if is_navigational_format?
+        expire_session_data_after_sign_in!
+        respond_with resource, :location => after_inactive_sign_up_path_for(resource)
+      end
+    else
+      clean_up_passwords resource
+      respond_with resource
+    end
+  end
+
+  def sign_up(resource_name, resource)
+    sign_in(resource_name, resource)
+  end
+
   def update
     # required for settings form to submit when password is left blank
     if params[:user][:password].blank?
@@ -13,6 +38,8 @@ class RegistrationsController < Devise::RegistrationsController
     else
       @user.favorite_genre_list = []
     end
+
+    params[:user]["md5_hash"] = Digest::MD5.hexdigest(params[:user][:email])
 
     if @user.update_attributes(params[:user])
       set_flash_message :notice, :updated

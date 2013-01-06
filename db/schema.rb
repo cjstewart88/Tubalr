@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130105031648) do
+ActiveRecord::Schema.define(:version => 20130106012201) do
 
   create_table "banned_videos", :force => true do |t|
     t.integer  "user_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20130105031648) do
     t.datetime "updated_at"
     t.string   "username"
     t.string   "background"
+    t.string   "md5_hash"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
