@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def list
-    @users = User.paginate(:page => params[:page])
+    @users = User.paginate(:page => params[:page]).order('playlists_count DESC')
   end
 
   private
