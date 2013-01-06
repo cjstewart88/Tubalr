@@ -1,12 +1,40 @@
+@import "compass";
+
 #profile-main {
+  #profile-badge {
+    margin-bottom: 25px;
+
+    #profile-badge-picture {
+      @include border-radius(8px);
+      border: solid 1px #000;
+    }
+
+    #profile-badge-username {
+      position: absolute;
+      width: 177px;
+      margin-top: -35px;
+      background: #000;
+      background: rgba(0, 0, 0, .7);
+      border-top: solid 1px #000;
+      @include border-bottom-left-radius(7px);
+      @include border-bottom-right-radius(7px);
+      line-height: 30px;
+      text-align: center;
+      color: #fff;
+      font-weight: normal;
+      font-size: 12px; 
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
   p {
     margin-bottom: 15px;
   }
 }
 
 /* Custom Playists Stuff */ 
-
-@import "compass";
 
 #profile-main ul {
   list-style: none;
