@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106145903) do
+ActiveRecord::Schema.define(:version => 20130106172855) do
 
   create_table "banned_videos", :force => true do |t|
     t.integer  "user_id"
     t.string   "video_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "follows", :force => true do |t|
@@ -36,8 +36,8 @@ ActiveRecord::Schema.define(:version => 20130106145903) do
   create_table "playlists", :force => true do |t|
     t.string   "playlist_name"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "taggings", :force => true do |t|
@@ -68,11 +68,12 @@ ActiveRecord::Schema.define(:version => 20130106145903) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "username"
     t.string   "background"
     t.string   "md5_email"
+    t.integer  "playlists_count",        :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
@@ -82,8 +83,8 @@ ActiveRecord::Schema.define(:version => 20130106145903) do
     t.string   "video_title"
     t.string   "video_id"
     t.integer  "playlist_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
     t.integer  "track_number"
   end
 
