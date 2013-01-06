@@ -5,6 +5,8 @@
     margin-bottom: 25px;
 
     #profile-badge-picture {
+      width: 175px;
+      height: 175px;
       @include border-radius(8px);
       border: solid 1px #000;
     }
