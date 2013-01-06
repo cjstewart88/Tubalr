@@ -16,6 +16,9 @@ Tubalr::Application.routes.draw do
   get "/r"                                          => "application#explore"
   get "/explore"                                    => "application#explore"
 
+  post "/follow/:who"                               => "follows#follow"
+  delete "/follow/:who"                             => "follows#unfollow"
+
   get "/users"                                      => "users#list"
   get "/:username/profile"                          => "users#profile"
   get "/:username/playlists"                        => "users#profile"
