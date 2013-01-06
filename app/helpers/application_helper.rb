@@ -7,14 +7,14 @@ module ApplicationHelper
       options[:customPlaylistOwner] = array_or_string_for_javascript(url_encode(escape_javascript(@username)))
       options[:customPlaylistName]  = array_or_string_for_javascript(url_encode(escape_javascript(@playlist_name)))
       options[:persistentSorting]   = @is_playlist_owner
-    elsif request.path.index('just')
+    elsif request.path.index('/just/')
       options[:searchType] = array_or_string_for_javascript('just')
-    elsif request.path.index('similar')
+    elsif request.path.index('/similar/')
       options[:searchType] = array_or_string_for_javascript('similar')
-    elsif request.path.index('r/')
+    elsif request.path.index('/r/')
       options[:searchType] = array_or_string_for_javascript('reddit')
       options[:subReddit]  = array_or_string_for_javascript(params[:subreddit])
-    elsif request.path.index('video')
+    elsif request.path.index('/video/')
       options[:searchType] = array_or_string_for_javascript('video')
       options[:videoID]    = array_or_string_for_javascript(params[:video_id])
     end
