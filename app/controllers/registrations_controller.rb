@@ -39,7 +39,7 @@ class RegistrationsController < Devise::RegistrationsController
       @user.favorite_genre_list = []
     end
 
-    params[:user]["md5_hash"] = Digest::MD5.hexdigest(params[:user][:email])
+    params[:user][:md5_hash] = Digest::MD5.hexdigest(params[:user][:email])
 
     if @user.update_attributes(params[:user])
       set_flash_message :notice, :updated
