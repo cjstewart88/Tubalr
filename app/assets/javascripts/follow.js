@@ -15,6 +15,10 @@ var Follow = {
 $(document).ready(function () {
 
   $('button.follow').live('click', function (e) {
+    if ($(this).hasClass('not-signed-in')) {
+      return false;
+    }
+
     Follow.follow($(this), $(this).data('user-id'));
   });
 

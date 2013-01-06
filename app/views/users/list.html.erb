@@ -18,7 +18,11 @@
             <% end %>
           </div>
           <ul class="counts-and-follow">
-            <button class="follow-unfollow-button <%= 'un' if user_signed_in? && user.followed_by?(current_user) %>follow" data-user-id="<%= user.id %>"><span class="icon-plus"></span><span class="icon-minus"></span><span class="icon-ok"></span></button>
+            <% if user_signed_in? && user.id == current_user.id %>
+            <% else %>
+              <button original-title="Sign up or Login to follow users!" class="<%= 'tooltip not-signed-in' if !user_signed_in? %> follow-unfollow-button <%= 'un' if user_signed_in? && user.followed_by?(current_user) %>follow" data-user-id="<%= user.id %>"><span class="icon-plus"></span><span class="icon-minus"></span><span class="icon-ok"></span></button>
+            <% end %>
+            
             <li><span class="count"><%= user.playlists.count %></span> Playlists</li>
             <li><span class="count"><%= user.followers.count %></span> Followers</li>
           </ul>

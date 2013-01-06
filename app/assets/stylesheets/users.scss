@@ -34,12 +34,12 @@
         .counts-and-follow {
           list-style-type: none;
 
-          button {
+          .follow-unfollow-button {
             float: left;
             margin-right: 15px;
             padding: 6px;
             margin-top: 4px;
-
+            
             span {
               display: none;
             }
@@ -78,7 +78,7 @@
 
             &.unfollow {
               background: #00B078;
-              
+
               .icon-ok {
                 display: inline-block;
               }
