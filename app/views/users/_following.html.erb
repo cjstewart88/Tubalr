@@ -10,14 +10,6 @@
           </a>
           <div class="info">
             <h3 class="username"><a href="/<%= user.username %>/profile"><%= user.username %></a></h3>
-            <div class="favorite-genres">
-              <b>Favorite Genres:</b> 
-              <% if user.favorite_genres.count == 0 %>
-                none
-              <% else %>
-                <span class="tooltip" original-title="<%= user.favorite_genres.collect{|g|g.name}.join(', ') %>"><%= user.favorite_genres.collect{|g|g.name}.join(', ') %></span>
-              <% end %>
-            </div>
             <ul class="counts-and-follow">
               <% if user_signed_in? && user.id == current_user.id %>
               <% else %>

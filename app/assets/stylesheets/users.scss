@@ -18,16 +18,12 @@
     }
 
     .info {
+      margin-right: 10px;
+      margin-top: 10px;
+
       .username {
         margin-bottom: 5px;
         font-size: 16px;
-      }
-
-      .favorite-genres {
-        margin-bottom: 5px;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
       }
 
       .counts-and-follow {
