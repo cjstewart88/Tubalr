@@ -36,52 +36,6 @@
         .follow-unfollow-button {
           float: left;
           margin-right: 15px;
-          padding: 6px;
-          margin-top: 4px;
-
-          span {
-            display: none;
-          }
-
-          &:hover {
-            &.follow {
-              background: #00B078;
-
-              .icon-ok {
-                display: inline-block;
-              }
-
-              .icon-plus {
-                display: none;
-              }
-            }
-
-            &.unfollow {
-              background: #BF2633;
-
-              .icon-ok {
-                display: none;
-              }
-
-              .icon-minus {
-                display: inline-block;
-              }
-            }
-          }
-
-          &.follow {
-            .icon-plus {
-              display: inline-block;
-            }
-          }
-
-          &.unfollow {
-            background: #00B078;
-
-            .icon-ok {
-              display: inline-block;
-            }
-          }
         }
 
         li {
@@ -94,6 +48,56 @@
           font-weight: bold;
         }
       }  
+    }
+  }
+}
+
+.follow-unfollow-button {
+  padding: 6px;
+  margin-top: 4px;
+
+  span {
+    display: none;
+    width: 15px;
+  }
+
+  &:hover {
+    &.follow {
+      background: #00B078;
+
+      .icon-ok {
+        display: inline-block;
+      }
+
+      .icon-plus {
+        display: none;
+      }
+    }
+
+    &.unfollow {
+      background: #BF2633;
+
+      .icon-ok {
+        display: none;
+      }
+
+      .icon-minus {
+        display: inline-block;
+      }
+    }
+  }
+
+  &.follow {
+    .icon-plus {
+      display: inline-block;
+    }
+  }
+
+  &.unfollow {
+    background: #00B078;
+
+    .icon-ok {
+      display: inline-block;
     }
   }
 }

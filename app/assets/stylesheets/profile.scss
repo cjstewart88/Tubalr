@@ -1,6 +1,13 @@
 @import "compass";
 
 #profile-main {
+  position: relative;
+
+  .profile-follow-me {
+    position: absolute;
+    right: 20px;
+  }
+
   #profile-badge {
     margin-bottom: 25px;
 

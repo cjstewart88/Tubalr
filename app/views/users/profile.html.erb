@@ -1,6 +1,11 @@
 <%= render :partial => 'playlists/import_youtube_playlists' if @profile_owner %>
 
 <section id="profile-main" class="remove-when-searching">
+  <% if user_signed_in? && @user.id == current_user.id %>
+  <% else %>
+    <button original-title="Sign up or Login to follow <%= @user.username %>!" class="profile-follow-me <%= 'tooltip not-signed-in' if !user_signed_in? %> follow-unfollow-button <%= 'un' if user_signed_in? && @user.followed_by?(current_user) %>follow" data-user-id="<%= @user.id %>"><span class="icon-plus"></span><span class="icon-minus"></span><span class="icon-ok"></span></button>
+  <% end %>
+
   <% if @user.present? %>
     <div id="tabs">
       <header id="profile-badge">
