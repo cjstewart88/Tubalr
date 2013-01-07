@@ -2,7 +2,7 @@
   <h2>Playlists</h2>
 
   <% if @user.playlists.count != 0 %>
-    <ul>
+    <ul class="list">
       <% @user.playlists.each do | playlist | %>
         <li id="<%= playlist.id %>" data-playlist-name="<%= playlist.playlist_name%>">
           <a href="<%= "/#{@user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></a>

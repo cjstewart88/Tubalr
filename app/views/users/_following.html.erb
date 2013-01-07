@@ -1,0 +1,43 @@
+<div class="tab-content following-tab-content">
+  <h2>Following</h2>
+
+  <% if user_object.all_following.count != 0 %>
+    <ol id="users-list">
+      <% user_object.all_following.each do | user | %>
+        <li class="user">
+          <a href="/<%= user.username %>/profile">
+            <img class="profile-picture" src="http://www.gravatar.com/avatar/<%= user.md5_email || 'false' %>">
+          </a>
+          <div class="info">
+            <h3 class="username"><a href="/<%= user.username %>/profile"><%= user.username %></a></h3>
+            <div class="favorite-genres">
+              <b>Favorite Genres:</b> 
+              <% if user.favorite_genres.count == 0 %>
+                none
+              <% else %>
+                <span class="tooltip" original-title="<%= user.favorite_genres.collect{|g|g.name}.join(', ') %>"><%= user.favorite_genres.collect{|g|g.name}.join(', ') %></span>
+              <% end %>
+            </div>
+            <ul class="counts-and-follow">
+              <% if user_signed_in? && user.id == current_user.id %>
+              <% else %>
+                <button original-title="Sign up or Login to follow users!" class="<%= 'tooltip not-signed-in' if !user_signed_in? %> follow-unfollow-button <%= 'un' if user_signed_in? && user.followed_by?(current_user) %>follow" data-user-id="<%= user.id %>"><span class="icon-plus"></span><span class="icon-minus"></span><span class="icon-ok"></span></button>
+              <% end %>
+              
+              <li><span class="count"><%= user.playlists.count %></span> Playlists</li>
+              <li><span class="count"><%= user.followers.count %></span> Followers</li>
+            </ul>
+          </div>
+        </li>
+      <% end %>
+    </ol>
+  <% else %>
+    <p>
+      <% if !user_signed_in? || (@user && @user.id != current_user.id) %>
+        This is a sad day, it turns out <%= "#{user_object.username}" %> is following 0 users.
+      <% else %>
+        Looks like you're currently following 0 users, head over to the <a href="/users">user list</a> page and find some interesting folks!
+      <% end %>
+    </p>
+  <% end %>
+</div>

@@ -45,6 +45,7 @@
         
           <nav id="main-nav">
             <%= link_to('explore', '/explore') %>
+            <%= link_to('users', '/users') %>
             <% if user_signed_in? %>
               <%= link_to('my profile', "/#{current_user.username}/profile") %>  
               <%= link_to('settings', '/users/edit') %>  

@@ -32,4 +32,8 @@ module ApplicationHelper
       "background: #4C4C4C url('#{current_user.background}') no-repeat center center fixed;" 
     end  
   end
+
+  def user_object
+    @user || current_user 
+  end
 end

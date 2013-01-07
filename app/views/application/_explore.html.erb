@@ -3,6 +3,7 @@
     <ul>
       <% if user_signed_in? %>
         <li class="tab me-tab" data-tab-name="me">Me <span class="icon-chevron-right"></span></li>
+        <li class="tab following-tab" data-tab-name="following">Following <span class="icon-chevron-right"></span></li>
       <% end %>
       <li class="tab top-genres-tab" data-tab-name="top-genres">Top Genres <span class="icon-chevron-right"></span></li>
       <li class="tab all-genres-tab" data-tab-name="all-genres">All Genres<span class="icon-chevron-right"></span></li>
@@ -49,6 +50,8 @@
           </p>
         <% end %>
       </div>
+
+      <%= render :partial => 'users/following' %>
     <% end %>
     
     <div class="tab-content top-genres-tab-content">

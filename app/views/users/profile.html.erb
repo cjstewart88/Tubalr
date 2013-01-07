@@ -11,36 +11,14 @@
       <ul>
         <li class="tab playlists-tab" data-tab-name="playlists">Playlists<span class="icon-chevron-right"></span></li>
         <li class="tab favorite-genres-tab" data-tab-name="favorite-genres">Favorite Genres <span class="icon-chevron-right"></span></li>
+        <li class="tab following-tab" data-tab-name="following">Following<span class="icon-chevron-right"></span></li>
       </ul>
     </div>
 
     <div id="tabs-contents">
       <%= render :partial => 'playlists/playlists' %>
-
-      <div class="tab-content favorite-genres-tab-content">
-        <h2>Favorite Genres</h2>
-
-        <% if @profile_owner %>
-          <p>
-            You can update your favorite genres at any time, just head over to <a href="/users/edit">your settings</a> to update them!
-          </p>
-        <% end %>
-        <% if @user.favorite_genres.count != 0 %>  
-          <ul class="list">
-            <% @user.favorite_genres.each do | genre | %>
-              <li><a href='/just/<%= genre %>'><%= genre %></a></li>
-            <% end %>
-          </ul>
-        <% else %>
-          <p>
-            <% if @profile_owner %>
-              You should pick some favorite genres, not only will they be handy in this section but they will help us suggest new music for you. Head over to <a href="/users/edit">your settings</a> and let us know your favorites!
-            <% else %>
-              This is a sad day, it turns out <%= "#{@user.username}" %> has 0 favorite genres.
-            <% end %>
-          </p>
-        <% end %>
-      </div>
+      <%= render :partial => 'favorite_genres' %>
+      <%= render :partial => 'following' %>
     </div>
 
     <div class="clear"></div>
