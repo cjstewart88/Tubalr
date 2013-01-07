@@ -9,7 +9,7 @@
   }
 
   #profile-badge {
-    margin-bottom: 25px;
+    margin-bottom: 15px;
 
     #profile-badge-profile-picture {
       width: 175px;
@@ -35,6 +35,27 @@
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+    }
+  }
+
+  #profile-counts {
+    margin-bottom: 15px;
+    
+    div {
+      width: 60px;
+      display: inline-block;
+      background: rgba(0, 0, 0, .5);
+      border: solid 1px black;
+      border-radius: 5px;
+      margin-right: 10px;
+      padding: 10px;
+      text-align: center;
+      line-height: 20px;
+
+      span {
+        display: block;
+        font-weight: bold;
+      }
     }
   }
 

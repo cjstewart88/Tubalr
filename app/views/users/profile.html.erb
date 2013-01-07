@@ -13,6 +13,11 @@
         <div id="profile-badge-username"><%= "#{@user.username}" %></div>
       </header>
 
+      <aside id="profile-counts">
+        <div><span class="count"><%= @user.playlists_count %></span>Playlists</div>
+        <div><span class="count"><%= @user.followers.count %></span>Followers</div>
+      </aside>
+
       <ul>
         <li class="tab playlists-tab" data-tab-name="playlists">Playlists<span class="icon-chevron-right"></span></li>
         <li class="tab favorite-genres-tab" data-tab-name="favorite-genres">Favorite Genres <span class="icon-chevron-right"></span></li>
