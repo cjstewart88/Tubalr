@@ -41,6 +41,21 @@ module ApplicationHelper
     @user || current_user 
   end
 
+
+
+  # timeline helpers
+
+  def timeline_icon(event_type)
+    case event_type
+    when 'watchedVideo'
+      'icon-eye-open'
+    when 'customPlaylist'
+      'icon-user'
+    else
+      'icon-search'
+    end
+  end
+
   def timeline_event(event)
     case event.event
     when 'watchedVideo' 

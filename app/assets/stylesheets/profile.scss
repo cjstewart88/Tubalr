@@ -126,5 +126,19 @@
   li {
     margin-bottom: 10px;
     font-size: 14px;
+
+    .timeline-icon {
+      float: left;
+      margin-top: 5px;
+      margin-right: 20px;
+      font-weight: normal;
+      font-size: 20px;
+    }
+
+    .time-ago {
+      display: block;
+      font-size: 12px;
+      font-style: italic;
+    }
   }
 }

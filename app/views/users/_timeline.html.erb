@@ -4,7 +4,9 @@
   <ol id="timeline-list">
     <% @user.events.limit(30).each do | event | %>
       <li>
+        <span class="timeline-icon <%= timeline_icon(event.event) %>"></span>
         <%= timeline_event(event) %>
+        <span class="time-ago"><%= time_ago_in_words(event.created_at) %> ago</span>
       </li>
     <% end %>
   </ol>
