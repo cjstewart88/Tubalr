@@ -5,8 +5,6 @@ Tubalr::Application.routes.draw do
 
   get "/support"                                    => "application#support"
 
-  get "/:username/playlist/:playlist_name.json"     => "api#user_playlist"
-
   get "/stats"                                      => "application#stats"
   get "/just/:artist_band"                          => "application#index"
   get "/similar/:artist_band"                       => "application#index"
@@ -23,6 +21,7 @@ Tubalr::Application.routes.draw do
   get "/:username/profile"                          => "users#profile"
   get "/:username/playlists"                        => "users#profile"
   
+  get "/:username/playlist/:playlist_name.json"     => "playlists#get"
   get "/:username/playlist/:playlist_name"          => "playlists#listen"
   post "/:username/playlist/:playlist_name/sort"    => "playlists#sort"
   match "/playlist/create"                          => "playlists#create"
@@ -35,6 +34,8 @@ Tubalr::Application.routes.draw do
 
   post "/check_banned"                              => "bannedVideos#check"
   post "/ban_video"                                 => "bannedVideos#ban_video"
+
+  post "/event"                                     => "events#create"
 
   devise_scope :user do
     get "/users/sign_out"                           => "devise/sessions#destroy"

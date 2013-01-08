@@ -10,4 +10,5 @@
 //= require import
 //= require tabs
 //= require follow
+//= require report
 //= require custom-playlist-settings

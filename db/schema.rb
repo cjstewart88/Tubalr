@@ -11,13 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130106172855) do
+ActiveRecord::Schema.define(:version => 20130108043259) do
 
   create_table "banned_videos", :force => true do |t|
     t.integer  "user_id"
     t.string   "video_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "events", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "event"
+    t.string   "query"
+    t.string   "playlist_name"
+    t.string   "playlist_owner"
+    t.string   "video_id"
+    t.string   "video_title"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "follows", :force => true do |t|

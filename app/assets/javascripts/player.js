@@ -12,7 +12,7 @@ var Player = {
     // lets keep the session active in google analytics to 
     // track better avg visit duration
     setInterval(function () {
-      _gaq.push(['_trackEvent', 'ping', 'pong']);
+      Report.gaPing();
     }, 60000);
   },
 
@@ -40,8 +40,13 @@ var Player = {
 
   onPlayerStateChange: function (newState) {
     if (newState.data == 0) {
-      // track full video views
-      _gaq.push(['_trackEvent', 'video', 'watched in full', Playlist.videos[Playlist.currentTrack].videoID]);
+      Report.gaVideoView();
+      Report.event({
+        event: 'watchedVideo',
+        video_id: Playlist.videos[Playlist.currentTrack].videoID,
+        video_title: Playlist.videos[Playlist.currentTrack].videoTitle
+      });
+      
 
       Playlist.nextSong();
     }
