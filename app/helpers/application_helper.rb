@@ -46,16 +46,16 @@ module ApplicationHelper
     when 'watchedVideo' 
       "Watched #{link_to(event.video_title, '/video/'+event.video_id)}."
     when 'just'  
-      "Searched for \"#{link_to(event.query, '/just/'+CGI.escape(event.query))}\"."
+      "Searched for \"#{link_to(CGI::unescape(event.query), '/just/'+CGI.escape(event.query))}\"."
     when 'similar'
-      "Searched for artist and bands similar to \"#{link_to(event.query, '/similar/'+CGI.escape(event.query))}\"."
+      "Searched for artist and bands similar to \"#{link_to(CGI::unescape(event.query), '/similar/'+CGI.escape(event.query))}\"."
     when 'reddit'
       "Enjoyed the top videos on #{link_to('/r/'+ event.query.sub('/r/',''), '/r/'+CGI.escape(event.query))}."
     when 'customPlaylist'
       if user_signed_in? && event.playlist_owner == current_user.username
-        "Jammed out to your own playlist, \"#{link_to(event.playlist_name, '/'+event.playlist_owner+'/playlist/'+CGI.escape(event.playlist_name))}\"."
+        "Jammed out to your own playlist, \"#{link_to(CGI::unescape(event.playlist_name), '/'+event.playlist_owner+'/playlist/'+CGI.escape(event.playlist_name))}\"."
       else
-        "Checked out #{link_to(event.playlist_owner, '/'+event.playlist_owner+'/profile')}'s playlist, \"#{link_to(event.playlist_name, '/'+event.playlist_owner+'/playlist/'+CGI.escape(event.playlist_name))}\"."
+        "Checked out #{link_to(CGI::unescape(event.playlist_owner), '/'+event.playlist_owner+'/profile')}'s playlist, \"#{link_to(CGI::unescape(event.playlist_name), '/'+event.playlist_owner+'/playlist/'+CGI.escape(event.playlist_name))}\"."
       end
     when 'genre'
       "Enjoyed some #{link_to(event.query, '/just/'+CGI.escape(event.query))}."

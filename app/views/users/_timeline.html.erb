@@ -2,7 +2,7 @@
   <h2>Timeline</h2>
 
   <ol id="timeline-list">
-    <% @user.events.each do | event | %>
+    <% @user.events.limit(30).each do | event | %>
       <li>
         <%= timeline_event(event) %>
       </li>
