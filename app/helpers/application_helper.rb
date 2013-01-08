@@ -52,9 +52,9 @@ module ApplicationHelper
     when 'reddit'
       "Enjoyed the top videos on #{link_to('/r/'+ event.query.sub('/r/',''), '/r/'+CGI.escape(event.query))}."
     when 'customPlaylist'
-      if user_signed_in? && event.playlist_owner == current_user.username
+      if user_signed_in? && CGI::unescape(event.playlist_owner) == current_user.username
         "Jammed out to your own playlist, \"#{link_to(CGI::unescape(event.playlist_name), '/'+event.playlist_owner+'/playlist/'+event.playlist_name)}\"."
-      elsif event.playlist_owner == @user.username
+      elsif CGI::unescape(event.playlist_owner) == @user.username
         "Jammed out to his own playlist, \"#{link_to(CGI::unescape(event.playlist_name), '/'+event.playlist_owner+'/playlist/'+event.playlist_name)}\"."
       else 
         "Checked out #{link_to(CGI::unescape(event.playlist_owner), '/'+event.playlist_owner+'/profile')}'s playlist, \"#{link_to(CGI::unescape(event.playlist_name), '/'+event.playlist_owner+'/playlist/'+event.playlist_name)}\"."
