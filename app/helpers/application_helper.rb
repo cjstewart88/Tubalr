@@ -53,9 +53,9 @@ module ApplicationHelper
       "Enjoyed the top videos on #{link_to('/r/'+ event.query.sub('/r/',''), '/r/'+CGI.escape(event.query))}."
     when 'customPlaylist'
       if user_signed_in? && event.playlist_owner == current_user.username
-        "Jammed out to your own playlist, \"#{link_to(CGI::unescape(event.playlist_name), '/'+event.playlist_owner+'/playlist/'+CGI.escape(event.playlist_name))}\"."
+        "Jammed out to your own playlist, \"#{link_to(CGI::unescape(event.playlist_name), '/'+event.playlist_owner+'/playlist/'+event.playlist_name)}\"."
       else
-        "Checked out #{link_to(CGI::unescape(event.playlist_owner), '/'+event.playlist_owner+'/profile')}'s playlist, \"#{link_to(CGI::unescape(event.playlist_name), '/'+event.playlist_owner+'/playlist/'+CGI.escape(event.playlist_name))}\"."
+        "Checked out #{link_to(CGI::unescape(event.playlist_owner), '/'+event.playlist_owner+'/profile')}'s playlist, \"#{link_to(CGI::unescape(event.playlist_name), '/'+event.playlist_owner+'/playlist/'+event.playlist_name)}\"."
       end
     when 'genre'
       "Enjoyed some #{link_to(event.query, '/just/'+CGI.escape(event.query))}."
