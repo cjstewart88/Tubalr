@@ -19,6 +19,10 @@ module ApplicationHelper
       options[:videoID]    = array_or_string_for_javascript(params[:video_id])
     end
 
+    if params[:artist_band]
+      params[:artist_band] = params[:artist_band].gsub('+',' ')
+    end
+
     options[:search] = array_or_string_for_javascript(escape_javascript(params[:artist_band]))
 
     options_for_javascript(options)
@@ -35,5 +39,26 @@ module ApplicationHelper
 
   def user_object
     @user || current_user 
+  end
+
+  def timeline_event(event)
+    case event.event
+    when 'watchedVideo' 
+      "Watched #{link_to(event.video_title, '/video/'+event.video_id)}."
+    when 'just'  
+      "Searched for \"#{link_to(event.query, '/just/'+CGI.escape(event.query))}\"."
+    when 'similar'
+      "Searched for artist and bands similar to \"#{link_to(event.query, '/similar/'+CGI.escape(event.query))}\"."
+    when 'reddit'
+      "Enjoyed the top videos on #{link_to('/r/'+ event.query.sub('/r/',''), '/r/'+CGI.escape(event.query))}."
+    when 'customPlaylist'
+      if user_signed_in? && event.playlist_owner == current_user.username
+        "Jammed out to your own playlist, \"#{link_to(event.playlist_name, '/'+event.playlist_owner+'/playlist/'+CGI.escape(event.playlist_name))}\"."
+      else
+        "Checked out #{link_to(event.playlist_owner, '/'+event.playlist_owner+'/profile')}'s playlist, \"#{link_to(event.playlist_name, '/'+event.playlist_owner+'/playlist/'+CGI.escape(event.playlist_name))}\"."
+      end
+    when 'genre'
+      "Enjoyed some #{link_to(event.query, '/just/'+CGI.escape(event.query))}."
+    end.html_safe
   end
 end

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  has_many :events
+  has_many :events, :order => "created_at DESC"
   has_many :playlists, :order => "lower(playlist_name) ASC"
   has_many :banned_videos
   

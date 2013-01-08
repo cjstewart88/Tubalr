@@ -1,0 +1,11 @@
+<div class="tab-content timeline-tab-content">
+  <h2>Timeline</h2>
+
+  <ol id="timeline-list">
+    <% @user.events.each do | event | %>
+      <li>
+        <%= timeline_event(event) %>
+      </li>
+    <% end %>
+  </ol>
+</div>

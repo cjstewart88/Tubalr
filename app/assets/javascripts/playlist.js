@@ -61,12 +61,15 @@ var Playlist = {
 
   report: function () {
     Report.gaPageview();
-    Report.event({
-      event: Playlist.options.searchType,
-      query: Playlist.options.search || Playlist.options.subReddit || null,
-      playlist_name: Playlist.options.customPlaylistName,
-      playlist_owner: Playlist.options.customPlaylistOwner
-    });
+
+    if (Playlist.options.searchType != 'video') {
+      Report.event({
+        event: Playlist.options.searchType,
+        query: Playlist.options.search || Playlist.options.subReddit || null,
+        playlist_name: Playlist.options.customPlaylistName,
+        playlist_owner: Playlist.options.customPlaylistOwner
+      });
+    }
   },
 
   determineIfSpecialSearch: function () {
@@ -83,7 +86,7 @@ var Playlist = {
 
   just: function () {
     var search = Playlist.options.search;
-
+    
     var numberOfSongs = (Playlist.options.searchType == 'just' ? 40 : 20);
 
     $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&start=0&results=' + numberOfSongs , function (data) {
