@@ -1,6 +1,7 @@
 <section id="explore-main" class="remove-when-searching">
   <div id="tabs">
     <ul>
+        <li class="tab timeline-tab" data-tab-name="timeline">Timeline <span class="icon-chevron-right"></span></li>
       <% if user_signed_in? %>
         <li class="tab me-tab" data-tab-name="me">Me <span class="icon-chevron-right"></span></li>
         <li class="tab following-tab" data-tab-name="following">Following <span class="icon-chevron-right"></span></li>
@@ -12,6 +13,22 @@
   </div>
 
   <div id="tabs-contents">
+    <div class="tab-content timeline-tab-content">
+      <h2>
+        Timeline
+      </h2>
+
+      <ol id="timeline-list">
+        <% Event.limit(50).each do | event | %>
+          <li>
+            <span class="timeline-icon <%= timeline_icon(event.event) %>"></span>
+            <span class="event-copy"><%= global_timeline_event(event) %></span>
+            <span class="time-ago"><%= time_ago_in_words(event.created_at) %> ago</span>
+          </li>
+        <% end %>
+      </ol>
+    </div>
+
     <% if user_signed_in? %>
       <div class="tab-content me-tab-content">
         <h2>
