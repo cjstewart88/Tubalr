@@ -135,6 +135,14 @@
       font-size: 20px;
     }
 
+    .event-copy {
+      display: block;
+      margin-right: 50px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
     .time-ago {
       display: block;
       font-size: 12px;
