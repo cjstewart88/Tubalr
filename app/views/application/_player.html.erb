@@ -18,6 +18,9 @@
 
   <div id="player-controls">
     <div id="player-controls-right">
+      <% if user_signed_in? %>
+        <a href="#" id="dj-mode-button" class="enter-dj-mode button tooltip" original-title="Go LIVE and let others listen along with you!" data-dj-username="<%= dj_username %>">Enter DJ Mode</a>
+      <% end %>
       <a href="#" class="shuffle button tooltip" original-title="Shuffle"><span class="icon-random"></span></a>
       <a href="#" id="previous" class="button tooltip" original-title="Previous">&nbsp;<span class="icon-step-backward"></span></a>
       <a href="#" id="next" class="button tooltip" original-title="Next"><span class="icon-step-forward"></span>&nbsp;</a>
@@ -35,9 +38,11 @@
       <% end %>
     </div>
   </div>
+
+  <%= render :partial => 'dj/initialized' if user_signed_in? %>
 </section>
 
 <%= javascript_tag do %>
   Playlist.init(<%= search_options %>);
 <% end if request.path.index("/similar/") || request.path.index("/video/") || request.path.index("/r/") ||
-          request.path.index("/genre/")  || request.path.index("/just/") || @playlist_name %>
+          request.path.index("/genre/")  || request.path.index("/just/") || @playlist_name || @dj %>

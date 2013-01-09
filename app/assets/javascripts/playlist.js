@@ -10,6 +10,8 @@ var Playlist = {
 
   sortThrottler: null,
 
+  dj: null,
+
   options: {
     search:               null,
     searchType:           null,
@@ -17,7 +19,9 @@ var Playlist = {
     customPlaylistName:   null,
     persistentSorting:    false,
     videoID:              null,
-    subReddit:            null
+    subReddit:            null,
+    djUsername:           null,
+    djListener:           null
   },
 
   init: function (options) {
@@ -82,6 +86,22 @@ var Playlist = {
       Playlist.options.searchType = 'reddit';
       Playlist.options.subReddit = search.replace('/r/', '');
     }
+  },
+
+  dj: function () {
+    Playlist.djMode = new Tubalr.DJ(Playlist.options.djListener);
+    Playlist.djMode.listenTo(Playlist.options.djUsername);
+    Playlist.djMode.onUpdate = Playlist.djModeChange;
+  },
+
+  djModeChange: function (dj, title, videoId, videoAt) {
+    Playlist.videos = [{
+      videoID: videoId,
+      videoTitle: title,
+      startAt: videoAt
+    }];
+
+    Playlist.resultsReady();
   },
 
   just: function () {
@@ -275,7 +295,7 @@ var Playlist = {
   },
 
   buildPlaylistUI: function () {
-    var playlistContainer = $('#playlist').empty();
+    var playlistContainer = $('#playlist').show().empty();
 
     $.each(Playlist.videos, function(i) {
       playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
@@ -363,7 +383,11 @@ var Playlist = {
     $('#playlist .active').removeClass('active');
     $('#' + currentVideo.videoID).addClass('active');
     
-    Player.self.loadVideoById(currentVideo.videoID, 0);
+    Player.self.loadVideoById(currentVideo.videoID, currentVideo.startAt || 0);
+    
+    if (Playlist.djMode) {
+      Playlist.djMode.updateBroadcast(currentVideo.videoTitle, currentVideo.videoID, 0);
+    }
   },
 
   throttlePersistSort: function () {

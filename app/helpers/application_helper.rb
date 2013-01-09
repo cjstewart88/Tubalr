@@ -7,6 +7,10 @@ module ApplicationHelper
       options[:customPlaylistOwner] = array_or_string_for_javascript(url_encode(escape_javascript(@username)))
       options[:customPlaylistName]  = array_or_string_for_javascript(url_encode(escape_javascript(@playlist_name)))
       options[:persistentSorting]   = @is_playlist_owner
+    elsif @dj
+      options[:searchType] = array_or_string_for_javascript('dj')
+      options[:djUsername] = array_or_string_for_javascript(@dj)
+      options[:djListener] = array_or_string_for_javascript((user_signed_in? ? current_user.username : 'guest'))
     elsif request.path.index('/just/')
       options[:searchType] = array_or_string_for_javascript('just')
     elsif request.path.index('/similar/')
@@ -104,5 +108,9 @@ module ApplicationHelper
     when 'genre'
       "#{who} enjoyed some #{link_to(event.query, '/just/'+CGI.escape(event.query))}."
     end.html_safe
+  end
+
+  def dj_username
+    current_user.username.delete("^a-zA-Z0-9").downcase
   end
 end

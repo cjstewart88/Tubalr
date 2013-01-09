@@ -26,7 +26,35 @@ window.Tubalr = (function(exports) {
         id:    videoId,
         at:    videoElapsed
       });
+
+      this.initBroadcastingUI();
     }
+  };
+
+  DJ.prototype.initBroadcastingUI = function () {
+    window.onbeforeunload = function(e) {
+      return 'Are you sure you want to leave DJ mode?';
+    }
+
+    $('.enter-dj-mode').addClass('leave-dj-mode')
+                       .removeClass('enter-dj-mode')
+                       .text('Quit DJ Mode')
+                       .attr('original-title', 'If you leave DJ mode your listeners will bad sad!');
+
+    $('#djing').slideDown();
+  };
+
+  DJ.prototype.removeBroadcastingUI = function () {
+    this.stopBroadcasting();
+
+    window.onbeforeunload = null;
+
+    $('.leave-dj-mode').addClass('enter-dj-mode')
+                       .removeClass('leave-dj-mode')
+                       .text('Enter DJ Mode')
+                       .attr('original-title', 'Go LIVE and let others listen along with you!');
+
+    $('#djing').slideUp();
   };
 
   DJ.prototype.stopBroadcasting = function() {
@@ -36,6 +64,9 @@ window.Tubalr = (function(exports) {
       this.socket.emit('stop', {
         from: this.username
       });
+
+      this.removeBroadcastingUI();
+      Playlist.djMode = null;
     }
   };
 
@@ -65,3 +96,23 @@ window.Tubalr = (function(exports) {
   exports.DJ = DJ;
   return exports;
 })(exports);
+
+$(document).ready(function () {
+
+  $('.enter-dj-mode').live('click', function () {
+    Playlist.djMode = new Tubalr.DJ($(this).data('dj-username'));
+
+    Playlist.djMode.startBroadcasting(Playlist.videos[Playlist.currentTrack].videoTitle, Playlist.videos[Playlist.currentTrack].videoID, Player.self.getCurrentTime());
+
+    return false;
+  });
+
+  $('.leave-dj-mode').live('click', function () {
+    if (confirm('Are you sure you want to leave DJ mode?')) {
+      Playlist.djMode.stopBroadcasting();
+    }
+
+    return false;
+  });
+
+});
