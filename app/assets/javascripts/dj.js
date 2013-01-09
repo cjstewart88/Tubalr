@@ -9,7 +9,7 @@ window.Tubalr = (function(exports) {
 
     this.username = username;
 
-    this.server   = opts.server || 'localhost';
+    this.server   = opts.server || 'throttle.io';
     this.port     = opts.port   || 8900;
 
     this.socket   = io.connect(this.server, {port: this.port});
