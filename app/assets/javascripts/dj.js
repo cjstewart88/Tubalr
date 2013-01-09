@@ -16,14 +16,15 @@ window.Tubalr = (function(exports) {
     this.onUpdate = opts.onUpdate || function() {};
   };
 
-  DJ.prototype.startBroadcasting = function(videoId, videoElapsed) {
+  DJ.prototype.startBroadcasting = function(videoTitle, videoId, videoElapsed) {
     if (!this.broadcasting) {
       this.broadcasting = true;
       this.socket.emit('start', {
-        ts:   Date.now(),
-        from: this.username,
-        id:   videoId,
-        at:   videoElapsed
+        ts:    Date.now(),
+        from:  this.username,
+        title: videoTitle,
+        id:    videoId,
+        at:    videoElapsed
       });
     }
   };
@@ -38,13 +39,14 @@ window.Tubalr = (function(exports) {
     }
   };
 
-  DJ.prototype.updateBroadcast = function(videoId, videoElapsed) {
+  DJ.prototype.updateBroadcast = function(videoTitle, videoId, videoElapsed) {
     if (this.broadcasting) {
       this.socket.emit('change', {
-        ts:   Date.now(),
-        from: this.username,
-        id:   videoId,
-        at:   videoElapsed
+        ts:    Date.now(),
+        from:  this.username,
+        title: videoTitle,
+        id:    videoId,
+        at:    videoElapsed
       });
     }
   };
@@ -54,7 +56,7 @@ window.Tubalr = (function(exports) {
 
     this.socket.on('dj-' + who, function(msg) {
       var diff = (Date.now() - msg.ts) / 1000;
-      self.onUpdate(msg.from, msg.id, msg.at + diff);
+      self.onUpdate(msg.from, msg.title, msg.id, msg.at + diff);
     });
 
     this.socket.emit('subscribe', {target: who});
