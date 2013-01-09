@@ -54,11 +54,13 @@ window.Tubalr = (function(exports) {
   DJ.prototype.listenTo = function(who) {
     var self = this;
 
-    this.socket.on('dj-' + who, function(msg) {
+    function callback(msg) {
       var diff = (Date.now() - msg.ts) / 1000;
       self.onUpdate(msg.from, msg.title, msg.id, msg.at + diff);
-    });
+    }
 
+    this.socket.removeAllListeners('dj-' + who);
+    this.socket.on('dj-' + who, callback);
     this.socket.emit('subscribe', {target: who});
   };
 
