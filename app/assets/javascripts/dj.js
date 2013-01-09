@@ -20,6 +20,7 @@ window.Tubalr = (function(exports) {
     if (!this.broadcasting) {
       this.broadcasting = true;
       this.socket.emit('start', {
+        ts:   Date.now(),
         from: this.username,
         id:   videoId,
         at:   videoElapsed
@@ -40,6 +41,7 @@ window.Tubalr = (function(exports) {
   DJ.prototype.updateBroadcast = function(videoId, videoElapsed) {
     if (this.broadcasting) {
       this.socket.emit('change', {
+        ts:   Date.now(),
         from: this.username,
         id:   videoId,
         at:   videoElapsed
@@ -51,7 +53,8 @@ window.Tubalr = (function(exports) {
     var self = this;
 
     this.socket.on('dj-' + who, function(msg) {
-      self.onUpdate(msg);
+      var diff = (Date.now() - msg.ts) / 1000;
+      self.onUpdate(msg.from, msg.id, msg.at + diff);
     });
 
     this.socket.emit('subscribe', {target: who});
