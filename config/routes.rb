@@ -10,7 +10,8 @@ Tubalr::Application.routes.draw do
   get "/similar/:artist_band"                       => "application#index"
   get "/video/:video_id"                            => "application#index"
   get "/r/:subreddit"                               => "application#index"
-  
+  get "/dj/:username"                               => "application#dj"
+
   get "/r"                                          => "application#explore"
   get "/explore"                                    => "application#explore"
 
