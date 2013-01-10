@@ -294,7 +294,7 @@ var Playlist = {
   },
 
   buildPlaylistUI: function () {
-    var playlistContainer = $('#playlist').show().removeClass('no-playlist').empty();
+    var playlistContainer = $('#playlist').empty();
 
     $.each(Playlist.videos, function(i) {
       playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
