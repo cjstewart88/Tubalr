@@ -49,7 +49,7 @@ var Player = {
       
       Playlist.nextSong();
     }
-    else if (newState.data = 2 && Playlist.djMode) {
+    else if (newState.data == 2 && Playlist.djMode) {
       Player.self.playVideo();
     }
 

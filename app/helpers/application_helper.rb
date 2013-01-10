@@ -8,9 +8,13 @@ module ApplicationHelper
       options[:customPlaylistName]  = array_or_string_for_javascript(url_encode(escape_javascript(@playlist_name)))
       options[:persistentSorting]   = @is_playlist_owner
     elsif @dj
-      options[:searchType] = array_or_string_for_javascript('dj')
-      options[:djUsername] = array_or_string_for_javascript(@dj)
-      options[:djListener] = array_or_string_for_javascript((user_signed_in? ? current_user.username : 'guest'))
+      options[:searchType]  = array_or_string_for_javascript('dj')
+      options[:djUsername]  = array_or_string_for_javascript(@dj)
+      options[:djListener]  = array_or_string_for_javascript((user_signed_in? ? current_user.username : 'guest'))
+
+      if user_signed_in? && @dj == current_user.username
+        options[:isDJ]        = array_or_string_for_javascript(true)
+      end
     elsif request.path.index('/just/')
       options[:searchType] = array_or_string_for_javascript('just')
     elsif request.path.index('/similar/')
@@ -53,6 +57,8 @@ module ApplicationHelper
       'icon-eye-open'
     when 'customPlaylist'
       'icon-user'
+    when 'dj'
+      'icon-music'
     else
       'icon-search'
     end
@@ -60,6 +66,8 @@ module ApplicationHelper
 
   def timeline_event(event)
     case event.event
+    when 'dj'
+      "Listened to #{event.query} DJ!"
     when 'watchedVideo' 
       "Watched #{link_to(event.video_title, '/video/'+event.video_id)}."
     when 'just'  
@@ -89,6 +97,8 @@ module ApplicationHelper
     end
 
     case event.event
+    when 'dj'
+      "#{who} listened to #{event.query} DJ!"
     when 'watchedVideo'
       "#{who} watched #{link_to(event.video_title, '/video/'+event.video_id)}."
     when 'just'  

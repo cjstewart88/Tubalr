@@ -39,7 +39,7 @@ window.Tubalr = (function(exports) {
     $('.enter-dj-mode').addClass('leave-dj-mode')
                        .removeClass('enter-dj-mode')
                        .text('Quit DJ Mode')
-                       .attr('original-title', 'If you leave DJ mode your listeners will bad sad!');
+                       .attr('original-title', 'If you leave DJ mode your listeners will be sad!');
 
     $('#djing').slideDown();
   };
