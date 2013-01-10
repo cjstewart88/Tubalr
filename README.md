@@ -5,6 +5,10 @@ Watch/Listen to just Band of Horses:
 Watch/Listen to bands similar to Fleet Foxes:
 [http://www.tubalr.com/similar/Fleet+Foxes](http://www.tubalr.com/similar/Fleet+Foxes)
 
+# DJ Mode Socket Server
+
+Checkout the [TubalrDJ](https://github.com/cjstewart88/TubalrDJ) repo for info on the socket server that powers DJ Mode!
+
 # Contributing
 Please go for it if you're interested in pitching in to make Tubalr better. 
 
