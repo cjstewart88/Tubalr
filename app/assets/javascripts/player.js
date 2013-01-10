@@ -40,6 +40,9 @@ var Player = {
 
   onPlayerStateChange: function (newState) {
     if (newState.data == 0) {
+      // we don't want to report video views in dj mode due
+      // to some browsers wigging out and triggering this
+      // several times in a row
       if (Playlist.djMode == null) {
         Report.gaVideoView();
         Report.event({
@@ -52,6 +55,7 @@ var Player = {
       Playlist.nextSong();
     }
     else if (newState.data == 2 && Playlist.djMode) {
+      // if in djMode and the user trys to pause the video, start it back
       Player.self.playVideo();
     }
 

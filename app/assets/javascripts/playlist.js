@@ -384,7 +384,9 @@ var Playlist = {
     
     Player.self.loadVideoById(currentVideo.videoID, currentVideo.startAt || 0);
     
-    if (Playlist.djMode) {
+    // if the user is in djing we need to update the 
+    // connected listeners of the video change
+    if (Playlist.djMode && Playlist.djMode.broadcasting) {
       Playlist.djMode.updateBroadcast(currentVideo.videoTitle, currentVideo.videoID, 0);
     }
   },

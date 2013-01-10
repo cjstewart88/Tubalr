@@ -3,7 +3,10 @@ var Report = {
   gaPageview: function () {
     var url;
 
-    if (Playlist.options.searchType == 'customPlaylist') {
+    if (Playlist.options.djUsername) {
+      return;
+    }
+    else if (Playlist.options.searchType == 'customPlaylist') {
       url = [Playlist.options.customPlaylistOwner.replace(/[ ]/g,"+"), "playlist", Playlist.options.customPlaylistName.replace(/[ ]/g,"+")];
     }
     else if (Playlist.options.searchType == 'video') {
@@ -13,10 +16,15 @@ var Report = {
       url = ['r', Playlist.options.subReddit];
     }
     else {
+      console.log(Playlist.options.search);
       url = [Playlist.options.searchType, Playlist.options.search.replace(/[ ]/g,"+")];
-    }
+    } 
 
-    _gaq.push(['_trackPageview', url.join('/')]);
+    // check to make sure the pageview we are trying to report is not a direct path
+    // that's already been reported
+    if ('/' + url.join('/') != decodeURIComponent(location.pathname)) {
+      _gaq.push(['_trackPageview', url.join('/')]);
+    }
   },
 
   gaVideoView: function () {
