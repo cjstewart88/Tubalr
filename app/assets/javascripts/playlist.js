@@ -10,6 +10,8 @@ var Playlist = {
 
   sortThrottler: null,
 
+  djMode: null,
+
   options: {
     search:               null,
     searchType:           null,
@@ -17,7 +19,8 @@ var Playlist = {
     customPlaylistName:   null,
     persistentSorting:    false,
     videoID:              null,
-    subReddit:            null
+    subReddit:            null,
+    djUsername:           null
   },
 
   init: function (options) {
@@ -65,7 +68,7 @@ var Playlist = {
     if (Playlist.options.searchType != 'video') {
       Report.event({
         event: Playlist.options.searchType,
-        query: Playlist.options.search || Playlist.options.subReddit || null,
+        query: Playlist.options.search || Playlist.options.subReddit || Playlist.options.djUsername || null,
         playlist_name: Playlist.options.customPlaylistName,
         playlist_owner: Playlist.options.customPlaylistOwner
       });
@@ -82,6 +85,22 @@ var Playlist = {
       Playlist.options.searchType = 'reddit';
       Playlist.options.subReddit = search.replace('/r/', '');
     }
+  },
+
+  dj: function () {
+    Playlist.djMode = new Tubalr.DJ('guest');
+    Playlist.djMode.listenTo(Playlist.options.djUsername);
+    Playlist.djMode.onUpdate = Playlist.djModeChange;
+  },
+
+  djModeChange: function (dj, title, videoId, videoAt) {
+    Playlist.videos = [{
+      videoID: videoId,
+      videoTitle: title,
+      startAt: videoAt
+    }];
+
+    Playlist.resultsReady();
   },
 
   just: function () {
@@ -275,13 +294,13 @@ var Playlist = {
   },
 
   buildPlaylistUI: function () {
-    var playlistContainer = $('#playlist').empty();
+    var playlistContainer = $('#playlist').show().removeClass('no-playlist').empty();
 
     $.each(Playlist.videos, function(i) {
       playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
     });
     
-    $('#' + Playlist.videos[Playlist.currentTrack].videoID).addClass('active');
+    $('#' + Playlist.videos[Playlist.currentTrack].videoID).addClass('active');      
   },
 
   start: function () {
@@ -363,7 +382,11 @@ var Playlist = {
     $('#playlist .active').removeClass('active');
     $('#' + currentVideo.videoID).addClass('active');
     
-    Player.self.loadVideoById(currentVideo.videoID, 0);
+    Player.self.loadVideoById(currentVideo.videoID, currentVideo.startAt || 0);
+    
+    if (Playlist.djMode) {
+      Playlist.djMode.updateBroadcast(currentVideo.videoTitle, currentVideo.videoID, 0);
+    }
   },
 
   throttlePersistSort: function () {

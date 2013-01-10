@@ -47,8 +47,10 @@ var Player = {
         video_title: Playlist.videos[Playlist.currentTrack].videoTitle
       });
       
-
       Playlist.nextSong();
+    }
+    else if (newState.data == 2 && Playlist.djMode) {
+      Player.self.playVideo();
     }
 
     for (var i = 0; i < Player.listeners.length; ++i) {

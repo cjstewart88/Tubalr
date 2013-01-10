@@ -12,3 +12,4 @@
 //= require follow
 //= require report
 //= require custom-playlist-settings
+//= require dj

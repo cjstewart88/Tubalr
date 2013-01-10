@@ -37,4 +37,9 @@ class ApplicationController < ActionController::Base
   def support
     render :layout => "application", :template => "support"
   end
+
+  def dj
+    @dj = params[:username]
+    render :layout => "application", :template => "index"
+  end
 end
