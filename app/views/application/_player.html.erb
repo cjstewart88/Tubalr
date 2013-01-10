@@ -21,7 +21,7 @@
   <% if !@dj %>
     <div id="player-controls">
       <div id="player-controls-right">
-        <% if user_signed_in? && (current_user.id == 1 || current_user.id == 7653) %>
+        <% if user_signed_in? %>
           <a href="#" id="dj-mode-button" class="enter-dj-mode button tooltip" original-title="Go LIVE and let others listen along with you!" data-dj-username="<%= dj_username %>">Enter DJ Mode</a>
         <% end %>
         <a href="#" class="shuffle button tooltip" original-title="Shuffle"><span class="icon-random"></span></a>
@@ -50,6 +50,15 @@
       <p>
         You can share this url with friends to have them listen along with you: <b>http://www.tubalr.com/dj/<%=dj_username %></b>
       </p>
+
+      <h3>NOTE:</h3>
+
+      <ul>
+        <li>If you seek ahead in a video, connected users will not be updated of the new position.</li>
+        <li>Switching songs will update the connected users so they're listening to the same song.</li>
+        <li>You can perform any search using the search box at the top of the page to change what your listening too.</li>
+        <li>This is extremly early beta and there could be issues, run into anything weird shoot an email to <a href="mailto:listen.to.tubalr@gmail.com">listen.to.tubalr@gmail.com</a></li>
+      </ul>
     </div>
   <% end %>
 </section>
