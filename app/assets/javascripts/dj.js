@@ -14,6 +14,8 @@ window.Tubalr = (function(exports) {
 
     this.socket   = io.connect(this.server, {port: this.port});
     this.onUpdate = opts.onUpdate || function() {};
+
+    this.socket.emit('register', {from: this.username});
   };
 
   DJ.prototype.startBroadcasting = function(videoTitle, videoId, videoElapsed) {
@@ -21,7 +23,6 @@ window.Tubalr = (function(exports) {
       this.broadcasting = true;
       this.socket.emit('start', {
         ts:    Date.now(),
-        from:  this.username,
         title: videoTitle,
         id:    videoId,
         at:    videoElapsed
@@ -34,7 +35,7 @@ window.Tubalr = (function(exports) {
   DJ.prototype.initBroadcastingUI = function () {
     window.onbeforeunload = function(e) {
       return 'Are you sure you want to leave DJ mode?';
-    }
+    };
 
     $('.enter-dj-mode').addClass('leave-dj-mode')
                        .removeClass('enter-dj-mode')
@@ -61,9 +62,7 @@ window.Tubalr = (function(exports) {
     if (this.broadcasting) {
       this.broadcasting = false;
 
-      this.socket.emit('stop', {
-        from: this.username
-      });
+      this.socket.emit('stop', { });
 
       this.removeBroadcastingUI();
       Playlist.djMode = null;
@@ -74,7 +73,6 @@ window.Tubalr = (function(exports) {
     if (this.broadcasting) {
       this.socket.emit('change', {
         ts:    Date.now(),
-        from:  this.username,
         title: videoTitle,
         id:    videoId,
         at:    videoElapsed
@@ -90,8 +88,8 @@ window.Tubalr = (function(exports) {
       self.onUpdate(msg.from, msg.title, msg.id, msg.at + diff);
     }
 
-    this.socket.removeAllListeners('dj-' + who);
-    this.socket.on('dj-' + who, callback);
+    this.socket.removeAllListeners('update');
+    this.socket.on('update', callback);
     this.socket.emit('subscribe', {target: who});
   };
 
