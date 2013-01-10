@@ -40,12 +40,14 @@ var Player = {
 
   onPlayerStateChange: function (newState) {
     if (newState.data == 0) {
-      Report.gaVideoView();
-      Report.event({
-        event: 'watchedVideo',
-        video_id: Playlist.videos[Playlist.currentTrack].videoID,
-        video_title: Playlist.videos[Playlist.currentTrack].videoTitle
-      });
+      if (Playlist.djMode == null) {
+        Report.gaVideoView();
+        Report.event({
+          event: 'watchedVideo',
+          video_id: Playlist.videos[Playlist.currentTrack].videoID,
+          video_title: Playlist.videos[Playlist.currentTrack].videoTitle
+        });
+      }
       
       Playlist.nextSong();
     }
