@@ -20,9 +20,7 @@ var Playlist = {
     persistentSorting:    false,
     videoID:              null,
     subReddit:            null,
-    djUsername:           null,
-    djListener:           null,
-    isDJ:                 null
+    djUsername:           null
   },
 
   init: function (options) {
@@ -90,7 +88,7 @@ var Playlist = {
   },
 
   dj: function () {
-    Playlist.djMode = new Tubalr.DJ(Playlist.options.djListener);
+    Playlist.djMode = new Tubalr.DJ('guest');
     Playlist.djMode.listenTo(Playlist.options.djUsername);
     Playlist.djMode.onUpdate = Playlist.djModeChange;
   },

@@ -10,11 +10,6 @@ module ApplicationHelper
     elsif @dj
       options[:searchType]  = array_or_string_for_javascript('dj')
       options[:djUsername]  = array_or_string_for_javascript(@dj)
-      options[:djListener]  = array_or_string_for_javascript((user_signed_in? ? current_user.username : 'guest'))
-
-      if user_signed_in? && @dj == current_user.username
-        options[:isDJ]        = array_or_string_for_javascript(true)
-      end
     elsif request.path.index('/just/')
       options[:searchType] = array_or_string_for_javascript('just')
     elsif request.path.index('/similar/')
