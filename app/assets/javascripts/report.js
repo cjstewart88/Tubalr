@@ -16,7 +16,6 @@ var Report = {
       url = ['r', Playlist.options.subReddit];
     }
     else {
-      console.log(Playlist.options.search);
       url = [Playlist.options.searchType, Playlist.options.search.replace(/[ ]/g,"+")];
     } 
 

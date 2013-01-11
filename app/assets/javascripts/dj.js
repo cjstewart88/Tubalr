@@ -5,15 +5,38 @@ var exports = window.Tubalr || {};
 
 window.Tubalr = (function(exports) {
   var DJ = function(username, opts) {
+    var self = this;
+
     opts = opts || {};
 
-    this.username = username;
+    this.username = username || 'guest';
 
     this.server   = opts.server || 'throttle.io';
     this.port     = opts.port   || 8900;
 
     this.socket   = io.connect(this.server, {port: this.port});
     this.onUpdate = opts.onUpdate || function() {};
+    this.onChat   = opts.onChat   || function() {};
+
+    this.socket.on('update', function(msg) {
+      var diff = (Date.now() - msg.ts) / 1000;
+      self.onUpdate(msg.from, msg.title, msg.id, msg.at + diff);
+    });
+
+    this.socket.on('chat', function(msg) {
+      self.newChatMessage(msg.from, msg.text);
+    });
+
+    this.socket.on('no-dj', function () {
+      $('#playlist-message').text('This DJ is currently not broadcasting :(');
+    });
+
+    this.socket.emit('register', {from: this.username});
+  };
+
+  DJ.prototype.chat = function(text) {
+    this.socket.emit('chat', {target: this.listeningTo, text: text});
+    this.newChatMessage('you', text)
   };
 
   DJ.prototype.startBroadcasting = function(videoTitle, videoId, videoElapsed) {
@@ -21,11 +44,12 @@ window.Tubalr = (function(exports) {
       this.broadcasting = true;
       this.socket.emit('start', {
         ts:    Date.now(),
-        from:  this.username,
         title: videoTitle,
         id:    videoId,
         at:    videoElapsed
       });
+
+      this.listeningTo = this.username;
 
       this.initBroadcastingUI();
     }
@@ -34,12 +58,14 @@ window.Tubalr = (function(exports) {
   DJ.prototype.initBroadcastingUI = function () {
     window.onbeforeunload = function(e) {
       return 'Are you sure you want to leave DJ mode?';
-    }
+    };
 
     $('.enter-dj-mode').addClass('leave-dj-mode')
                        .removeClass('enter-dj-mode')
                        .text('Quit DJ Mode')
                        .attr('original-title', 'If you leave DJ mode your listeners will be sad!');
+
+    $('#dj-chat').addClass('show-chat');
 
     $('#djing').slideDown();
   };
@@ -54,6 +80,8 @@ window.Tubalr = (function(exports) {
                        .text('Enter DJ Mode')
                        .attr('original-title', 'Go LIVE and let others listen along with you!');
 
+    $('#dj-chat').removeClass('show-chat');
+
     $('#djing').slideUp();
   };
 
@@ -61,9 +89,7 @@ window.Tubalr = (function(exports) {
     if (this.broadcasting) {
       this.broadcasting = false;
 
-      this.socket.emit('stop', {
-        from: this.username
-      });
+      this.socket.emit('stop', { });
 
       this.removeBroadcastingUI();
       Playlist.djMode = null;
@@ -74,7 +100,6 @@ window.Tubalr = (function(exports) {
     if (this.broadcasting) {
       this.socket.emit('change', {
         ts:    Date.now(),
-        from:  this.username,
         title: videoTitle,
         id:    videoId,
         at:    videoElapsed
@@ -83,16 +108,19 @@ window.Tubalr = (function(exports) {
   };
 
   DJ.prototype.listenTo = function(who) {
-    var self = this;
-
-    function callback(msg) {
-      var diff = (Date.now() - msg.ts) / 1000;
-      self.onUpdate(msg.from, msg.title, msg.id, msg.at + diff);
-    }
-
-    this.socket.removeAllListeners('dj-' + who);
-    this.socket.on('dj-' + who, callback);
+    this.listeningTo = who;
     this.socket.emit('subscribe', {target: who});
+  };
+
+  DJ.prototype.newChatMessage = function (from, text) {
+    var chatLog = $('#dj-chat-log');
+    var newLine = $('<div>').addClass('line');
+    var from    = $('<span>').addClass('from').text(from + ': ');
+    var message = $('<span>').addClass('message').text(text);
+
+    newLine.append(from).append(message);
+
+    chatLog.append(newLine).scrollTop(chatLog[0].scrollHeight)
   };
 
   exports.DJ = DJ;
@@ -115,6 +143,18 @@ $(document).ready(function () {
     }
 
     return false;
+  });
+
+  Mousetrap.bind('enter', function (e, element, combo) {
+    if ($(e.target).attr('id') == 'dj-chat-input' && $(e.target).val().trim() != '') {
+      if (User.username) {
+        Playlist.djMode.chat($(e.target).val().trim());
+        $(e.target).val('')
+      }
+      else {
+        alert('You need to login to chat!');
+      }
+    }
   });
 
 });
