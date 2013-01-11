@@ -5,17 +5,34 @@ var exports = window.Tubalr || {};
 
 window.Tubalr = (function(exports) {
   var DJ = function(username, opts) {
+    var self = this;
+
     opts = opts || {};
 
-    this.username = username;
+    this.username = username || 'guest';
 
-    this.server   = opts.server || 'throttle.io';
+    this.server   = opts.server || 'localhost';
     this.port     = opts.port   || 8900;
 
     this.socket   = io.connect(this.server, {port: this.port});
     this.onUpdate = opts.onUpdate || function() {};
+    this.onChat   = opts.onChat   || function() {};
+
+    this.socket.on('update', function(msg) {
+      var diff = (Date.now() - msg.ts) / 1000;
+      self.onUpdate(msg.from, msg.title, msg.id, msg.at + diff);
+
+    });
+
+    this.socket.on('chat', function(msg) {
+      self.onChat(msg.from, msg.text);
+    });
 
     this.socket.emit('register', {from: this.username});
+  };
+
+  DJ.prototype.chat = function(text) {
+    this.socket.emit('chat', {target: this.listeningTo, text: text});
   };
 
   DJ.prototype.startBroadcasting = function(videoTitle, videoId, videoElapsed) {
@@ -27,6 +44,8 @@ window.Tubalr = (function(exports) {
         id:    videoId,
         at:    videoElapsed
       });
+
+      this.listeningTo = this.username;
 
       this.initBroadcastingUI();
     }
@@ -81,15 +100,7 @@ window.Tubalr = (function(exports) {
   };
 
   DJ.prototype.listenTo = function(who) {
-    var self = this;
-
-    function callback(msg) {
-      var diff = (Date.now() - msg.ts) / 1000;
-      self.onUpdate(msg.from, msg.title, msg.id, msg.at + diff);
-    }
-
-    this.socket.removeAllListeners('update');
-    this.socket.on('update', callback);
+    this.listeningTo = who;
     this.socket.emit('subscribe', {target: who});
   };
 
