@@ -16,7 +16,6 @@ window.Tubalr = (function(exports) {
 
     this.socket   = io.connect(this.server, {port: this.port});
     this.onUpdate = opts.onUpdate || function() {};
-    this.onChat   = opts.onChat   || function() {};
 
     this.socket.on('update', function(msg) {
       var diff = (Date.now() - msg.ts) / 1000;
@@ -31,12 +30,21 @@ window.Tubalr = (function(exports) {
       $('#playlist-message').text('This DJ is currently not broadcasting :(');
     });
 
+    this.socket.on('join', function(msg) {
+      /* todo: msg.from has joined the room */
+    });
+
+    this.socket.on('part', function(msg) {
+      /* todo: msg.from has left the room */
+    });
+
+
     this.socket.emit('register', {from: this.username});
   };
 
   DJ.prototype.chat = function(text) {
     this.socket.emit('chat', {target: this.listeningTo, text: text});
-    this.newChatMessage('you', text)
+    this.newChatMessage('you', text);
   };
 
   DJ.prototype.startBroadcasting = function(videoTitle, videoId, videoElapsed) {
@@ -115,12 +123,12 @@ window.Tubalr = (function(exports) {
   DJ.prototype.newChatMessage = function (from, text) {
     var chatLog = $('#dj-chat-log');
     var newLine = $('<div>').addClass('line');
-    var from    = $('<span>').addClass('from').text(from + ': ');
+    var fromSpan= $('<span>').addClass('from').text(from + ': ');
     var message = $('<span>').addClass('message').text(text);
 
-    newLine.append(from).append(message);
+    newLine.append(fromSpan).append(message);
 
-    chatLog.append(newLine).scrollTop(chatLog[0].scrollHeight)
+    chatLog.append(newLine).scrollTop(chatLog[0].scrollHeight);
   };
 
   exports.DJ = DJ;
