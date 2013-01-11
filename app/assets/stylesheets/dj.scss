@@ -1,13 +1,59 @@
+@import "compass";
+
 #djing {
   display: none;
   margin-top: 20px;
+}
 
-  p {
-    margin-bottom: 20px;
+#dj-chat {
+  display: none;
+  margin-top: 20px;
+
+  &.show-chat {
+    display: block;
   }
 
-  ul {
-    margin-left: 20px;
-    margin-top: 10px;
+  h2 {
+    margin-bottom: 15px;
+  }
+
+  #dj-chat-log {
+    height: 300px;
+    padding: 10px;
+    overflow-y: scroll;
+    background: rgba(0, 0, 0, .3);
+    @include border-top-left-radius(5px);
+    @include border-top-right-radius(5px);
+  }
+
+  #dj-chat-input-wrapper {
+    padding: 10px;
+    background: #000;
+    background: rgba(0, 0, 0, .3);
+    border-top: solid 1px #464646;
+    @include border-bottom-left-radius(5px);
+    @include border-bottom-right-radius(5px);
+
+
+    #dj-chat-input {
+      padding: 0;
+      background: none;
+      width: 100%;;
+      background: none;
+      color: white;
+      @include border-radius(0);
+    }
+  }
+
+  .line {
+    word-wrap: break-word;
+    margin-bottom: 8px;
+
+    .from {
+      color: #DDF556;
+      margin-right: 10px;
+    }
+
+    .message {}
   }
 }

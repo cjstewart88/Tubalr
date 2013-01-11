@@ -20,7 +20,8 @@ var Playlist = {
     persistentSorting:    false,
     videoID:              null,
     subReddit:            null,
-    djUsername:           null
+    djUsername:           null,
+    djListener:           null
   },
 
   init: function (options) {
@@ -88,7 +89,7 @@ var Playlist = {
   },
 
   dj: function () {
-    Playlist.djMode = new Tubalr.DJ('guest');
+    Playlist.djMode = new Tubalr.DJ(Playlist.options.djListener);
     Playlist.djMode.listenTo(Playlist.options.djUsername);
     Playlist.djMode.onUpdate = Playlist.djModeChange;
   },
@@ -484,6 +485,11 @@ var Playlist = {
         url += search + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
         url += '%2Fjust%2F' + search.replace(/%20/g, '%2B');
         break;
+      case 'dj':
+        search = Playlist.options.djUsername;
+        url += search + '%20DJ%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
+        url += '%2Fdj%2F' + search;
+        break;
       case 'similar':
         search = Playlist.options.search.replace(/[ +]/g,"%20");
         url += 'artists%2Fbands%20similar%20to%20' + search + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
@@ -521,11 +527,16 @@ var Playlist = {
       url += "r/" + Playlist.options.subReddit;
       shareText += "/r/" + Playlist.options.subReddit;
     }
+    else if (Playlist.options.djUsername) {
+      url += "dj/" + Playlist.options.djUsername;
+      shareText += "I'm listening to " + Playlist.options.djUsername + " DJ"
+    }
     else if (Playlist.options.search) {
       if (Playlist.options.searchType == "similar") {
         shareText += "Artists/Bands similar to ";
       }
       else {
+      shareText += "I'm listening to ";
         url += "just/"
       }
 
@@ -541,7 +552,7 @@ var Playlist = {
       shareText += unescape(Playlist.options.customPlaylistName.replace(/[+]/g," "));
     }
 
-    shareText += ", brought to you by tubalr!";
+    shareText += ", on tubalr!";
 
     FB.ui({
         method: 'stream.publish',
@@ -584,19 +595,6 @@ $(document).ready(function () {
   $('#remove-video').click(function () {
     Playlist.removeVideo();
     return false;
-  });
-
-  Mousetrap.bind('space', function(e) {
-    Playlist.playPause();
-    e.preventDefault();
-  });
-
-  Mousetrap.bind('left', function() {
-    Playlist.previousSong();
-  });
-
-  Mousetrap.bind('right', function() {
-    Playlist.nextSong();
   });
 
   $('#next').click(function () { 

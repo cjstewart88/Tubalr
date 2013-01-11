@@ -3,12 +3,10 @@
 <section id="empty-playlist">o_O This playlist has 0 videos... this is kinda weird.</section>
 
 <section id="player">
-  <% if !@dj %>
-    <aside id="share-playlist">
-      <span id="share-on-twitter" class="icon-twitter tooltip" original-title="Share on twitter."></span>
-      <span id="share-on-facebook" class="icon-facebook tooltip" original-title="Share on facebook."></span>
-    </aside>
-  <% end %>
+  <aside id="share-playlist">
+    <span id="share-on-twitter" class="icon-twitter tooltip" original-title="Share on twitter."></span>
+    <span id="share-on-facebook" class="icon-facebook tooltip" original-title="Share on facebook."></span>
+  </aside>
 
   <h2 id="current-video-title"></h2>
 
@@ -50,17 +48,17 @@
       <p>
         You can share this url with friends to have them listen along with you: <b>http://www.tubalr.com/dj/<%=dj_username %></b>
       </p>
-
-      <h3>NOTE:</h3>
-
-      <ul>
-        <li>If you seek ahead in a video, connected users will not be updated of the new position.</li>
-        <li>Switching songs will update the connected users so they're listening to the same song.</li>
-        <li>You can perform any search using the search box at the top of the page to change what your listening too.</li>
-        <li>This is extremly early beta and there could be issues, run into anything weird shoot an email to <a href="mailto:listen.to.tubalr@gmail.com">listen.to.tubalr@gmail.com</a></li>
-      </ul>
     </div>
   <% end %>
+
+  <div id="dj-chat" class="<%= 'show-chat' if @dj %>">
+    <h2>Chat With Listeners</h2>
+    <div id="dj-chat-log"></div>
+    <div id="dj-chat-input-wrapper">
+      <input type="text" placeholder="Enter your message here..." id="dj-chat-input" class="mousetrap">
+    </div>
+  </div>
+
 </section>
 
 <%= javascript_tag do %>

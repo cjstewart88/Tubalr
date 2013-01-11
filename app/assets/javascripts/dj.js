@@ -21,11 +21,11 @@ window.Tubalr = (function(exports) {
     this.socket.on('update', function(msg) {
       var diff = (Date.now() - msg.ts) / 1000;
       self.onUpdate(msg.from, msg.title, msg.id, msg.at + diff);
-
     });
 
     this.socket.on('chat', function(msg) {
-      self.onChat(msg.from, msg.text);
+      //self.onChat(msg.from, msg.text);
+      self.newChatMessage(msg.from, msg.text);
     });
 
     this.socket.emit('register', {from: this.username});
@@ -33,6 +33,7 @@ window.Tubalr = (function(exports) {
 
   DJ.prototype.chat = function(text) {
     this.socket.emit('chat', {target: this.listeningTo, text: text});
+    this.newChatMessage('you', text)
   };
 
   DJ.prototype.startBroadcasting = function(videoTitle, videoId, videoElapsed) {
@@ -61,6 +62,8 @@ window.Tubalr = (function(exports) {
                        .text('Quit DJ Mode')
                        .attr('original-title', 'If you leave DJ mode your listeners will be sad!');
 
+    $('#dj-chat').addClass('show-chat');
+
     $('#djing').slideDown();
   };
 
@@ -73,6 +76,8 @@ window.Tubalr = (function(exports) {
                        .removeClass('leave-dj-mode')
                        .text('Enter DJ Mode')
                        .attr('original-title', 'Go LIVE and let others listen along with you!');
+
+    $('#dj-chat').removeClass('show-chat');
 
     $('#djing').slideUp();
   };
@@ -104,6 +109,17 @@ window.Tubalr = (function(exports) {
     this.socket.emit('subscribe', {target: who});
   };
 
+  DJ.prototype.newChatMessage = function (from, text) {
+    var chatLog = $('#dj-chat-log');
+    var newLine = $('<div>').addClass('line');
+    var from    = $('<span>').addClass('from').text(from + ': ');
+    var message = $('<span>').addClass('message').text(text);
+
+    newLine.append(from).append(message);
+
+    chatLog.append(newLine).scrollTop(chatLog[0].scrollHeight)
+  };
+
   exports.DJ = DJ;
   return exports;
 })(exports);
@@ -124,6 +140,18 @@ $(document).ready(function () {
     }
 
     return false;
+  });
+
+  Mousetrap.bind('enter', function (e, element, combo) {
+    if ($(e.target).attr('id') == 'dj-chat-input' && $(e.target).val().trim() != '') {
+      if (User.username) {
+        Playlist.djMode.chat($(e.target).val().trim());
+        $(e.target).val('')
+      }
+      else {
+        alert('You need to sign in to chat!');
+      }
+    }
   });
 
 });
