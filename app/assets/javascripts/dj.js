@@ -24,8 +24,11 @@ window.Tubalr = (function(exports) {
     });
 
     this.socket.on('chat', function(msg) {
-      //self.onChat(msg.from, msg.text);
       self.newChatMessage(msg.from, msg.text);
+    });
+
+    this.socket.on('no-dj', function () {
+      $('#playlist-message').text('This DJ is currently not broadcasting :(');
     });
 
     this.socket.emit('register', {from: this.username});
@@ -149,7 +152,7 @@ $(document).ready(function () {
         $(e.target).val('')
       }
       else {
-        alert('You need to sign in to chat!');
+        alert('You need to login to chat!');
       }
     }
   });

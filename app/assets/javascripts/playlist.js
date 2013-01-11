@@ -60,7 +60,7 @@ var Playlist = {
     $('.remove-when-searching').fadeOut();
     $('#player').fadeOut();
     $('#empty-playlist').fadeOut();
-    $('#loading-playlist').fadeIn();
+    $('#playlist-message').text('Loading...').fadeIn();
   },
 
   report: function () {
@@ -273,7 +273,7 @@ var Playlist = {
   },
 
   togglePlayer: function () {
-    $('#loading-playlist').hide();
+    $('#playlist-message').hide();
 
     if (Playlist.videos.length == 0) {
       $('#empty-playlist').fadeIn();
