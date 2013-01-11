@@ -157,9 +157,12 @@ input[type=button], input[type=submit], a.button, button {
 }
 
 .ui-dialog {
-  input[type=button], input[type=submit], a.button {
+  input[type=button], input[type=submit], a.button, #search-popup-btn {
     background: #548FF4;
     color: #fff;
+  }
+  #search-popup-btn[disabled=disabled] {
+    background: grey;
   }
 }
 
@@ -189,7 +192,7 @@ input[type=button], input[type=submit], a.button, button {
   }
 }
 
-#playlist {
+#playlist, .playlist-like {
   float: left;
   height: 390px;
   overflow: auto;
@@ -479,6 +482,91 @@ section {
     font-size: 14px;
     font-weight: normal;
   }
+}
+
+#add-songs {
+  display: none;
+  line-height: 25px;
+  float: right;
+  position: absolute;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  right: 29px;
+  top: 57px;
+  opacity: 0.2;
+  font-size: 3em;
+  color: #EEE;
+  /*background: #999;*/
+  padding:0;margin:0;
+  border-radius: 15px;
+  padding-left: 4px;
+  &:hover {
+    color: #4283F4;
+  }
+  &:active {
+    color: #666;
+  }
+}
+#popup-search {
+  overflow: visible;
+  margin-top: 20px;
+  #popup-search-query {
+    width: 200px;
+  }
+  #popup-search-results-holder {
+    overflow: visible;
+    #popup-search-results {
+      overflow: visible;
+      width: 100%;
+      height: 100%;
+
+      li {
+        color: black;
+        background: white;
+        a {
+          &:hover {
+            cursor: -moz-grab;
+            cursor: -webkit-grab;
+            background: #EEE;
+          }
+          &:active {
+            cursor: -moz-grabbing;
+            cursor: -webkit-grabbing;
+            background: #FFF;
+          }
+          padding-left: 4px;
+          background: #DDD;
+        }
+      }
+    }
+  }
+}
+
+/* hacky mchack - how to make dragged items visible? */
+.popup-search-dialog { overflow: visible !important; }
+
+#drag-trashcan {
+  font-size: 2.5em;
+  position: relative;
+  top: 5px;
+  opacity: 0.1;
+  &.drag-hover {
+    -webkit-filter: blur(1px);
+    filter: blur(1px);
+    color: red;
+  }
+  &.dragging {
+    opacity: 0.8;
+  }
+}
+
+span.drag-grip {
+  background: url(/assets/jquery_icons.png);
+  background-position: 0 -224px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
 }
 
 .clear {

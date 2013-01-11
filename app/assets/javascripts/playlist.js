@@ -103,6 +103,78 @@ var Playlist = {
     Playlist.resultsReady();
   },
 
+  popup_search: function() {
+    var search_term = $('#popup-search-query').val();
+    if (search_term === '') {
+      return;
+    }
+
+    $('#popup-search-query, #search-popup-btn').attr('disabled', 'disabled');
+    Playlist.generic_search(search_term, function(vids) {
+      $('#popup-search-query, #search-popup-btn').removeAttr('disabled');
+      $('#popup-search-results').html('');
+      if (!vids || vids.length == 0) { //if results are empty/bad
+        $('#popup-search-results').html('<li>No results :(</li>');
+        return;
+      } else {
+        $('#popup-search-results').html('');
+      }
+      $.each(vids, function(i, vid) {
+        $('#popup-search-results').append(
+          "<li class='dragvid' data-video-title='" + vid.videoTitle + "' data-video-id='" + vid.videoID + "' >" + 
+            "<a href='#' id='" + vid.videoID + "' >" +
+            //"<span class='drag-grip'/> " + //this provides grip!
+             vid.videoTitle + "</a></li>"
+        );
+      });  
+    });
+  },
+
+  /* usage:  
+   *   search('search term', function(data) {
+   *     console.log(data); // [{videoID: ..., videoTitle: ...}]
+   *   })
+   */
+  generic_search: function(query, callback, options) {
+    if(!options) {
+      options = {};
+    }
+    var search = query;
+    
+    var numberOfSongs = options.numberOfSongs || 10;
+
+    var results = [];
+
+    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&start=0&results=' + numberOfSongs , function (data) {
+        var ajaxs = [];
+        
+        $.each(data.response.songs || [], function (i, track) {
+          if (track.title.toLowerCase().search("cover") == -1 && track.title.toLowerCase().search("remix") == -1) {
+            ajaxs.push(
+              $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '%20%2D$20' + escape(track.title) + '&orderby=relevance&start-index=1&max-results=10&v=2&format=5&alt=json-in-script&callback=?', function (data) {
+                if (data.feed.hasOwnProperty("entry")) {
+                  $.each(data.feed.entry, function (i, video) {
+                    if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video)) {
+                      results.push({ 
+                        videoID:    video.id.$t.split(":")[3], 
+                        videoTitle: video.title.$t
+                      }); 
+
+                      return false;
+                    }
+                  });
+                }
+              }))
+          }
+        });
+
+        $.when.apply($, ajaxs).then(function () {
+          callback(results);
+        });
+      }
+    );
+  },
+
   just: function () {
     var search = Playlist.options.search;
     
@@ -140,7 +212,7 @@ var Playlist = {
       }
     });
   },
-
+                                                                                              
   similar: function () {
     var search = Playlist.options.search;
 
@@ -306,7 +378,13 @@ var Playlist = {
   start: function () {
     Playlist.preparePlaylist();
     Playlist.togglePlayer();
-    Playlist.currentVideo();
+
+    //now you just put #dev-mode on the end of the URL
+    //and you don't have to deal with videos playing
+    //(might need to refresh to see it work)
+    if (window.location.hash != '#dev-mode') {
+      Playlist.currentVideo();
+    }
   },
 
   playPause: function () {
@@ -622,6 +700,7 @@ $(document).ready(function () {
   });
 
   $('#playlist').sortable({
+    receive: Playlist.sortVideos,
     stop: Playlist.sortVideos
   });
 

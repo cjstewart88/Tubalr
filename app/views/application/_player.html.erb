@@ -13,9 +13,14 @@
   <h2 id="current-video-title"></h2>
 
   <div id="video-and-playlist" class="<%= 'no-playlist' if @dj %>">
+    <!-- the indicator that is shown for adding music -->
+    <div id='add-songs' class='tooltip-west' original-title="Add Videos">
+      +
+    </div>
     <div id="ytplayerid"></div> 
 
     <ul id="playlist"></ul>
+
   </div>
 
   <% if !@dj %>
@@ -30,6 +35,9 @@
       </div>
       
       <div id="player-controls-left">
+        <a id='drag-trashcan' class='tooltip' original-title="Drag Here to Remove" href='#'>
+          <span class='icon-trash'></span>
+        </a>
         <input type="button" id="remove-video" value="Remove" class="tooltip" original-title="Remove the current video from your playlist. If you're logged in it will never play again!"/>
         <% if user_signed_in? %>
           <%= select_tag "add-to-playlist-dropdown", options_for_select([[nil, nil],['(+) Create New Playlist', 'new']] + current_user.playlists.map{ | p | [p.playlist_name, p.id, { "data-test" => "derp" }]}), { "data-placeholder" => "Add to Playlist" } %>       
@@ -62,6 +70,14 @@
     </div>
   <% end %>
 </section>
+
+<div id='popup-search'>
+  <input type="text" placeholder='search artists' id="popup-search-query" /><button id='search-popup-btn' disabled='disabled'><span class='icon-search'></span></button>
+  <div id='popup-search-results-holder'>
+    <ul id='popup-search-results' class='playlist-like'>
+    </ul>
+  </div>
+</div>
 
 <%= javascript_tag do %>
   Playlist.init(<%= search_options %>);
