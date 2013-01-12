@@ -35,68 +35,32 @@ $(document).ready(function () {
     $("#q").focus();
   }
 
-  //popup search
+  // popup search
   $('#popup-search').dialog({
-    width:      '350px',
-    close:       function() { $("#add-songs").show(); },
-    show:        {effect: 'slide', direction: 'right'},
-    hide:        {effect: 'slide', direction: 'right'},
-    dialogClass: 'popup-search-dialog',
-    autoOpen:    false,
-    draggable:   true
+    width:        '350px',
+    dialogClass:  'popup-search-dialog',
+    autoOpen:     false,
+    draggable:    true,
+    title:        'Playlist Mixer',
+    position:     [($(window).width() / 2) - (350 / 2), 150]
   });
   
-  $("#add-songs").hover(function() {
-    //$('#add-songs').stop().attr('style', 'opacity: 1;');
-  }).click(function(ev) {
-    $('#popup-search').dialog('option', {
-      position: {my: 'left top', of: ev} 
-    }).dialog('open');
+  $("#add-songs").click(function (e) {
+    $('#popup-search').dialog('open');
     $('#popup-search-query').focus();
     $('#popup-search-results').sortable({
       zIndex: 999999,
       connectWith: '#playlist'
     });
-    $(this).stop().hide();
   });
 
-  //show/hide the + (add to playlist) button
-  $('#playlist').hover(
-    //in
-    function(){
-      if($('#popup-search').dialog("isOpen")) {
-        return;
-      }
-      $('#add-songs').show();
-      $('#add-songs').stop().animate({opacity: 0.7});
-    },
-    //out
-    function(ev){
-      //check toElement to prevent trigger when leaving for add-songs
-      if($('#popup-search').dialog("isOpen") || ev.toElement.id == 'add-songs') {
-        return;
-      }
-      $('#add-songs').stop().animate({opacity: 0.2}, {
-        complete: function() {
-          $('#add-songs').removeAttr('style');
-          $('#add-songs').hide();
-        }
-      });
-    }
-  );
-
-  $('#popup-search-query').keyup(function(ev) {
-    if ($(this).val() === '') {
-      $('#search-popup-btn').attr('disabled', 'disabled');
-    } else {
-      $('#search-popup-btn').removeAttr('disabled');
-      if(ev.which == '13') { //enter key pressed
-        Playlist.popup_search();
-      }
+  $('#popup-search-query').keyup(function (e) {
+    if (e.which == '13') { //enter key pressed
+      Playlist.popupSearch();
     }
   });
 
-  $('#search-popup-btn').click(Playlist.popup_search);
+  $('#search-popup-btn').click(Playlist.popupSearch);
 
   // Tooltips
   $('.tooltip').tipsy({

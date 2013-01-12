@@ -103,28 +103,28 @@ var Playlist = {
     Playlist.resultsReady();
   },
 
-  popup_search: function() {
-    var search_term = $('#popup-search-query').val();
-    if (search_term === '') {
-      return;
-    }
+  popupSearch: function () {
+    var search = $('#popup-search-query').val();
+    if (search == '') { return; }
 
     $('#popup-search-query, #search-popup-btn').attr('disabled', 'disabled');
-    Playlist.generic_search(search_term, function(vids) {
+    Playlist.genericSearch(search, function (vids) {
       $('#popup-search-query, #search-popup-btn').removeAttr('disabled');
       $('#popup-search-results').html('');
+      
       if (!vids || vids.length == 0) { //if results are empty/bad
         $('#popup-search-results').html('<li>No results :(</li>');
         return;
-      } else {
+      } 
+      else {
         $('#popup-search-results').html('');
       }
+
       $.each(vids, function(i, vid) {
         $('#popup-search-results').append(
           "<li class='dragvid' data-video-title='" + vid.videoTitle + "' data-video-id='" + vid.videoID + "' >" + 
-            "<a href='#' id='" + vid.videoID + "' >" +
-            //"<span class='drag-grip'/> " + //this provides grip!
-             vid.videoTitle + "</a></li>"
+          "<span class='remove-video icon-trash'></span>" + 
+          "<a href='#' id='" + vid.videoID + "' >" + vid.videoTitle + "</a></li>"
         );
       });  
     });
@@ -135,13 +135,13 @@ var Playlist = {
    *     console.log(data); // [{videoID: ..., videoTitle: ...}]
    *   })
    */
-  generic_search: function(query, callback, options) {
-    if(!options) {
+  genericSearch: function (query, callback, options) {
+    if (!options) {
       options = {};
     }
     var search = query;
     
-    var numberOfSongs = options.numberOfSongs || 10;
+    var numberOfSongs = options.numberOfSongs || 50;
 
     var results = [];
 

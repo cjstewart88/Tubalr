@@ -13,8 +13,6 @@
   <h2 id="current-video-title"></h2>
 
   <div id="video-and-playlist" class="<%= 'no-playlist' if @dj %>">
-    <!-- the indicator that is shown for adding music -->
-    <div id='add-songs' class='tooltip-west' original-title="Add Videos">+</div>
     <div id="ytplayerid"></div> 
     <ul id="playlist"></ul>
   </div>
@@ -25,6 +23,7 @@
         <% if user_signed_in? %>
           <a href="#" id="dj-mode-button" class="enter-dj-mode button tooltip" original-title="Go LIVE and let others listen along with you!" data-dj-username="<%= dj_username %>">Enter DJ Mode</a>
         <% end %>
+        <a href="#" id="add-songs" class="button tooltip" original-title="Search for videos to add to the current playlist."><span class="icon-plus"></span></a>
         <a href="#" class="shuffle button tooltip" original-title="Shuffle"><span class="icon-random"></span></a>
         <a href="#" id="previous" class="button tooltip" original-title="Previous">&nbsp;<span class="icon-step-backward"></span></a>
         <a href="#" id="next" class="button tooltip" original-title="Next"><span class="icon-step-forward"></span>&nbsp;</a>
@@ -64,10 +63,15 @@
 </section>
 
 <div id='popup-search'>
-  <input type="text" placeholder='search artists' id="popup-search-query" /><button id='search-popup-btn' disabled='disabled'><span class='icon-search'></span></button>
+  <p>
+    Enter an artist/band below, or search for a specific song. Then drag videos into your playlist!
+  </p>
+
+  <input type="text" placeholder="search for artists or bands" id="popup-search-query"/>
+  <button id="search-popup-btn"><span class="icon-search"></span></button>
+  
   <div id='popup-search-results-holder'>
-    <ul id='popup-search-results' class='playlist-like'>
-    </ul>
+    <ul id='popup-search-results'></ul>
   </div>
 </div>
 
