@@ -105,21 +105,4 @@ $(document).ready(function () {
   $('.tooltip-west').tipsy({
     gravity: 'w'
   });
-  $('#drag-trashcan').droppable({
-    accept: '#playlist li',
-    hoverClass: 'drag-hover',
-    tolerance: 'touch',
-    activate: function(ev,ui) {
-      $('#drag-trashcan').addClass('dragging');
-      console.log('actives');
-    },
-    deactivate: function(ev,ui) {
-      $('#drag-trashcan').removeClass('dragging');
-      //$('#drag-trashcan').fadeOut('fast');
-    },
-    drop: function(ev,ui) {
-      $(ui.draggable).remove();
-      Playlist.sortVideos();
-    }
-  });
 });

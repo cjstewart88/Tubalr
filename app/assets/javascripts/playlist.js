@@ -369,7 +369,7 @@ var Playlist = {
     var playlistContainer = $('#playlist').empty();
 
     $.each(Playlist.videos, function(i) {
-      playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
+      playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><span class="remove-video icon-trash"></span><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
     });
     
     $('#' + Playlist.videos[Playlist.currentTrack].videoID).addClass('active');      
@@ -426,8 +426,6 @@ var Playlist = {
     }
 
     Playlist.currentVideo();
-    
-    return false;
   },
 
   previousSong: function () {
@@ -441,8 +439,6 @@ var Playlist = {
       Playlist.currentTrack = Playlist.currentTrack-=1;
       Playlist.currentVideo();
     }
-    
-    return false;
   },
 
   jumpToSong: function (videoID) {
@@ -507,9 +503,7 @@ var Playlist = {
     });
   },
 
-  removeVideo: function () {
-    var videoID = Playlist.videos[Playlist.currentTrack].videoID;
-
+  removeVideo: function (videoID) {
     if (User.id) {
       if (User.username == Playlist.options.customPlaylistOwner) {
         $.ajax({
@@ -537,17 +531,22 @@ var Playlist = {
         });
       }
     }
-
+    
     $("#playlist #" + videoID).remove();
-    Playlist.videos.splice(Playlist.currentTrack, 1);
+
+    var videoIndex = findIndexByKeyValue(Playlist.videos,'videoID', videoID);
+    Playlist.videos.splice(videoIndex, 1);
 
     if (Playlist.videos.length == 0) {
       Player.self.stopVideo();
       $('#player').fadeOut();
       $('#empty-playlist').fadeIn();
     }
-    else {
+    else if (videoIndex == Playlist.currentTrack) {
       Playlist.nextSong("keepCurrentTrack");
+    }
+    else if (videoIndex < Playlist.currentTrack) {
+      Playlist.currentTrack = Playlist.currentTrack-=1;
     }
   },
 
@@ -659,8 +658,9 @@ $(document).ready(function () {
     }
   });
 
-  $('#remove-video').click(function () {
-    Playlist.removeVideo();
+  $('.remove-video').live('click', function (e) {
+    e.stopImmediatePropagation();
+    Playlist.removeVideo($(this).next().attr('id'));
     return false;
   });
 

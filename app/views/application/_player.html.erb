@@ -14,13 +14,9 @@
 
   <div id="video-and-playlist" class="<%= 'no-playlist' if @dj %>">
     <!-- the indicator that is shown for adding music -->
-    <div id='add-songs' class='tooltip-west' original-title="Add Videos">
-      +
-    </div>
+    <div id='add-songs' class='tooltip-west' original-title="Add Videos">+</div>
     <div id="ytplayerid"></div> 
-
     <ul id="playlist"></ul>
-
   </div>
 
   <% if !@dj %>
@@ -35,10 +31,6 @@
       </div>
       
       <div id="player-controls-left">
-        <a id='drag-trashcan' class='tooltip' original-title="Drag Here to Remove" href='#'>
-          <span class='icon-trash'></span>
-        </a>
-        <input type="button" id="remove-video" value="Remove" class="tooltip" original-title="Remove the current video from your playlist. If you're logged in it will never play again!"/>
         <% if user_signed_in? %>
           <%= select_tag "add-to-playlist-dropdown", options_for_select([[nil, nil],['(+) Create New Playlist', 'new']] + current_user.playlists.map{ | p | [p.playlist_name, p.id, { "data-test" => "derp" }]}), { "data-placeholder" => "Add to Playlist" } %>       
           <span id="create-new-playlist">
