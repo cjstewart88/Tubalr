@@ -139,7 +139,7 @@ window.Tubalr = (function(exports) {
 
   DJ.prototype.joinPartNotice = function (who, type) {
     var chatLog = $('#dj-chat-log');
-    var action  = (type == 'join' ? ' joined the room.' : ' ');
+    var action  = (type == 'join' ? ' joined the room.' : ' left the room.');
     var newLine = $('<div>').addClass('line').text(who + action);
 
     chatLog.append(newLine).scrollTop(chatLog[0].scrollHeight);
