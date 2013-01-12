@@ -33,13 +33,13 @@ window.Tubalr = (function(exports) {
     });
 
     this.socket.on('join', function(msg) {
-      this.listenerCount += 1; 
+      self.listenerCount += 1; 
       self.joinPartNotice(msg.from, 'join');
       self.updateListenerCount();
     });
 
     this.socket.on('part', function(msg) {
-      this.listenerCount -= 1;
+      self.listenerCount -= 1;
       self.joinPartNotice(msg.from, 'part');
       self.updateListenerCount();
     });
