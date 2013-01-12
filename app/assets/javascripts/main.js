@@ -66,7 +66,4 @@ $(document).ready(function () {
   $('.tooltip').tipsy({
     gravity: 'n'
   });
-  $('.tooltip-west').tipsy({
-    gravity: 'w'
-  });
 });
