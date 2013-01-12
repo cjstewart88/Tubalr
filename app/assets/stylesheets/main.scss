@@ -245,11 +245,11 @@ input[type=button], input[type=submit], a.button, button {
       font-size: 16px;
       cursor: pointer;
     }
+  }
 
-    &:hover {
-      .icon-trash {
-        display: block;
-      }
+  &#playlist li:hover {
+    .icon-trash {
+      display: block;
     }
   }
 }
@@ -525,7 +525,7 @@ section {
 
       li {
         margin-right: 2px;
-        
+
         a {
           color: #000;
           border-top: none;
