@@ -11,11 +11,13 @@ window.Tubalr = (function(exports) {
 
     this.username = username || 'guest';
 
-    this.server   = opts.server || 'throttle.io';
+    this.server   = opts.server || 'localhost';
     this.port     = opts.port   || 8900;
 
     this.socket   = io.connect(this.server, {port: this.port});
     this.onUpdate = opts.onUpdate || function() {};
+
+    this.listenerCount = 0;
 
     this.socket.on('update', function(msg) {
       var diff = (Date.now() - msg.ts) / 1000;
@@ -31,11 +33,15 @@ window.Tubalr = (function(exports) {
     });
 
     this.socket.on('join', function(msg) {
-      /* todo: msg.from has joined the room */
+      this.listenerCount++; 
+      self.joinPartNotice(msg.from, 'join');
+      self.updateListenerCount();
     });
 
     this.socket.on('part', function(msg) {
-      /* todo: msg.from has left the room */
+      this.listenerCount--;
+      self.joinPartNotice(msg.from, 'part');
+      self.updateListenerCount();
     });
 
 
@@ -129,6 +135,18 @@ window.Tubalr = (function(exports) {
     newLine.append(fromSpan).append(message);
 
     chatLog.append(newLine).scrollTop(chatLog[0].scrollHeight);
+  };
+
+  DJ.prototype.joinPartNotice = function (who, type) {
+    var chatLog = $('#dj-chat-log');
+    var action  = (type == 'join' ? ' joined the room.' : ' ');
+    var newLine = $('<div>').addClass('line').text(who + action);
+
+    chatLog.append(newLine).scrollTop(chatLog[0].scrollHeight);
+  };
+
+  DJ.prototype.updateListenerCount = function () {
+    $('#dj-listener-count').text(this.listenerCount);
   };
 
   exports.DJ = DJ;
