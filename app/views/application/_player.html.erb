@@ -52,7 +52,7 @@
   <% end %>
 
   <div id="dj-chat" class="<%= 'show-chat' if @dj %>">
-    <h2>Chat With Listeners</h2>
+    <h2><aside style="display: none;">Listeners: <span id="dj-listener-count">0</span></aside>Chat With Listeners</h2>
     <div id="dj-chat-log"></div>
     <div id="dj-chat-input-wrapper">
       <input type="text" placeholder="Enter your message here..." id="dj-chat-input" class="mousetrap">
