@@ -474,7 +474,8 @@ var Playlist = {
     var positions           = [];
     var currentPlayingVideo = Playlist.videos[Playlist.currentTrack].videoID;
 
-    $('#playlist li').each(function(index, item) {
+    $('#playlist li').each(function (index, item) {
+      console.log($(item).data('videoTitle'))
       positions.push({
         track_number: index, 
         videoID:      $(item).data('videoId'), 
@@ -532,10 +533,9 @@ var Playlist = {
       }
     }
     
-    $("#playlist #" + videoID).remove();
+    $("#playlist #" + videoID).remove()
 
     var videoIndex = findIndexByKeyValue(Playlist.videos,'videoID', videoID);
-    Playlist.videos.splice(videoIndex, 1);
 
     if (Playlist.videos.length == 0) {
       Player.self.stopVideo();
@@ -545,9 +545,8 @@ var Playlist = {
     else if (videoIndex == Playlist.currentTrack) {
       Playlist.nextSong("keepCurrentTrack");
     }
-    else if (videoIndex < Playlist.currentTrack) {
-      Playlist.currentTrack = Playlist.currentTrack-=1;
-    }
+
+    Playlist.sortVideos();
   },
 
   shareOnTwitter: function () {
