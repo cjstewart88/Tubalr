@@ -20,9 +20,6 @@
   <% if !@dj %>
     <div id="player-controls">
       <div id="player-controls-right">
-        <% if user_signed_in? %>
-          <a href="#" id="dj-mode-button" class="enter-dj-mode button tooltip" original-title="Go LIVE and let others listen along with you!" data-dj-username="<%= dj_username %>">Enter DJ Mode</a>
-        <% end %>
         <a href="#" id="add-songs" class="button tooltip" original-title="Search for videos to add to the current playlist."><span class="icon-plus"></span></a>
         <a href="#" class="shuffle button tooltip" original-title="Shuffle"><span class="icon-random"></span></a>
         <a href="#" id="previous" class="button tooltip" original-title="Previous">&nbsp;<span class="icon-step-backward"></span></a>
@@ -31,6 +28,8 @@
       
       <div id="player-controls-left">
         <% if user_signed_in? %>
+          <input type="button" id="dj-mode-button" class="enter-dj-mode button tooltip" original-title="Go LIVE and let others listen along with you!" data-dj-username="<%= dj_username %>" value="Enter DJ Mode"/>
+
           <%= select_tag "add-to-playlist-dropdown", options_for_select([[nil, nil],['(+) Create New Playlist', 'new']] + current_user.playlists.map{ | p | [p.playlist_name, p.id, { "data-test" => "derp" }]}), { "data-placeholder" => "Add to Playlist" } %>       
           <span id="create-new-playlist">
             <input type="text"    id="create-new-playlist-name"   placeholder="Enter New Playlist Name..."/>
