@@ -15,8 +15,9 @@
     <ul id="playlist"></ul>
   </div>
 
-  <% if !@dj %>
-    <div id="player-controls">
+
+  <div id="player-controls">
+    <% if !@dj %>
       <div id="player-controls-right">
         <a href="#" id="add-songs" class="button tooltip" original-title="Search for videos to add to the current playlist."><span class="icon-plus"></span></a>
         <a href="#" class="shuffle button tooltip" original-title="Shuffle"><span class="icon-random"></span></a>
@@ -28,16 +29,15 @@
         <% if user_signed_in? %>
           <input type="button" id="dj-mode-button" class="enter-dj-mode button tooltip" original-title="Go LIVE and let others listen along with you!" data-dj-username="<%= dj_username %>" value="Enter DJ Mode"/>
 
-          <%= select_tag "add-to-playlist-dropdown", options_for_select([[nil, nil],['(+) Create New Playlist', 'new']] + current_user.playlists.map{ | p | [p.playlist_name, p.id, { "data-test" => "derp" }]}), { "data-placeholder" => "Add to Playlist" } %>       
-          <span id="create-new-playlist">
-            <input type="text"    id="create-new-playlist-name"   placeholder="Enter New Playlist Name..."/>
-            <input type="button"  id="create-new-playlist-submit" value="Create"/>
-            <input type="button"  id="create-new-playlist-cancel" value="Cancel"/>
-          </span>
+          <%= render :partial => 'custom_playlist_dropdown' %>
         <% end %>
       </div>
-    </div>
-  <% end %>
+    <% elsif @dj && user_signed_in? %>
+      <div id="player-controls-left">
+        <%= render :partial => 'custom_playlist_dropdown' %>
+      </div>
+    <% end %>
+  </div>
 
   <% if user_signed_in? %>
     <div id="djing">
