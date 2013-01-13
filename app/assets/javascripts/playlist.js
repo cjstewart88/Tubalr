@@ -98,7 +98,7 @@ var Playlist = {
     Playlist.videos = [{
       videoID:    videoId,
       videoTitle: title,
-      startAt:    videoAt
+      startAt:    (videoAt < 0 ? 0 : videoAt)
     }];
     console.log([dj, title, videoId, videoAt]);
     Playlist.resultsReady();
