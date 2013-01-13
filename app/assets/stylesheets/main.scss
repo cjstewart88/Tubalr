@@ -163,7 +163,7 @@ input[type=button], input[type=submit], a.button, button {
 }
 
 .ui-dialog {
-  input[type=button], input[type=submit], a.button {
+  input[type=button], input[type=submit], a.button, button {
     background: #548FF4;
     color: #fff;
   }
@@ -195,7 +195,7 @@ input[type=button], input[type=submit], a.button, button {
   }
 }
 
-#playlist {
+#playlist, #popup-search-results {
   float: left;
   height: 390px;
   overflow: auto;
@@ -207,7 +207,7 @@ input[type=button], input[type=submit], a.button, button {
 
   a {
     display: block;
-  	padding: 9px 14px;
+  	padding: 9px 35px 9px 14px;
     color: #fff;
     white-space: nowrap;
     overflow: hidden;
@@ -233,12 +233,29 @@ input[type=button], input[type=submit], a.button, button {
   }
 
   li {
+    position: relative;
+
     &:first-child {
       a { border-top: none !important; }
     }
 
     &:last-child {
       a { border-bottom: none; }
+    }
+
+    .icon-trash {
+      position: absolute;
+      display: none;
+      top: 6px;
+      right: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  }
+
+  &#playlist li:hover {
+    .icon-trash {
+      display: block;
     }
   }
 }
@@ -260,10 +277,11 @@ input[type=button], input[type=submit], a.button, button {
 
 #player-controls {
   margin-top: 20px;
+  height: 31px;
 }
 
 #player-controls, #playlist {
-  input, a.button {
+  input, a.button, button {
     padding: 6px 12px;
     margin-right: 8px;
     font-size: 12px;
@@ -482,6 +500,79 @@ section {
     font-size: 14px;
     font-weight: normal;
   }
+}
+
+#popup-search {
+  overflow: visible;
+  margin-top: 30px;
+
+  p {
+    margin-bottom: 15px;
+  }
+
+  #popup-search-query {
+    width: 240px;
+    margin-right: 6px;
+  }
+  
+  #popup-search-results-holder {
+    overflow: visible;
+    
+    #popup-search-message {
+      display: none;
+    }
+
+    #popup-search-results {
+      overflow: auto;
+      width: 100%;
+      height: auto;
+      max-height: 300px;
+      margin: 20px 0px 5px;
+      background: none;
+
+      li {
+        margin-right: 2px;
+
+        a {
+          color: #000;
+          border-top: none;
+          border-bottom: none;
+
+          &:hover {
+            background: #464646;
+            color: #fff;
+            cursor: -moz-grab;
+            cursor: -webkit-grab;
+          }
+
+          &:active {
+            background: #000;
+            cursor: -moz-grabbing;
+            cursor: -webkit-grabbing;
+          }
+        }
+      }
+    }
+
+    &.show-popup-search-message {
+      #popup-search-message {
+        display: block;
+        margin-top: 15px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+/* hacky mchack - how to make dragged items visible? */
+.popup-search-dialog { overflow: visible !important; }
+
+span.drag-grip {
+  background: url(/assets/jquery_icons.png);
+  background-position: 0 -224px;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
 }
 
 .clear {
