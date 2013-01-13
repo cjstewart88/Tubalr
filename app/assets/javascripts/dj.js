@@ -1,27 +1,27 @@
 /*jshint browser:true undef:true strict:false jquery:true*/
 /*global io */
 
-var exports = window.Tubalr || {};
-
 window.Tubalr = (function(exports) {
   var DJ = function(username, opts) {
     var self = this;
 
     opts = opts || {};
 
-    this.username = username || 'guest';
-
-    this.server   = opts.server || 'throttle.io';
-    this.port     = opts.port   || 8900;
-
-    this.socket   = io.connect(this.server, {port: this.port});
+    this.username = username      || 'guest';
+    this.server   = opts.server   || 'throttle.io';
+    this.port     = opts.port     || 8900;
     this.onUpdate = opts.onUpdate || function() {};
+    this.socket   = io.connect(this.server, {port: this.port});
 
     this.listenerCount = 0;
 
     this.socket.on('update', function(msg) {
-      var diff = (Date.now() - msg.ts) / 1000;
+      var diff = Math.max(0, (Date.now() - msg.ts) / 1000);
       self.onUpdate(msg.from, msg.title, msg.id, msg.at + diff);
+    });
+
+    this.socket.on('register', function(msg) {
+      this.socket.emit('register', {from: this.username});
     });
 
     this.socket.on('chat', function(msg) {
@@ -44,12 +44,15 @@ window.Tubalr = (function(exports) {
       self.updateListenerCount();
     });
 
+    this.socket.on('users', function(msg) {
 
-    this.socket.emit('register', {from: this.username});
+    });
+
+
   };
 
   DJ.prototype.chat = function(text) {
-    this.socket.emit('chat', {target: this.listeningTo, text: text});
+    this.socket.emit('chat', {text: text});
     this.newChatMessage('you', text);
   };
 
@@ -62,8 +65,6 @@ window.Tubalr = (function(exports) {
         id:    videoId,
         at:    videoElapsed
       });
-
-      this.listeningTo = this.username;
 
       this.initBroadcastingUI();
     }
@@ -128,7 +129,6 @@ window.Tubalr = (function(exports) {
   };
 
   DJ.prototype.listenTo = function(who) {
-    this.listeningTo = who;
     this.socket.emit('subscribe', {target: who});
   };
 
@@ -157,7 +157,7 @@ window.Tubalr = (function(exports) {
 
   exports.DJ = DJ;
   return exports;
-})(exports);
+})(window.Tubalr || {});
 
 $(document).ready(function () {
 
