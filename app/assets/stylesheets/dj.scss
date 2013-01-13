@@ -7,32 +7,24 @@
 
 #dj-chat {
   display: none;
-  margin-top: 20px;
-
-  &.show-chat {
-    display: block;
-  }
+  float: left;
+  height: 390px;
+  overflow: auto;
+  width: 100%;
 
   h2 {
     margin-bottom: 15px;
   }
 
   #dj-chat-log {
-    height: 300px;
+    height: 332px;
     padding: 10px;
     overflow-y: scroll;
-    background: rgba(0, 0, 0, .3);
-    @include border-top-left-radius(5px);
-    @include border-top-right-radius(5px);
   }
 
   #dj-chat-input-wrapper {
     padding: 10px;
-    background: #000;
-    background: rgba(0, 0, 0, .3);
     border-top: solid 1px #464646;
-    @include border-bottom-left-radius(5px);
-    @include border-bottom-right-radius(5px);
 
 
     #dj-chat-input {

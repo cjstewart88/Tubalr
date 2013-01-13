@@ -79,7 +79,8 @@ window.Tubalr = (function(exports) {
                        .val('Quit DJ Mode')
                        .attr('original-title', 'If you leave DJ mode your listeners will be sad!');
 
-    $('#dj-chat').addClass('show-chat');
+    $('#chat-and-playlist').addClass('show-chat-and-playlist')
+                           .removeClass('show-only-playlist');
 
     $('#djing').slideDown();
   };
@@ -94,7 +95,12 @@ window.Tubalr = (function(exports) {
                        .val('Enter DJ Mode')
                        .attr('original-title', 'Go LIVE and let others listen along with you!');
 
-    $('#dj-chat').removeClass('show-chat');
+    $('#chat-and-playlist').removeClass('show-chat-and-playlist')
+                           .addClass('show-only-playlist')
+                           .removeClass('show-only-chat');
+
+    $('#show-playlist-button').addClass('active');
+    $('#show-chat-button').removeClass('active');
 
     $('#djing').slideUp();
   };
@@ -180,6 +186,18 @@ $(document).ready(function () {
       else {
         alert('You need to login to chat!');
       }
+    }
+  });
+
+  $('#chat-and-playlist-nav button').click(function () {
+    $('#chat-and-playlist-nav button').removeClass('active');
+    $(this).addClass('active');
+    
+    if ($(this).attr('id') == 'show-playlist-button') {
+      $('#chat-and-playlist').removeClass('show-only-chat').addClass('show-only-playlist');
+    }
+    else {
+      $('#chat-and-playlist').removeClass('show-only-playlist').addClass('show-only-chat'); 
     }
   });
 

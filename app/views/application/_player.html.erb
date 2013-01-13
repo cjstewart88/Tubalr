@@ -10,9 +10,25 @@
 
   <h2 id="current-video-title"></h2>
 
-  <div id="video-and-playlist" class="<%= 'no-playlist' if @dj %>">
+  <div id="video-playlist-chat">
     <div id="ytplayerid"></div> 
-    <ul id="playlist"></ul>
+
+    <div id="chat-and-playlist" class="<%= 'show-only-chat' if @dj %>">
+      <nav id="chat-and-playlist-nav">
+        <button id="show-playlist-button" class="active"><span class="icon-list"></span></button>
+        <button id="show-chat-button"><span class="icon-comment"></span></button>
+      </nav>
+
+      <ul id="playlist"></ul>
+
+      <div id="dj-chat">
+        <aside style="display: none;">Listeners: <span id="dj-listener-count">0</span></aside>
+        <div id="dj-chat-log"></div>
+        <div id="dj-chat-input-wrapper">
+          <input type="text" placeholder="Enter your message here..." id="dj-chat-input" class="mousetrap">
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -48,15 +64,6 @@
       </p>
     </div>
   <% end %>
-
-  <div id="dj-chat" class="<%= 'show-chat' if @dj %>">
-    <h2><aside style="display: none;">Listeners: <span id="dj-listener-count">0</span></aside>Chat With Listeners</h2>
-    <div id="dj-chat-log"></div>
-    <div id="dj-chat-input-wrapper">
-      <input type="text" placeholder="Enter your message here..." id="dj-chat-input" class="mousetrap">
-    </div>
-  </div>
-
 </section>
 
 <div id='popup-search'>
