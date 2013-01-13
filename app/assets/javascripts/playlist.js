@@ -96,11 +96,11 @@ var Playlist = {
 
   djModeChange: function (dj, title, videoId, videoAt) {
     Playlist.videos = [{
-      videoID: videoId,
+      videoID:    videoId,
       videoTitle: title,
-      startAt: videoAt
+      startAt:    videoAt
     }];
-
+    console.log([dj, title, videoId, videoAt]);
     Playlist.resultsReady();
   },
 
