@@ -76,7 +76,7 @@ window.Tubalr = (function(exports) {
 
     $('.enter-dj-mode').addClass('leave-dj-mode')
                        .removeClass('enter-dj-mode')
-                       .text('Quit DJ Mode')
+                       .val('Quit DJ Mode')
                        .attr('original-title', 'If you leave DJ mode your listeners will be sad!');
 
     $('#dj-chat').addClass('show-chat');
@@ -91,7 +91,7 @@ window.Tubalr = (function(exports) {
 
     $('.leave-dj-mode').addClass('enter-dj-mode')
                        .removeClass('leave-dj-mode')
-                       .text('Enter DJ Mode')
+                       .val('Enter DJ Mode')
                        .attr('original-title', 'Go LIVE and let others listen along with you!');
 
     $('#dj-chat').removeClass('show-chat');

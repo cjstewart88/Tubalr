@@ -104,14 +104,49 @@ var Playlist = {
     Playlist.resultsReady();
   },
 
-  just: function () {
-    var search = Playlist.options.search;
-    
-    var numberOfSongs = (Playlist.options.searchType == 'just' ? 40 : 20);
+  popupSearch: function () {
+    var search = $('#popup-search-query').val();
+    var videos = [];
+    if (search == '') { return; }
 
-    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&start=0&results=' + numberOfSongs , function (data) {
+    $('#popup-search-query, #search-popup-btn').attr('disabled', 'disabled');
+    $('#popup-search-results-holder').addClass('show-popup-search-message');
+    $('#popup-search-message').html("Searching...");
+    $('#popup-search-results').html('');
+    
+    Playlist.just({
+      search:       search,
+      videos:       videos, 
+      resultsReady: function () {
+        $('#popup-search-query, #search-popup-btn').removeAttr('disabled');
+        
+        if (!videos || videos.length == 0) {
+          $('#popup-search-message').html("We couldn't find anything for you :(");
+        }
+        else {
+          $('#popup-search-results-holder').removeClass('show-popup-search-message');
+
+          $.each(videos, function (i, video) {
+            $('#popup-search-results').append(
+              "<li class='dragvid' data-video-title='" + video.videoTitle + "' data-video-id='" + video.videoID + "' >" + 
+              "<span class='remove-video icon-trash'></span>" + 
+              "<a href='#' id='" + video.videoID + "' >" + video.videoTitle + "</a></li>"
+            );
+          });
+        }
+      }  
+    });
+  },
+
+  just: function (options) {
+    options = options || {};
+
+    var search = options.search || Playlist.options.search;
+    var videos = options.videos || Playlist.videos;
+
+    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&start=0&results=40' , function (data) {
       if (data.response.status.code == 5 || data.response.songs.length <= 10) {
-        Playlist.youtube();
+        Playlist.youtube(options);
       }
       else {
         var ajaxs = [];
@@ -122,8 +157,8 @@ var Playlist = {
               $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '%20%2D$20' + escape(track.title) + '&orderby=relevance&start-index=1&max-results=10&v=2&format=5&alt=json-in-script&callback=?', function (data) {
                 if (data.feed.hasOwnProperty("entry")) {
                   $.each(data.feed.entry, function (i, video) {
-                    if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video)) {
-                      Playlist.videos.push({ 
+                    if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video, videos) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video) && Video.hasTitle(video)) {
+                      videos.push({ 
                         videoID:    video.id.$t.split(":")[3], 
                         videoTitle: video.title.$t
                       }); 
@@ -137,11 +172,11 @@ var Playlist = {
           }
         });
         
-        $.when.apply($, ajaxs).then(Playlist.resultsReady);
+        $.when.apply($, ajaxs).then(options.resultsReady || Playlist.resultsReady);
       }
     });
   },
-
+                                                                                              
   similar: function () {
     var search = Playlist.options.search;
 
@@ -153,7 +188,7 @@ var Playlist = {
           $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(artist.name)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?&format=5', function (data) {
             if (data.feed.hasOwnProperty("entry")) {
               $.each(data.feed.entry, function (i, video) {  
-                if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video)) {
+                if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video) && Video.hasTitle(video)) {
                   Playlist.videos.push({ 
                     videoID: video.id.$t.split(":")[3], 
                     videoTitle: video.title.$t
@@ -184,7 +219,7 @@ var Playlist = {
           $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + searchFor + '&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?', function (data) {
             if (data.feed.hasOwnProperty("entry")) {
               $.each(data.feed.entry, function (i,video) {
-                if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotLive(video) && Video.isNotUserBanned(video)) {
+                if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotLive(video) && Video.isNotUserBanned(video) && Video.hasTitle(video)) {
                   Playlist.videos.push({ 
                     videoID:    video.id.$t.split(":")[3], 
                     videoTitle: video.title.$t,
@@ -203,14 +238,15 @@ var Playlist = {
     });
   },
 
-  youtube: function () {
-    var search = Playlist.options.search;
-    
-    $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(search)+'&orderby=relevance&start-index=1&max-results=40&v=2&alt=json-in-script&callback=?', function (data) {
+  youtube: function (options) {
+    var search = options.search || Playlist.options.search;
+    var videos = options.videos || Playlist.videos;
+
+    $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '&orderby=relevance&start-index=1&max-results=40&v=2&alt=json-in-script&callback=?', function (data) {
       if (data.feed.hasOwnProperty("entry")) {
         $.each(data.feed.entry, function (i, video) {
-          if (Video.isNotBlocked(video) && Video.isNotUserBanned(video)) {
-            Playlist.videos.push({ 
+          if (Video.isNotBlocked(video) && Video.isNotUserBanned(video) && Video.hasTitle(video)) {
+            videos.push({ 
               videoID:    video.id.$t.split(":")[3], 
               videoTitle: video.title.$t 
             });
@@ -218,7 +254,12 @@ var Playlist = {
         });
       }
       
-      Playlist.resultsReady();
+      if (options.resultsReady) {
+        options.resultsReady()
+      }
+      else {
+        Playlist.resultsReady();
+      }
     });
   },
 
@@ -298,7 +339,7 @@ var Playlist = {
     var playlistContainer = $('#playlist').empty();
 
     $.each(Playlist.videos, function(i) {
-      playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
+      playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><span class="remove-video icon-trash"></span><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
     });
     
     $('#' + Playlist.videos[Playlist.currentTrack].videoID).addClass('active');      
@@ -307,7 +348,13 @@ var Playlist = {
   start: function () {
     Playlist.preparePlaylist();
     Playlist.togglePlayer();
-    Playlist.currentVideo();
+
+    //now you just put #dev-mode on the end of the URL
+    //and you don't have to deal with videos playing
+    //(might need to refresh to see it work)
+    if (window.location.hash != '#dev-mode') {
+      Playlist.currentVideo();
+    }
   },
 
   playPause: function () {
@@ -349,8 +396,6 @@ var Playlist = {
     }
 
     Playlist.currentVideo();
-    
-    return false;
   },
 
   previousSong: function () {
@@ -364,8 +409,6 @@ var Playlist = {
       Playlist.currentTrack = Playlist.currentTrack-=1;
       Playlist.currentVideo();
     }
-    
-    return false;
   },
 
   jumpToSong: function (videoID) {
@@ -401,7 +444,7 @@ var Playlist = {
     var positions           = [];
     var currentPlayingVideo = Playlist.videos[Playlist.currentTrack].videoID;
 
-    $('#playlist li').each(function(index, item) {
+    $('#playlist li').each(function (index, item) {
       positions.push({
         track_number: index, 
         videoID:      $(item).data('videoId'), 
@@ -430,9 +473,7 @@ var Playlist = {
     });
   },
 
-  removeVideo: function () {
-    var videoID = Playlist.videos[Playlist.currentTrack].videoID;
-
+  removeVideo: function (videoID) {
     if (User.id) {
       if (User.username == Playlist.options.customPlaylistOwner) {
         $.ajax({
@@ -460,16 +501,19 @@ var Playlist = {
         });
       }
     }
+    
+    $("#playlist #" + videoID).parent().remove();
 
-    $("#playlist #" + videoID).remove();
-    Playlist.videos.splice(Playlist.currentTrack, 1);
+    var videoIndex = findIndexByKeyValue(Playlist.videos,'videoID', videoID);
+
+    Playlist.sortVideos();
 
     if (Playlist.videos.length == 0) {
       Player.self.stopVideo();
       $('#player').fadeOut();
       $('#empty-playlist').fadeIn();
     }
-    else {
+    else if (videoIndex == Playlist.currentTrack) {
       Playlist.nextSong("keepCurrentTrack");
     }
   },
@@ -592,8 +636,9 @@ $(document).ready(function () {
     }
   });
 
-  $('#remove-video').click(function () {
-    Playlist.removeVideo();
+  $('.remove-video').live('click', function (e) {
+    e.stopImmediatePropagation();
+    Playlist.removeVideo($(this).next().attr('id'));
     return false;
   });
 
@@ -620,6 +665,7 @@ $(document).ready(function () {
   });
 
   $('#playlist').sortable({
+    receive: Playlist.sortVideos,
     stop: Playlist.sortVideos
   });
 
