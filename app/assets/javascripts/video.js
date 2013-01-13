@@ -55,6 +55,15 @@ var Video = {
     else {
       return true;
     }
+  },
+
+  hasTitle: function (video) {
+    if (video.title.$t.trim() == '') {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 
 };
