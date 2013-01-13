@@ -100,7 +100,7 @@ var Playlist = {
       videoTitle: title,
       startAt:    (videoAt < 0 ? 0 : videoAt)
     }];
-    console.log([dj, title, videoId, videoAt]);
+
     Playlist.resultsReady();
   },
 
