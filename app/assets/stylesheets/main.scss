@@ -514,13 +514,17 @@ section {
   
   #popup-search-results-holder {
     overflow: visible;
+    
+    #popup-search-message {
+      display: none;
+    }
 
     #popup-search-results {
       overflow: auto;
       width: 100%;
       height: auto;
       max-height: 300px;
-      margin: 20px 0px;
+      margin: 20px 0px 5px;
       background: none;
 
       li {
@@ -532,7 +536,7 @@ section {
           border-bottom: none;
 
           &:hover {
-            background: #000;
+            background: #464646;
             color: #fff;
             cursor: -moz-grab;
             cursor: -webkit-grab;
@@ -543,6 +547,14 @@ section {
             cursor: -webkit-grabbing;
           }
         }
+      }
+    }
+
+    &.show-popup-search-message {
+      #popup-search-message {
+        display: block;
+        margin-top: 15px;
+        text-align: center;
       }
     }
   }

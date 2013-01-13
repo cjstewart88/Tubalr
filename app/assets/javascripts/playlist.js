@@ -108,16 +108,19 @@ var Playlist = {
     if (search == '') { return; }
 
     $('#popup-search-query, #search-popup-btn').attr('disabled', 'disabled');
+    $('#popup-search-results-holder').addClass('show-popup-search-message');
+    $('#popup-search-message').html("Searching...");
+    $('#popup-search-results').html('');
+    
     Playlist.genericSearch(search, function (vids) {
       $('#popup-search-query, #search-popup-btn').removeAttr('disabled');
-      $('#popup-search-results').html('');
       
       if (!vids || vids.length == 0) { //if results are empty/bad
-        $('#popup-search-results').html('<li>No results :(</li>');
+        $('#popup-search-message').html("We couldn't find anything for you :(");
         return;
-      } 
+      }
       else {
-        $('#popup-search-results').html('');
+        $('#popup-search-results-holder').removeClass('show-popup-search-message');
       }
 
       $.each(vids, function(i, vid) {
