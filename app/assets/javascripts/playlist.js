@@ -105,6 +105,7 @@ var Playlist = {
 
   popupSearch: function () {
     var search = $('#popup-search-query').val();
+    var videos = [];
     if (search == '') { return; }
 
     $('#popup-search-query, #search-popup-btn').attr('disabled', 'disabled');
@@ -112,80 +113,39 @@ var Playlist = {
     $('#popup-search-message').html("Searching...");
     $('#popup-search-results').html('');
     
-    Playlist.genericSearch(search, function (vids) {
-      $('#popup-search-query, #search-popup-btn').removeAttr('disabled');
-      
-      if (!vids || vids.length == 0) { //if results are empty/bad
-        $('#popup-search-message').html("We couldn't find anything for you :(");
-        return;
-      }
-      else {
-        $('#popup-search-results-holder').removeClass('show-popup-search-message');
-      }
+    Playlist.just({
+      search:       search,
+      videos:       videos, 
+      resultsReady: function () {
+        $('#popup-search-query, #search-popup-btn').removeAttr('disabled');
+        
+        if (!videos || videos.length == 0) {
+          $('#popup-search-message').html("We couldn't find anything for you :(");
+        }
+        else {
+          $('#popup-search-results-holder').removeClass('show-popup-search-message');
 
-      $.each(vids, function(i, vid) {
-        $('#popup-search-results').append(
-          "<li class='dragvid' data-video-title='" + vid.videoTitle + "' data-video-id='" + vid.videoID + "' >" + 
-          "<span class='remove-video icon-trash'></span>" + 
-          "<a href='#' id='" + vid.videoID + "' >" + vid.videoTitle + "</a></li>"
-        );
-      });  
+          $.each(videos, function (i, video) {
+            $('#popup-search-results').append(
+              "<li class='dragvid' data-video-title='" + video.videoTitle + "' data-video-id='" + video.videoID + "' >" + 
+              "<span class='remove-video icon-trash'></span>" + 
+              "<a href='#' id='" + video.videoID + "' >" + video.videoTitle + "</a></li>"
+            );
+          });
+        }
+      }  
     });
   },
 
-  /* usage:  
-   *   search('search term', function(data) {
-   *     console.log(data); // [{videoID: ..., videoTitle: ...}]
-   *   })
-   */
-  genericSearch: function (query, callback, options) {
-    if (!options) {
-      options = {};
-    }
-    var search = query;
-    
-    var numberOfSongs = options.numberOfSongs || 50;
+  just: function (options) {
+    options = options || {};
 
-    var results = [];
+    var search = options.search || Playlist.options.search;
+    var videos = options.videos || Playlist.videos;
 
-    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&start=0&results=' + numberOfSongs , function (data) {
-        var ajaxs = [];
-        
-        $.each(data.response.songs || [], function (i, track) {
-          if (track.title.toLowerCase().search("cover") == -1 && track.title.toLowerCase().search("remix") == -1) {
-            ajaxs.push(
-              $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '%20%2D$20' + escape(track.title) + '&orderby=relevance&start-index=1&max-results=10&v=2&format=5&alt=json-in-script&callback=?', function (data) {
-                if (data.feed.hasOwnProperty("entry")) {
-                  $.each(data.feed.entry, function (i, video) {
-                    if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video)) {
-                      results.push({ 
-                        videoID:    video.id.$t.split(":")[3], 
-                        videoTitle: video.title.$t
-                      }); 
-
-                      return false;
-                    }
-                  });
-                }
-              }))
-          }
-        });
-
-        $.when.apply($, ajaxs).then(function () {
-          callback(results);
-        });
-      }
-    );
-  },
-
-  just: function () {
-    var search = Playlist.options.search;
-    
-    var numberOfSongs = (Playlist.options.searchType == 'just' ? 40 : 20);
-
-    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&start=0&results=' + numberOfSongs , function (data) {
+    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&start=0&results=40' , function (data) {
       if (data.response.status.code == 5 || data.response.songs.length <= 10) {
-        Playlist.youtube();
+        Playlist.youtube(options);
       }
       else {
         var ajaxs = [];
@@ -196,8 +156,8 @@ var Playlist = {
               $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '%20%2D$20' + escape(track.title) + '&orderby=relevance&start-index=1&max-results=10&v=2&format=5&alt=json-in-script&callback=?', function (data) {
                 if (data.feed.hasOwnProperty("entry")) {
                   $.each(data.feed.entry, function (i, video) {
-                    if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video)) {
-                      Playlist.videos.push({ 
+                    if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video, videos) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video)) {
+                      videos.push({ 
                         videoID:    video.id.$t.split(":")[3], 
                         videoTitle: video.title.$t
                       }); 
@@ -211,7 +171,7 @@ var Playlist = {
           }
         });
         
-        $.when.apply($, ajaxs).then(Playlist.resultsReady);
+        $.when.apply($, ajaxs).then(options.resultsReady || Playlist.resultsReady);
       }
     });
   },
@@ -277,14 +237,15 @@ var Playlist = {
     });
   },
 
-  youtube: function () {
-    var search = Playlist.options.search;
-    
-    $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(search)+'&orderby=relevance&start-index=1&max-results=40&v=2&alt=json-in-script&callback=?', function (data) {
+  youtube: function (options) {
+    var search = options.search || Playlist.options.search;
+    var videos = options.videos || Playlist.videos;
+
+    $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '&orderby=relevance&start-index=1&max-results=40&v=2&alt=json-in-script&callback=?', function (data) {
       if (data.feed.hasOwnProperty("entry")) {
         $.each(data.feed.entry, function (i, video) {
           if (Video.isNotBlocked(video) && Video.isNotUserBanned(video)) {
-            Playlist.videos.push({ 
+            videos.push({ 
               videoID:    video.id.$t.split(":")[3], 
               videoTitle: video.title.$t 
             });
@@ -292,7 +253,12 @@ var Playlist = {
         });
       }
       
-      Playlist.resultsReady();
+      if (options.resultsReady) {
+        options.resultsReady()
+      }
+      else {
+        Playlist.resultsReady();
+      }
     });
   },
 

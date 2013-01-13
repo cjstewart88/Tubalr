@@ -8,16 +8,17 @@ var Video = {
     return video.media$group.media$category[0].$t === "Music";
   },
 
-  isUnique: function (video) {
+  isUnique: function (video, videos) {
+    videos = videos || Playlist.videos
     var unique = true;
     
-    for (var i = 0; i < Playlist.videos.length; i++) {
-      if (Playlist.videos[i].videoID === video.id.$t.split(":")[3]) {
+    for (var i = 0; i < videos.length; i++) {
+      if (videos[i].videoID === video.id.$t.split(":")[3]) {
         unique = false;
         break;
       }
 
-      var tmpTitle1 = Playlist.videos[i].videoTitle.toLowerCase().replace(/ *\([^)]*\) */g, '').replace(/[^a-zA-Z ]/g, "");
+      var tmpTitle1 = videos[i].videoTitle.toLowerCase().replace(/ *\([^)]*\) */g, '').replace(/[^a-zA-Z ]/g, "");
       var tmpTitle2 = video.title.$t.toLowerCase().replace(/ *\([^)]*\) */g, '').replace(/[^a-zA-Z ]/g, "");
       
       if (tmpTitle1 === tmpTitle2) {
