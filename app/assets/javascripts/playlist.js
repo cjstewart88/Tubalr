@@ -144,7 +144,11 @@ var Playlist = {
     var search = options.search || Playlist.options.search;
     var videos = options.videos || Playlist.videos;
 
-    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&start=0&results=40' , function (data) {
+    // This is needed so when the similar search calls this method
+    // it only gets 20 songs for the original search
+    var numberOfSongs = (Playlist.options.searchType == 'just' ? 40 : 20);
+
+    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&start=0&results=' + numberOfSongs , function (data) {
       if (data.response.status.code == 5 || data.response.songs.length <= 10) {
         Playlist.youtube(options);
       }
