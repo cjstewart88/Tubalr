@@ -11,9 +11,20 @@
   height: 390px;
   overflow: auto;
   width: 100%;
+  position: relative;
 
-  h2 {
-    margin-bottom: 15px;
+  #dj-listener-count-wrapper {
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    background: #000;
+    background: rgba(0, 0, 0, .8);
+    padding: 5px 10px;
+    @include border-radius(5px);
+
+    #dj-listener-count {
+      margin-left: 10px;
+    }
   }
 
   #dj-chat-log {

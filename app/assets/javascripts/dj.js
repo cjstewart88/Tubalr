@@ -13,6 +13,8 @@ window.Tubalr = (function(exports) {
     this.onUpdate = opts.onUpdate || function() {};
     this.socket   = io.connect(this.server, {port: this.port});
 
+    self.socket.emit('register', {from: self.username});
+    
     this.listenerCount = 0;
 
     this.socket.on('update', function(msg) {
@@ -21,7 +23,7 @@ window.Tubalr = (function(exports) {
     });
 
     this.socket.on('register', function(msg) {
-      this.socket.emit('register', {from: this.username});
+      self.socket.emit('register', {from: self.username});
     });
 
     this.socket.on('chat', function(msg) {
@@ -45,7 +47,8 @@ window.Tubalr = (function(exports) {
     });
 
     this.socket.on('users', function(msg) {
-
+      self.listenerCount = msg.users.length;
+      self.updateListenerCount();
     });
 
 
@@ -144,6 +147,10 @@ window.Tubalr = (function(exports) {
   };
 
   DJ.prototype.joinPartNotice = function (who, type) {
+    if (who == 'guest') {
+      return;
+    }
+
     var chatLog = $('#dj-chat-log');
     var action  = (type == 'join' ? ' joined the room.' : ' left the room.');
     var newLine = $('<div>').addClass('line').text(who + action);
