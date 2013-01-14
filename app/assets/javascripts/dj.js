@@ -148,7 +148,7 @@ window.Tubalr = (function(exports) {
     $('#dj-listener-count').text(this.listenerCount);
 
     if (options.user) {
-      var username = options.user;
+      var username = options.user.replace(/#/g,'');
 
       if (options.action == 'join') {
         var userLI = $('<li>').attr('id', username).text(username);
@@ -162,7 +162,7 @@ window.Tubalr = (function(exports) {
       $('#dj-listeners').html('');
 
       $.each(options.users, function (i, user) {
-        var userLI = $('<li>').attr('id', user).text(user);
+        var userLI = $('<li>').attr('id', user.replace(/#/g,'')).text(user);
         $('#dj-listeners').append(userLI);
       });
     }
