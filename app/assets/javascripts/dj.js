@@ -14,7 +14,7 @@ window.Tubalr = (function(exports) {
     this.socket   = io.connect(this.server, {port: this.port});
 
     self.socket.emit('register', {from: self.username});
-    
+
     this.listenerCount = 0;
 
     this.socket.on('update', function(msg) {
@@ -37,20 +37,19 @@ window.Tubalr = (function(exports) {
     this.socket.on('join', function(msg) {
       self.listenerCount += 1; 
       self.joinPartNotice(msg.from, 'join');
-      self.updateListenerCount();
+      self.updateListenersUI({ user: msg.from, action: 'join' });
     });
 
     this.socket.on('part', function(msg) {
       self.listenerCount -= 1;
       self.joinPartNotice(msg.from, 'part');
-      self.updateListenerCount();
+      self.updateListenersUI({ user: msg.from, action: 'part' });
     });
 
     this.socket.on('users', function(msg) {
       self.listenerCount = msg.users.length;
-      self.updateListenerCount();
+      self.updateListenersUI({ users: msg.users });
     });
-
 
   };
 
@@ -83,10 +82,18 @@ window.Tubalr = (function(exports) {
                        .val('Quit DJ Mode')
                        .attr('original-title', 'If you leave DJ mode your listeners will be sad!');
 
-    $('#chat-and-playlist').addClass('show-chat-and-playlist')
-                           .removeClass('show-only-playlist');
+    $('#main-player-ui-tabs-wrapper').addClass('show-dj-ui show-only-playlist');
 
     $('#djing').slideDown();
+  };
+
+  DJ.prototype.stopBroadcasting = function() {
+    if (this.broadcasting) {
+      this.broadcasting = false;
+      this.socket.emit('stop', { });
+      this.removeBroadcastingUI();
+      Playlist.djMode = null;
+    }
   };
 
   DJ.prototype.removeBroadcastingUI = function () {
@@ -99,26 +106,12 @@ window.Tubalr = (function(exports) {
                        .val('Enter DJ Mode')
                        .attr('original-title', 'Go LIVE and let others listen along with you!');
 
-    $('#chat-and-playlist').removeClass('show-chat-and-playlist')
-                           .addClass('show-only-playlist')
-                           .removeClass('show-only-chat');
-
-    $('#show-playlist-button').addClass('active');
-    $('#show-chat-button').removeClass('active');
+    $('#main-player-ui-tabs-wrapper').removeClass('show-dj-ui')
+                                     .removeClass('show-only-playlist show-only-chat show-only-listeners');
 
     $('#djing').slideUp();
   };
 
-  DJ.prototype.stopBroadcasting = function() {
-    if (this.broadcasting) {
-      this.broadcasting = false;
-
-      this.socket.emit('stop', { });
-
-      this.removeBroadcastingUI();
-      Playlist.djMode = null;
-    }
-  };
 
   DJ.prototype.updateBroadcast = function(videoTitle, videoId, videoElapsed) {
     if (this.broadcasting) {
@@ -140,26 +133,39 @@ window.Tubalr = (function(exports) {
     var newLine = $('<div>').addClass('line');
     var fromSpan= $('<span>').addClass('from').text(from + ': ');
     var message = $('<span>').addClass('message').text(text);
-
     newLine.append(fromSpan).append(message);
-
     chatLog.append(newLine).scrollTop(chatLog[0].scrollHeight);
   };
 
   DJ.prototype.joinPartNotice = function (who, type) {
-    if (who == 'guest') {
-      return;
-    }
-
     var chatLog = $('#dj-chat-log');
     var action  = (type == 'join' ? ' joined the room.' : ' left the room.');
     var newLine = $('<div>').addClass('line').text(who + action);
-
     chatLog.append(newLine).scrollTop(chatLog[0].scrollHeight);
   };
 
-  DJ.prototype.updateListenerCount = function () {
+  DJ.prototype.updateListenersUI = function (options) {
     $('#dj-listener-count').text(this.listenerCount);
+
+    if (options.user) {
+      var username = options.user;
+
+      if (options.action == 'join') {
+        var userLI = $('<li>').attr('id', username).text(username);
+        $('#dj-listeners').append(userLI);
+      }
+      else {
+        $('#dj-listeners #' + username).remove();
+      }
+    }
+    else {
+      $('#dj-listeners').html('');
+
+      $.each(options.users, function (i, user) {
+        var userLI = $('<li>').attr('id', user).text(user);
+        $('#dj-listeners').append(userLI);
+      });
+    }
   };
 
   exports.DJ = DJ;
@@ -196,15 +202,15 @@ $(document).ready(function () {
     }
   });
 
-  $('#chat-and-playlist-nav button').click(function () {
-    $('#chat-and-playlist-nav button').removeClass('active');
-    $(this).addClass('active');
-    
+  $('#main-player-ui-tabs button').click(function () {
     if ($(this).attr('id') == 'show-playlist-button') {
-      $('#chat-and-playlist').removeClass('show-only-chat').addClass('show-only-playlist');
+      $('#main-player-ui-tabs-wrapper').removeClass('show-only-chat show-only-listeners').addClass('show-only-playlist');
+    }
+    else if ($(this).attr('id') == 'show-chat-button') {
+      $('#main-player-ui-tabs-wrapper').removeClass('show-only-playlist show-only-listeners').addClass('show-only-chat'); 
     }
     else {
-      $('#chat-and-playlist').removeClass('show-only-playlist').addClass('show-only-chat'); 
+      $('#main-player-ui-tabs-wrapper').removeClass('show-only-playlist show-only-chat').addClass('show-only-listeners'); 
     }
   });
 

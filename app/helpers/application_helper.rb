@@ -63,7 +63,7 @@ module ApplicationHelper
   def timeline_event(event)
     case event.event
     when 'dj'
-      "Listened to #{event.query} DJ!"
+      "Listened to #{link_to(event.query, '/dj/'+event.query)} DJ!"
     when 'watchedVideo' 
       "Watched #{link_to(event.video_title, '/video/'+event.video_id)}."
     when 'just'  
@@ -94,7 +94,7 @@ module ApplicationHelper
 
     case event.event
     when 'dj'
-      "#{who} listened to #{event.query} DJ!"
+      "#{who} listened to #{link_to(event.query, '/dj/'+event.query)} DJ!"
     when 'watchedVideo'
       "#{who} watched #{link_to(event.video_title, '/video/'+event.video_id)}."
     when 'just'  

@@ -177,79 +177,79 @@ input[type=button], input[type=submit], a.button, button {
   text-align: center;
 }
 
-#video-playlist-chat {
+#main-player-ui {
   height: 390px;
   border: solid 1px #000;
   background: rgba(0,0,0, .4);
 
-  #chat-and-playlist {
+  #main-player-ui-tabs-wrapper {
     float: left;
     width: 32%;
     height: 390px;
 
-    #chat-and-playlist-nav {
+    #main-player-ui-tabs {
       display: none;
       height: 30px;
       border-bottom: solid 1px #000;
       position: relative;
 
+      #dj-listener-count {
+        margin-left: 10px;
+      }
+
       button {
         float: left;
         display: block;
-        width: 50%;
+        width: 33%;
         text-align: center;
         padding: 0;
         line-height: 30px;
         background: none;
         color: #fff;
         @include border-radius(0);
+        border-right: solid 1px #000;
 
-        &.active {
-          color: #548FF4;
-        }
-
-        &:first-child {
-          border-right: solid 1px #000;
+        &:last-child {
+          border-right: none;
         }
       }
     }
 
-    &.show-chat-and-playlist {
-      #chat-and-playlist-nav {
+    &.show-dj-ui {
+      #main-player-ui-tabs {
         display: block;
-      }
-      
-      #dj-chat {
-        display: none;
-
-        #dj-chat-log {
-          height: 302px;  
-        }
       }
 
       #playlist {
-        height: 360px;
+        height: 359px;
       }
     }
 
-    &.show-only-chat {
-      #dj-chat {
-        display: block;
-      }
+    &.show-dj-listener-ui {
+      #show-playlist-button { display: none; }
+      #show-chat-button, #show-listeners-button { width: 50%; }
 
-      #playlist {
-        display: none !important;
+      #main-player-ui-tabs {
+        display: block;
       }
     }
 
     &.show-only-playlist {
-      #playlist {
-        display: block;
-      }
+      #show-playlist-button { color: #548FF4; }
+      #playlist { display: block; }
+      #dj-chat, #dj-listeners { display: none; }
+    }
+    
+    &.show-only-chat {
+      #show-chat-button { color: #548FF4; }
+      #dj-chat { display: block; }
+      #playlist, #dj-listeners { display: none; }
+    }
 
-      #dj-chat {
-        display: none !important;
-      }
+    &.show-only-listeners {
+      #show-listeners-button { color: #548FF4; }
+      #dj-listeners { display: block; }
+      #dj-chat, #playlist { display: none; }
     }
   }
 }

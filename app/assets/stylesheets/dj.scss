@@ -5,30 +5,28 @@
   margin-top: 20px;
 }
 
-#dj-chat {
+#dj-listeners, #dj-chat {
   display: none;
   float: left;
-  height: 390px;
+  height: 359px;
   overflow: auto;
   width: 100%;
   position: relative;
+}
 
-  #dj-listener-count-wrapper {
-    position: absolute;
-    right: 30px;
-    top: 10px;
-    background: #000;
-    background: rgba(0, 0, 0, .8);
-    padding: 5px 10px;
-    @include border-radius(5px);
+#dj-listeners {
+  li {
+    padding: 10px;
 
-    #dj-listener-count {
-      margin-left: 10px;
+    &:nth-child(even) {
+      background: rgba(0,0,0,.3);
     }
   }
+}
 
+#dj-chat {
   #dj-chat-log {
-    height: 332px;
+    height: 301px;
     padding: 10px;
     overflow-y: scroll;
   }
