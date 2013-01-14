@@ -141,7 +141,7 @@ window.Tubalr = (function(exports) {
     if (who.search("guest") == 0) {
       return;
     }
-    
+
     var chatLog = $('#dj-chat-log');
     var action  = (type == 'join' ? ' joined the room.' : ' left the room.');
     var newLine = $('<div>').addClass('line').text(who + action);
@@ -152,7 +152,7 @@ window.Tubalr = (function(exports) {
     $('#dj-listener-count').text(this.listenerCount);
 
     if (options.user) {
-      var username = options.user.replace(/#/g,'');
+      var username = options.user;
 
       if (options.action == 'join') {
         var userLI = $('<li>').attr('id', username).text(username);
@@ -166,7 +166,7 @@ window.Tubalr = (function(exports) {
       $('#dj-listeners').html('');
 
       $.each(options.users, function (i, user) {
-        var username = user.replace(/#/g,'');
+        var username = user;
         var userLI = $('<li>').attr('id', username).text(username);
         $('#dj-listeners').append(userLI);
       });

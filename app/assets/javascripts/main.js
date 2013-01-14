@@ -41,7 +41,7 @@ $(document).ready(function () {
     dialogClass:  'popup-search-dialog',
     autoOpen:     false,
     draggable:    true,
-    title:        'Playlist Mixer',
+    title:        'Mix in Videos',
     position:     [($(window).width() / 2) - (350 / 2), 150]
   });
   
