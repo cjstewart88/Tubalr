@@ -162,7 +162,8 @@ window.Tubalr = (function(exports) {
       $('#dj-listeners').html('');
 
       $.each(options.users, function (i, user) {
-        var userLI = $('<li>').attr('id', user.replace(/#/g,'')).text(user);
+        var username = user.replace(/#/g,'');
+        var userLI = $('<li>').attr('id', username).text(username);
         $('#dj-listeners').append(userLI);
       });
     }
