@@ -138,6 +138,10 @@ window.Tubalr = (function(exports) {
   };
 
   DJ.prototype.joinPartNotice = function (who, type) {
+    if (who.search("guest") == 0) {
+      return;
+    }
+    
     var chatLog = $('#dj-chat-log');
     var action  = (type == 'join' ? ' joined the room.' : ' left the room.');
     var newLine = $('<div>').addClass('line').text(who + action);
