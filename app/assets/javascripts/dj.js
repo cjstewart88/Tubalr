@@ -219,4 +219,15 @@ $(document).ready(function () {
     }
   });
 
+  $.getJSON('http://throttle.io:8080/stats.json', function (data) { 
+    if (data.djs.length == 0) {
+      $('.djs-list').replaceWith("<p>There's currently no one DJing, <a href='http://tubalr.tumblr.com/post/40519876276/introducing-dj-mode' target='_blank'>go spin it up</a>!</p>");
+    } 
+    else {
+      $.each(data.djs, function (i, username) {
+        $('.djs-list').append('<li><a href="/dj/'+username+'">'+username+'</a></li>');
+      });  
+    }
+  });
+
 });
