@@ -1,6 +1,4 @@
 Tubalr::Application.routes.draw do
-  use_doorkeeper
-
   devise_for :users, :controllers => { :registrations => "registrations" }
   devise_scope :user do
     get "/users/sign_out"                           => "devise/sessions#destroy"

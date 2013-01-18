@@ -44,6 +44,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_current_user
-    current_user = User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
+    # set
+    # current_user = User.find() if params[:auth_token]
   end
 end

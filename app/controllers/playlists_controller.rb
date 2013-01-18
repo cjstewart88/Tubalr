@@ -1,6 +1,4 @@
 class PlaylistsController < ApplicationController
-  doorkeeper_for :create, :delete_video, :destroy, :update, :if => lambda { !user_signed_in? }
-
   def listen
     @user               = User.where(:username =>  params[:username]).first
     @username           = params[:username]
@@ -113,11 +111,5 @@ class PlaylistsController < ApplicationController
     end
 
     render :json => response
-  end
-
-  private
-
-  def verify_user
-    user_signed_in?
   end
 end

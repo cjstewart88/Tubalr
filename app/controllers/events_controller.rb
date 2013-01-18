@@ -39,8 +39,6 @@
 # }
 
 class EventsController < ApplicationController
-  doorkeeper_for :create, :if => lambda { !user_signed_in? }
-
   before_filter :validate_current_user
 
   def create
