@@ -1,7 +1,7 @@
 class ApiController < ApplicationController
   doorkeeper_for :user_info
 
-  before_filter :validate_user_id
+  before_filter :validate_user_id, :except => :library
 
   def library
     render :json => {
