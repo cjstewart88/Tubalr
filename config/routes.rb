@@ -1,5 +1,10 @@
 Tubalr::Application.routes.draw do
+  use_doorkeeper
+
   devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_scope :user do
+    get "/users/sign_out"                           => "devise/sessions#destroy"
+  end
 
   root :to => "application#index"
 
@@ -12,7 +17,6 @@ Tubalr::Application.routes.draw do
   get "/r/:subreddit"                               => "application#index"
   get "/dj/:username"                               => "application#dj"
 
-  get "/r"                                          => "application#explore"
   get "/explore"                                    => "application#explore"
 
   post "/follow/:who"                               => "follows#follow"
@@ -20,15 +24,14 @@ Tubalr::Application.routes.draw do
 
   get "/users"                                      => "users#list"
   get "/:username/profile"                          => "users#profile"
-  get "/:username/playlists"                        => "users#profile"
-  
+
   get "/:username/playlist/:playlist_name.json"     => "playlists#get"
   get "/:username/playlist/:playlist_name"          => "playlists#listen"
   post "/:username/playlist/:playlist_name/sort"    => "playlists#sort"
   match "/playlist/create"                          => "playlists#create"
   match "/playlist/add_video"                       => "playlists#add_video"
   match "/playlist/delete_video"                    => "playlists#delete_video"
-  
+
   resources :playlists, :only => [:destroy, :update]
 
   post "/import_youtube_playlists"                  => "playlists#import_youtube_playlists"
@@ -38,7 +41,7 @@ Tubalr::Application.routes.draw do
 
   post "/event"                                     => "events#create"
 
-  devise_scope :user do
-    get "/users/sign_out"                           => "devise/sessions#destroy"
-  end
+  get "/api/library.json"                           => "api#library"
+  get "/api/user/:user_id/info.json"                => "api#user_info"
+  get "/api/user/:user_id/playlists.json"           => "api#user_playlists"
 end

@@ -1,7 +1,6 @@
 # Params to pass:
 #
 # {
-#   api_key:        string,   required only IF submitting an event from outside the app
 #   user_id:        integer,  REQUIRED must be the user_id of the person triggering the event
 #   event:          string,   REQUIRED can be 'watchedVideo', 'just', 'similar', 'genre', 'dj', 'reddit', or 'customPlaylist'
 #   query:          string,   required IF event IS 'just', 'similar', 'genre', 'dj', 'reddit', or 'customPlaylist'
@@ -40,6 +39,8 @@
 # }
 
 class EventsController < ApplicationController
+  doorkeeper_for :create, :if => lambda { !user_signed_in? }
+
   before_filter :validate_current_user
 
   def create

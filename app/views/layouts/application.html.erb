@@ -5,7 +5,7 @@
     <meta property="og:image" content="http://www.tubalr.com/assets/facebook-meta-logo.png"/>
     <META NAME="Description" CONTENT="Tubalr is a simple way to enjoy great music videos.">
     <%= stylesheet_link_tag     "http://fonts.googleapis.com/css?family=PT+Sans:400,700,800,400italic,700italic", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800", "application" %>
-    
+
     <script>
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-16656461-3']);
@@ -20,38 +20,37 @@
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <%= javascript_tag do %>
       User.init({
-        id:           <%= current_user.id %>, 
-        username:     '<%= escape_javascript(current_user.username) %>', 
+        id:           <%= current_user.id %>,
+        username:     '<%= escape_javascript(current_user.username) %>',
         bannedVideos: <%= array_or_string_for_javascript(current_user.banned_videos.map(&:video_id)) %>
       });
     <% end if user_signed_in? %>
-    
+
     <%= csrf_meta_tag %>
   </head>
   <body>
     <div id="fb-root"></div>
-     
+
     <div id="main">
       <div id="inner-main">
         <div id="notices">
           <%= "<aside class='flash-msg'>#{flash[:alert]}</aside>".html_safe   if !flash[:alert].nil?  %>
           <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
         </div>
-      
+
         <header id="main-header">
           <h1 id="logo">
             <a href='/' class="tooltip" original-title="Pronounced: tuba-ler">tubalr</a>
           </h1>
-        
+
           <nav id="main-nav">
             <%= link_to('explore', '/explore') %>
-            <%= link_to('users', '/users') %>
             <% if user_signed_in? %>
-              <%= link_to('my profile', "/#{current_user.username}/profile") %>  
-              <%= link_to('settings', '/users/edit') %>  
+              <%= link_to('my profile', "/#{current_user.username}/profile") %>
+              <%= link_to('settings', '/users/edit') %>
               <%= link_to('logout', destroy_user_session_path, :method => :delete) %>
-            <% else %>  
-              <%= link_to('sign up', '/users/sign_up') %> 
+            <% else %>
+              <%= link_to('sign up', '/users/sign_up') %>
               <%= link_to('login', '/users/sign_in') %>
             <% end %>
           </nav>
@@ -60,7 +59,7 @@
         </header>
 
         <%= render :partial => 'player' %>
-        
+
         <%= yield %>
 
         <aside class="social">
@@ -68,33 +67,33 @@
           <a href="https://twitter.com/tubalr" class="twitter-follow-button" data-show-count="true">Follow @tubalr</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
         </aside>
-        
+
         <a id="echo" href="http://the.echonest.com/" target="_blank"><img src="/assets/echo.gif" width="60" height="50"/></a>
 
         <div id="about-tubalr">
           <p>
             Tubalr is Pronounced: tuba-ler
           </p>
-          
+
           <p>
             Have feedback, feature requests, or bugs? Want to share a custom playlist or whatever else you may think of? Head on over to <a href="http://www.reddit.com/r/tubalr" target="_blank">/r/tubalr</a>. Checkout Tubalr's <%= link_to('blog', 'http://www.tubalr.tumblr.com/', :target => '_blank') %> for updates.
           <p>
 
           <p>
-            Tubalr is an app that was crafted out of curiosity and passion, Sept 12th 2010. I 
+            Tubalr is an app that was crafted out of curiosity and passion, Sept 12th 2010. I
             released it into the wild and have been iterating ever since. I built Tubalr because
             I kept running across great high quality videos wishing I had a simple app to play those
-            videos back to back, while working or doing other things. 
+            videos back to back, while working or doing other things.
           </p>
-      
+
           <p>
-            I mentioned that I've been 
+            I mentioned that I've been
             tweaking Tubalr since its creation, and thats largely due to the amazing feedback
-            and support given by its supporters and users. So with that said, if you have ANY 
-            feedback or just wanna chat... please shoot an e-mail to 
-            <a href='mailto:listen.to.tubalr@gmail.com'>listen.to.tubalr@gmail.com</a>. 
+            and support given by its supporters and users. So with that said, if you have ANY
+            feedback or just wanna chat... please shoot an e-mail to
+            <a href='mailto:listen.to.tubalr@gmail.com'>listen.to.tubalr@gmail.com</a>.
           </p>
-      
+
           <p>
             Oh, by the way, my name's Cody Jack Stewart, the founder and crafter of Tubalr. If ya need anything
             at all, checkout my <a href="http://www.codyjackstewart.com/" target="_blank">personal site</a>.

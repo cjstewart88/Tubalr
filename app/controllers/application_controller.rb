@@ -1,16 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-    
-  before_filter :ensure_domain
 
-  APP_DOMAIN = 'www.tubalr.com'
+  before_filter :ensure_domain, :check_current_user
 
-  def ensure_domain
-    if Rails.env.production? && request.env['HTTP_HOST'] != APP_DOMAIN
-      redirect_to "http://#{APP_DOMAIN}#{request.fullpath}", :status => 301
-    end
-  end
-  
   def index
     flash[:notice] = "Thanks a ton for your support, it means a lot!" if params[:thanks]
 
@@ -41,5 +33,17 @@ class ApplicationController < ActionController::Base
   def dj
     @dj = params[:username]
     render :layout => "application", :template => "index"
+  end
+
+  private
+
+  def ensure_domain
+    if Rails.env.production? && request.env['HTTP_HOST'] != 'www.tubalr.com'
+      redirect_to "http://www.tubalr.com#{request.fullpath}", :status => 301
+    end
+  end
+
+  def check_current_user
+    current_user = User.find(doorkeeper_token.resource_owner_id) if doorkeeper_token
   end
 end
