@@ -1,18 +1,19 @@
 class PlaylistsController < ApplicationController
-  
+  doorkeeper_for :create, :delete_video, :destroy, :update, :if => lambda { !user_signed_in? }
+
   def listen
     @user               = User.where(:username =>  params[:username]).first
     @username           = params[:username]
     @playlist_name      = params[:playlist_name]
     @is_playlist_owner  = current_user.present? && current_user.username == params[:username]
-    
+
     render :layout => "application", :template => "index"
-  end  
-  
+  end
+
   def import_youtube_playlists
     params[:playlists].values.each do | youtube_playlist |
       playlist  = current_user.playlists.where("lower(playlist_name) = ?", youtube_playlist["name"].downcase).first
-      
+
       if !playlist.present?
         playlist = current_user.playlists.create(:playlist_name => youtube_playlist["name"])
       end
@@ -30,16 +31,16 @@ class PlaylistsController < ApplicationController
 
   def create
     playlist  = current_user.playlists.where("lower(playlist_name) = ?", params[:playlist_name].downcase).first
-    
+
     to_return = {}
-    
+
     if playlist.present?
       playlist.videos.create(:video_id => params[:video_id], :video_title => params[:video_title])
     else
       playlist_name = params[:playlist_name]
-      
+
       new_playlist = current_user.playlists.create(:playlist_name => playlist_name)
-    
+
       new_playlist.videos.create(:video_id => params[:video_id], :video_title => params[:video_title])
 
       to_return[:id]    = new_playlist.id
@@ -48,19 +49,19 @@ class PlaylistsController < ApplicationController
 
     render :json => to_return
   end
-  
+
   def add_video
     playlist  = Playlist.find(params[:playlist_id])
     video     = playlist.videos.where("video_id = ?", params[:video_id]).first
-    
+
     if !video.present?
       playlist.videos.create(:video_id => params[:video_id], :video_title => params[:video_title])
-    
+
       response = {
         :added_to_playlist => true
       }
     end
-    
+
     render :json => response
   end
 
@@ -79,7 +80,7 @@ class PlaylistsController < ApplicationController
 
   def destroy
     current_user.playlists.find(params[:id]).destroy
-    
+
     render :json => {}
   end
 
@@ -100,10 +101,10 @@ class PlaylistsController < ApplicationController
   def get
     response  = []
     user      = User.where(:username => params[:username]).first
-    
+
     if user.present?
       playlist_data = user.playlists.where("lower(playlist_name) = ?", params[:playlist_name].downcase).first
-      
+
       if playlist_data.present?
         playlist_data.videos.each do | video |
           response.push(:videoID => video["video_id"], :videoTitle => video["video_title"])
@@ -112,5 +113,11 @@ class PlaylistsController < ApplicationController
     end
 
     render :json => response
+  end
+
+  private
+
+  def verify_user
+    user_signed_in?
   end
 end

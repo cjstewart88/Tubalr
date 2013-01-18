@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-    
+
   before_filter :ensure_domain
 
   APP_DOMAIN = 'www.tubalr.com'
@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       redirect_to "http://#{APP_DOMAIN}#{request.fullpath}", :status => 301
     end
   end
-  
+
   def index
     flash[:notice] = "Thanks a ton for your support, it means a lot!" if params[:thanks]
 
@@ -41,5 +41,15 @@ class ApplicationController < ActionController::Base
   def dj
     @dj = params[:username]
     render :layout => "application", :template => "index"
+  end
+
+  private
+
+  def current_user
+    if current_user
+      current_user
+    elsif doorkeeper_token
+      User.find(doorkeeper_token.resource_owner_id)
+    end
   end
 end
