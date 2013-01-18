@@ -42,4 +42,6 @@ Tubalr::Application.routes.draw do
   post "/event"                                     => "events#create"
 
   get "/api/library.json"                           => "api#library"
+  get "/api/user/:user_id/info.json"                => "api#user_info"
+  get "/api/user/:user_id/playlists.json"           => "api#user_playlists"
 end
