@@ -39,8 +39,8 @@
         <h2>
           My Favorite Genres
         </h2>
-        
-        <% if current_user.favorite_genres.count != 0 %>  
+
+        <% if current_user.favorite_genres.count != 0 %>
           <ul class="list">
             <% current_user.favorite_genres.each do | genre | %>
               <li><a href='/just/<%= genre %>'><%= genre %></a></li>
@@ -80,46 +80,9 @@
       </h2>
 
       <ul class="list">
-        <li><a href='/just/rock'>rock</a></li>
-        <li><a href='/just/electronic'>electronic</a></li>
-        <li><a href='/just/hip hop'>hip hop</a></li>
-        <li><a href='/just/pop rock'>pop rock</a></li>
-        <li><a href='/just/indie rock'>indie rock</a></li>
-        <li><a href='/just/jazz'>jazz</a></li>
-        <li><a href='/just/techno'>techno</a></li>
-        <li><a href='/just/hard rock'>hard rock</a></li>
-        <li><a href='/just/electro'>electro</a></li>
-        <li><a href='/just/disco'>disco</a></li>
-        <li><a href='/just/heavy metal'>heavy metal</a></li>
-        <li><a href='/just/trance'>trance</a></li>
-        <li><a href='/just/alternative rock'>alternative rock</a></li>
-        <li><a href='/just/pop'>pop</a></li>
-        <li><a href='/just/downtempo'>downtempo</a></li>
-        <li><a href='/just/new wave'>new wave</a></li>
-        <li><a href='/just/reggae'>reggae</a></li>
-        <li><a href='/just/folk rock'>folk rock</a></li>
-        <li><a href='/just/funk'>funk</a></li>
-        <li><a href='/just/dance pop'>dance pop</a></li>
-        <li><a href='/just/soft rock'>soft rock</a></li>
-        <li><a href='/just/classic rock'>classic rock</a></li>
-        <li><a href='/just/dub'>dub</a></li>
-        <li><a href='/just/tech house'>tech house</a></li>
-        <li><a href='/just/deep house'>deep house</a></li>
-        <li><a href='/just/progressive house'>progressive house</a></li>
-        <li><a href='/just/rap'>rap</a></li>
-        <li><a href='/just/progressive trance'>progressive trance</a></li>
-        <li><a href='/just/art rock'>art rock</a></li>
-        <li><a href='/just/breakbeat'>breakbeat</a></li>
-        <li><a href='/just/singer-songwriter'>singer-songwriter</a></li>
-        <li><a href='/just/indie pop'>indie pop</a></li>
-        <li><a href='/just/easy listening'>easy listening</a></li>
-        <li><a href='/just/experimental'>experimental</a></li>
-        <li><a href='/just/country rock'>country rock</a></li>
-        <li><a href='/just/blues'>blues</a></li>
-        <li><a href='/just/gangster rap'>gangster rap</a></li>
-        <li><a href='/just/punk'>punk</a></li>
-        <li><a href='/just/pop rap'>pop rap</a></li>
-        <li><a href='/just/blues-rock'>blues-rock</a></li>
+        <% TOP_GENRES.each do | genre | %>
+          <li><a href='/just/<%= genre %>'><%= genre %></a></li>
+        <% end %>
       </ul>
     </div>
 
@@ -137,349 +100,23 @@
 
     <div class="tab-content reddit-tab-content">
       <h2>
-        Reddit Generated Playlists 
+        Reddit Generated Playlists
       </h2>
 
       <p>
-        These playlists are genered by using posts made on a popular link sharing website known as <a href="http://www.reddit.com/">Reddit</a>. Each listing represents a community on Reddit and these are the "hot" links for each one at any given time. 
+        These playlists are genered by using posts made on a popular link sharing website known as <a href="http://www.reddit.com/">Reddit</a>. Each listing represents a community on Reddit and these are the "hot" links for each one at any given time.
         <br/></br>
         <b>TIP:</b> Don't see the subreddit you're looking for? You can search for it on the main page by typing something like  '/r/video'. Or navigate to a url like 'www.tubalr.com/r/video' in your browsers URL bar.
       </p>
-      
-      <h3>Classical Music</h3>
-      <ul class="list">
-        <li><a href="/r/classicalmusic">/r/classicalmusic</a></li>
-        <li><a href="/r/baroque">/r/baroque</a></li>
-        <li><a href="/r/contemporary">/r/contemporary</a></li>
-        <li><a href="/r/concertband">/r/concertband</a></li>
-        <li><a href="/r/choralmusic">/r/choralmusic</a></li>
-        <li><a href="/r/chambermusic">/r/ChamberMusic</a></li>
-        <li><a href="/r/earlymusicalnotation">/r/earlymusicalnotation</a></li>
-        <li><a href="/r/icm">/r/icm</a></li>
-        <li><a href="/r/opera">/r/Opera</a></li>
-        <li><a href="/r/orchestra">/r/orchestra</a></li>
-      </ul>
 
-      <h3>Electronic Music</h3>
-      <ul class="list">
-        <li><a href="/r/chiptunes">/r/Chiptunes</a></li>
-        <li><a href="/r/DnB">/r/DnB</a></li>
-        <li><a href="/r/DubStep">/r/DubStep</a></li>
-        <li><a href="/r/electrohouse">/r/electrohouse</a></li>
-        <li><a href="/r/ElectronicMusic">/r/ElectronicMusic</a></li>
-        <li><a href="/r/glitch">/r/glitch</a></li>
-        <li><a href="/r/minimal">/r/minimal</a></li>
-        <li><a href="/r/mixes">/r/mixes</a></li>
-        <li><a href="/r/realdubstep">/r/RealDubstep</a></li>
-        <li><a href="/r/swinghouse">/r/swinghouse</a></li>
-        <li><a href="/r/Techno">/r/Techno</a></li>
-        <li><a href="/r/Trance">/r/Trance</a></li>
-        <li><a href="/r/futurebeats">/r/futurebeats</a></li>
-        <li><a href="/r/acidhouse">/r/acidhouse</a></li>
-        <li><a href="/r/ambientmusic">/r/ambientmusic</a></li>
-        <li><a href="/r/astateoftrance">/r/AStateOfTrance</a></li>
-        <li><a href="/r/breakbeat">/r/breakbeat</a></li>
-        <li><a href="/r/breakcore">/r/breakcore</a></li>
-        <li><a href="/r/Chipbreak">/r/Chipbreak</a></li>
-        <li><a href="/r/complextro">/r/complextro</a></li>
-        <li><a href="/r/darkstep">/r/darkstep</a></li>
-        <li><a href="/r/electronicdancemusic">/r/electronicdancemusic</a></li>
-        <li><a href="/r/ElectronicJazz">/r/ElectronicJazz</a></li>
-        <li><a href="/r/electrohiphop">/r/electrohiphop</a></li>
-        <li><a href="/r/electropop">/r/electropop</a></li>
-        <li><a href="/r/ExperimentalMusic">/r/ExperimentalMusic</a></li>
-        <li><a href="/r/fidget">/r/fidget</a></li>
-        <li><a href="/r/filth">/r/filth</a></li>
-        <li><a href="/r/frenchelectro">/r/frenchelectro</a></li>
-        <li><a href="/r/funkhouse">/r/funkhouse</a></li>
-        <li><a href="/r/fusiondancemusic">/r/fusiondancemusic</a></li>
-        <li><a href="/r/futurefunkairlines">/r/FutureFunkAirlines</a></li>
-        <li><a href="/r/FutureGarage">/r/FutureGarage</a></li>
-        <li><a href="/r/gabber">/r/gabber</a></li>
-        <li><a href="/r/glitchop">/r/glitchop</a></li>
-        <li><a href="/r/Grime">/r/Grime</a></li>
-        <li><a href="/r/happyhardcore">/r/happyhardcore</a></li>
-        <li><a href="/r/hardhouse">/r/hardhouse</a></li>
-        <li><a href="/r/hardstyle">/r/hardstyle</a></li>
-        <li><a href="/r/house">/r/house</a></li>
-        <li><a href="/r/idm">/r/idm</a></li>
-        <li><a href="/r/industrialmusic">/r/industrialmusic</a></li>
-        <li><a href="/r/italodisco">/r/ItaloDisco</a></li>
-        <li><a href="/r/mashups">/r/mashups</a></li>
-        <li><a href="/r/moombahcore">/r/moombahcore</a></li>
-        <li><a href="/r/psybient">/r/psybient</a></li>
-        <li><a href="/r/psytrance">/r/psytrance</a></li>
-        <li><a href="/r/purplemusic">/r/purplemusic</a></li>
-        <li><a href="/r/raggajungle">/r/raggajungle</a></li>
-        <li><a href="/r/shoegaze">/r/shoegaze </a></li>
-        <li><a href="/r/skweee">/r/skweee</a></li>
-        <li><a href="/r/turntablists">/r/turntablists</a></li>
-        <li><a href="/r/tech_house">/r/tech_house</a></li>
-        <li><a href="/r/ukfunky">/r/ukfunky</a></li>
-      </ul>
-
-      <h3>Rock / Metal</h3>
-      <ul class="list">
-        <li><a href="/r/Alternativerock">/r/AlternativeRock</a></li>
-        <li><a href="/r/blues">/r/Blues</a></li>
-        <li><a href="/r/folk">/r/folk</a></li>
-        <li><a href="/r/indie_rock">/r/indie_rock</a></li>
-        <li><a href="/r/metal">/r/metal</a></li>
-        <li><a href="/r/metalcore">/r/metalcore</a></li>
-        <li><a href="/r/poppunkers">/r/poppunkers</a></li>
-        <li><a href="/r/PostHardcore">/r/PostHardcore</a></li>
-        <li><a href="/r/postrock">/r/Post-Rock</a></li>
-        <li><a href="/r/punk">/r/punk</a></li>
-        <li><a href="/r/psychedelicrock">/r/PsychedelicRock</a></li>
-        <li><a href="/r/90sAlternative">/r/90sAlternative</a></li>
-        <li><a href="/r/90sRock">/r/90sRock</a></li>
-        <li><a href="/r/AORmelodic">/r/AORMelodic</a></li>
-        <li><a href="/r/blackmetal">/r/BlackMetal</a></li>
-        <li><a href="/r/bluegrass">/r/bluegrass</a></li>
-        <li><a href="/r/bluesrock">/r/bluesrock</a></li>
-        <li><a href="/r/CanadianClassicRock">/r/CanadianClassicRock</a></li>
-        <li><a href="/r/country">/r/country</a></li>
-        <li><a href="/r/crunkcore">/r/crunkcore</a></li>
-        <li><a href="/r/deathcore">/r/deathcore</a></li>
-        <li><a href="/r/deathmetal">/r/deathmetal</a></li>
-        <li><a href="/r/djent">/r/Djent</a></li>
-        <li><a href="/r/doommetal">/r/DoomMetal</a></li>
-        <li><a href="/r/EmoScreamo">/r/EmoScreamo</a></li>
-        <li><a href="/r/folkmetal">/r/folkmetal</a></li>
-        <li><a href="/r/garagepunk">/r/GaragePunk</a></li>
-        <li><a href="/r/GothicMetal">/r/GothicMetal</a></li>
-        <li><a href="/r/Grunge">/r/Grunge</a></li>
-        <li><a href="/r/hardcore">/r/hardcore</a></li>
-        <li><a href="/r/HardRock">/r/HardRock</a></li>
-        <li><a href="/r/mathrock">/r/MathRock</a></li>
-        <li><a href="/r/melodicdeathmetal">/r/melodicdeathmetal</a></li>
-        <li><a href="/r/melodicmetal">/r/MelodicMetal</a></li>
-        <li><a href="/r/newwave">/r/NewWave</a></li>
-        <li><a href="/r/noiserock">/r/noiserock</a></li>
-        <li><a href="/r/numetal">/r/numetal</a></li>
-        <li><a href="/r/powermetal">/r/powermetal</a></li>
-        <li><a href="/r/powerpop">/r/powerpop</a></li>
-        <li><a href="/r/ProgMetal">/r/ProgMetal</a></li>
-        <li><a href="/r/progrockmusic">/r/progrockmusic</a></li>
-        <li><a href="/r/psychedelicrock">/r/PsychedelicRock</a></li>
-        <li><a href="/r/Punkskahardcore">/r/Punkskahardcore</a></li>
-        <li><a href="/r/Punk_Rock">/r/Punk_Rock</a></li>
-        <li><a href="/r/rock">/r/Rock</a></li>
-        <li><a href="/r/stonerrock">/r/stonerrock</a></li>
-        <li><a href="/r/symphonicblackmetal">/r/symphonicblackmetal</a></li>
-        <li><a href="/r/synthrock">/r/synthrock</a></li>
-        <li><a href="/r/truethrash">/r/truethrash</a></li>
-        <li><a href="/r/Truemetal">/r/Truemetal</a></li>
-        <li><a href="/r/womenrock">/r/WomenRock</a></li>
-      </ul>
-
-      <h3>Hip Hop</h3>
-      <ul class="list">
-        <li><a href="/r/HipHopHeads">/r/HipHopHeads</a></li>
-        <li><a href="/r/OFWGKTA">/r/OFWGKTA</a></li>
-        <li><a href="/r/trapmuzik">/r/trapmuzik</a></li>
-        <li><a href="/r/90sHipHop">/r/90sHipHop</a></li>
-        <li><a href="/r/altrap">/r/altrap</a></li>
-        <li><a href="/r/backspin">/r/backspin</a></li>
-        <li><a href="/r/Rap">/r/Rap</a></li>
-        <li><a href="/r/rapverses">/r/rapverses</a></li>
-      </ul>
-
-      <h3>Other</h3>
-      <ul class="list">
-        <li><a href="/r/femalesingers">/r/femalesingers</a></li>
-        <li><a href="/r/gamemusic">/r/gamemusic</a></li>
-        <li><a href="/r/jazz">/r/jazz</a></li>
-        <li><a href="/r/kpop">/r/kpop</a></li>
-        <li><a href="/r/retromusic">/r/RetroMusic</a></li>
-        <li><a href="/r/rootsmusic">/r/rootsmusic</a></li>
-        <li><a href="/r/ska">/r/Ska</a></li>
-        <li><a href="/r/triphop">/r/triphop</a></li>
-        <li><a href="/r/70s">/r/70s</a></li>
-        <li><a href="/r/acappella">/r/Acappella</a></li>
-        <li><a href="/r/AcousticCovers">/r/AcousticCovers</a></li>
-        <li><a href="/r/afrobeat">/r/afrobeat</a></li>
-        <li><a href="/r/animemusic">/r/animemusic</a></li>
-        <li><a href="/r/balkanbrass">/r/balkanbrass</a></li>
-        <li><a href="/r/balkanmusic">/r/balkanmusic</a></li>
-        <li><a href="/r/boomswing">/r/boomswing</a></li>
-        <li><a href="/r/bossanova">/r/bossanova</a></li>
-        <li><a href="/r/britpop">/r/britpop</a></li>
-        <li><a href="/r/chillmusic">/r/chillmusic</a></li>
-        <li><a href="/r/cpop">/r/cpop</a></li>
-        <li><a href="/r/CrappyMusic">/r/CrappyMusic</a></li>
-        <li><a href="/r/dembow">/r/dembow</a></li>
-        <li><a href="/r/disco">/r/disco</a></li>
-        <li><a href="/r/dreampop">/r/DreamPop</a></li>
-        <li><a href="/r/Exotica">/r/Exotica</a></li>
-        <li><a href="/r/filmmusic">/r/FilmMusic</a></li>
-        <li><a href="/r/FunkSouMusic">/r/FunkSouMusic</a></li>
-        <li><a href="/r/gypsyjazz">/r/GypsyJazz</a></li>
-        <li><a href="/r/hispanicmusic">/r/HispanicMusic</a></li>
-        <li><a href="/r/indiefolk">/r/IndieFolk</a></li>
-        <li><a href="/r/Irishmusic">/r/Irishmusic</a></li>
-        <li><a href="/r/jambands">/r/jambands</a></li>
-        <li><a href="/r/jpop">/r/jpop</a></li>
-        <li><a href="/r/klezmer">/r/klezmer</a></li>
-        <li><a href="/r/MelancholyMusic">/r/MelancholyMusic</a></li>
-        <li><a href="/r/minimalism_music">/r/minimalism_music</a></li>
-        <li><a href="/r/motown">/r/motown</a></li>
-        <li><a href="/r/MovieMusic">/r/MovieMusic</a></li>
-        <li><a href="/r/oldiemusic">/r/oldiemusic</a></li>
-        <li><a href="/r/popmusic">/r/PopMusic</a></li>
-        <li><a href="/r/reggae">/r/reggae</a></li>
-        <li><a href="/r/rnb">/r/rnb</a></li>
-        <li><a href="/r/songbooks">/r/songbooks</a></li>
-        <li><a href="/r/soulies">/r/Soulies</a></li>
-        <li><a href="/r/SoundsVintage">/r/SoundsVintage</a></li>
-        <li><a href="/r/SpaceMusic">/r/SpaceMusic</a></li>
-        <li><a href="/r/tango">/r/Tango</a></li>
-        <li><a href="/r/TheRealBookVideos">/r/TheRealBookVideos</a></li>
-        <li><a href="/r/touhoumusic">/r/TouhouMusic</a></li>
-        <li><a href="/r/treemusic">/r/treemusic</a></li>
-        <li><a href="/r/vocaloid">/r/vocaloid</a></li>
-        <li><a href="/r/WorldMusic">/r/WorldMusic</a></li>
-      </ul>
-
-      <h3>Any Genre</h3>
-      <ul class="list">
-        <li><a href="/r/CoverSongs">/r/CoverSongs</a></li>
-        <li><a href="/r/freemusic">/r/freemusic</a></li>
-        <li><a href="/r/frisson">/r/Frisson</a></li>
-        <li><a href="/r/heythatwasin">/r/HeyThatWasIn</a></li>
-        <li><a href="/r/ifyoulikeblank">/r/ifyoulikeblank</a></li>
-        <li><a href="/r/indie">/r/indie</a></li>
-        <li><a href="/r/ListenToThis">/r/ListenToThis</a></li>
-        <li><a href="/r/listentous">/r/ListenToUs</a></li>
-        <li><a href="/r/Music">/r/Music</a></li>
-        <li><a href="/r/Albums">/r/Albums </a></li>
-        <li><a href="/r/headnodders">/r/HeadNodders</a></li>
-        <li><a href="/r/heady">/r/heady</a></li>
-        <li><a href="/r/HighFidelity">/r/HighFidelity</a></li>
-        <li><a href="/r/ipm">/r/ipm</a></li>
-        <li><a href="/r/indiewok">/r/IndieWok</a></li>
-        <li><a href="/r/letstalkmusic">/r/LetsTalkMusic</a></li>
-        <li><a href="/r/listentomusic">/r/listentomusic</a></li>
-        <li><a href="/r/lyrics">/r/Lyrics</a></li>
-        <li><a href="/r/mainstreammusic">/r/mainstreammusic</a></li>
-        <li><a href="/r/MiddleEasternMusic">/r/MiddleEasternMusic</a></li>
-        <li><a href="/r/MusicAlbums">/r/MusicAlbums</a></li>
-        <li><a href="/r/MusicToSleepTo">/r/MusicToSleepTo </a></li>
-        <li><a href="/r/musicvideos">/r/musicvideos</a></li>
-        <li><a href="/r/newmusic">/r/newmusic</a></li>
-        <li><a href="/r/partymusic">/r/partymusic</a></li>
-        <li><a href="/r/RedditOriginals">/r/RedditOriginals</a></li>
-        <li><a href="/r/RepublicOfMusic">/r/RepublicOfMusic</a></li>
-        <li><a href="/r/ThemVoices">/r/ThemVoices</a></li>
-        <li><a href="/r/unheardof">/r/unheardof</a></li>
-        <li><a href="/r/WTFMusicVideos">/r/WTFMusicVideos</a></li>
-      </ul>
-
-      <h3>Redditor Made Music</h3>
-      <ul class="list">
-        <li><a href="/r/300Songs">/r/300Songs</a></li>
-        <li><a href="/r/Composer">/r/Composer</a></li>
-        <li><a href="/r/MusicInTheMaking">/r/MusicInTheMaking</a></li>
-        <li><a href="/r/RadioReddit">/r/RadioReddit</a></li>
-        <li><a href="/r/Songwriters">/r/Songwriters</a></li>
-        <li><a href="/r/ThisIsOurMusic">/r/ThisIsOurMusic</a></li>
-        <li><a href="/r/AcousticOriginals">/r/AcousticOriginals</a></li>
-        <li><a href="/r/ICoveredASong">/r/ICoveredASong</a></li>
-        <li><a href="/r/MyMusic">/r/MyMusic</a></li>
-        <li><a href="/r/ratemyband">/r/ratemyband</a></li>
-      </ul>
-
-      <h3>Single Artist/Band subreddits</h3>
-      <ul class="list">
-        <li><a href="/r/beatles">/r/Beatles</a></li>
-        <li><a href="/r/deadmau5">/r/Deadmau5</a></li>
-        <li><a href="/r/gratefuldead">/r/gratefuldead</a></li>
-        <li><a href="/r/nin">/r/NIN</a></li>
-        <li><a href="/r/pinkfloyd">/r/PinkFloyd</a></li>
-        <li><a href="/r/radiohead">/r/Radiohead</a></li>
-        <li><a href="/r/toolband">/r/ToolBand</a></li>
-        <li><a href="/r/led_zeppelin">/r/Led_Zeppelin</a></li>
-        <li><a href="/r/311/">/r/311/</a></li>
-        <li><a href="/r/ArcadeFire">/r/ArcadeFire</a></li>
-        <li><a href="/r/aperfectcircle">/r/APerfectCircle</a></li>
-        <li><a href="/r/TheAvettBrothers">/r/TheAvettBrothers</a></li>
-        <li><a href="/r/thebeachboys">/r/TheBeachBoys</a></li>
-        <li><a href="/r/billytalent">/r/billytalent</a></li>
-        <li><a href="/r/Blink182/">/r/Blink182</a></li>
-        <li><a href="/r/BruceSpringsteen/">/r/BruceSpringsteen</a></li>
-        <li><a href="/r/coldplay">/r/Coldplay</a></li>
-        <li><a href="/r/TheCure">/r/TheCure </a></li>
-        <li><a href="/r/DavidBowie">/r/DavidBowie</a></li>
-        <li><a href="/r/deftones">/r/Deftones</a></li>
-        <li><a href="/r/EnterShikari">/r/EnterShikari</a></li>
-        <li><a href="/r/gorillaz">/r/Gorillaz</a></li>
-        <li><a href="/r/greenday">/r/Greenday</a></li>
-        <li><a href="/r/incubus">/r/Incubus</a></li>
-        <li><a href="/r/jackwhite">/r/JackWhite</a></li>
-        <li><a href="/r/ladygaga">/r/ladygaga</a></li>
-        <li><a href="/r/Manowar">/r/Manowar</a></li>
-        <li><a href="/r/MattAndKim">/r/MattAndKim</a></li>
-        <li><a href="/r/MGMT">/r/MGMT</a></li>
-        <li><a href="/r/MinusTheBear">/r/MinusTheBear</a></li>
-        <li><a href="/r/ModestMouse">/r/ModestMouse</a></li>
-        <li><a href="/r/Morrissey">/r/Morrissey</a></li>
-        <li><a href="/r/muse">/r/Muse</a></li>
-        <li><a href="/r/neilyoung">/r/NeilYoung </a></li>
-        <li><a href="/r/nirvana">/r/Nirvana</a></li>
-        <li><a href="/r/oasis/">/r/oasis</a></li>
-        <li><a href="/r/Opeth/">/r/Opeth</a></li>
-        <li><a href="/r/OFWGKTA/">/r/OFWGKTA (Odd Future)</a></li>
-        <li><a href="/r/OutKast/">/r/OutKast (Odd Future)</a></li>
-        <li><a href="/r/phish/">/r/phish</a></li>
-        <li><a href="/r/porcupinetree">/r/porcupinetree</a></li>
-        <li><a href="/r/puscifer">/r/Puscifer</a></li>
-        <li><a href="/r/ratm">/r/RATM</a></li>
-        <li><a href="/r/redhotchilipeppers">/r/RedHotChiliPeppers</a></li>
-        <li><a href="/r/rush">/r/Rush</a></li>
-        <li><a href="/r/sigurros">/r/SigurRos</a></li>
-        <li><a href="/r/thestrokes">/r/TheStrokes</a></li>
-        <li><a href="/r/UnicornsMusic">/r/UnicornsMusic</a></li>
-        <li><a href="/r/slayer">/r/Slayer</a></li>
-        <li><a href="/r/SmashingPumpkins">/r/SmashingPumpkins</a></li>
-        <li><a href="/r/tragicallyhip">/r/tragicallyhip</a></li>
-        <li><a href="/r/Umphreys/">/r/Umphreys</a></li>
-        <li><a href="/r/WeirdAl/">/r/WeirdAl</a></li>
-        <li><a href="/r/Zappa/">/r/Zappa</a></li>
-      </ul>
-
-      <h3>Instrument</h3>
-      <ul class="list">
-        <li><a href="/r/Bass">/r/Bass</a></li>
-        <li><a href="/r/Guitar">/r/Guitar</a></li>
-        <li><a href="/r/Piano">/r/Piano</a></li>
-        <li><a href="/r/Percussionists">/r/Percussionists</a></li>
-        <li><a href="/r/Singing">/r/Singing</a></li>
-        <li><a href="/r/Accordion">/r/Accordion</a></li>
-        <li><a href="/r/banjo">/r/banjo</a></li>
-        <li><a href="/r/bassoon">/r/Bassoon</a></li>
-        <li><a href="/r/beatbox">/r/beatbox</a></li>
-        <li><a href="/r/brass">/r/brass</a></li>
-        <li><a href="/r/cello">/r/Cello</a></li>
-        <li><a href="/r/clarinet">/r/Clarinet</a></li>
-        <li><a href="/r/ClassicalGuitar">/r/ClassicalGuitar</a></li>
-        <li><a href="/r/doublebass">/r/DoubleBass</a></li>
-        <li><a href="/r/drummers">/r/Drummers</a></li>
-        <li><a href="/r/Drums">/r/Drums</a></li>
-        <li><a href="/r/Flute">/r/Flute</a></li>
-        <li><a href="/r/hammondorgan">/r/hammondorgan</a></li>
-        <li><a href="/r/harmonica">/r/harmonica</a></li>
-        <li><a href="/r/horn">/r/Horn</a></li>
-        <li><a href="/r/luthier">/r/luthier</a></li>
-        <li><a href="/r/oboe">/r/Oboe</a></li>
-        <li><a href="/r/percussion">/r/Percussion</a></li>
-        <li><a href="/r/piccolo">/r/Piccolo</a></li>
-        <li><a href="/r/saxophone">/r/saxophone</a></li>
-        <li><a href="/r/telecaster">/r/Telecaster</a></li>
-        <li><a href="/r/trombone">/r/Trombone</a></li>
-        <li><a href="/r/trumpet">/r/Trumpet</a></li>
-        <li><a href="/r/ukulele">/r/ukulele</a></li>
-        <li><a href="/r/violinist">/r/Violinist</a></li>
-      </ul>
+      <% REDDIT.each do | r | %>
+        <h3><%= r[:category] %></h3>
+        <ul class="list">
+          <% r[:subreddits].each do | sr | %>
+            <li><a href='<%= sr %>'><%= sr %></a></li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
   </div>
   <div class="clear"></div>

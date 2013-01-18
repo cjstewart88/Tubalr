@@ -2,6 +2,9 @@ Tubalr::Application.routes.draw do
   use_doorkeeper
 
   devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_scope :user do
+    get "/users/sign_out"                           => "devise/sessions#destroy"
+  end
 
   root :to => "application#index"
 
@@ -38,7 +41,5 @@ Tubalr::Application.routes.draw do
 
   post "/event"                                     => "events#create"
 
-  devise_scope :user do
-    get "/users/sign_out"                           => "devise/sessions#destroy"
-  end
+  get "/api/library.json"                           => "api#library"
 end
