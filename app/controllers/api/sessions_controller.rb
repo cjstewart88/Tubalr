@@ -1,11 +1,3 @@
-# to sign in:
-#   method: POST
-#   route:  /api/sessions.json?email_or_username=USERNAME_OR_EMAIL&password=PASSWORD_HERE
-#
-# to sign out: /api/sessions/
-#   method: DELETE
-#   route:  /api/sessions/TOKEN_HERE
-
 class Api::SessionsController < ApplicationController
   before_filter :ensure_json, :only => :create
   skip_before_filter :verify_authenticity_token
@@ -20,7 +12,7 @@ class Api::SessionsController < ApplicationController
       return
     end
 
-    @user = User.where('email = :email_or_username OR username = :email_or_username', {email_or_username: email_or_username}).first
+    @user = User.where('email = :email_or_username OR username = :email_or_username', { email_or_username: email_or_username }).first
 
     if @user.nil?
       logger.info("User #{email_or_username} failed signin, user cannot be found.")
@@ -46,7 +38,7 @@ class Api::SessionsController < ApplicationController
       render :status => 404, :json => { :message => "Invalid token." }
     else
       @user.reset_authentication_token!
-      render :status => 200, :json => { :token => params[:id] }
+      render :status => 200, :json => { :id => @user.id, :token => params[:id] }
     end
   end
 

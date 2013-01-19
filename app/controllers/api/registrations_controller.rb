@@ -7,6 +7,8 @@ class Api::RegistrationsController < ApplicationController
   respond_to :json
 
   def create
+    params[:md5_email] = Digest::MD5.hexdigest(params[:email])
+
     user = User.new(params)
 
     if user.save
