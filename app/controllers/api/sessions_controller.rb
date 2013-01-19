@@ -7,17 +7,13 @@
 #   route:  /api/sessions/TOKEN_HERE
 
 class Api::SessionsController < ApplicationController
+  before_filter :ensure_json, :only => :create
   skip_before_filter :verify_authenticity_token
   respond_to :json
 
   def create
     email_or_username = params[:email_or_username]
     password          = params[:password]
-
-    if request.format != :json
-      render :status => 406, :json => { :message => "The request must be json" }
-      return
-    end
 
     if email_or_username.nil? or password.nil?
       render :status => 400, :json => { :message => "The request must contain the user email/username and password." }
@@ -52,5 +48,11 @@ class Api::SessionsController < ApplicationController
       @user.reset_authentication_token!
       render :status => 200, :json => { :token => params[:id] }
     end
+  end
+
+  private
+
+  def ensure_json
+    render :status => 406, :json => { :message => "The request must be json" } if request.format != :json
   end
 end
