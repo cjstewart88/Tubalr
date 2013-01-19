@@ -10,9 +10,10 @@ class Api::RegistrationsController < ApplicationController
     params[:md5_email] = Digest::MD5.hexdigest(params[:email])
 
     user = User.new(params)
+    user.ensure_authentication_token!
 
     if user.save
-      render :json => user.as_json(:auth_token=>user.authentication_token, :email=>user.email), :status => 201
+      render :json => user.as_json["user"].merge(:auth_token => user.authentication_token), :status => 201
       return
     else
       warden.custom_failure!
