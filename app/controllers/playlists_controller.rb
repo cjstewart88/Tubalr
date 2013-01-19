@@ -1,4 +1,6 @@
 class PlaylistsController < ApplicationController
+  before_filter :authenticate_user!, :only => [:import_youtube_playlists, :create, :sort, :update]
+
   def listen
     @user               = User.where(:username =>  params[:username]).first
     @username           = params[:username]

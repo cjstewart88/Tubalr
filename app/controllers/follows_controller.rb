@@ -1,4 +1,5 @@
 class FollowsController < ApplicationController
+  before_filter :authenticate_user!
   before_filter :validate_follow_params
 
   def follow
@@ -14,11 +15,9 @@ class FollowsController < ApplicationController
   private
 
   def validate_follow_params
-    head 403 and return unless user_signed_in?
-
     @who = User.find(params[:who])
   rescue ActiveRecord::RecordNotFound
-    render :status => 400, :json => {error: "User not found"}
+    render :status => 400, :json => { error: "User not found" }
   end
 
 end

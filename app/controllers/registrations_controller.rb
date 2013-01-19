@@ -1,9 +1,11 @@
 class RegistrationsController < Devise::RegistrationsController
+  before_filter :authenticate_user!, :only => [:update]
+
   def create
     resource_params["md5_email"] = Digest::MD5.hexdigest(resource_params["email"])
-    
+
     build_resource
-    
+
     if resource.save
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
@@ -32,7 +34,7 @@ class RegistrationsController < Devise::RegistrationsController
     end
 
     @user = User.find(current_user.id)
-    
+
     if params[:user][:favorite_genres]
       @user.favorite_genre_list = params[:user][:favorite_genres].join(',')
     else

@@ -92,10 +92,6 @@ Devise.setup do |config|
   # If true, extends the user's remember period when remembered via cookie.
   # config.extend_remember_period = false
 
-  # If true, uses the password salt as remember token. This should be turned
-  # to false if you are not using database authenticatable.
-  config.use_salt_as_remember_token = true
-
   # Options to be passed to the created cookie. For instance, you can set
   # :secure => true in order to force SSL only cookies.
   # config.cookie_options = {}
@@ -207,9 +203,9 @@ Devise.setup do |config|
   #   manager.intercept_401 = false
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
-  
+
   config.warden do |manager|
-    manager.strategies.add(:login_with_username_or_email) do 
+    manager.strategies.add(:login_with_username_or_email) do
       def valid?
         params[:user] && params[:user][:email] && params[:user][:password]
       end
@@ -226,6 +222,6 @@ Devise.setup do |config|
     end
     manager.default_strategies(scope: :user).unshift :login_with_username_or_email
   end
-  
+
   config.authentication_keys = [ :login ]
 end

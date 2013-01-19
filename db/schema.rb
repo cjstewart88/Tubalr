@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130108043259) do
+ActiveRecord::Schema.define(:version => 20130119142649) do
 
   create_table "banned_videos", :force => true do |t|
     t.integer  "user_id"
@@ -86,8 +86,10 @@ ActiveRecord::Schema.define(:version => 20130108043259) do
     t.string   "background"
     t.string   "md5_email"
     t.integer  "playlists_count",        :default => 0
+    t.string   "authentication_token"
   end
 
+  add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 

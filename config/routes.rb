@@ -39,7 +39,11 @@ Tubalr::Application.routes.draw do
 
   post "/event"                                     => "events#create"
 
-  get "/api/library.json"                           => "api#library"
-  get "/api/user/:user_id/info.json"                => "api#user_info"
-  get "/api/user/:user_id/playlists.json"           => "api#user_playlists"
+  namespace :api do
+    get "/library.json"                           => "data#library"
+    get "/user/:user_id/info.json"                => "data#user_info"
+    get "/user/:user_id/playlists.json"           => "data#user_playlists"
+    resources :sessions, :only => [:create, :destroy]
+    resources :registrations, :only => [:create]
+  end
 end

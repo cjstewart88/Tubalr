@@ -1,4 +1,5 @@
-class ApiController < ApplicationController
+class Api::DataController < ApplicationController
+  before_filter :authenticate_user!, :only => [:user_info]
   before_filter :validate_user_id, :except => :library
 
   def library
