@@ -6,6 +6,15 @@ Tubalr::Application.routes.draw do
 
   root :to => "application#index"
 
+  namespace :api do
+    get "/library.json"                             => "data#library"
+    get "/user/info.json"                           => "data#user_info"
+    get "/user/:user_id/playlists.json"             => "data#user_playlists"
+    get "/playlist/:playlist_id"                    => "data#playlist_videos"
+    resources :sessions, :only => [:create, :destroy]
+    resources :registrations, :only => [:create]
+  end
+
   get "/support"                                    => "application#support"
 
   get "/stats"                                      => "application#stats"
@@ -34,16 +43,7 @@ Tubalr::Application.routes.draw do
 
   post "/import_youtube_playlists"                  => "playlists#import_youtube_playlists"
 
-  post "/check_banned"                              => "bannedVideos#check"
   post "/ban_video"                                 => "bannedVideos#ban_video"
 
   post "/event"                                     => "events#create"
-
-  namespace :api do
-    get "/library.json"                             => "data#library"
-    get "/user/info.json"                           => "data#user_info"
-    get "/user/:user_id/playlists.json"             => "data#user_playlists"
-    resources :sessions, :only => [:create, :destroy]
-    resources :registrations, :only => [:create]
-  end
 end
