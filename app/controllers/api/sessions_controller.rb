@@ -4,7 +4,7 @@
 #
 # to sign out: /api/sessions/
 #   method: DELETE
-#   route:  /api/sessions/:token_here
+#   route:  /api/sessions/TOKEN_HERE
 
 class Api::SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
