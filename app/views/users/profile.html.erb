@@ -19,7 +19,6 @@
       </aside>
 
       <ul>
-        <li class="tab timeline-tab" data-tab-name="timeline">Timeline<span class="icon-chevron-right"></span></li>
         <li class="tab playlists-tab" data-tab-name="playlists">Playlists<span class="icon-chevron-right"></span></li>
         <li class="tab favorite-genres-tab" data-tab-name="favorite-genres">Favorite Genres <span class="icon-chevron-right"></span></li>
         <li class="tab following-tab" data-tab-name="following">Following<span class="icon-chevron-right"></span></li>
@@ -27,7 +26,6 @@
     </div>
 
     <div id="tabs-contents">
-      <%= render :partial => 'timeline' %>
       <%= render :partial => 'playlists/playlists' %>
       <%= render :partial => 'favorite_genres' %>
       <%= render :partial => 'following' %>
@@ -36,11 +34,11 @@
     <div class="clear"></div>
   <% else %>
     <h2>user missing in action!</h2>
-    
+
     <p>
-      Looks like there's no user with the name <b><%= params[:username] %></b>. 
-      Make sure you spelled it right and give it another go. If the user's 
-      still MIA, shoot and email to <a href="mailto:listen.to.tubalr@gmail.com">listen.to.tubalr@gmail.com</a> 
+      Looks like there's no user with the name <b><%= params[:username] %></b>.
+      Make sure you spelled it right and give it another go. If the user's
+      still MIA, shoot and email to <a href="mailto:listen.to.tubalr@gmail.com">listen.to.tubalr@gmail.com</a>
       and we'll see if we can track this user down!
     </p>
   <% end %>

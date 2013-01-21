@@ -31,7 +31,7 @@
       text-align: center;
       color: #fff;
       font-weight: normal;
-      font-size: 12px; 
+      font-size: 12px;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -40,7 +40,7 @@
 
   #profile-counts {
     margin-bottom: 15px;
-    
+
     div {
       width: 60px;
       display: inline-block;
@@ -64,7 +64,7 @@
   }
 }
 
-/* Custom Playists Stuff */ 
+/* Custom Playists Stuff */
 
 #profile-main .list li {
   display: inline-block;
@@ -77,10 +77,10 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 115px;
-    display: inline-block;  
+    display: inline-block;
     color: #fff;
   }
-  
+
   .custom-playlist-settings-open-dialog {
     display: none;
     float: right;
@@ -108,45 +108,13 @@
 
   #danger-zone {
     margin-top: 20px;
-    
+
     p {
       margin-bottom: 10px;
     }
 
     #delete-playlist {
       background: #E83841;
-    }    
-  }
-}
-
-/* Timeline Styles */
-#timeline-list {
-  list-style-type: none;
-
-  li {
-    margin-bottom: 10px;
-    font-size: 14px;
-
-    .timeline-icon {
-      float: left;
-      margin-top: 5px;
-      margin-right: 20px;
-      font-weight: normal;
-      font-size: 20px;
-    }
-
-    .event-copy {
-      display: block;
-      margin-right: 50px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-
-    .time-ago {
-      display: block;
-      font-size: 12px;
-      font-style: italic;
     }
   }
 }
