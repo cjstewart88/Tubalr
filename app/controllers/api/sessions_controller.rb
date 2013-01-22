@@ -26,15 +26,7 @@ class Api::SessionsController < Api::BaseController
       logger.info("User #{email_or_username} failed signin, password \"#{password}\" is invalid")
       render :status => 401, :json => { :message => "Invalid email/username or password." }
     else
-      render :status => 200, :json => {
-        :id               => @user.id,
-        :token            => @user.authentication_token,
-        :username         => @user.username,
-        :email            => @user.email,
-        :favorite_genres  => @user.favorite_genres.collect{ | g | g.name },
-        :playlists        => get_user_playlists,
-        :banned_videos    => @user.banned_videos.map(&:video_id)
-      }
+      render :status => 200, :json => get_user_info
     end
   end
 
