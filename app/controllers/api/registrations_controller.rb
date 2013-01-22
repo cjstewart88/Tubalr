@@ -1,8 +1,4 @@
-# to register a new user:
-#   method: POST
-#   route:  /api/registrations?username=USERNAME_HERE&email=EMAIL_HERE&password=PASSWORD_HERE
-
-class Api::RegistrationsController < ApplicationController
+class Api::RegistrationsController < Api::BaseController
   before_filter :ensure_json
   respond_to :json
 
@@ -19,11 +15,5 @@ class Api::RegistrationsController < ApplicationController
       warden.custom_failure!
       render :json => user.errors, :status => 422
     end
-  end
-
-  private
-
-  def ensure_json
-    render :status => 406, :json => { :message => "The request must be json" } if request.format != :json
   end
 end

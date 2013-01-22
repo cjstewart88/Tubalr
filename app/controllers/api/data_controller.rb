@@ -1,4 +1,4 @@
-class Api::DataController < ApplicationController
+class Api::DataController < Api::BaseController
   before_filter :authenticate_user!, :only => [:user_info]
   before_filter :validate_user_authentication, :except => [:library, :user_info, :playlist_videos]
 
@@ -16,18 +16,13 @@ class Api::DataController < ApplicationController
       :username         => current_user.username,
       :email            => current_user.email,
       :favorite_genres  => current_user.favorite_genres.collect{ | g | g.name },
+      :playlists        => get_user_playlists,
       :banned_videos    => current_user.banned_videos.map(&:video_id)
     }
   end
 
   def user_playlists
-    response = []
-
-    @user.playlists.each do | playlist |
-      response.push(:playlist_id => playlist[:id], :playlist_name => playlist[:playlist_name])
-    end
-
-    render :json => response
+    render :json => get_user_playlists
   end
 
   def playlist_videos

@@ -1,4 +1,4 @@
-class Api::SessionsController < ApplicationController
+class Api::SessionsController < Api::BaseController
   before_filter :ensure_json, :only => :create
   skip_before_filter :verify_authenticity_token
   respond_to :json
@@ -32,6 +32,7 @@ class Api::SessionsController < ApplicationController
         :username         => @user.username,
         :email            => @user.email,
         :favorite_genres  => @user.favorite_genres.collect{ | g | g.name },
+        :playlists        => get_user_playlists,
         :banned_videos    => @user.banned_videos.map(&:video_id)
       }
     end
@@ -47,11 +48,5 @@ class Api::SessionsController < ApplicationController
       @user.reset_authentication_token!
       render :status => 200, :json => { :id => @user.id, :token => params[:id] }
     end
-  end
-
-  private
-
-  def ensure_json
-    render :status => 406, :json => { :message => "The request must be json" } if request.format != :json
   end
 end
