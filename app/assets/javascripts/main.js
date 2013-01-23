@@ -52,7 +52,7 @@ $(document).ready(function () {
       zIndex: 999999,
       connectWith: '#playlist',
       stop: function (event, ui) {
-        event.stopPropagation();
+        event.stopImmediatePropagation();
       }
     });
   });
