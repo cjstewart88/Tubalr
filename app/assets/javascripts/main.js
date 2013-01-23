@@ -1,10 +1,10 @@
-$(document).ready(function () { 
+$(document).ready(function () {
   if (typeof FB !== "undefined") {
-    FB.init({ 
-      appId   : '239275546125436', 
-      status  : true, 
-      cookie  : true, 
-      xfbml   : true 
+    FB.init({
+      appId   : '239275546125436',
+      status  : true,
+      cookie  : true,
+      xfbml   : true
     });
   }
 
@@ -16,9 +16,9 @@ $(document).ready(function () {
     draggable:  false,
     title:      'About Tubalr'
   });
-  
-  $('.about-tubalr').click(function () { 
-    $('#about-tubalr').dialog('open'); 
+
+  $('.about-tubalr').click(function () {
+    $('#about-tubalr').dialog('open');
   });
 
   // If there's rails invoked flash messages, fade them out.
@@ -44,13 +44,16 @@ $(document).ready(function () {
     title:        'Mix in Videos',
     position:     [($(window).width() / 2) - (350 / 2), 150]
   });
-  
+
   $("#add-songs").click(function (e) {
     $('#popup-search').dialog('open');
     $('#popup-search-query').focus();
     $('#popup-search-results').sortable({
       zIndex: 999999,
-      connectWith: '#playlist'
+      connectWith: '#playlist',
+      stop: function (event, ui) {
+        event.stopPropagation();
+      }
     });
   });
 
