@@ -53,7 +53,7 @@ var CustomPlaylistSettings = {
           CustomPlaylistSettings.playlistNameTaken(newPlaylistName);
         }
         else {
-          CustomPlaylistSettings.renameDone(newPlaylistName);  
+          CustomPlaylistSettings.renameDone(newPlaylistName);
         }
       }
     });
@@ -66,14 +66,14 @@ var CustomPlaylistSettings = {
   },
 
   renameDone: function (newPlaylistName) {
-    var playlistLI = $('#playlists-main #' + CustomPlaylistSettings.playlistID);
+    var playlistLI = $('.playlists-tab-content .list #' + CustomPlaylistSettings.playlistID);
 
     playlistLI.data('playlist-name', newPlaylistName)
               .find('a').text(newPlaylistName);
 
     CustomPlaylistSettings.notice('<b>' + CustomPlaylistSettings.playlistName + '</b>, renamed to <b>' + newPlaylistName + '</b>.');
 
-    $('#custom-playlist-settings').dialog('close');          
+    $('#custom-playlist-settings').dialog('close');
   },
 
   notice: function (message) {
@@ -83,7 +83,7 @@ var CustomPlaylistSettings = {
       $('.playlist-settings-notice').slideUp(500, function () {
         $(this).remove();
       });
-    }, 5000); 
+    }, 5000);
   }
 
 };
@@ -97,14 +97,14 @@ $(document).ready(function () {
     draggable:  false,
     title:      'Playlist Settings'
   });
-  
+
   $('.custom-playlist-settings-open-dialog').click(function () {
     CustomPlaylistSettings.init({
       playlistID:   $(this).parent().attr('id'),
       playlistName: $(this).parent().data('playlist-name')
     });
 
-    $('#custom-playlist-settings').dialog('open'); 
+    $('#custom-playlist-settings').dialog('open');
   });
 
   $('#delete-playlist').click(function () {

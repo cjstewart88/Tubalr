@@ -500,7 +500,6 @@ var Playlist = {
           },
           dataType: 'json',
           success: function (data) {
-            console.log('booooo');
             User.bannedVideos.push(videoID);
           }
         });

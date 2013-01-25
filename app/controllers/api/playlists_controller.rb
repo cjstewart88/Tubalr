@@ -23,7 +23,7 @@ class Api::PlaylistsController < Api::BaseController
   end
 
   def add_video
-    playlist  = Playlist.find(params[:playlist_id])
+    playlist  = current_user.playlists.find(params[:playlist_id])
     video     = playlist.videos.where("video_id = ?", params[:video_id]).first
 
     if !video.present?

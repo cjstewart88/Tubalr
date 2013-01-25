@@ -47,7 +47,6 @@ var customPlaylistsDropdown = {
       type: 'POST',
       url: '/api/playlist/create',
       data: {
-        user_id:        User.id,
         playlist_name:  playlistName.replace(/[^a-z\d ]/ig,""),
         video_id:       Playlist.videos[Playlist.currentTrack].videoID,
         video_title:    Playlist.videos[Playlist.currentTrack].videoTitle
