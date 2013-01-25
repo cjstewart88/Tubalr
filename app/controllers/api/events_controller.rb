@@ -40,7 +40,7 @@
 
 
 
-class EventsController < ApplicationController
+class Api::EventsController < Api::BaseController
   before_filter :authenticate_user!
 
   def create

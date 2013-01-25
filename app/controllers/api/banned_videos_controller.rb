@@ -1,4 +1,4 @@
-class BannedVideosController < ApplicationController
+class Api::BannedVideosController < Api::BaseController
   before_filter :authenticate_user!
 
   def ban_video

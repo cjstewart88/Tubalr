@@ -7,11 +7,15 @@ Tubalr::Application.routes.draw do
   root :to => "application#index"
 
   namespace :api do
-    get "/library.json"                             => "data#library"
-    get "/user/info.json"                           => "data#user_info"
-    get "/user/:user_id/playlists.json"             => "data#user_playlists"
-    get "/playlist/:playlist_id"                    => "data#playlist_videos"
-    resources :sessions, :only => [:create, :destroy]
+    post  "/ban_video"                              => "banned_videos#ban_video"
+    post  "/playlist/create"                        => "playlists#create"
+    post  "/playlist/add_video"                     => "playlists#add_video"
+    post  "/event"                                  => "events#create"
+    get   "/library.json"                           => "data#library"
+    get   "/user/info.json"                         => "data#user_info"
+    get   "/user/:user_id/playlists.json"           => "data#user_playlists"
+    get   "/playlist/:playlist_id"                  => "data#playlist_videos"
+    resources :sessions,      :only => [:create, :destroy]
     resources :registrations, :only => [:create]
   end
 
@@ -29,21 +33,14 @@ Tubalr::Application.routes.draw do
   post "/follow/:who"                               => "follows#follow"
   delete "/follow/:who"                             => "follows#unfollow"
 
-  get "/users"                                      => "users#list"
   get "/:username/profile"                          => "users#profile"
 
   get "/:username/playlist/:playlist_name.json"     => "playlists#get"
   get "/:username/playlist/:playlist_name"          => "playlists#listen"
   post "/:username/playlist/:playlist_name/sort"    => "playlists#sort"
-  match "/playlist/create"                          => "playlists#create"
-  match "/playlist/add_video"                       => "playlists#add_video"
-  match "/playlist/delete_video"                    => "playlists#delete_video"
+  post "/playlist/delete_video"                     => "playlists#delete_video"
 
   resources :playlists, :only => [:destroy, :update]
 
   post "/import_youtube_playlists"                  => "playlists#import_youtube_playlists"
-
-  post "/ban_video"                                 => "bannedVideos#ban_video"
-
-  post "/event"                                     => "events#create"
 end

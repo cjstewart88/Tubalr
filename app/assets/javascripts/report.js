@@ -1,5 +1,5 @@
 var Report = {
-  
+
   gaPageview: function () {
     var url;
 
@@ -17,7 +17,7 @@ var Report = {
     }
     else {
       url = [Playlist.options.searchType, Playlist.options.search.replace(/[ ]/g,"+")];
-    } 
+    }
 
     // check to make sure the pageview we are trying to report is not a direct path
     // that's already been reported
@@ -36,7 +36,7 @@ var Report = {
 
   event: function (params) {
     if (User.id) {
-      $.post('/event', { event: JSON.stringify(params) });
+      $.post('/api/event', { event: JSON.stringify(params) });
     }
   }
 

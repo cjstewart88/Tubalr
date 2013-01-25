@@ -1,11 +1,11 @@
-var Playlist = {                                                                                                                                                                                                                                                                       
+var Playlist = {
 
   genres: ["acappella","acidhouse","acidjazz","acousticblues","afrobeat","albumrock","alternativecountry","alternativedance","alternativehiphop","alternativemetal","alternativerock","ambient","anti-folk","artrock","atmosphericblackmetal","australianhiphop","avant-garde","avant-gardejazz","avantgardemetal","bachata","bailefunk","banda","bassmusic","bebop","bhangra","bigband","bigbeat","blackmetal","blue-eyedsoul","bluegrass","blues","blues-rock","bolero","boogaloo","boogie-woogie","bossanova","brassband","brazilianpopmusic","breakbeat","breakcore","brillbuildingpop","britishblues","britishfolk","britishinvasion","britishpop","brokenbeat","brutaldeathmetal","bubblegumdance","bubblegumpop","cabaret","calypso","canterburyscene","ccm","celtic","celticrock","chamberpop","chanson","chicagoblues","chicagohouse","chicagosoul","children'smusic","chill-out","chillwave","chiptune","choro","chorus","christianalternativerock","christianhardcore","christianhiphop","christianmetal","christianmusic","christianpunk","christianrock","classicrock","classical","comedy","contemporarycountry","cooljazz","country","countryblues","countrygospel","countryrock","cowpunk","crossoverthrash","crunk","crustpunk","cumbia","dancepop","dancerock","dance-punk","dancehall","darkambient","darkwave","deathcore","deathmetal","deathgrind","deephouse","deltablues","desi","detroittechno","digitalhardcore","dirtysouthrap","disco","discohouse","djent","doo-wop","doommetal","downtempo","dreampop","drone","drumandbass","dub","dubstep","earlymusic","eastcoasthiphop","easylistening","ebm","electricblues","electro","electro-industrial","electroclash","electronic","emo","eurobeat","eurodance","europop","exotica","experimental","experimentalrock","fado","filmi","flamenco","folk","folkmetal","folkpunk","folkrock","folk-pop","freakfolk","freakbeat","freeimprovisation","freejazz","freestyle","funeraldoom","funk","funkmetal","funkrock","futurepop","gfunk","gabba","game","gangsterrap","garagerock","germanpop","glammetal","glamrock","glitch","goregrind","gospel","gothicmetal","gothicrock","gothicsymphonicmetal","grime","grindcore","groovemetal","grunge","gypsyjazz","happyhardcore","hardbop","hardhouse","hardrock","hardtrance","hardcore","hardcorehiphop","hardcoretechno","hardstyle","harmonicablues","hinrg","highlife","hiphop","hiphouse","horrorpunk","house","hyphy","icelandicpop","illbient","indianclassical","indiefolk","indiepop","indierock","indietronica","industrial","industrialmetal","industrialrock","intelligentdancemusic","irishfolk","italiandisco","jpop","jrock","jamband","janglepop","japanoise","jazz","jazzblues","jazzfunk","jazzfusion","judaica","jugband","juggalo","jumpblues","junglemusic","kpop","kiwirock","klezmer","kompa","krautrock","kwaito","laiko","latin","latinalternative","latinjazz","latinpop","lo-fi","louisianablues","lounge","loversrock","madchester","mambo","mariachi","martialindustrial","mathrock","mathcore","medieval","mellowgold","melodicdeathmetal","melodichardcore","melodicmetalcore","memphisblues","memphissoul","merengue","merseybeat","metal","metalcore","minimal","modernblues","modernclassical","motown","mpb","musiqueconcrete","nashvillesound","nativeamerican","neoclassicalmetal","neosoul","neo-progressive","neoclassical","neofolk","neuedeutscheharte","newage","newbeat","newjackswing","neworleansblues","neworleansjazz","newrave","newromantic","newwave","newweirdamerica","ninja","nowave","noisepop","noiserock","northernsoul","nujazz","numetal","nuskoolbreaks","nwobhm","oi","oldschoolhiphop","opera","oratory","outlawcountry","paganblackmetal","pianoblues","pianorock","piedmontblues","polka","pop","poppunk","poprap","poprock","portugueserock","postrock","post-grunge","post-hardcore","post-metal","post-punk","powerelectronics","powermetal","powernoise","powerpop","powerviolence","progressivebluegrass","progressivehouse","progressivemetal","progressiverock","progressivetrance","protopunk","psychedelicrock","psychedelictrance","psychobilly","punk","punkblues","quietstorm","r&b","ragtime","rai","ranchera","rap","rapmetal","raprock","reggae","reggaeton","renaissance","rock","rock'nroll","rockenespanol","rocksteady","rockabilly","rootsreggae","rootsrock","rumba","salsa","samba","screamo","sexy","shibuya-kei","shoegaze","showtunes","singer-songwriter","ska","skapunk","skatepunk","skiffle","slovenianrock","slowcore","sludgemetal","smoothjazz","soca","softrock","soukous","soul","soulblues","souljazz","soundtrack","southerngospel","southernhiphop","southernrock","southernsoul","spacerock","speedgarage","speedmetal","speedcore","stonermetal","stonerrock","straightedge","stride","suomirock","surfmusic","swampblues","swing","symphonicblackmetal","symphonicmetal","symphonicrock","synthpop","tango","techhouse","technicaldeathmetal","techno","teenpop","tejano","texasblues","texascountry","thaipop","thrashcore","thrashmetal","traditionalblues","traditionalcountry","traditionalfolk","trance","tribalhouse","triphop","turbofolk","turntablism","tweepop","ukgarage","undergroundhiphop","upliftingtrance","urbancontemporary","vallenato","videogamemusic","vikingmetal","visualkei","vocalhouse","vocaljazz","westcoastrap","westernswing","world","worship","zouk","zydeco"],
-  
+
   currentTrack: 0,
 
   videos: [],
-  
+
   direction: 'forward',
 
   sortThrottler: null,
@@ -27,8 +27,8 @@ var Playlist = {
   init: function (options) {
     Playlist.reset();
     $.extend(Playlist.options, options);
-    
-    Playlist.determineIfSpecialSearch(); 
+
+    Playlist.determineIfSpecialSearch();
     Playlist.report();
 
     Playlist[Playlist.options.searchType]();
@@ -44,8 +44,8 @@ var Playlist = {
   },
 
   reset: function () {
-    if (Player.self) { 
-      Player.self.stopVideo(); 
+    if (Player.self) {
+      Player.self.stopVideo();
     }
 
     Playlist.videos = [];
@@ -113,13 +113,13 @@ var Playlist = {
     $('#popup-search-results-holder').addClass('show-popup-search-message');
     $('#popup-search-message').html("Searching...");
     $('#popup-search-results').html('');
-    
+
     Playlist.just({
       search:       search,
-      videos:       videos, 
+      videos:       videos,
       resultsReady: function () {
         $('#popup-search-query, #search-popup-btn').removeAttr('disabled');
-        
+
         if (!videos || videos.length == 0) {
           $('#popup-search-message').html("We couldn't find anything for you :(");
         }
@@ -128,13 +128,13 @@ var Playlist = {
 
           $.each(videos, function (i, video) {
             $('#popup-search-results').append(
-              "<li class='dragvid' data-video-title='" + video.videoTitle + "' data-video-id='" + video.videoID + "' >" + 
-              "<span class='remove-video icon-trash'></span>" + 
+              "<li class='dragvid' data-video-title='" + video.videoTitle + "' data-video-id='" + video.videoID + "' >" +
+              "<span class='remove-video icon-trash'></span>" +
               "<a href='#' id='" + video.videoID + "' >" + video.videoTitle + "</a></li>"
             );
           });
         }
-      }  
+      }
     });
   },
 
@@ -154,7 +154,7 @@ var Playlist = {
       }
       else {
         var ajaxs = [];
-        
+
         $.each(data.response.songs, function (i, track) {
           if (track.title.toLowerCase().search("cover") == -1 && track.title.toLowerCase().search("remix") == -1) {
             ajaxs.push(
@@ -162,11 +162,11 @@ var Playlist = {
                 if (data.feed.hasOwnProperty("entry")) {
                   $.each(data.feed.entry, function (i, video) {
                     if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video, videos) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video) && Video.hasTitle(video)) {
-                      videos.push({ 
-                        videoID:    video.id.$t.split(":")[3], 
+                      videos.push({
+                        videoID:    video.id.$t.split(":")[3],
                         videoTitle: video.title.$t
-                      }); 
-                      
+                      });
+
                       return false;
                     }
                   });
@@ -175,29 +175,29 @@ var Playlist = {
             )
           }
         });
-        
+
         $.when.apply($, ajaxs).then(options.resultsReady || Playlist.resultsReady);
       }
     });
   },
-                                                                                              
+
   similar: function () {
     var search = Playlist.options.search;
 
     $.getJSON('http://developer.echonest.com/api/v4/artist/similar?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&results=40&start=0', function (data) {
       var ajaxs = [];
-      
+
       $.each(data.response.artists, function (i, artist) {
         ajaxs.push(
           $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(artist.name)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?&format=5', function (data) {
             if (data.feed.hasOwnProperty("entry")) {
-              $.each(data.feed.entry, function (i, video) {  
+              $.each(data.feed.entry, function (i, video) {
                 if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video) && Video.hasTitle(video)) {
-                  Playlist.videos.push({ 
-                    videoID: video.id.$t.split(":")[3], 
+                  Playlist.videos.push({
+                    videoID: video.id.$t.split(":")[3],
                     videoTitle: video.title.$t
                   });
-                  
+
                   return false;
                 }
               });
@@ -205,7 +205,7 @@ var Playlist = {
           })
         );
       });
-      
+
       $.when.apply($,ajaxs).then(Playlist.just);
     });
   },
@@ -224,10 +224,10 @@ var Playlist = {
             if (data.feed.hasOwnProperty("entry")) {
               $.each(data.feed.entry, function (i,video) {
                 if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotLive(video) && Video.isNotUserBanned(video) && Video.hasTitle(video)) {
-                  Playlist.videos.push({ 
-                    videoID:    video.id.$t.split(":")[3], 
+                  Playlist.videos.push({
+                    videoID:    video.id.$t.split(":")[3],
                     videoTitle: video.title.$t,
-                    artistName: song.artist_name 
+                    artistName: song.artist_name
                   });
 
                   return false;
@@ -237,7 +237,7 @@ var Playlist = {
           })
         )
       });
-      
+
       $.when.apply($, ajaxs).then(Playlist.resultsReady);
     });
   },
@@ -250,14 +250,14 @@ var Playlist = {
       if (data.feed.hasOwnProperty("entry")) {
         $.each(data.feed.entry, function (i, video) {
           if (Video.isNotBlocked(video) && Video.isNotUserBanned(video) && Video.hasTitle(video)) {
-            videos.push({ 
-              videoID:    video.id.$t.split(":")[3], 
-              videoTitle: video.title.$t 
+            videos.push({
+              videoID:    video.id.$t.split(":")[3],
+              videoTitle: video.title.$t
             });
           }
         });
       }
-      
+
       if (options.resultsReady) {
         options.resultsReady()
       }
@@ -272,7 +272,7 @@ var Playlist = {
 
     $.getJSON(url, function (data) {
       Playlist.videos = data;
-      Playlist.resultsReady(); 
+      Playlist.resultsReady();
     });
   },
 
@@ -281,8 +281,8 @@ var Playlist = {
       var video = data.entry;
 
       if (typeof video !== "undefined" && Video.isNotBlocked(video)) {
-        Playlist.videos.push({ 
-          videoID:    video.id.$t.split(":")[3], 
+        Playlist.videos.push({
+          videoID:    video.id.$t.split(":")[3],
           videoTitle: video.title.$t
         });
       }
@@ -299,12 +299,12 @@ var Playlist = {
     $.getJSON("http://www.reddit.com/r/" + Playlist.options.subReddit + "/hot.json?jsonp=?&limit=100", function (data) {
       $.each(data.data.children, function () {
         var post = this.data;
-        
+
         if (post.domain == "youtube.com" && post.media != null && typeof post.media === 'object' && post.media.hasOwnProperty("oembed") && post.media.oembed.url !== undefined) {
           var videoID = Import.getVideoID([{ href: post.media.oembed.url }]);
 
           if (videoID.length == 11){
-            Playlist.videos.push({ 
+            Playlist.videos.push({
               videoID:    videoID,
               videoTitle: post.media.oembed.title
             });
@@ -322,7 +322,7 @@ var Playlist = {
 
     if (Playlist.videos.length == 0) {
       $('#empty-playlist').fadeIn();
-    } 
+    }
     else {
       $('#player').fadeIn(1000);
     }
@@ -345,8 +345,8 @@ var Playlist = {
     $.each(Playlist.videos, function(i) {
       playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><span class="remove-video icon-trash"></span><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
     });
-    
-    $('#' + Playlist.videos[Playlist.currentTrack].videoID).addClass('active');      
+
+    $('#' + Playlist.videos[Playlist.currentTrack].videoID).addClass('active');
   },
 
   start: function () {
@@ -374,11 +374,11 @@ var Playlist = {
     Playlist.options.persistentSorting = false;
 
     var currentTrackVideoID = Playlist.videos[Playlist.currentTrack].videoID;
-    
+
     Playlist.videos.sort(function () {
       return (Math.round(Math.random()) - 0.5);
     });
-    
+
     Playlist.currentTrack = 0;
     Playlist.currentVideo();
     Playlist.buildPlaylistUI();
@@ -404,7 +404,7 @@ var Playlist = {
 
   previousSong: function () {
     Playlist.direction = "backward";
-    
+
     if (Playlist.currentTrack == 0) {
       Playlist.currentTrack = Playlist.videos.length-1;
       Playlist.currentVideo();
@@ -429,10 +429,10 @@ var Playlist = {
 
     $('#playlist .active').removeClass('active');
     $('#' + currentVideo.videoID).addClass('active');
-    
+
     Player.self.loadVideoById(currentVideo.videoID, currentVideo.startAt || 0);
-    
-    // if the user is in djing we need to update the 
+
+    // if the user is in djing we need to update the
     // connected listeners of the video change
     if (Playlist.djMode && Playlist.djMode.broadcasting) {
       Playlist.djMode.updateBroadcast(currentVideo.videoTitle, currentVideo.videoID, 0);
@@ -450,8 +450,8 @@ var Playlist = {
 
     $('#playlist li').each(function (index, item) {
       positions.push({
-        track_number: index, 
-        videoID:      $(item).data('videoId'), 
+        track_number: index,
+        videoID:      $(item).data('videoId'),
         videoTitle:   $(item).data('videoTitle')
       });
 
@@ -488,24 +488,25 @@ var Playlist = {
             video_id:       videoID
           },
           dataType: 'json',
-          success: function(data) { }
-        }); 
+          success: function (data) { }
+        });
       }
       else {
         $.ajax({
           type: 'POST',
-          url: '/ban_video',
+          url: '/api/ban_video',
           data: {
             video_id: videoID
           },
           dataType: 'json',
-          success: function(data) {
+          success: function (data) {
+            console.log('booooo');
             User.bannedVideos.push(videoID);
           }
         });
       }
     }
-    
+
     $("#playlist #" + videoID).parent().remove();
 
     var videoIndex = findIndexByKeyValue(Playlist.videos,'videoID', videoID);
@@ -619,7 +620,7 @@ var Playlist = {
 };
 
 $(document).ready(function () {
-  
+
   $('#listenForm input[type=button]').click(function () {
     if ($('#q').val() != "") {
       Playlist.init({
@@ -646,7 +647,7 @@ $(document).ready(function () {
     return false;
   });
 
-  $('#next').click(function () { 
+  $('#next').click(function () {
     Playlist.nextSong();
     return false;
   });
@@ -656,8 +657,8 @@ $(document).ready(function () {
     return false;
   });
 
-  $('#playlist').delegate('a', 'click', function () { 
-    Playlist.jumpToSong($(this).index('#playlist a')); 
+  $('#playlist').delegate('a', 'click', function () {
+    Playlist.jumpToSong($(this).index('#playlist a'));
   });
 
   $('#share-on-twitter').click(function () {
