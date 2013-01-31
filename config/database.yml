@@ -4,11 +4,12 @@ development:
   database: tubalr
   pool: 5
   timeout: 5000
-  username: guer
+  username: postgres
 
 test:
   adapter: postgresql
   encoding: unicode
   database: tubalr-test
   pool: 5
-  username: guer
+  timeout: 5000
+  username: postgres
