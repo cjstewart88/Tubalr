@@ -5,10 +5,10 @@ class Api::RegistrationsController < Api::BaseController
   def create
     params[:md5_email] = Digest::MD5.hexdigest(params[:email])
 
-    user = User.new(params)
-    user.ensure_authentication_token!
+    user = User.new(params.slice(:email, :username, :password))
 
     if user.save
+      user.ensure_authentication_token!
       render :json => user.as_json["user"].merge(:auth_token => user.authentication_token), :status => 201
       return
     else
