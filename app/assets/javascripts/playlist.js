@@ -266,20 +266,9 @@ var Playlist = {
         });
       }
       if ( Playlist.options.retainTopID ) {
-      $.ajax({
-        url: 'http://gdata.youtube.com/feeds/api/videos/'+topID+'?alt=json',
-      	async: false,
-      	dataType: 'json',
-      	success: function(data) {
-      		if (Video.isNotBlocked(data.entry) && Video.isNotUserBanned(data.entry) && Video.hasTitle(data.entry)) {
-            videos.push({
-              videoID:    topID,
-              videoTitle: data.entry.title.$t
-            });
-          }
-      	}
-      });
-    }
+        Playlist.options.videoID = topID;
+        Playlist.video();
+      }
       if (options.resultsReady) {
         options.resultsReady()
       }
