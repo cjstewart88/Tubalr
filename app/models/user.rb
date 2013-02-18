@@ -9,11 +9,6 @@ class User < ActiveRecord::Base
   acts_as_taggable
   acts_as_taggable_on :favorite_genres
 
-  acts_as_followable
-  acts_as_follower
-
-  self.per_page = 10
-
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
 
   attr_accessor :login

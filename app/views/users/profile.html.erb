@@ -1,11 +1,6 @@
 <%= render :partial => 'playlists/import_youtube_playlists' if @profile_owner %>
 
 <section id="profile-main" class="remove-when-searching">
-  <% if user_signed_in? && @user.id == current_user.id %>
-  <% else %>
-    <button original-title="Sign up or Login to follow <%= @user.username %>!" class="profile-follow-me <%= 'tooltip not-signed-in' if !user_signed_in? %> follow-unfollow-button <%= 'un' if user_signed_in? && @user.followed_by?(current_user) %>follow" data-user-id="<%= @user.id %>"><span class="icon-plus"></span><span class="icon-minus"></span><span class="icon-ok"></span></button>
-  <% end %>
-
   <% if @user.present? %>
     <div id="tabs">
       <header id="profile-badge">
@@ -13,22 +8,15 @@
         <div id="profile-badge-username"><%= "#{@user.username}" %></div>
       </header>
 
-      <aside id="profile-counts">
-        <div><span class="count"><%= @user.playlists_count %></span>Playlists</div>
-        <div><span class="count"><%= @user.followers.count %></span>Followers</div>
-      </aside>
-
       <ul>
         <li class="tab playlists-tab" data-tab-name="playlists">Playlists<span class="icon-chevron-right"></span></li>
         <li class="tab favorite-genres-tab" data-tab-name="favorite-genres">Favorite Genres <span class="icon-chevron-right"></span></li>
-        <li class="tab following-tab" data-tab-name="following">Following<span class="icon-chevron-right"></span></li>
       </ul>
     </div>
 
     <div id="tabs-contents">
       <%= render :partial => 'playlists/playlists' %>
       <%= render :partial => 'favorite_genres' %>
-      <%= render :partial => 'following' %>
     </div>
 
     <div class="clear"></div>
