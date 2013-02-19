@@ -30,6 +30,8 @@ Tubalr::Application.routes.draw do
 
   get "/explore"                                    => "application#explore"
 
+  get "/random"                                     => "application#random"
+
   get "/:username/profile"                          => "users#profile"
 
   get "/:username/playlist/:playlist_name.json"     => "playlists#get"
