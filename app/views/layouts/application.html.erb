@@ -4,7 +4,7 @@
     <title>Tubalr - A simple tool for enjoying music videos!</title>
     <meta property="og:image" content="http://www.tubalr.com/assets/facebook-meta-logo.png"/>
     <META NAME="Description" CONTENT="Tubalr is a simple way to enjoy great music videos.">
-    <%= stylesheet_link_tag     "http://fonts.googleapis.com/css?family=PT+Sans:400,700,800,400italic,700italic", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800", "application" %>
+    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:400,700,800,400italic,700italic", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800", "application" %>
 
     <script>
       var _gaq = _gaq || [];
@@ -15,22 +15,6 @@
       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-
-      var GoSquared = {};
-      GoSquared.acct = "GSN-642752-A";
-      (function(w){
-        function gs(){
-          w._gstc_lt = +new Date;
-          var d = document, g = d.createElement("script");
-          g.type = "text/javascript";
-          g.src = "//d1l6p2sc9645hc.cloudfront.net/tracker.js";
-          var s = d.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(g, s);
-        }
-        w.addEventListener ?
-          w.addEventListener("load", gs, false) :
-          w.attachEvent("onload", gs);
-      })(window);
     </script>
     <%= javascript_include_tag  "http://connect.facebook.net/en_US/all.js", "application" %>
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->

@@ -2,11 +2,10 @@
   <div class="col">
     <% if user_signed_in? %>
       <p>
-        <b>New Feature!!</b><br/>
-        DJ Mode is now in full force, you can now broadcast what you're listening to too the world. So what are you waiting on, get spinnin!
+        You can now import YouTube playlists. It works for any YouTube user, meaning... you can save your favorite DJs playlists to your Tubalr account for safe keeping and future enjoyment!
       </p>
 
-      <a href="http://tubalr.tumblr.com/post/40519876276/introducing-dj-mode" target="_blank" class="button has-icon-left"><span class="icon-flag"></span>Read About It</a>
+      <a href="/<%= current_user.username %>/profile" class="button has-icon-left"><span class="icon-download-alt"></span>Get Started</a>
     <% else %>
       <p>
        Tubalr is a simple way to enjoy all the great music content on YouTube. Start by browsing below or searching for an artist/band above. Sign up to create custom playlists while you're at it.
@@ -18,10 +17,10 @@
 
   <div class="col">
     <p>
-      Tubalr is run with time, effort, and care... and will continue to, as long as there is interest and support behind the idea. If you like what you see and want to see it continue, check out the donations page.
+      Tubalr is run with time, effort, and care... and will continue to, as long as there is interest and support behind the idea. If you like what you see and want to see it continue, check out the support page.
     </p>
 
-    <a href="/support" class="button has-icon-left"><span class="icon-heart"></span>Donate</a>  
+    <a href="/support" class="button has-icon-left"><span class="icon-heart"></span>Support</a>
   </div>
 
   <div class="clear"></div>
