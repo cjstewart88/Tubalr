@@ -21,16 +21,17 @@ var Playlist = {
     videoID:              null,
     subReddit:            null,
     djUsername:           null,
-    djListener:           null
+    djListener:           null,
+    retainTopID:          false
   },
 
   init: function (options) {
     Playlist.reset();
     $.extend(Playlist.options, options);
-
+    
     Playlist.determineIfSpecialSearch();
     Playlist.report();
-
+    
     Playlist[Playlist.options.searchType]();
   },
 
@@ -147,14 +148,14 @@ var Playlist = {
     // This is needed so when the similar search calls this method
     // it only gets 20 songs for the original search
     var numberOfSongs = (Playlist.options.searchType == 'just' ? 40 : 20);
-
     $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&start=0&results=' + numberOfSongs , function (data) {
       if (data.response.status.code == 5 || data.response.songs.length <= 10) {
         Playlist.youtube(options);
       }
       else {
+        Playlist.options.retainTopID = false;
         var ajaxs = [];
-
+        
         $.each(data.response.songs, function (i, track) {
           if (track.title.toLowerCase().search("cover") == -1 && track.title.toLowerCase().search("remix") == -1) {
             ajaxs.push(
@@ -166,7 +167,6 @@ var Playlist = {
                         videoID:    video.id.$t.split(":")[3],
                         videoTitle: video.title.$t
                       });
-
                       return false;
                     }
                   });
@@ -175,7 +175,6 @@ var Playlist = {
             )
           }
         });
-
         $.when.apply($, ajaxs).then(options.resultsReady || Playlist.resultsReady);
       }
     });
@@ -183,7 +182,6 @@ var Playlist = {
 
   similar: function () {
     var search = Playlist.options.search;
-
     $.getJSON('http://developer.echonest.com/api/v4/artist/similar?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&results=40&start=0', function (data) {
       var ajaxs = [];
 
@@ -218,7 +216,6 @@ var Playlist = {
 
       $.each(data.response.songs, function (i, song) {
         var searchFor = song.artist_name + ' ' + song.title;
-
         ajaxs.push(
           $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + searchFor + '&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?', function (data) {
             if (data.feed.hasOwnProperty("entry")) {
@@ -245,7 +242,18 @@ var Playlist = {
   youtube: function (options) {
     var search = options.search || Playlist.options.search;
     var videos = options.videos || Playlist.videos;
-
+    var topID;
+    $.ajax({
+      url: 'http://gdata.youtube.com/feeds/api/videos/'+search+'?alt=json',
+    	async: false,
+    	dataType: 'json',
+    	success: function(data) {
+    		if (Video.isNotBlocked(data.entry) && Video.isNotUserBanned(data.entry) && Video.hasTitle(data.entry)) {
+          Playlist.options.retainTopID = true;
+        }
+        search = data.entry.title.$t;
+    	}
+    });
     $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '&orderby=relevance&start-index=1&max-results=40&v=2&alt=json-in-script&callback=?', function (data) {
       if (data.feed.hasOwnProperty("entry")) {
         $.each(data.feed.entry, function (i, video) {
@@ -257,7 +265,10 @@ var Playlist = {
           }
         });
       }
-
+      if ( Playlist.options.retainTopID ) {
+        Playlist.options.videoID = topID;
+        Playlist.video();
+      }
       if (options.resultsReady) {
         options.resultsReady()
       }
@@ -331,9 +342,19 @@ var Playlist = {
   preparePlaylist: function () {
     //don't sort a user playlist.
     if (Playlist.options.customPlaylistOwner == null || Playlist.options.customPlaylistOwner.length == 0) {
+      var topID;
+      if ( Playlist.options.retainTopID ) {
+        topID = Playlist.videos [0];
+      }
       Playlist.videos.sort(function () {
         return (Math.round(Math.random()) - 0.5);
       });
+      if ( Playlist.options.retainTopID ) {
+        var index = Playlist . videos . indexOf ( topID );
+        var tempIndex = Playlist.videos [0];
+        Playlist.videos [0] = topID;
+        Playlist.videos [index] = tempIndex;
+      }
     }
 
     Playlist.buildPlaylistUI();
