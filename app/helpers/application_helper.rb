@@ -48,4 +48,5 @@ module ApplicationHelper
   def dj_username
     current_user.username.delete("^a-zA-Z0-9").downcase
   end
+
 end
