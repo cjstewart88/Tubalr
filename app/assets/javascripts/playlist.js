@@ -21,17 +21,16 @@ var Playlist = {
     videoID:              null,
     subReddit:            null,
     djUsername:           null,
-    djListener:           null,
-    retainTopID:          false
+    djListener:           null
   },
 
   init: function (options) {
     Playlist.reset();
     $.extend(Playlist.options, options);
-    
+
     Playlist.determineIfSpecialSearch();
     Playlist.report();
-    
+
     Playlist[Playlist.options.searchType]();
   },
 
@@ -49,14 +48,14 @@ var Playlist = {
       Player.self.stopVideo();
     }
 
-    Playlist.videos = [];
-    Playlist.currentTrack = 0;
-    Playlist.direction = 'forward';
-    Playlist.options.customPlaylistOwner = null;
-    Playlist.options.customPlaylistName = null;
-    Playlist.options.persistentSorting = false;
-    Playlist.options.videoID = null;
-    Playlist.options.subReddit = null;
+    Playlist.videos                       = [];
+    Playlist.currentTrack                 = 0;
+    Playlist.direction                    = 'forward';
+    Playlist.options.customPlaylistOwner  = null;
+    Playlist.options.customPlaylistName   = null;
+    Playlist.options.persistentSorting    = false;
+    Playlist.options.videoID              = null;
+    Playlist.options.subReddit            = null;
 
     $('.remove-when-searching').fadeOut();
     $('#player').fadeOut();
@@ -153,9 +152,8 @@ var Playlist = {
         Playlist.youtube(options);
       }
       else {
-        Playlist.options.retainTopID = false;
         var ajaxs = [];
-        
+
         $.each(data.response.songs, function (i, track) {
           if (track.title.toLowerCase().search("cover") == -1 && track.title.toLowerCase().search("remix") == -1) {
             ajaxs.push(
@@ -242,18 +240,13 @@ var Playlist = {
   youtube: function (options) {
     var search = options.search || Playlist.options.search;
     var videos = options.videos || Playlist.videos;
-    var topID;
-    $.ajax({
-      url: 'http://gdata.youtube.com/feeds/api/videos/'+search+'?alt=json',
-    	async: false,
-    	dataType: 'json',
-    	success: function(data) {
-    		if (Video.isNotBlocked(data.entry) && Video.isNotUserBanned(data.entry) && Video.hasTitle(data.entry)) {
-          Playlist.options.retainTopID = true;
-        }
-        search = data.entry.title.$t;
-    	}
-    });
+
+    if (search.search('youtube')) {
+      search = Import.getVideoID([{href: search}]);
+      Playlist.video();
+      return false;
+    }
+
     $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '&orderby=relevance&start-index=1&max-results=40&v=2&alt=json-in-script&callback=?', function (data) {
       if (data.feed.hasOwnProperty("entry")) {
         $.each(data.feed.entry, function (i, video) {
@@ -265,12 +258,9 @@ var Playlist = {
           }
         });
       }
-      if ( Playlist.options.retainTopID ) {
-        Playlist.options.videoID = topID;
-        Playlist.video();
-      }
+
       if (options.resultsReady) {
-        options.resultsReady()
+        options.resultsReady();
       }
       else {
         Playlist.resultsReady();
@@ -342,19 +332,9 @@ var Playlist = {
   preparePlaylist: function () {
     //don't sort a user playlist.
     if (Playlist.options.customPlaylistOwner == null || Playlist.options.customPlaylistOwner.length == 0) {
-      var topID;
-      if ( Playlist.options.retainTopID ) {
-        topID = Playlist.videos [0];
-      }
       Playlist.videos.sort(function () {
         return (Math.round(Math.random()) - 0.5);
       });
-      if ( Playlist.options.retainTopID ) {
-        var index = Playlist . videos . indexOf ( topID );
-        var tempIndex = Playlist.videos [0];
-        Playlist.videos [0] = topID;
-        Playlist.videos [index] = tempIndex;
-      }
     }
 
     Playlist.buildPlaylistUI();

@@ -59,13 +59,13 @@ var Import = {
           if (data.feed.entry === undefined) {
             return false;
           }
-          
+
           $.each(data.feed.entry, function (i, video) {
             if (Video.isNotBlocked(video)) {
               var videoID = Import.getVideoID(video.link);
 
               playlist.videos.push({
-                id:    videoID, 
+                id:    videoID,
                 title: video.title.$t
               });
             }
@@ -100,7 +100,7 @@ var Import = {
         return false;
       }
     });
-    
+
     return videoID;
   },
 
@@ -146,9 +146,9 @@ $(document).ready(function () {
     draggable:  false,
     title:      'Import YouTube Playlists'
   });
-  
-  $('#import-youtube-playlists-open-dialog').click(function () { 
-    $('#import-youtube-playlists').dialog('open'); 
+
+  $('#import-youtube-playlists-open-dialog').click(function () {
+    $('#import-youtube-playlists').dialog('open');
   });
 
   $('#import-youtube-playlists-form').submit(function () {
