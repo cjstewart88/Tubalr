@@ -1,7 +1,7 @@
 var Player = {
   self: null,
   listeners: [],
-  
+
   init: function () {
     var tag = document.createElement('script');
     tag.src = "http://www.youtube.com/player_api?version=3";
@@ -9,7 +9,7 @@ var Player = {
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    // lets keep the session active in google analytics to 
+    // lets keep the session active in google analytics to
     // track better avg visit duration
     setInterval(function () {
       Report.gaPing();
@@ -45,13 +45,8 @@ var Player = {
       // several times in a row
       if (Playlist.djMode == null) {
         Report.gaVideoView();
-        Report.event({
-          event: 'watchedVideo',
-          video_id: Playlist.videos[Playlist.currentTrack].videoID,
-          video_title: Playlist.videos[Playlist.currentTrack].videoTitle
-        });
       }
-      
+
       Playlist.nextSong();
     }
     else if (newState.data == 2 && Playlist.djMode) {
@@ -67,7 +62,7 @@ var Player = {
   onPlayerError: function (errorCode) {
     if (Playlist.direction == "backward") {
       Playlist.previousSong();
-    } 
+    }
     else {
       Playlist.nextSong();
     }

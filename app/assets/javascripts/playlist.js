@@ -65,15 +65,6 @@ var Playlist = {
 
   report: function () {
     Report.gaPageview();
-
-    if (Playlist.options.searchType != 'video') {
-      Report.event({
-        event: Playlist.options.searchType,
-        query: Playlist.options.search || Playlist.options.subReddit || Playlist.options.djUsername || null,
-        playlist_name: Playlist.options.customPlaylistName,
-        playlist_owner: Playlist.options.customPlaylistOwner
-      });
-    }
   },
 
   determineIfSpecialSearch: function () {

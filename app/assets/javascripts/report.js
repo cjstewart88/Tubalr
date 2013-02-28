@@ -32,12 +32,6 @@ var Report = {
 
   gaPing: function () {
     _gaq.push(['_trackEvent', 'ping', 'pong']);
-  },
-
-  event: function (params) {
-    if (User.id) {
-      $.post('/api/event', { event: JSON.stringify(params) });
-    }
   }
 
 }
