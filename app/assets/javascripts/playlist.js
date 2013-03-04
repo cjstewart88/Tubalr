@@ -232,8 +232,8 @@ var Playlist = {
     var search = options.search || Playlist.options.search;
     var videos = options.videos || Playlist.videos;
 
-    if (search.search('youtube')) {
-      search = Import.getVideoID([{href: search}]);
+    if (search.search('youtube') >= 0) {
+      Playlist.options.videoID = Import.getVideoID([{href: search}]);
       Playlist.video();
       return false;
     }
