@@ -138,7 +138,7 @@ var Playlist = {
     // This is needed so when the similar search calls this method
     // it only gets 20 songs for the original search
     var numberOfSongs = (Playlist.options.searchType == 'just' ? 40 : 20);
-    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&start=0&results=' + numberOfSongs , function (data) {
+    $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + encodeURIComponent(search) + '&format=jsonp&callback=?&start=0&results=' + numberOfSongs , function (data) {
       if (data.response.status.code == 5 || data.response.songs.length <= 10) {
         Playlist.youtube(options);
       }
@@ -171,7 +171,7 @@ var Playlist = {
 
   similar: function () {
     var search = Playlist.options.search;
-    $.getJSON('http://developer.echonest.com/api/v4/artist/similar?api_key=OYJRQNQMCGIOZLFIW&name=' + escape(search) + '&format=jsonp&callback=?&results=40&start=0', function (data) {
+    $.getJSON('http://developer.echonest.com/api/v4/artist/similar?api_key=OYJRQNQMCGIOZLFIW&name=' + encodeURIComponent(search) + '&format=jsonp&callback=?&results=40&start=0', function (data) {
       var ajaxs = [];
 
       $.each(data.response.artists, function (i, artist) {
