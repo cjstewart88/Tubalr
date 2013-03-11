@@ -20,13 +20,13 @@ var CustomPlaylistSettings = {
   },
 
   destroyDone: function () {
-    $('#playlists-main #' + CustomPlaylistSettings.playlistID).remove();
+    $('.playlists-tab-content ul.list li#' + CustomPlaylistSettings.playlistID).remove();
 
-    if ($('#playlists-main li').length == 0) {
+    if ($('.playlists-tab-content ul.list li').length == 0) {
       var noPlaylistsSpan = $('<span>').attr('id', 'no-playlists')
                                        .text('Looks like you currently have 0 playlists, starting using tubalr and click the playlist dropdown under the video player to get started!');
 
-      $('#playlists-main ul').replaceWith(noPlaylistsSpan);
+      $('.playlists-tab-content ul.list').replaceWith(noPlaylistsSpan);
     }
 
     CustomPlaylistSettings.notice('Your playlist, <b>' + CustomPlaylistSettings.playlistName + '</b>, has been successfully deleted.');

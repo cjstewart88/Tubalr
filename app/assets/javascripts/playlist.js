@@ -172,28 +172,33 @@ var Playlist = {
   similar: function () {
     var search = Playlist.options.search;
     $.getJSON('http://developer.echonest.com/api/v4/artist/similar?api_key=OYJRQNQMCGIOZLFIW&name=' + encodeURIComponent(search) + '&format=jsonp&callback=?&results=40&start=0', function (data) {
-      var ajaxs = [];
+      if (data.response.status.code == 5) {
+        Playlist.just()
+      }
+      else {
+        var ajaxs = [];
 
-      $.each(data.response.artists, function (i, artist) {
-        ajaxs.push(
-          $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(artist.name)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?&format=5', function (data) {
-            if (data.feed.hasOwnProperty("entry")) {
-              $.each(data.feed.entry, function (i, video) {
-                if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video) && Video.hasTitle(video)) {
-                  Playlist.videos.push({
-                    videoID: video.id.$t.split(":")[3],
-                    videoTitle: video.title.$t
-                  });
+        $.each(data.response.artists, function (i, artist) {
+          ajaxs.push(
+            $.getJSON('http://gdata.youtube.com/feeds/api/videos?q='+escape(artist.name)+'&orderby=relevance&start-index=1&max-results=10&v=2&alt=json-in-script&callback=?&format=5', function (data) {
+              if (data.feed.hasOwnProperty("entry")) {
+                $.each(data.feed.entry, function (i, video) {
+                  if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video) && Video.hasTitle(video)) {
+                    Playlist.videos.push({
+                      videoID: video.id.$t.split(":")[3],
+                      videoTitle: video.title.$t
+                    });
 
-                  return false;
-                }
-              });
-            }
-          })
-        );
-      });
+                    return false;
+                  }
+                });
+              }
+            })
+          );
+        });
 
-      $.when.apply($,ajaxs).then(Playlist.just);
+        $.when.apply($,ajaxs).then(Playlist.just);
+      }
     });
   },
 
