@@ -71,20 +71,12 @@ h2 {
   color: #CFFFFF;
   text-transform: capitalize;
 
-  aside {
-    float: right;
-    font-size: 10px;
-    font-weight: normal;
-  }
-
   a {
     float: right;
+    margin-top: 3px;
     font-size: 10px;
     font-weight: normal;
-
-    span {
-      margin-right: 6px;
-    }
+    cursor: pointer;
 
     &:hover {
       text-decoration: none;
