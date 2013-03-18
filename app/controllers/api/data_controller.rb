@@ -14,7 +14,10 @@ class Api::DataController < Api::BaseController
   end
 
   def user_playlists
+    @user = User.find(params[:user_id])
     render :json => get_user_playlists
+  rescue ActiveRecord::RecordNotFound
+    render :status => 400, :json => { error: "User not found" }
   end
 
   def playlist_videos
