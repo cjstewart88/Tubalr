@@ -44,7 +44,7 @@
           </h1>
 
           <nav id="main-nav">
-            <%= link_to('explore', '/explore') %>
+            <%= link_to('about', '#', { :class => 'about-tubalr' }) %>
             <% if user_signed_in? %>
               <%= link_to('my profile', "/#{current_user.username}/profile") %>
               <%= link_to('settings', '/users/edit') %>
@@ -53,7 +53,6 @@
               <%= link_to('sign up', '/users/sign_up') %>
               <%= link_to('login', '/users/sign_in') %>
             <% end %>
-            <%= link_to('support', '/support') %>
           </nav>
 
           <%= render :partial => 'search_form' if !@dj %>
@@ -73,13 +72,26 @@
 
         <div id="about-tubalr">
           <p>
-            Tubalr is Pronounced: tuba-ler
+            Pronounced: tuba-ler
           </p>
 
+          <h3>Reddit</h3>
           <p>
-            Have feedback, feature requests, or bugs? Want to share a custom playlist or whatever else you may think of? Head on over to <a href="http://www.reddit.com/r/tubalr" target="_blank">/r/tubalr</a>. Checkout Tubalr's <%= link_to('blog', 'http://www.tubalr.tumblr.com/', :target => '_blank') %> for updates.
+            Have feedback, feature requests, or bugs? Want to share a custom playlist or whatever else you may think of? Head on over to <a href="http://www.reddit.com/r/tubalr" target="_blank">/r/tubalr</a>.
           <p>
 
+          <h3>Blog</h3>
+          <p>
+            Checkout Tubalr's <%= link_to('blog', 'http://www.tubalr.tumblr.com/', :target => '_blank') %> for updates.
+          </p>
+
+          <h3>GitHub</h3>
+          <p>
+            Tubalr's full source can be found on <a href="https://github.com/cjstewart88/tubalr" target="_blank">github</a>,
+            feel free to send a PR or submit an issue!
+          </p>
+
+          <h3>Why was this built?</h3>
           <p>
             Tubalr is an app that was crafted out of curiosity and passion, Sept 12th 2010. I
             released it into the wild and have been iterating ever since. I built Tubalr because
@@ -88,17 +100,28 @@
           </p>
 
           <p>
-            I mentioned that I've been
-            tweaking Tubalr since its creation, and thats largely due to the amazing feedback
-            and support given by its supporters and users. So with that said, if you have ANY
-            feedback or just wanna chat... please shoot an e-mail to
+            I mentioned that I've been tweaking Tubalr since its creation, and thats largely due to
+            the amazing feedback and support given by its supporters and users. So with that said, if
+            you have ANY feedback or just wanna chat... please shoot an e-mail to
             <a href='mailto:listen.to.tubalr@gmail.com'>listen.to.tubalr@gmail.com</a>.
           </p>
 
+          <h3>Who built it?</h3>
           <p>
-            Oh, by the way, my name's Cody Jack Stewart, the founder and crafter of Tubalr. If ya need anything
-            at all, checkout my <a href="http://www.codyjackstewart.com/" target="_blank">personal site</a>.
+            Me, <a href="http://www.twitter.com/codyjackstewart" target="_blank">Cody Stewart</a>, I'm the
+            founder and crafter of Tubalr. There's also been a few open source contributions via <a href="https://github.com/cjstewart88/Tubalr/contributors" target="_blank">github</a>.
           </p>
+
+          <h3>Donate</h3>
+          <p>
+            Tubalr is run with time, effort, and care... and will continue to, as long as there is interest
+            and support behind the idea. Regardless of monetary backing, Tubalr will continue to run as long as it can.
+          </p>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+            <input type="hidden" name="cmd" value="_s-xclick">
+            <input type="hidden" name="hosted_button_id" value="VLGMMSXGJVV56">
+            <input type="submit" value="Donate">
+          </form>
         </div>
       </div>
     </div>

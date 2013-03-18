@@ -26,10 +26,6 @@ class ApplicationController < ActionController::Base
     render :layout => "application", :template => "explore"
   end
 
-  def support
-    render :layout => "application", :template => "support"
-  end
-
   def dj
     @dj = params[:username]
     render :layout => "application", :template => "index"

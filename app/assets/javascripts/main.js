@@ -12,7 +12,7 @@ $(document).ready(function () {
   $('#about-tubalr').dialog({
     modal:      true,
     autoOpen:   false,
-    width:      600,
+    width:      800,
     draggable:  false,
     title:      'About Tubalr'
   });

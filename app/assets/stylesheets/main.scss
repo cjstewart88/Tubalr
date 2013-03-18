@@ -535,32 +535,6 @@ section {
   }
 }
 
-.welcome {
-  line-height: 20px;
-  text-align: center;
-
-  .col {
-    float: left;
-    width: 50%;
-  }
-
-  p {
-    margin-bottom: 15px;
-    padding: 20px;
-
-    b {
-      color: #DDF556;
-    }
-  }
-
-  .button {
-    display: inline-block;
-    margin-bottom: 10px;
-    font-size: 14px;
-    font-weight: normal;
-  }
-}
-
 #popup-search {
   overflow: visible;
   margin-top: 30px;

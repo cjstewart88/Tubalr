@@ -18,8 +18,6 @@ Tubalr::Application.routes.draw do
     resources :registrations, :only => [:create]
   end
 
-  get "/support"                                    => "application#support"
-
   get "/stats"                                      => "application#stats"
   get "/just/:artist_band"                          => "application#index"
   get "/similar/:artist_band"                       => "application#index"
