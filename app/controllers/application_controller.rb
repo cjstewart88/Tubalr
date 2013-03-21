@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :ensure_domain, :random_playlist
+  before_filter :ensure_domain
 
   def index
     flash[:notice] = "Thanks a ton for your support, it means a lot!" if params[:thanks]
@@ -32,30 +32,18 @@ class ApplicationController < ActionController::Base
   end
 
   def random
+    random_reddit   = REDDIT.sample[:subreddits].sample
+    random_genre    = '/just/' + GENRES.sample.sub(' ','%20')
+    random_playlist = [random_reddit, random_genre].sample
+
     redirect_to random_playlist
   end
 
   private
 
-
   def ensure_domain
     if Rails.env.production? && request.env['HTTP_HOST'] != 'www.tubalr.com'
       redirect_to "http://www.tubalr.com#{request.fullpath}", :status => 301
     end
-  end
-
-  def random_playlist
-
-    def random_reddit
-      r = REDDIT.sample
-      r[:subreddits].sample
-    end
-
-    def random_genre
-      r = '/just/' + GENRES.sample
-      r.sub(' ','%20')
-    end
-
-    [random_reddit, random_genre].sample
   end
 end
