@@ -35,7 +35,7 @@ window.Tubalr = (function(exports) {
     });
 
     this.socket.on('join', function(msg) {
-      self.listenerCount += 1; 
+      self.listenerCount += 1;
       self.joinPartNotice(msg.from, 'join');
       self.updateListenersUI({ user: msg.from, action: 'join' });
     });
@@ -212,21 +212,10 @@ $(document).ready(function () {
       $('#main-player-ui-tabs-wrapper').removeClass('show-only-chat show-only-listeners').addClass('show-only-playlist');
     }
     else if ($(this).attr('id') == 'show-chat-button') {
-      $('#main-player-ui-tabs-wrapper').removeClass('show-only-playlist show-only-listeners').addClass('show-only-chat'); 
+      $('#main-player-ui-tabs-wrapper').removeClass('show-only-playlist show-only-listeners').addClass('show-only-chat');
     }
     else {
-      $('#main-player-ui-tabs-wrapper').removeClass('show-only-playlist show-only-chat').addClass('show-only-listeners'); 
-    }
-  });
-
-  $.getJSON('http://throttle.io:8080/stats.json', function (data) { 
-    if (data.djs.length == 0) {
-      $('.djs-list').replaceWith("<p>There's currently no one DJing, <a href='http://tubalr.tumblr.com/post/40519876276/introducing-dj-mode' target='_blank'>go spin it up</a>!</p>");
-    } 
-    else {
-      $.each(data.djs, function (i, username) {
-        $('.djs-list').append('<li><a href="/dj/'+username+'">'+username+'</a></li>');
-      });  
+      $('#main-player-ui-tabs-wrapper').removeClass('show-only-playlist show-only-chat').addClass('show-only-listeners');
     }
   });
 

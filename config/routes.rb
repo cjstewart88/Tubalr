@@ -25,8 +25,6 @@ Tubalr::Application.routes.draw do
   get "/r/:subreddit"                               => "application#index"
   get "/dj/:username"                               => "application#dj"
 
-  get "/explore"                                    => "application#explore"
-
   get "/random"                                     => "application#random"
 
   get "/:username/profile"                          => "users#profile"
