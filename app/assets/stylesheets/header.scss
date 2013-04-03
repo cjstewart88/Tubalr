@@ -5,77 +5,51 @@
   height: 40px;
   margin-bottom: 20px;
   line-height: 40px;
-  
+  padding: 20px 0;
+
   #logo {
     float: left;
-    margin-left: 20px;
+    margin-left: 35px;
     font: 30px 'PT Sans';
     font-weight: 700;
-    @include text-shadow(0 0 3px rgba(0, 0, 0, .8));
-    
+
     a {
-      color: #fff; 
-      
+      color: #fff;
+
       &:hover {
-       text-decoration: none; 
+       text-decoration: none;
       }
     }
   }
-  
+
   #main-nav {
     float: left;
-    font-size: 12px;
-    
+
     a {
       color: #fff;
       margin-left: 20px;
-      @include text-shadow(0 0 3px rgba(0, 0, 0, .8));
-      
-      &:hover {
-       text-decoration: none; 
-      }
 
-      &.support-link {
-        color: #fff;
-        @include text-shadow(none);
-        border: solid 1px #000;
-        background: #000;
-        background: rgba(0,0,0,.3);
-        font-weight: normal;
+      &:hover {
+       text-decoration: none;
       }
     }
   }
 
-  #listenForm { 
+  #listenForm {
     float: right;
-    margin-right: 20px;
+    margin-right: 35px;
 
     input {
-      margin: 0;
-      @include border-radius(18px);
+      margin: 0 0 0 5px;
     }
 
     #q {
       width: 250px;
-      padding-left: 18px;
-      @include border-top-right-radius(0px);
-      @include border-bottom-right-radius(0px);
     }
 
     input[type=button] {
-      margin-left: -3px;
       background: #548FF4;
       color: #fff;
-    
-      &.just {
-        border-right: solid 1px #4283F4;
-        @include border-radius(0);
-      }
-
-      &.similar {
-        @include border-top-left-radius(0px);
-        @include border-bottom-left-radius(0px);
-      }
     }
   }
 }

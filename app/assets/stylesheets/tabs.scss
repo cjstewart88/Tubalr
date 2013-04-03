@@ -10,9 +10,8 @@
 
     li {
       width: 144px;
-      margin-bottom: 15px;  
+      margin-bottom: 15px;
       padding: 10px 16px;
-      border: solid 1px transparent;
 
       span {
         float: right;
@@ -27,19 +26,9 @@
         }
       }
 
-      &:hover {
-        border: solid 1px #000;
-        background: rgba(0,0,0,.3);
-        @include border-radius(3px);
+      &:hover, &.active {
+        background: #548FF4;
         cursor: pointer;
-      }
-
-      &.active {
-        color: #CFFFFF;
-        border: solid 1px #000;
-        background: rgba(0,0,0,.3);
-        @include border-radius(3px);
-        cursor: auto;
       }
     }
   }
@@ -48,9 +37,9 @@
 #tabs-contents {
   float: right;
   width: 80%;
-  
+
   .tab-content {
-    display: none;  
+    display: none;
     padding-left: 25px;
 
     &.active {

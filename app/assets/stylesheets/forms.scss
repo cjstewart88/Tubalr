@@ -1,5 +1,52 @@
 @import "compass";
 
+input {
+  color: #000;
+  font: 12px 'Open Sans', sans-serif;
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+input[type=text], input[type=email], input[type=password], textarea {
+  padding: 8px 14px;
+  width: 250px;
+  border: none;
+  font-size: 12px;
+  background: #FFFFFF;
+}
+
+input[type=button], input[type=submit], a.button, button {
+  font-size: 12px;
+  color: #000;
+  line-height: normal;
+  padding: 8px 20px;
+  background-color: whiteSmoke;
+  border: none;
+  cursor: pointer;
+  moz-transition: all .3s;
+  -o-transition: all .3s;
+  -webkit-transition: all .3s;
+  transition: all .3s;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.has-icon-left span {
+    margin-right: 8px;
+    line-height: normal;
+  }
+
+  &.has-icon-right span {
+    margin-left: 10px;
+    line-height: normal;
+  }
+}
+
+button:focus { outline: 0; }
+
 .select2-drop.select2-drop-multi.select2-drop-active {
   border: none !important;
   @include box-shadow(none);
@@ -7,13 +54,11 @@
   color: #000;
 
   margin-top: -2px;
-  @include border-bottom-left-radius(3px);
-  @include border-bottom-right-radius(3px);
+  @include border-radius(0);
 
   &.select2-drop-above {
     margin-top: 4px;
-    @include border-bottom-left-radius(3px);
-    @include border-bottom-right-radius(3px);
+    @include border-radius(0);
   }
 }
 
@@ -29,7 +74,7 @@ form {
   input[type=text], input[type=email], input[type=password] { margin-top: 15px; margin-bottom: 15px; }
   div i { font-size: 12px; }
   div p { width: 430px; margin-top: 15px; }
-  div label { font-size: 14px; font-weight: bold; text-transform: capitalize; }
+  div label { font-size: 12px; font-weight: bold; text-transform: capitalize; }
   div input[type=submit] { margin: 0px; margin-top: 15px; }
   div p.no-input-field { margin-bottom: 15px; }
   .field_with_errors { margin-top: 0px; display: inline-block; }
@@ -46,17 +91,17 @@ form {
       .select2-choices, .select2-drop {
         border: none;
         @include box-shadow(none);
-      } 
+      }
     }
-    
+
     .select2-choices, .select2-choice {
       padding-top: 3px;
       padding-bottom: 3px;
       border: none;
-      @include border-radius(3px);
+      @include border-radius(0px);
       background: #fff;
     }
-    
+
     .select2-choices {
       padding-left: 8px;
       padding-right: 8px;
@@ -65,15 +110,15 @@ form {
         padding: 6px 5px 4px 5px;
       }
     }
-    
+
     .select2-choice {
       @include box-shadow(none);
       padding-left: 12px;
-      
+
       div {
         background: none;
         border-left: none;
-        
+
         b {
           background-position: -4px 6px;
         }
@@ -81,7 +126,7 @@ form {
     }
   }
 
-  .select2-dropdown-open { 
+  .select2-dropdown-open {
     .select2-choice div b {
       background-position: -22px 6px;
     }
