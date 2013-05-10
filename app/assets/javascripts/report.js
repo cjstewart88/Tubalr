@@ -31,16 +31,21 @@ var Report = {
   },
 
   reportWatchedVideo: function () {
+    var params = {
+      video_id:     Playlist.videos[Playlist.currentTrack].videoID,
+      video_title:  Playlist.videos[Playlist.currentTrack].videoTitle,
+      user_agent:   'web'
+    }
+
+    if (User.id != null) {
+      params["user_id"] = User.id;
+    }
+
     $.ajax({
-      type:         'POST',
-      url:          '/api/analytics/report_watched_video',
-      dataType:     'json',
-      data:         {
-        video_id:     Playlist.videos[Playlist.currentTrack].videoID,
-        video_title:  Playlist.videos[Playlist.currentTrack].videoTitle,
-        user_id:      User.id || null,
-        user_agent:   'web'
-      }
+      type:     'POST',
+      url:      '/api/analytics/report_watched_video',
+      dataType: 'json',
+      data:     params
     });
   }
 
