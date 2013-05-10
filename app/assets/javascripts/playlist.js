@@ -74,7 +74,7 @@ var Playlist = {
       Playlist.options.searchType = 'genre';
     }
     else if (search.match('/r/') != null) {
-      Playlist.options.searchType = 'reddit';
+      Playlist.options.searchType = 'subreddit';
       Playlist.options.subReddit = search.replace('/r/', '');
     }
   },
@@ -288,8 +288,8 @@ var Playlist = {
     });
   },
 
-  reddit: function () {
-    var redditError = setTimeout(function () {
+  subreddit: function () {
+    var subredditError = setTimeout(function () {
       Playlist.togglePlayer();
     }, 6000);
 
@@ -309,7 +309,7 @@ var Playlist = {
         }
       });
 
-      clearTimeout(redditError);
+      clearTimeout(subredditError);
       Playlist.resultsReady();
     });
   },
@@ -549,7 +549,7 @@ var Playlist = {
         url += Playlist.videos[Playlist.currentTrack].videoTitle.replace(/[ +]/g,"%20") + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
         url += '%2Fvideo%2F' + Playlist.videos[Playlist.currentTrack].videoID;
         break;
-      case 'reddit':
+      case 'subreddit':
         url += '%2Fr%2F' + Playlist.options.subReddit + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
         url += '%2Fr%2F' + Playlist.options.subReddit;
         break;
@@ -568,7 +568,7 @@ var Playlist = {
     var url       = "http://www.tubalr.com/";
     var shareText = "";
 
-    if (Playlist.options.searchType == "reddit") {
+    if (Playlist.options.searchType == "subreddit") {
       url += "r/" + Playlist.options.subReddit;
       shareText += "/r/" + Playlist.options.subReddit;
     }

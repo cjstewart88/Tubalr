@@ -16,7 +16,7 @@ module ApplicationHelper
     elsif request.path.index('/similar/')
       options[:searchType] = array_or_string_for_javascript('similar')
     elsif request.path.index('/r/')
-      options[:searchType] = array_or_string_for_javascript('reddit')
+      options[:searchType] = array_or_string_for_javascript('subreddit')
       options[:subReddit]  = array_or_string_for_javascript(params[:subreddit])
     elsif request.path.index('/video/')
       options[:searchType] = array_or_string_for_javascript('video')

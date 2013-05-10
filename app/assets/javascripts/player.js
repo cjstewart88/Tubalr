@@ -44,7 +44,7 @@ var Player = {
       // to some browsers wigging out and triggering this
       // several times in a row
       if (Playlist.djMode == null) {
-        Report.gaVideoView();
+        Report.reportWatchedVideo();
       }
 
       Playlist.nextSong();

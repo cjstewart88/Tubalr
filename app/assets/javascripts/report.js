@@ -12,7 +12,7 @@ var Report = {
     else if (Playlist.options.searchType == 'video') {
       url = [Playlist.options.searchType, Playlist.options.videoID];
     }
-    else if (Playlist.options.searchType == 'reddit') {
+    else if (Playlist.options.searchType == 'subreddit') {
       url = ['r', Playlist.options.subReddit];
     }
     else {
@@ -26,12 +26,22 @@ var Report = {
     }
   },
 
-  gaVideoView: function () {
-    _gaq.push(['_trackEvent', 'video', 'watched in full', Playlist.videos[Playlist.currentTrack].videoID]);
-  },
-
   gaPing: function () {
     _gaq.push(['_trackEvent', 'ping', 'pong']);
+  },
+
+  reportWatchedVideo: function () {
+    $.ajax({
+      type:         'POST',
+      url:          '/api/analytics/report_watched_video',
+      dataType:     'json',
+      data:         {
+        video_id:     Playlist.videos[Playlist.currentTrack].videoID,
+        video_title:  Playlist.videos[Playlist.currentTrack].videoTitle,
+        user_id:      User.id || null,
+        user_agent:   'web'
+      }
+    });
   }
 
 }

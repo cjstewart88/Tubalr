@@ -7,6 +7,7 @@ Tubalr::Application.routes.draw do
   root :to => "application#index"
 
   namespace :api do
+    post  "/analytics/report_watched_video"         => "analytics#report_watched_video"
     post  "/ban_video"                              => "banned_videos#ban_video"
     post  "/playlist/create"                        => "playlists#create"
     post  "/playlist/add_video"                     => "playlists#add_video"
