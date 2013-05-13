@@ -38,7 +38,7 @@
         <i>(could result in excessive buffering for slower connections)</i>
         <div id="video-quality-inner">
           <%= "<span class='error'>#{resource.errors[:hd][0]}</span>".html_safe if resource.errors[:hd][0] %><br />
-          <%= f.check_box :hd, { :checked => current_user.hd ? 'checked' : '' }, 'true', 'false' %><%= f.label "Play videos in highest definition", :for => :user_hd, :class => 'normal-label' %>
+          <%= f.check_box :hd, { :checked => current_user.hd ? 'checked' : '' }, 'true', 'false' %><%= f.label "Play videos in highest possible quality", :for => :user_hd, :class => 'normal-label' %>
         </div>
       </div>
 
