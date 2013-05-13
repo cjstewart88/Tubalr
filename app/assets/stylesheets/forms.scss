@@ -81,10 +81,23 @@ form {
   .error { color: red; margin-left: 10px; }
   .form-link { display: inline-block; margin-top: 15px; }
   .remember-me { margin-bottom: 15px; }
+  input[type=checkbox] { margin-right: 10px; }
+
+  #video-quality {
+    #video-quality-inner {
+      margin-top: 4px;
+      margin-bottom: 24px;
+    }
+
+    .normal-label {
+      font-weight: normal;
+      text-transform: normal;
+    }
+  }
 
   .select2-container, .select2-container-multi {
     display: block;
-    margin-top: 15px;
+    margin-top: 13px;
     margin-bottom: 15px;
 
     &.select2-container-active {

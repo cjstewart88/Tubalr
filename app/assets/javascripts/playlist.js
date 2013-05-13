@@ -427,7 +427,11 @@ var Playlist = {
     $('#playlist .active').removeClass('active');
     $('#' + currentVideo.videoID).addClass('active');
 
-    Player.self.loadVideoById(currentVideo.videoID, currentVideo.startAt || 0);
+    Player.self.loadVideoById({
+      videoId: currentVideo.videoID,
+      startSeconds: currentVideo.startAt || 0,
+      suggestedQuality: (User.hd ? 'hd1080' : 'default')
+    });
 
     // if the user is in djing we need to update the
     // connected listeners of the video change

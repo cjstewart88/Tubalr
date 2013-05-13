@@ -6,40 +6,49 @@
       <div>
         <%= f.label :email %>
         <%= "<span class='error'>#{resource.errors[:email][0]}</span>".html_safe if resource.errors[:email][0] %><br />
-        <%= f.email_field :email %> 
+        <%= f.email_field :email %>
       </div>
 
       <div>
         <%= f.label :password %>
         <i>(leave blank if you don't want to change it)</i>
         <%= "<span class='error'>#{resource.errors[:password][0]}</span>".html_safe if resource.errors[:password][0] %><br />
-        <%= f.password_field :password %> 
+        <%= f.password_field :password %>
       </div>
 
       <div>
         <%= f.label :password_confirmation %>
         <%= "<span class='error'>#{resource.errors[:password_confirmation][0]}</span>".html_safe if resource.errors[:password_confirmation][0] %><br />
-        <%= f.password_field :password_confirmation %> 
+        <%= f.password_field :password_confirmation %>
       </div>
 
       <div>
         <%= f.label :background %>
         <i>(must be a url to a .png, .jpg, or .gif)</i>
         <%= "<span class='error'>#{resource.errors[:background][0]}</span>".html_safe if resource.errors[:background][0] %><br />
-        <%= f.text_field :background %> 
+        <%= f.text_field :background %>
       </div>
 
       <div><%= f.submit "Update" %></div>
     </div>
 
     <div id="right-col">
+      <div id="video-quality">
+        <label>Video Quality</label>
+        <i>(could result in excessive buffering for slower connections)</i>
+        <div id="video-quality-inner">
+          <%= "<span class='error'>#{resource.errors[:hd][0]}</span>".html_safe if resource.errors[:hd][0] %><br />
+          <%= f.check_box :hd, { :checked => current_user.hd ? 'checked' : '' }, 'true', 'false' %><%= f.label "Play videos in highest definition", :for => :user_hd, :class => 'normal-label' %>
+        </div>
+      </div>
+
       <div>
         <%= f.label "profile picture" %>
         <p class="no-input-field">
           We use <a href="https://en.gravatar.com/" target="_blank">Gravatar.com</a> to manage user profile pictures. So head <a href="https://en.gravatar.com/" target="_blank">over there</a> to manage yours or sign up if you're not already!
         </p>
       </div>
-      
+
       <div>
         <%= f.label "favorite genres" %>
         <p>

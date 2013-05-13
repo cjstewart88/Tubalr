@@ -25,7 +25,8 @@
       User.init({
         id:           <%= current_user.id %>,
         username:     '<%= escape_javascript(current_user.username) %>',
-        bannedVideos: <%= array_or_string_for_javascript(current_user.banned_videos.map(&:video_id)) %>
+        bannedVideos: <%= array_or_string_for_javascript(current_user.banned_videos.map(&:video_id)) %>,
+        hd:           <%= current_user.hd %>
       });
     <% end if user_signed_in? %>
   </head>

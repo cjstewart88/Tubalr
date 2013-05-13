@@ -43,6 +43,10 @@ class RegistrationsController < Devise::RegistrationsController
 
     params[:user][:md5_email] = Digest::MD5.hexdigest(params[:user][:email])
 
+    params[:user][:hd] = (params[:user][:hd] == "true" ? true : false)
+    Rails.logger.debug "------"
+    Rails.logger.debug params[:user]
+    Rails.logger.debug "------"
     if @user.update_attributes(params[:user])
       set_flash_message :notice, :updated
       # Sign in the user bypassing validation in case his password changed

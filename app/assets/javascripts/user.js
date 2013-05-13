@@ -6,6 +6,8 @@ var User = {
 
   bannedVideos: [],
 
+  hd: null,
+
   init: function (options) {
     $.extend(User, options);
   },
@@ -24,7 +26,7 @@ var User = {
 };
 
 $(document).ready(function () {
-  
+
   $('#user_new').submit(function () {
     return User.validateUsername();
   });
