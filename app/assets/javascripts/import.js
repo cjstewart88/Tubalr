@@ -35,9 +35,10 @@ var Import = {
 
       $.each(data.feed.entry, function () {
         Import.youtubePlaylists.push({
-          id:     this.id["$t"].split(":")[5],
-          name:   this.title["$t"].replace(/[^a-z\d ]/ig,""),
-          videos: []
+          id:           this.id["$t"].split(":")[5],
+          name:         this.title["$t"].replace(/[^a-z\d ]/ig,""),
+          videosCount:  this["yt$countHint"]["$t"],
+          videos:       []
         });
       });
     });
@@ -54,24 +55,30 @@ var Import = {
     var ajaxs = [];
 
     $.each(Import.youtubePlaylists, function (i, playlist) {
-      ajaxs.push(
-        $.getJSON('https://gdata.youtube.com/feeds/api/playlists/' + playlist.id + '?v=2&alt=json-in-script&callback=?', function (data) {
-          if (data.feed.entry === undefined) {
-            return false;
-          }
+      var startIndex  = 1;
+      var pages       = Math.ceil(playlist.videosCount/50);
 
-          $.each(data.feed.entry, function (i, video) {
-            if (Video.isNotBlocked(video)) {
-              var videoID = Import.getVideoID(video.link);
-
-              playlist.videos.push({
-                id:    videoID,
-                title: video.title.$t
-              });
+      for (var i = 0; pages > i; i++) {
+        ajaxs.push(
+          $.getJSON('https://gdata.youtube.com/feeds/api/playlists/' + playlist.id + '?v=2&alt=json-in-script&callback=?&start-index=' + startIndex + '&max-results=50', function (data) {
+            if (data.feed.entry === undefined) {
+              return false;
             }
-          });
-        })
-      );
+
+            $.each(data.feed.entry, function (i, video) {
+              if (Video.isNotBlocked(video)) {
+                var videoID = Import.getVideoID(video.link);
+                playlist.videos.push({
+                  id:    videoID,
+                  title: video.title.$t
+                });
+              }
+            });
+          })
+        );
+
+        startIndex += 50;
+      }
     });
 
     $.when.apply($, ajaxs).then(Import.savePlaylists);
@@ -126,13 +133,9 @@ var Import = {
       },
       dataType: 'json',
       success: function (data) {
-        Import.done();
+        location.reload();
       }
     });
-  },
-
-  done: function () {
-    location.reload();
   }
 
 };
