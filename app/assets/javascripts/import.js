@@ -67,9 +67,8 @@ var Import = {
 
             $.each(data.feed.entry, function (i, video) {
               if (Video.isNotBlocked(video)) {
-                var videoID = Import.getVideoID(video.link);
                 playlist.videos.push({
-                  id:    videoID,
+                  id:    video.content.src.split('/')[4].split('?')[0],
                   title: video.title.$t
                 });
               }
@@ -82,33 +81,6 @@ var Import = {
     });
 
     $.when.apply($, ajaxs).then(Import.savePlaylists);
-  },
-
-  getVideoID: function (videoLinks) {
-    var videoID = "";
-
-    $.each(videoLinks, function () {
-      var hrefSplit         = this.href.split('v=')[1];
-      var ampersandPosition = hrefSplit.indexOf('&');
-
-      if (ampersandPosition != -1) {
-        videoID = hrefSplit.substring(0, ampersandPosition);
-      }
-
-      if (videoID.length != 11) {
-        hrefSplit = this.href.match(/\b([A-Za-z0-9_-]{11})\b/);
-
-        if (hrefSplit != null) {
-          videoID = hrefSplit[1];
-        }
-      }
-
-      if (videoID.length == 11) {
-        return false;
-      }
-    });
-
-    return videoID;
   },
 
   removeEmptyPlaylists: function () {
