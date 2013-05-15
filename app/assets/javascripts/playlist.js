@@ -665,7 +665,8 @@ $(document).ready(function () {
 
   $('#playlist').sortable({
     receive: Playlist.sortVideos,
-    stop: Playlist.sortVideos
+    stop: Playlist.sortVideos,
+    helper: 'clone'
   });
 
   $('.shuffle').click(function () {
