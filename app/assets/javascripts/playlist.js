@@ -292,7 +292,7 @@ var Playlist = {
         var post = this.data;
 
         if (post.domain == "youtube.com" && post.media != null && typeof post.media === 'object' && post.media.hasOwnProperty("oembed") && post.media.oembed.url !== undefined) {
-          var videoID = Import.getVideoID([{ href: post.media.oembed.url }]);
+          var videoID = Video.getVideoID([{ href: post.media.oembed.url }]);
 
           if (videoID.length == 11){
             Playlist.videos.push({

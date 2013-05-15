@@ -11,7 +11,7 @@ var Video = {
   isUnique: function (video, videos) {
     videos = videos || Playlist.videos
     var unique = true;
-    
+
     for (var i = 0; i < videos.length; i++) {
       if (videos[i].videoID === video.id.$t.split(":")[3]) {
         unique = false;
@@ -20,13 +20,13 @@ var Video = {
 
       var tmpTitle1 = videos[i].videoTitle.toLowerCase().replace(/ *\([^)]*\) */g, '').replace(/[^a-zA-Z ]/g, "");
       var tmpTitle2 = video.title.$t.toLowerCase().replace(/ *\([^)]*\) */g, '').replace(/[^a-zA-Z ]/g, "");
-      
+
       if (tmpTitle1 === tmpTitle2) {
         unique = false;
         break;
       }
     }
-     
+
     return unique;
   },
 
@@ -64,6 +64,32 @@ var Video = {
     else {
       return true;
     }
-  }
+  },
+
+  getVideoID: function (videoLinks) {
+    var videoID = "";
+
+    $.each(videoLinks, function () {
+      var hrefSplit         = this.href.split('v=')[1];
+      var ampersandPosition = hrefSplit.indexOf('&');
+
+      if (ampersandPosition != -1) {
+        videoID = hrefSplit.substring(0, ampersandPosition);
+      }
+
+      if (videoID.length != 11) {
+        hrefSplit = this.href.match(/\b([A-Za-z0-9_-]{11})\b/);
+        if (hrefSplit != null) {
+          videoID = hrefSplit[1];
+        }
+      }
+
+      if (videoID.length == 11) {
+        return false;
+      }
+    });
+
+    return videoID;
+  },
 
 };
