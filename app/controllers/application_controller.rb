@@ -17,7 +17,10 @@ class ApplicationController < ActionController::Base
       :users_registered_today           => User.where("created_at >= ?", Date.today).count,
       :playlists_created_today          => Playlist.where("created_at >= ?", Date.today).count,
       :videos_added_to_playlists_today  => Video.where("created_at >= ?", Date.today).count,
-      :videos_watched                   => WatchedVideo.count
+      :videos_watched                   => WatchedVideo.count,
+      :videos_watched_on_web            => WatchedVideo.where(:user_agent => 'web').count,
+      :videos_watched_on_android        => WatchedVideo.where(:user_agent => 'android').count,
+      :videos_watched_on_ios            => WatchedVideo.where(:user_agent => 'ios').count
     }
 
     render :layout => "application", :template => "stats"
