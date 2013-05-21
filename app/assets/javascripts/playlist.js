@@ -646,6 +646,11 @@ $(document).ready(function () {
     return false;
   });
 
+  $('#pause').click(function () {
+    Playlist.playPause();
+    return false;
+  });
+
   $('#previous').click(function () {
     Playlist.previousSong();
     return false;
