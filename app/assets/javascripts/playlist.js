@@ -648,6 +648,15 @@ $(document).ready(function () {
 
   $('#pause').click(function () {
     Playlist.playPause();
+    $('#play').show();
+    $('#pause').hide();
+    return false;
+  });
+
+  $('#play').click(function () {
+    Playlist.playPause();
+    $('#pause').show();
+    $('#play').hide();
     return false;
   });
 
