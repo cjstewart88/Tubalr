@@ -355,10 +355,18 @@ var Playlist = {
   playPause: function () {
     if (Player.self.getPlayerState() === 1) {
       Player.self.pauseVideo();
+      $('#play').show();
+      $('#pause').hide();
     }
     else {
       Player.self.playVideo();
+      Playlist.resetPause();
     }
+  },
+
+  resetPause: function () {
+    $('#pause').show();
+    $('#play').hide();
   },
 
   shuffle: function () {
@@ -391,6 +399,7 @@ var Playlist = {
     }
 
     Playlist.currentVideo();
+    Playlist.resetPause();
   },
 
   previousSong: function () {
@@ -404,11 +413,13 @@ var Playlist = {
       Playlist.currentTrack = Playlist.currentTrack-=1;
       Playlist.currentVideo();
     }
+    Playlist.resetPause();
   },
 
   jumpToSong: function (videoID) {
     Playlist.currentTrack = videoID;
     Playlist.currentVideo();
+    Playlist.resetPause();
   },
 
   currentVideo: function () {
@@ -614,7 +625,7 @@ var Playlist = {
 };
 
 $(document).ready(function () {
-
+  
   $('#listenForm input[type=button]').click(function () {
     if ($('#q').val() != "") {
       Playlist.init({
@@ -643,6 +654,16 @@ $(document).ready(function () {
 
   $('#next').click(function () {
     Playlist.nextSong();
+    return false;
+  });
+
+  $('#pause').click(function () {
+    Playlist.playPause();
+    return false;
+  });
+
+  $('#play').click(function () {
+    Playlist.playPause();
     return false;
   });
 

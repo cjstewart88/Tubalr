@@ -301,9 +301,22 @@ h2 {
     margin-right: -4px;
     border-right: none;
   }
+
   #next {
     margin-right: 0px;
   }
+
+  #pause {
+    margin-right: -4px;
+    border-right: none;
+  }
+  
+  #play {
+    display: none;
+    margin-right: -4px;
+    border-right: none;
+  }
+
 }
 
 section {
