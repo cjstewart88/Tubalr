@@ -346,6 +346,15 @@ var Playlist = {
     Playlist.currentVideo();
   },
 
+  playPause: function () {
+    if (Player.self.getPlayerState() === 1) {
+      Player.self.pauseVideo();
+    }
+    else {
+      Player.self.playVideo();
+    }
+  },
+
   shuffle: function () {
     Playlist.options.persistentSorting = false;
 
