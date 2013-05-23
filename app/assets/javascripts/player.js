@@ -49,9 +49,17 @@ var Player = {
 
       Playlist.nextSong();
     }
+    else if (newState.data == 1) {
+      $('#pause').show();
+      $('#play').hide();
+    }
     else if (newState.data == 2 && Playlist.djMode) {
       // if in djMode and the user trys to pause the video, start it back
       Player.self.playVideo();
+    }
+    else if (newState.data == 2) {
+      $('#pause').hide();
+      $('#play').show();
     }
 
     for (var i = 0; i < Player.listeners.length; ++i) {

@@ -343,30 +343,7 @@ var Playlist = {
   start: function () {
     Playlist.preparePlaylist();
     Playlist.togglePlayer();
-
-    //now you just put #dev-mode on the end of the URL
-    //and you don't have to deal with videos playing
-    //(might need to refresh to see it work)
-    if (window.location.hash != '#dev-mode') {
-      Playlist.currentVideo();
-    }
-  },
-
-  playPause: function () {
-    if (Player.self.getPlayerState() === 1) {
-      Player.self.pauseVideo();
-      $('#play').show();
-      $('#pause').hide();
-    }
-    else {
-      Player.self.playVideo();
-      Playlist.resetPause();
-    }
-  },
-
-  resetPause: function () {
-    $('#pause').show();
-    $('#play').hide();
+    Playlist.currentVideo();
   },
 
   shuffle: function () {
@@ -399,7 +376,6 @@ var Playlist = {
     }
 
     Playlist.currentVideo();
-    Playlist.resetPause();
   },
 
   previousSong: function () {
@@ -413,13 +389,11 @@ var Playlist = {
       Playlist.currentTrack = Playlist.currentTrack-=1;
       Playlist.currentVideo();
     }
-    Playlist.resetPause();
   },
 
   jumpToSong: function (videoID) {
     Playlist.currentTrack = videoID;
     Playlist.currentVideo();
-    Playlist.resetPause();
   },
 
   currentVideo: function () {
@@ -625,7 +599,7 @@ var Playlist = {
 };
 
 $(document).ready(function () {
-  
+
   $('#listenForm input[type=button]').click(function () {
     if ($('#q').val() != "") {
       Playlist.init({
@@ -658,12 +632,12 @@ $(document).ready(function () {
   });
 
   $('#pause').click(function () {
-    Playlist.playPause();
+    Player.self.pauseVideo();
     return false;
   });
 
   $('#play').click(function () {
-    Playlist.playPause();
+    Player.self.playVideo();
     return false;
   });
 
@@ -694,4 +668,5 @@ $(document).ready(function () {
     Playlist.shuffle();
     return false;
   });
+
 });
