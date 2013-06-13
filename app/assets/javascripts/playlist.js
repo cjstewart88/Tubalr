@@ -421,6 +421,8 @@ var Playlist = {
       suggestedQuality: (User.hd ? 'hd1080' : 'default')
     });
 
+    Player.checkPlayerStatus();
+
     // if the user is in djing we need to update the
     // connected listeners of the video change
     if (Playlist.djMode && Playlist.djMode.broadcasting) {
