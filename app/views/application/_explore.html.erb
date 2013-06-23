@@ -7,6 +7,7 @@
       <li class="tab top-genres-tab" data-tab-name="top-genres">Top Genres <span class="icon-chevron-right"></span></li>
       <li class="tab all-genres-tab" data-tab-name="all-genres">All Genres<span class="icon-chevron-right"></span></li>
       <li class="tab reddit-tab" data-tab-name="reddit">Reddit Playlists <span class="icon-chevron-right"></span></li>
+      <li class="tab recent-tab" data-tab-name="recent">Recently Viewed<span class="icon-chevron-right"></span></li>
       <li class="tab"><a href='/random'>Random Playlist <span class="icon-random"></span></a></li>
     </ul>
   </div>
@@ -94,6 +95,21 @@
             <li><a href='<%= sr %>'><%= sr %></a></li>
           <% end %>
         </ul>
+      <% end %>
+    </div>
+
+    <div class="tab-content recent-tab-content">
+      <h2>
+        Recently Viewed Playlists
+      </h2>
+      <% if @recently_viewed %>
+        <ul class="list">
+          <% @recently_viewed.reverse_each do | r | %>
+            <li><a href='<%= r %>'><%= clean_up_link r %></a></li>
+          <% end %>
+      </ul>
+      <% else %>
+       <p>No recently viewed playlists.</p>
       <% end %>
     </div>
   </div>
