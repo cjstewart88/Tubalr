@@ -102,7 +102,7 @@
       <h2>
         Recently Viewed Playlists
       </h2>
-      <% if @recently_viewed %>
+      <% if @recently_viewed.count > 0 %>
         <ul class="list">
           <% @recently_viewed.reverse_each do | r | %>
             <li><a href='<%= r %>'><%= clean_up_link r %></a></li>

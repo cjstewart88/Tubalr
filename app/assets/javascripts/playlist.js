@@ -617,6 +617,10 @@ $(document).ready(function () {
         search:     $('#q').val(),
         searchType: $(this).attr('name')
       });
+
+      $.ajax({
+        url: "/just/" + $('#q').val()
+      });
     }
   });
 
@@ -628,7 +632,11 @@ $(document).ready(function () {
         search:     $('#q').val(),
         searchType: 'just'
       });
-    }
+
+      $.ajax({
+        url: "/just/" + $('#q').val()
+      });
+    }      
   });
 
   $('.remove-video').live('click', function (e) {
