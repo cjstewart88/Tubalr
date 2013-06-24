@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  before_filter :ensure_domain
+  before_filter :ensure_domain, :recently_viewed_playlist
 
   def index
     flash[:notice] = "Thanks a ton for your support, it means a lot!" if params[:thanks]
@@ -41,6 +41,16 @@ class ApplicationController < ActionController::Base
     random_playlist = [random_reddit, random_genre].sample
 
     redirect_to random_playlist
+  end
+
+  def recently_viewed_playlist
+    @recently_viewed = session[:recent] ||= []
+    session[:recent].delete_at(0) if session[:recent].size > 16
+    if request.fullpath.start_with?('/just/','/r/') || request.fullpath.include?('/playlist/')
+      unless request.fullpath.include?('.json')
+        session[:recent] << request.fullpath
+      end
+    end
   end
 
   private

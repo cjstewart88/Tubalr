@@ -49,4 +49,9 @@ module ApplicationHelper
     current_user.username.delete("^a-zA-Z0-9").downcase
   end
 
+  def clean_up_link(link)
+    link = link.sub(/\/just\/|.*playlist\//, "")
+    URI.unescape(link)
+  end
+
 end
