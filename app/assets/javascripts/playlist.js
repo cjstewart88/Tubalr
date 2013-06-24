@@ -336,8 +336,9 @@ var Playlist = {
     $.each(Playlist.videos, function(i) {
       playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><span class="remove-video icon-trash"></span><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
     });
-    if (Playlist.videos.length > 0)
+    if (Playlist.videos.length > 0) {
       $('#' + Playlist.videos[Playlist.currentTrack].videoID).addClass('active');
+    }
   },
 
   start: function () {
@@ -407,8 +408,9 @@ var Playlist = {
 
   currentVideo: function () {
     // failed search - exit early
-    if (Playlist.videos.length == 0)
-      return; 
+    if (Playlist.videos.length == 0) {
+      return;
+    }
     var currentVideo      = Playlist.videos[Playlist.currentTrack];
     var currentVideoTitle = currentVideo.videoTitle;
 
