@@ -4,7 +4,7 @@ var History = {
 
   // flag, whether localstorage is available
   // Method taken from modernizr framework
-  available: (function() {
+  available: function() {
     try {
       localStorage.setItem('__mod', '__mod');
       localStorage.removeItem('__mod');
@@ -12,7 +12,7 @@ var History = {
     } catch(e) {
       return false;
     }
-  })(),
+  },
 
   playlists: function() {
     var playlists = localStorage.getItem('playlists') || "{}";
@@ -40,9 +40,16 @@ var History = {
     return keys;
   },
 
+  sortedPlaylists: function() {
+    var lists = this.playlists();
+    return $.map(this.sortedKeys(), function(key) {
+      return lists[key];
+    });
+  },
+
   // tries to save the current playlist
   update: function() {
-    if (!this.available) return;
+    if (!this.available()) return;
 
     var playlistCopy = jQuery.extend(true, {}, Playlist);
     playlistCopy.visitTime = (new Date()).getTime();
@@ -71,20 +78,17 @@ var History = {
 };
 
 $(document).ready(function () {
-  if (!History.available || History.playlistCount() == 0) {
+  if (!History.available() || History.playlistCount() == 0) {
     $('.history-tab').hide();
   } else {
-    var playlists = History.playlists();
-
-    $.each(History.sortedKeys(), function(i, key) {
-      var list = playlists[key];
+    $.each(History.sortedPlaylists(), function(i, list) {
       var date = new Date(list.visitTime);
-      var text = list._name + ' ' + date;
+      var text = list._name; // + ' ' + date;
       var link = $('<li><a href="#">'+text+'</a></li>');
       link.click(function() {
         History.loadPlaylist(list._name);
       });
-      $('.history-tab-content .list').append(link);
+      $('#history-list').append(link);
     });
   }
 });
