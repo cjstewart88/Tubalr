@@ -432,9 +432,9 @@ var Playlist = {
     // connected listeners of the video change
     if (Playlist.djMode && Playlist.djMode.broadcasting) {
       Playlist.djMode.updateBroadcast(currentVideo.videoTitle, currentVideo.videoID, 0);
+    } else {
+      History.update();
     }
-
-    History.update();
   },
 
   throttlePersistSort: function () {

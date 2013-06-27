@@ -78,9 +78,7 @@ var History = {
 };
 
 $(document).ready(function () {
-  if (!History.available() || History.playlistCount() == 0) {
-    $('.history-tab').hide();
-  } else {
+  if (History.available() && History.playlistCount() > 0) {
     $.each(History.sortedPlaylists(), function(i, list) {
       var date = new Date(list.visitTime);
       var text = list._name; // + ' ' + date;
@@ -90,5 +88,7 @@ $(document).ready(function () {
       });
       $('#history-list').append(link);
     });
+  } else {
+    $('.history-tab').hide();
   }
 });
