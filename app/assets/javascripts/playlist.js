@@ -432,6 +432,8 @@ var Playlist = {
     // connected listeners of the video change
     if (Playlist.djMode && Playlist.djMode.broadcasting) {
       Playlist.djMode.updateBroadcast(currentVideo.videoTitle, currentVideo.videoID, 0);
+    } else {
+      History.update();
     }
   },
 
@@ -573,22 +575,22 @@ var Playlist = {
     }
     else if (Playlist.options.djUsername) {
       url += "dj/" + Playlist.options.djUsername;
-      shareText += "I'm listening to " + Playlist.options.djUsername + " DJ"
+      shareText += "I'm listening to " + Playlist.options.djUsername + " DJ";
     }
     else if (Playlist.options.search) {
       if (Playlist.options.searchType == "similar") {
         shareText += "Artists/Bands similar to ";
       }
       else {
-      shareText += "I'm listening to ";
-        url += "just/"
+        shareText += "I'm listening to ";
+        url += "just/";
       }
 
       url += Playlist.options.search.replace(/ /g,"%20");
       shareText += unescape(Playlist.options.search.replace(/[+]/g," "));
     }
     else if (Playlist.options.videoID) {
-      url += "video/" + Playlist.videos[Playlist.currentTrack].videoID
+      url += "video/" + Playlist.videos[Playlist.currentTrack].videoID;
       shareText += unescape(Playlist.videos[Playlist.currentTrack].videoTitle.replace(/[+]/g," "));
     }
     else if (Playlist.options.customPlaylistOwner) {
@@ -610,8 +612,21 @@ var Playlist = {
       function (response) {
       }
     );
-  }
+  },
 
+  name: function() {
+    if (this.options.subReddit) {
+      return "/r/"+this.options.subReddit;
+    }
+    else if (this.options.customPlaylistName) {
+      return "playlist " + this.options.customPlaylistName + " by " + this.options.customPlaylistOwner;
+    }
+    else if (Playlist.options.videoID) {
+      return "video " + Playlist.videos[Playlist.currentTrack].videoTitle;
+    }
+    // just x, similar x, genre x
+    return this.options.searchType + " " + this.options.search;
+  }
 };
 
 $(document).ready(function () {
