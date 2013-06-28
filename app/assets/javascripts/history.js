@@ -72,6 +72,7 @@ var History = {
 
   loadPlaylist: function(name) {
     var playlists = this.playlists();
+    Playlist.reset();
     jQuery.extend(Playlist, playlists[name]);
     Playlist.resultsReady();
   }
