@@ -39,6 +39,7 @@ var Report = {
 
     if (User.id != null) {
       params["user_id"] = User.id;
+      Report.lastfmAction('scrobble');
     }
 
     $.ajax({
@@ -47,6 +48,39 @@ var Report = {
       dataType: 'json',
       data:     params
     });
+  },
+
+  lastfmAction: function (action) {
+    params = {
+      video_title:  Playlist.videos[Playlist.currentTrack].videoTitle
+    }
+
+    if (Playlist.videos[Playlist.currentTrack].artist && Playlist.videos[Playlist.currentTrack].track) {
+      params['artist']  = Playlist.videos[Playlist.currentTrack].artist;
+      params['track']   = Playlist.videos[Playlist.currentTrack].track;
+    }
+
+    if (User.lastfmConnected) {
+      $.ajax({
+        type:     'POST',
+        url:      '/lastfm/' + action,
+        dataType: 'json',
+        data:     params,
+        success: function (data) {
+          if (data.lastfmDisconnected && $('.lastfm-disconnected-notice').length == 0) {
+            User.lastfmConnected = null;
+
+            $('#notices').append('<aside class="lastfm-disconnected-notice">Your Last.fm account has been disconnected, you\'re no longer scrobbling. Visit your setting to reconnect it.</aside>');
+
+            setTimeout(function () {
+              $('.lastfm-disconnected-notice').slideUp(500, function () {
+                $(this).remove();
+              });
+            }, 15000);
+          }
+        }
+      });
+    }
   }
 
 }

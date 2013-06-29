@@ -1,12 +1,14 @@
 var User = {
 
-  id:           null,
+  id:               null,
 
-  username:     null,
+  username:         null,
 
-  bannedVideos: [],
+  bannedVideos:     [],
 
-  hd: null,
+  hd:               null,
+
+  lastfmConnected:  null,
 
   init: function (options) {
     $.extend(User, options);

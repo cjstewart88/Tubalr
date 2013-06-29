@@ -10,6 +10,8 @@ var Playlist = {
 
   sortThrottler: null,
 
+  updateNowPlayingThrottle: null,
+
   djMode: null,
 
   options: {
@@ -154,7 +156,9 @@ var Playlist = {
                     if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video, videos) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video) && Video.hasTitle(video)) {
                       videos.push({
                         videoID:    video.id.$t.split(":")[3],
-                        videoTitle: video.title.$t
+                        videoTitle: video.title.$t,
+                        artist:     search,
+                        track:      track.title
                       });
                       return false;
                     }
@@ -185,7 +189,7 @@ var Playlist = {
                 $.each(data.feed.entry, function (i, video) {
                   if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video) && Video.hasTitle(video)) {
                     Playlist.videos.push({
-                      videoID: video.id.$t.split(":")[3],
+                      videoID:    video.id.$t.split(":")[3],
                       videoTitle: video.title.$t
                     });
 
@@ -218,7 +222,8 @@ var Playlist = {
                   Playlist.videos.push({
                     videoID:    video.id.$t.split(":")[3],
                     videoTitle: video.title.$t,
-                    artistName: song.artist_name
+                    artist:     song.artist_name,
+                    track:      song.title
                   });
 
                   return false;
@@ -411,6 +416,7 @@ var Playlist = {
     if (Playlist.videos.length == 0) {
       return;
     }
+
     var currentVideo      = Playlist.videos[Playlist.currentTrack];
     var currentVideoTitle = currentVideo.videoTitle;
 
@@ -432,9 +438,12 @@ var Playlist = {
     // connected listeners of the video change
     if (Playlist.djMode && Playlist.djMode.broadcasting) {
       Playlist.djMode.updateBroadcast(currentVideo.videoTitle, currentVideo.videoID, 0);
-    } else {
+    }
+    else {
       History.update();
     }
+
+    Report.lastfmAction('update_now_playing');
   },
 
   throttlePersistSort: function () {

@@ -29,7 +29,7 @@
         <%= f.text_field :background %>
       </div>
 
-      <div><%= f.submit "Update" %></div>
+      <div><%= f.submit "Update", :id => "update-settings-button" %></div>
     </div>
 
     <div id="right-col">
@@ -59,6 +59,25 @@
     </div>
 
     <div class="clear"></div>
+
+    <div id="last-fm-settings">
+      <h2>Last.fm</h2>
+      <div>
+        <p>
+          <% if current_user.lastfm_session_key %>
+            <p>
+              Your last.fm account is connected, now start listening so we can scrobble for you!
+            </p>
+            <a href="/lastfm/revoke_access" class="button">Revoke Last.fm Access</a>
+          <% else %>
+            <p>
+              If you'd like to enable scrobbling, you'll need to grant Tubalr access to your Last.fm account.
+            </p>
+            <a href="http://www.last.fm/api/auth/?api_key=<%= ENV["#{Rails.env.upcase}_LASTFM_API_KEY"] %>" class="button">Grant Last.fm Access</a>
+          <% end %>
+        </p>
+      </div>
+    </div>
   <% end %>
 </section>
 

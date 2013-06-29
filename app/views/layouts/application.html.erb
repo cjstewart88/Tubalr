@@ -23,10 +23,11 @@
     <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <%= javascript_tag do %>
       User.init({
-        id:           <%= current_user.id %>,
-        username:     '<%= escape_javascript(current_user.username) %>',
-        bannedVideos: <%= array_or_string_for_javascript(current_user.banned_videos.map(&:video_id)) %>,
-        hd:           <%= current_user.hd %>
+        id:               <%= current_user.id %>,
+        username:         '<%= escape_javascript(current_user.username) %>',
+        bannedVideos:     <%= array_or_string_for_javascript(current_user.banned_videos.map(&:video_id)) %>,
+        hd:               <%= current_user.hd %>,
+        lastfmConnected:  <%= current_user.lastfm_session_key ? 'true' : 'false' %>
       });
     <% end if user_signed_in? %>
   </head>
