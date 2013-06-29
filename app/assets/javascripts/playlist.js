@@ -10,8 +10,6 @@ var Playlist = {
 
   sortThrottler: null,
 
-  updateNowPlayingThrottle: null,
-
   djMode: null,
 
   options: {

@@ -25,7 +25,7 @@ class LastfmController < ApplicationController
   end
 
   def scrobble
-    with_exception_handeling do
+    with_exception_handling do
       Rockstar::Track.scrobble(
         :session_key  => current_user.lastfm_session_key,
         :track        => params[:track]   || extract_track(params[:video_title]),
@@ -36,7 +36,7 @@ class LastfmController < ApplicationController
   end
 
   def update_now_playing
-    with_exception_handeling do
+    with_exception_handling do
       Rockstar::Track.updateNowPlaying(
         :session_key  => current_user.lastfm_session_key,
         :track        => params[:track]   || extract_track(params[:video_title]),
@@ -45,7 +45,7 @@ class LastfmController < ApplicationController
     end
   end
 
-  def with_exception_handeling
+  def with_exception_handling
     if extract_artist(params[:video_title]).nil? || extract_track(params[:video_title]).nil?
       render :json => { :success => false }
     else
