@@ -50,4 +50,5 @@ class ApplicationController < ActionController::Base
       redirect_to "http://www.tubalr.com#{request.fullpath}", :status => 301
     end
   end
+
 end
