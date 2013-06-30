@@ -10,6 +10,8 @@ var Playlist = {
 
   sortThrottler: null,
 
+  reportUpdateNowPlayingThrottler: null,
+
   djMode: null,
 
   options: {
@@ -154,9 +156,7 @@ var Playlist = {
                     if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video, videos) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video) && Video.hasTitle(video)) {
                       videos.push({
                         videoID:    video.id.$t.split(":")[3],
-                        videoTitle: video.title.$t,
-                        artist:     search,
-                        track:      track.title
+                        videoTitle: video.title.$t
                       });
                       return false;
                     }
@@ -219,9 +219,7 @@ var Playlist = {
                 if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isNotLive(video) && Video.isNotUserBanned(video) && Video.hasTitle(video)) {
                   Playlist.videos.push({
                     videoID:    video.id.$t.split(":")[3],
-                    videoTitle: video.title.$t,
-                    artist:     song.artist_name,
-                    track:      song.title
+                    videoTitle: video.title.$t
                   });
 
                   return false;
@@ -441,7 +439,10 @@ var Playlist = {
       History.update();
     }
 
-    Report.lastfmAction('update_now_playing');
+    clearTimeout(Playlist.reportUpdateNowPlayingThrottler);
+    Playlist.reportUpdateNowPlayingThrottler = setTimeout(function () {
+      Report.lastfmAction('update_now_playing');
+    }, 10000);
   },
 
   throttlePersistSort: function () {

@@ -51,26 +51,20 @@ var Report = {
   },
 
   lastfmAction: function (action) {
-    params = {
-      video_title:  Playlist.videos[Playlist.currentTrack].videoTitle
-    }
-
-    if (Playlist.videos[Playlist.currentTrack].artist && Playlist.videos[Playlist.currentTrack].track) {
-      params['artist']  = Playlist.videos[Playlist.currentTrack].artist;
-      params['track']   = Playlist.videos[Playlist.currentTrack].track;
-    }
-
     if (User.lastfmConnected) {
       $.ajax({
         type:     'POST',
         url:      '/lastfm/' + action,
         dataType: 'json',
-        data:     params,
+        data:     {
+          video_title:    Playlist.videos[Playlist.currentTrack].videoTitle,
+          video_duration: Player.self.getDuration()
+        },
         success: function (data) {
-          if (data.lastfmDisconnected && $('.lastfm-disconnected-notice').length == 0) {
+          if (!data.success && data.message && $('.lastfm-disconnected-notice').length == 0) {
             User.lastfmConnected = null;
 
-            $('#notices').append('<aside class="lastfm-disconnected-notice">Your Last.fm account has been disconnected, you\'re no longer scrobbling. Visit your setting to reconnect it.</aside>');
+            $('#notices').append('<aside class="lastfm-disconnected-notice">' + data.message + '</aside>');
 
             setTimeout(function () {
               $('.lastfm-disconnected-notice').slideUp(500, function () {
