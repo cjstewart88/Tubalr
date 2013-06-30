@@ -4,8 +4,7 @@
       <% if user_signed_in? %>
         <li class="tab me-tab" data-tab-name="me">Me <span class="icon-chevron-right"></span></li>
       <% end %>
-      <li class="tab top-genres-tab" data-tab-name="top-genres">Top Genres <span class="icon-chevron-right"></span></li>
-      <li class="tab all-genres-tab" data-tab-name="all-genres">All Genres<span class="icon-chevron-right"></span></li>
+      <li class="tab genres-tab" data-tab-name="genres">Genres<span class="icon-chevron-right"></span></li>
       <li class="tab reddit-tab" data-tab-name="reddit">Reddit Playlists <span class="icon-chevron-right"></span></li>
       <li class="tab history-tab" data-tab-name="history">Recently Viewed<span class="icon-chevron-right"></span></li>
       <li class="tab"><a href='/random'>Random Playlist <span class="icon-random"></span></a></li>
@@ -15,6 +14,16 @@
   <div id="tabs-contents">
     <% if user_signed_in? %>
       <div class="tab-content me-tab-content">
+        <h2>Last.FM Scrobbling</h2>
+        <p>
+          <% if current_user.lastfm_session_key.nil? %>
+            Want to scrobble what you listen to on Tubalr? Head over to <a href="/users/edit">your settings</a> and
+            connect your Last.FM account to get started! Don't know what scrobbling is, read up about it <a href="http://www.last.fm/help/faq?category=99" target="_blank">here</a>.
+          <% else %>
+            Your Last.FM account is connected and you'll be scrobbling while enjoying tubalr!
+          <% end %>
+        </p>
+
         <h2>
           My Favorite Genres
         </h2>
@@ -27,14 +36,14 @@
           </ul>
         <% else %>
           <p>
-            You should pick some favorite genres, not only will they be handy in this section but they will help us suggest new music for you. Head over to <a href="/users/edit">your settings</a> and let us know your favorites!
+            You should pick some favorite genres, they'll appear here when you do. Head over to <a href="/users/edit">your settings</a> to do so!
           </p>
         <% end %>
 
         <h2>My Playlists</h2>
 
         <p>
-            <b>TIP:</b> You can import your YouTube playlists or other users YouTube playlist, head over to <a href="<%= "/#{current_user.username}/profile" %>">your profile</a> to get started.
+            <b>TIP:</b> You can import your YouTube playlists or other users YouTube playlist. Head over to <a href="<%= "/#{current_user.username}/profile" %>">your profile</a> to get started.
         </p>
 
         <% if current_user.playlists.count != 0 %>
@@ -53,7 +62,7 @@
       </div>
     <% end %>
 
-    <div class="tab-content top-genres-tab-content">
+    <div class="tab-content genres-tab-content">
       <h2>
         Top Genres
       </h2>
@@ -63,9 +72,7 @@
           <li><a href='/just/<%= genre %>'><%= genre %></a></li>
         <% end %>
       </ul>
-    </div>
 
-    <div class="tab-content all-genres-tab-content">
       <h2>
         All Genres
       </h2>

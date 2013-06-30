@@ -38,4 +38,9 @@ Tubalr::Application.routes.draw do
   resources :playlists, :only => [:destroy, :update]
 
   post "/import_youtube_playlists"                  => "playlists#import_youtube_playlists"
+
+  get "/lastfm/auth"                                => "lastfm#grant_access"
+  get "/lastfm/revoke_access"                       => "lastfm#revoke_access"
+  post "/lastfm/scrobble"                           => "lastfm#scrobble"
+  post "/lastfm/update_now_playing"                 => "lastfm#update_now_playing"
 end

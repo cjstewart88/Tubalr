@@ -39,6 +39,7 @@ var Report = {
 
     if (User.id != null) {
       params["user_id"] = User.id;
+      Report.lastfmAction('scrobble');
     }
 
     $.ajax({
@@ -47,6 +48,33 @@ var Report = {
       dataType: 'json',
       data:     params
     });
+  },
+
+  lastfmAction: function (action) {
+    if (User.lastfmConnected) {
+      $.ajax({
+        type:     'POST',
+        url:      '/lastfm/' + action,
+        dataType: 'json',
+        data:     {
+          video_title:    Playlist.videos[Playlist.currentTrack].videoTitle,
+          video_duration: Player.self.getDuration()
+        },
+        success: function (data) {
+          if (!data.success && data.message && $('.lastfm-disconnected-notice').length == 0) {
+            User.lastfmConnected = null;
+
+            $('#notices').append('<aside class="lastfm-disconnected-notice">' + data.message + '</aside>');
+
+            setTimeout(function () {
+              $('.lastfm-disconnected-notice').slideUp(500, function () {
+                $(this).remove();
+              });
+            }, 15000);
+          }
+        }
+      });
+    }
   }
 
 }
