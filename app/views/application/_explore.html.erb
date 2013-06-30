@@ -4,8 +4,7 @@
       <% if user_signed_in? %>
         <li class="tab me-tab" data-tab-name="me">Me <span class="icon-chevron-right"></span></li>
       <% end %>
-      <li class="tab top-genres-tab" data-tab-name="top-genres">Top Genres <span class="icon-chevron-right"></span></li>
-      <li class="tab all-genres-tab" data-tab-name="all-genres">All Genres<span class="icon-chevron-right"></span></li>
+      <li class="tab genres-tab" data-tab-name="genres">Genres<span class="icon-chevron-right"></span></li>
       <li class="tab reddit-tab" data-tab-name="reddit">Reddit Playlists <span class="icon-chevron-right"></span></li>
       <li class="tab history-tab" data-tab-name="history">Recently Viewed<span class="icon-chevron-right"></span></li>
       <li class="tab"><a href='/random'>Random Playlist <span class="icon-random"></span></a></li>
@@ -63,7 +62,7 @@
       </div>
     <% end %>
 
-    <div class="tab-content top-genres-tab-content">
+    <div class="tab-content genres-tab-content">
       <h2>
         Top Genres
       </h2>
@@ -73,9 +72,7 @@
           <li><a href='/just/<%= genre %>'><%= genre %></a></li>
         <% end %>
       </ul>
-    </div>
 
-    <div class="tab-content all-genres-tab-content">
       <h2>
         All Genres
       </h2>
