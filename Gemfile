@@ -16,3 +16,6 @@ gem 'uglifier'
 group :development, :test do
   gem 'rspec-rails', ">= 2.0.0.beta"
 end
+group :production do
+  gem 'therubyracer-heroku', '0.8.1.pre3'
+end
