@@ -1,61 +1,45 @@
 @import "compass";
 
-#profile-main {
-  position: relative;
+/* Profile Info */
 
-  #profile-badge {
-    margin-bottom: 15px;
+#profile-info {
+  margin-bottom: 25px;
 
-    #profile-badge-profile-picture {
-      width: 175px;
-      height: 175px;
-      border: solid 1px #000;
-    }
-
-    #profile-badge-username {
-      position: absolute;
-      width: 177px;
-      margin-top: -35px;
-      background: #000;
-      background: rgba(0, 0, 0, .7);
-      border-top: solid 1px #000;
-      line-height: 30px;
-      text-align: center;
-      color: #fff;
-      font-weight: normal;
-      font-size: 12px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
+  img {
+    @include border-radius(3px);
   }
 
-  p {
-    margin-bottom: 15px;
+  img, h2 {
+    float: left;
+  }
+
+  h2 {
+    margin-left: 20px;
+    margin-top: 15px;
+  }
+
+  #import-youtube-playlists-open-dialog {
+    float: right;
+    margin-top: 15px;
+    font-size: 10px;
   }
 }
 
 /* Custom Playists Stuff */
 
-#profile-main .list li {
-  display: inline-block;
-  width: 143px;
-  margin-bottom: 10px;
-  margin-right: 10px;
-
+#profile .playlists li {
   a {
+    display: inline-block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    max-width: 115px;
-    display: inline-block;
-    color: #fff;
+    max-width: 140px;
   }
 
   .custom-playlist-settings-open-dialog {
     display: none;
     float: right;
-    margin-right: 10px;
+    margin-top: 2px;
   }
 
   &:hover {
@@ -88,4 +72,23 @@
       background: #E83841;
     }
   }
+}
+
+/* Import Stuff */
+
+#import-youtube-playlists-welcome {
+  line-height: 33px;
+}
+
+#import-youtube-playlists-action {
+  margin-top: 20px;
+}
+
+#import-youtube-playlists-username {
+  margin-right: 10px;
+}
+
+#import-youtube-playlists-importing, #import-youtube-playlists-error {
+  display: none;
+  text-align: center;
 }

@@ -1,4 +1,6 @@
-<section id="playlist-message"></section>
+<div id="loading">
+  <i class="icon-refresh icon-spin icon-2x"></i>
+</div>
 
 <section id="empty-playlist">o_O This playlist has 0 videos... this is kinda weird.</section>
 
@@ -10,81 +12,29 @@
 
   <h2 id="current-video-title"></h2>
 
-  <div id="main-player-ui">
-    <div id="ytplayerid"></div> 
-
-    <div id="main-player-ui-tabs-wrapper" class="<%= 'show-dj-listener-ui show-only-chat' if @dj %>">
-      <nav id="main-player-ui-tabs">
-        <button id="show-playlist-button"><span class="icon-list"></span></button>
-        <button id="show-chat-button"><span class="icon-comment"></span></button>
-        <button id="show-listeners-button"><span class="icon-user"></span><span id="dj-listener-count"> 0</span></button>
-      </nav>
-
-      <ul id="playlist"></ul>
-
-      <div id="dj-chat">
-        <div id="dj-chat-log"></div>
-        <div id="dj-chat-input-wrapper">
-          <input type="text" placeholder="Enter your message here..." id="dj-chat-input" class="mousetrap">
-        </div>
-      </div>
-
-      <ul id="dj-listeners"></ul>
-    </div>
-  </div>
-
+  <div id="ytplayerid"></div> 
+  <ul id="playlist"></ul>
+  <div class="clear"></div>
 
   <div id="player-controls">
-    <% if !@dj %>
-      <div id="player-controls-right">
-        <a href="#" id="add-songs" class="button tooltip" original-title="Search for videos to add to the current playlist.">Mix in Videos</a>
-        <a href="#" class="shuffle button tooltip" original-title="Shuffle"><span class="icon-random"></span></a>
-        <a href="#" id="previous" class="button tooltip" original-title="Previous">&nbsp;<span class="icon-step-backward"></span></a>
-        <a href="#" id="pause" class="button tooltip" original-title="Pause"><span class="icon-pause"</span></a>
-        <a href="#" id="play" class="button tooltip" original-title="Play"><span class="icon-play"></span></a>
-        <a href="#" id="next" class="button tooltip" original-title="Next"><span class="icon-step-forward"></span>&nbsp;</a>
-      </div>
-      
-      <div id="player-controls-left">
-        <% if user_signed_in? %>
-          <input type="button" id="dj-mode-button" class="enter-dj-mode button tooltip" original-title="Go LIVE and let others listen along with you!" data-dj-username="<%= dj_username %>" value="Enter DJ Mode"/>
-
-          <%= render :partial => 'custom_playlist_dropdown' %>
-        <% end %>
-      </div>
-    <% elsif @dj && user_signed_in? %>
-      <div id="player-controls-left">
-        <%= render :partial => 'custom_playlist_dropdown' %>
-      </div>
-    <% end %>
-  </div>
-
-  <% if user_signed_in? %>
-    <div id="djing">
-      <h2>You're LIVE!</h2>
-
-      <p>
-        You can share this url with friends to have them listen along with you: <b>http://www.tubalr.com/dj/<%=dj_username %></b>
-      </p>
+    <div id="player-controls-right">
+      <a href="#" class="shuffle button small tooltip" original-title="Shuffle"><span class="icon-random"></span></a>
+      <a href="#" id="previous" class="button small tooltip" original-title="Previous">&nbsp;<span class="icon-step-backward"></span></a>
+      <a href="#" id="next" class="button small tooltip" original-title="Next"><span class="icon-step-forward"></span>&nbsp;</a>
     </div>
-  <% end %>
-</section>
+    
+    <div id="player-controls-left">
+      <% if user_signed_in? %>
+        <%= render :partial => 'custom_playlist_dropdown' %>
+      <% end %>
+    </div>
 
-<div id='popup-search'>
-  <p>
-    Enter an artist/band below, or search for a specific song. Then drag videos into your playlist!
-  </p>
-
-  <input type="text" placeholder="search for artists or bands" id="popup-search-query"/>
-  <button id="search-popup-btn"><span class="icon-search"></span></button>
-  
-  <div id='popup-search-results-holder'>
-    <div id='popup-search-message'></div>
-    <ul id='popup-search-results'></ul>
+    <div class="clear"></div>
   </div>
-</div>
+
+</section>
 
 <%= javascript_tag do %>
   Playlist.init(<%= search_options %>);
 <% end if request.path.index("/similar/") || request.path.index("/video/") || request.path.index("/r/") ||
-          request.path.index("/genre/")  || request.path.index("/just/") || @playlist_name || @dj %>
+          request.path.index("/genre/")  || request.path.index("/just/") || @playlist_name %>

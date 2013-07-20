@@ -1,8 +1,6 @@
 <div class="tab-content playlists-tab-content">
-  <h2>Playlists <% if @profile_owner %><a id="import-youtube-playlists-open-dialog">Import YouTube Playlists</a><% end %></h2>
-
   <% if @user.playlists.count != 0 %>
-    <ul class="list">
+    <ul class="playlists">
       <% @user.playlists.each do | playlist | %>
         <li id="<%= playlist.id %>" data-playlist-name="<%= playlist.playlist_name%>">
           <a href="<%= "/#{@user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></a>
