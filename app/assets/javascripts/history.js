@@ -83,7 +83,7 @@ $(document).ready(function () {
     $.each(History.sortedPlaylists(), function(i, list) {
       var date = new Date(list.visitTime);
       var text = list._name; // + ' ' + date;
-      var link = $('<li><a href="#">'+decodeURIComponent(text)+'</a></li>');
+      var link = $('<li><a href="#">'+unescape(text)+'</a></li>');
       link.click(function() {
         History.loadPlaylist(list._name);
       });
