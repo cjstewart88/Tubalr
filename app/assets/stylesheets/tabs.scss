@@ -9,27 +9,22 @@
     font-size: 14px;
 
     li {
-      width: 144px;
-      margin-bottom: 15px;
-      padding: 10px 16px;
+      margin-bottom: 25px;
 
       span {
         float: right;
       }
 
-      a {
-        text-decoration: none;
-        color: #fff;
+      &:hover {
+        cursor: pointer;
+      }
 
-        &:visited {
-          text-decoration:none;
-          color: #fff;
-        }
+      &.active {
+        cursor: default
       }
 
       &:hover, &.active {
-        background: #548FF4;
-        cursor: pointer;
+        color: #3498DB;
       }
     }
   }
@@ -41,10 +36,48 @@
 
   .tab-content {
     display: none;
-    padding-left: 25px;
 
     &.active {
       display: block;
+    }
+  }
+}
+
+.playlists {
+  list-style-type: none;
+
+  li {
+    display: inline-block; 
+    width: 170px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &.whats-hot-list li {
+    max-width: 182px;
+    width: auto;
+    margin: 0;
+    margin-right: 29px;
+    margin-bottom: 30px;
+
+    .cover {
+      width: 175px;
+      height: 175px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+    }
+
+    span {
+      display: block;
+      margin-top: 15px;
+      text-align: center;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 }

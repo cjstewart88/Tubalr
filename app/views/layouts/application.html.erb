@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="<%= show_user_bg %>">
+<html>
   <head>
     <title>Tubalr - A simple tool for enjoying music videos!</title>
 
@@ -33,14 +33,15 @@
   </head>
   <body>
     <div id="fb-root"></div>
-
-    <div id="main">
-      <div id="inner-main">
-        <%= render :partial => 'header' %>
-        <%= render :partial => 'player' %>
-        <%= yield %>
-        <%= render :partial => 'footer' %>
-      </div>
+    
+    <div id="notices">
+      <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
     </div>
+
+    <%= render :partial => 'header' %>
+    <%= yield %>
+    <%= render :partial => 'player' %>  
+    
+    <%= render :partial => 'footer' %>
   </body>
 </html>

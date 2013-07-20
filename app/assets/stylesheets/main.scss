@@ -2,74 +2,63 @@
 
 * { margin: 0px; padding: 0px; }
 
+header, footer, aside, nav, article, section { display: block; }
+
 *, object, embed { outline: none; }
 input::-moz-focus-inner { border: 0; }
 
 ::-webkit-scrollbar {
   width: 8px;
-  background: #333;
+  background: #efefef;
 }
 
 ::-webkit-scrollbar:hover {
-  -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1), inset 0 -1px 0 rgba(0,0,0,0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #464646;
-  -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1), inset 0 -1px 0 rgba(0,0,0,0.1);
+  background: #ccc;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #666;
-}
-
-html {
-  background: #000 url(/assets/bg6.jpg) no-repeat center center fixed;
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+  background: #c3c3c3;
 }
 
 body {
+  width: 1024px;
+  margin: 0 auto;
+  background: #fff;
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
-	color: #fff;
-	padding-bottom: 20px;
-  overflow-y: scroll;
+	color: #464646;
 }
 
-header, footer, aside, nav, article, section { display: block; }
+p {
+  margin-bottom: 30px;
+  line-height: 22px;
+}
 
 a {
-  color: #548FF4;
+  color: #464646;
   text-decoration: none;
 
   &:hover {
-    text-decoration: underline;
+    color: #3498DB;
   }
 
   &:active {
+    color: #3498DB;
     outline: none;
   }
 }
 
 h2 {
   font-size: 16px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   text-transform: capitalize;
+}
 
-  a {
-    float: right;
-    margin-top: 3px;
-    font-size: 10px;
-    font-weight: normal;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: none;
-    }
-  }
+h3 {
+  margin-bottom: 15px;
 }
 
 #notices {
@@ -81,22 +70,10 @@ h2 {
   aside {
     display: block;
     margin-bottom: 10px;
-    color: #fff;
-    background: #141527;
-    background: rgba(20, 21, 39, .6);
-    width: 180px;
+    background: #efefef;
+    width: 160px;
     padding: 10px;
-  }
-}
-
-#main {
-  width: 100%;
-  max-width: 1000px;
-  min-width: 890px;
-  margin: 25px auto;
-
-  #inner-main {
-    margin: 10px;
+    @include border-radius(4px);
   }
 }
 
@@ -115,215 +92,95 @@ h2 {
   text-align: center;
 }
 
-#main-player-ui {
-  height: 390px;
-  border: solid 1px #000;
-  background: rgba(0,0,0, .4);
+#current-video-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 30px;
+}
 
-  #main-player-ui-tabs-wrapper {
-    float: left;
-    width: 32%;
-    height: 390px;
+#share-playlist {
+  float: right;
+  margin-right: 10px;
 
-    #main-player-ui-tabs {
-      display: none;
-      height: 30px;
-      border-bottom: solid 1px #000;
-      position: relative;
-
-      #dj-listener-count {
-        margin-left: 10px;
-      }
-
-      button {
-        float: left;
-        display: block;
-        width: 33%;
-        text-align: center;
-        padding: 0;
-        line-height: 30px;
-        background: none;
-        color: #fff;
-        @include border-radius(0);
-        border-right: solid 1px #000;
-
-        &:last-child {
-          border-right: none;
-        }
-      }
-    }
-
-    &.show-dj-ui {
-      #main-player-ui-tabs {
-        display: block;
-      }
-
-      #playlist {
-        height: 359px;
-      }
-    }
-
-    &.show-dj-listener-ui {
-      #show-playlist-button { display: none; }
-      #show-chat-button, #show-listeners-button { width: 50%; }
-
-      #main-player-ui-tabs {
-        display: block;
-      }
-    }
-
-    &.show-only-playlist {
-      #show-playlist-button { color: #548FF4; }
-      #playlist { display: block; }
-      #dj-chat, #dj-listeners { display: none; }
-    }
-
-    &.show-only-chat {
-      #show-chat-button { color: #548FF4; }
-      #dj-chat { display: block; }
-      #playlist, #dj-listeners { display: none; }
-    }
-
-    &.show-only-listeners {
-      #show-listeners-button { color: #548FF4; }
-      #dj-listeners { display: block; }
-      #dj-chat, #playlist { display: none; }
-    }
+  span {
+    margin-left: 15px;
+    font-size: 16px;
+    cursor: pointer;
   }
 }
 
-#playlist, #popup-search-results {
-  float: left;
+#player {
+  display: none;
+}
+
+#ytplayerid {
   height: 390px;
+  width: 68%;
+  float: left;
+}
+
+#playlist {
+  height: 390px;
+  width: 32%;
+  float: left;
   overflow: auto;
-  width: 100%;
   list-style-type: none;
-  padding: 0;
-  @include box-shadow(none);
 
   a {
     display: block;
-  	padding: 9px 35px 9px 14px;
-    color: #fff;
+  	padding: 10px 34px 10px 34px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    border-top: 1px solid #000;
-    border-bottom: 1px solid #1D1D1D;
 
     &.active {
-      background: #000;
-      background: rgba(0,0,0,.3);
-      background-image: url('/assets/active.png') !important;
-      background-position: left center !important;
-      background-repeat: no-repeat !important;
+      color: #3498DB
     }
 
     &:hover {
   	  text-decoration: none;
-      background: #000;
-      background: rgba(0,0,0,.3);
     }
   }
 
   li {
     position: relative;
 
-    &:first-child {
-      a { border-top: none !important; }
-    }
-
-    &:last-child {
-      a { border-bottom: none; }
-    }
-
     .icon-trash {
       position: absolute;
       display: none;
-      top: 6px;
+      top: 10px;
       right: 10px;
       font-size: 16px;
       cursor: pointer;
     }
-  }
 
-  &#playlist li:hover {
-    .icon-trash {
+    &:hover .icon-trash {
       display: block;
     }
   }
 }
 
-#player {
-  padding: 20px;
-  position: relative;
-	margin: 0 auto;
-	display: none;
-}
-
-#ytplayerid {
-  float: left;
-	height: 390px;
-	width: 68%;
-	background: #000;
-  border: none;
-}
-
 #player-controls {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 #player-controls-left, #player-controls-right {
   height: 31px;
-}
 
-#player-controls, #playlist {
-  input, a.button, button {
-    padding: 6px 12px;
-    margin-right: 8px;
-    font-weight:  normal;
-    color: #fff;
-    background: #000;
-    background: rgba(0, 0, 0, 0.3);
-  }
-}
-
-#player-controls-right {
-  float: right;
-  line-height: 31px;
-
-  input {
-    margin-left: 8px;
-    margin-right: 0px;
+  &#player-controls-left {
+    float: left;
   }
 
-  #previous {
-    margin-right: -4px;
-    border-right: none;
+  &#player-controls-right {
+    float: right;
+    
+    .button {
+      display: inline-block;
+      background: none;
+      border: none; 
+    }
   }
-
-  #next {
-    margin-right: 0px;
-  }
-
-  #pause {
-    margin-right: -4px;
-    border-right: none;
-  }
-
-  #play {
-    display: none;
-    margin-right: -4px;
-    border-right: none;
-  }
-
-}
-
-section {
-  background: #141527;
-  background: rgba(20, 21, 39, .6);
-  padding: 35px;
-  margin-bottom: 20px;
 }
 
 #users-main p {
@@ -380,11 +237,6 @@ section {
   }
 }
 
-#mobile-promo {
-  margin-top: 15px;
-  text-align: center;
-}
-
 .why-register {
   ol {
     li {
@@ -393,16 +245,11 @@ section {
   }
 }
 
-#playlist-message {
+#loading {
   display: none;
-  height: 200px;
-  margin-top: 80px;
+  height: 300px;
+  line-height: 300px;
   text-align: center;
-  font-size: 16px;
-  text-shadow: 0 0 5px rgba(0, 0, 0, .5);
-  border: none;
-  background: none;
-  @include box-shadow(none);
 }
 
 #add-to-playlist-dropdown {
@@ -430,97 +277,6 @@ section {
   img {
     border: none;
   }
-}
-
-#current-video-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin-bottom: 15px;
-}
-
-#share-playlist {
-  float: right;
-  margin-right: 10px;
-
-  span {
-    margin-left: 15px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-}
-
-#popup-search {
-  overflow: visible;
-  margin-top: 30px;
-
-  p {
-    margin-bottom: 15px;
-  }
-
-  #popup-search-query {
-    width: 230px;
-    margin-right: 6px;
-  }
-
-  #popup-search-results-holder {
-    overflow: visible;
-
-    #popup-search-message {
-      display: none;
-    }
-
-    #popup-search-results {
-      overflow: auto;
-      width: 100%;
-      height: auto;
-      max-height: 300px;
-      margin: 20px 0px 5px;
-      background: none;
-
-      li {
-        margin-right: 2px;
-
-        a {
-          color: #000;
-          border-top: none;
-          border-bottom: none;
-
-          &:hover {
-            background: #464646;
-            color: #fff;
-            cursor: -moz-grab;
-            cursor: -webkit-grab;
-          }
-
-          &:active {
-            background: #000;
-            cursor: -moz-grabbing;
-            cursor: -webkit-grabbing;
-          }
-        }
-      }
-    }
-
-    &.show-popup-search-message {
-      #popup-search-message {
-        display: block;
-        margin-top: 15px;
-        text-align: center;
-      }
-    }
-  }
-}
-
-/* hacky mchack - how to make dragged items visible? */
-.popup-search-dialog { overflow: visible !important; }
-
-span.drag-grip {
-  background: url(/assets/jquery_icons.png);
-  background-position: 0 -224px;
-  width: 16px;
-  height: 16px;
-  display: inline-block;
 }
 
 .clear {

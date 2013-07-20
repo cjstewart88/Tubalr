@@ -1,21 +1,15 @@
-<section id="profile-main" class="remove-when-searching">
+<section id="profile" class="remove-when-searching">
   <% if @user.present? %>
-    <div id="tabs">
-      <header id="profile-badge">
-        <img id="profile-badge-profile-picture" src="http://www.gravatar.com/avatar/<%= @user.md5_email || 'false' %>?s=175">
-        <div id="profile-badge-username"><%= "#{@user.username}" %></div>
-      </header>
-
-      <ul>
-        <li class="tab playlists-tab" data-tab-name="playlists">Playlists<span class="icon-chevron-right"></span></li>
-        <li class="tab favorite-genres-tab" data-tab-name="favorite-genres">Favorite Genres <span class="icon-chevron-right"></span></li>
-      </ul>
+    <div id="profile-info">
+      <img id="profile-badge-profile-picture" src="http://www.gravatar.com/avatar/<%= @user.md5_email || 'false' %>?s=50">
+      <h2>
+        <%= @profile_owner ? "Your Profile" : "#{@user.username}'s Profile" %>
+      </h2>
+      <% if @profile_owner %><a href="#" id="import-youtube-playlists-open-dialog">Import YouTube Playlists</a><% end %>
+      <div class="clear"></div>
     </div>
 
-    <div id="tabs-contents">
-      <%= render :partial => 'playlists/playlists' %>
-      <%= render :partial => 'favorite_genres' %>
-    </div>
+    <%= render :partial => 'playlists/playlists' %>
 
     <div class="clear"></div>
   <% else %>

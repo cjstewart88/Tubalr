@@ -2,11 +2,8 @@ var Report = {
 
   gaPageview: function () {
     var url;
-
-    if (Playlist.options.djUsername) {
-      return;
-    }
-    else if (Playlist.options.searchType == 'customPlaylist') {
+    
+    if (Playlist.options.searchType == 'customPlaylist') {
       url = [Playlist.options.customPlaylistOwner.replace(/[ ]/g,"+"), "playlist", Playlist.options.customPlaylistName.replace(/[ ]/g,"+")];
     }
     else if (Playlist.options.searchType == 'video') {

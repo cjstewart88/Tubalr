@@ -1,13 +1,8 @@
 @import "compass";
 
 .select2-drop {
-  background: rgba(0, 0, 0, .8);
-  border: solid 1px black !important;
-  color: #ffffff;
-
   &.select2-drop-above, &.select2-drop-active {
     @include box-shadow(none);
-    @include border-radius(0px);
   }
 
   .select2-search {
@@ -27,15 +22,12 @@
       height: 29px;
       line-height: 29px;
       @include box-shadow(none);
-      @include border-radius(0px);
-      background: rgba(0, 0, 0, .3);
-      border: none !important;
-      color: #ffffff !important;
+      border-color: #aaa;
+      background: none;
 
       div {
-        @include border-radius(0);
-        background: rgba(0, 0, 0, .3);
-        border-left: solid 1px black;
+        background: none;
+        border: none;
       }
     }
   }
