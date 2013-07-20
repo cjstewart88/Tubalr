@@ -5,14 +5,8 @@ Watch/Listen to just Band of Horses:
 Watch/Listen to bands similar to Fleet Foxes:
 [http://www.tubalr.com/similar/Fleet+Foxes](http://www.tubalr.com/similar/Fleet+Foxes)
 
-# DJ Mode Socket Server
-
-Checkout the [TubalrDJ](https://github.com/cjstewart88/TubalrDJ) repo for info on the socket server that powers DJ Mode!
-
 # Contributing
 Please go for it if you're interested in pitching in to make Tubalr better. 
-
-Come hang out in #tubalr on irc.freenode.net!
 
 ## Get up and running
 
@@ -32,7 +26,7 @@ Come hang out in #tubalr on irc.freenode.net!
 
 1. Fork it    
 
-2. Make a branch for your fixes or new features: `git branch -b branch_name_here`
+2. Make a branch for your fixes or new features: `git checkout -b branch_name_here`
 
 3. Make your changes, test to make sure they work and that no previous 
 functionality is broken.
