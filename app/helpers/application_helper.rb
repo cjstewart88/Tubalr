@@ -7,10 +7,6 @@ module ApplicationHelper
       options[:customPlaylistOwner] = array_or_string_for_javascript(url_encode(escape_javascript(@username)))
       options[:customPlaylistName]  = array_or_string_for_javascript(url_encode(escape_javascript(@playlist_name)))
       options[:persistentSorting]   = @is_playlist_owner
-    elsif @dj
-      options[:searchType]  = array_or_string_for_javascript('dj')
-      options[:djUsername]  = array_or_string_for_javascript(@dj)
-      options[:djListener]  = array_or_string_for_javascript((user_signed_in? ? dj_username : 'guest' ))
     elsif request.path.index('/just/')
       options[:searchType] = array_or_string_for_javascript('just')
     elsif request.path.index('/similar/')
@@ -32,21 +28,8 @@ module ApplicationHelper
     options_for_javascript(options)
   end
 
-  def show_user_bg
-    # Show user background if user signed in and background not blank
-    if @user && !(@user.background.blank?)
-      "background: #4C4C4C url('#{@user.background}') no-repeat center center fixed;"
-    elsif user_signed_in? && !(current_user.background.blank?)
-      "background: #4C4C4C url('#{current_user.background}') no-repeat center center fixed;"
-    end
-  end
-
   def user_object
     @user || current_user
-  end
-
-  def dj_username
-    current_user.username.delete("^a-zA-Z0-9").downcase
   end
 
 end

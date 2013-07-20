@@ -14,34 +14,31 @@ input[type=text], input[type=email], input[type=password], textarea {
   width: 250px;
   border: none;
   font-size: 12px;
-  background: #FFFFFF;
+  border: solid 1px #E6E6E6;
+  @include border-radius(4px);
+
+  &.small {
+    padding: 6px 14px;
+  }
 }
 
 input[type=button], input[type=submit], a.button, button {
   font-size: 12px;
-  color: #000;
+  color: #464646;
   line-height: normal;
   padding: 8px 20px;
-  background-color: whiteSmoke;
-  border: none;
+  background-color: #E6E6E6;
+  border: solid 1px #E6E6E6;
   cursor: pointer;
-  moz-transition: all .3s;
-  -o-transition: all .3s;
-  -webkit-transition: all .3s;
-  transition: all .3s;
+  @include border-radius(4px);
 
   &:hover {
     text-decoration: none;
+    color: #464646;
   }
 
-  &.has-icon-left span {
-    margin-right: 8px;
-    line-height: normal;
-  }
-
-  &.has-icon-right span {
-    margin-left: 10px;
-    line-height: normal;
+  &.small {
+    padding: 6px 14px;
   }
 }
 
@@ -67,7 +64,7 @@ form {
     float: left;
 
     &#right-col {
-      margin-left: 40px;
+      margin-left: 200px;
     }
   }
 
@@ -92,56 +89,6 @@ form {
     .normal-label {
       font-weight: normal;
       text-transform: lowercase;
-    }
-  }
-
-  .select2-container, .select2-container-multi {
-    display: block;
-    margin-top: 13px;
-    margin-bottom: 15px;
-
-    &.select2-container-active {
-      .select2-choices, .select2-drop {
-        border: none;
-        @include box-shadow(none);
-      }
-    }
-
-    .select2-choices, .select2-choice {
-      padding-top: 3px;
-      padding-bottom: 3px;
-      border: none;
-      @include border-radius(0px);
-      background: #fff;
-    }
-
-    .select2-choices {
-      padding-left: 8px;
-      padding-right: 8px;
-
-      .select2-search-field input {
-        padding: 6px 5px 4px 5px;
-      }
-    }
-
-    .select2-choice {
-      @include box-shadow(none);
-      padding-left: 12px;
-
-      div {
-        background: none;
-        border-left: none;
-
-        b {
-          background-position: -4px 6px;
-        }
-      }
-    }
-  }
-
-  .select2-dropdown-open {
-    .select2-choice div b {
-      background-position: -22px 6px;
     }
   }
 }

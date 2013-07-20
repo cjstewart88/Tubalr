@@ -1,29 +1,25 @@
-<div id="notices">
-  <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
-</div>
-
-<header id="main-header">
+<header id="header">
   <h1 id="logo">
     <a href='/' class="tooltip" original-title="Pronounced: tuba-ler">tubalr</a>
   </h1>
 
+  <form id="listenForm" onSubmit="return false;">
+    <input type="text" name="q" autocomplete="off" id="q" class="small" value="<%= params[:artist_band].gsub('+',' ') if params[:artist_band].present? %>" tabindex="1" placeholder="search for artists or bands"/>
+    <input type="button" name="just" value="only" class="small listen just tooltip" tabindex="2" original-title="This search method is to search for a single artist or band."/>
+    <input type="button" name="similar" value="similar" class="small listen similar tooltip" tabindex="3" original-title="This search method will find artists and bands similar to your search."/>
+  </form>
+
   <nav id="main-nav">
-    <%= link_to('about', '#', { :class => 'about-tubalr' }) %>
+    <%#link_to('about', '#', { :class => 'about-tubalr' }) %>
     <% if user_signed_in? %>
-      <%= link_to('my profile', "/#{current_user.username}/profile") %>
-      <%= link_to('settings', '/users/edit') %>
-      <%= link_to('logout', destroy_user_session_path, :method => :delete) %>
+      <a href="<%= "/#{current_user.username}/profile" %>">
+        <img id="profile-badge" src="http://www.gravatar.com/avatar/<%= current_user.md5_email || 'false' %>?s=24" class="tooltip" original-title='Your Profile'>
+      </a>
+      <a href="/users/edit"><i class="icon-cog icon-large tooltip" original-title="Settings"></i></a>
+      <a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="icon-off icon-large tooltip" original-title="Sign Out"></i></a>
     <% else %>
-      <%= link_to('sign up', '/users/sign_up') %>
-      <%= link_to('login', '/users/sign_in') %>
+      <%= link_to('Sign Up', '/users/sign_up', :class => 'sign-up') %>
+      <%= link_to('Sing In', '/users/sign_in') %>
     <% end %>
   </nav>
-
-  <% if !@dj %>
-    <form id="listenForm" onSubmit="return false;">
-      <input type="text" name="q" autocomplete="off" id="q" value="<%= params[:artist_band].gsub('+',' ') if params[:artist_band].present? %>" tabindex="1" placeholder="search for artists or bands"/>
-      <input type="button" name="just" value="only" class="listen just tooltip" tabindex="2" original-title="This search method is to search for a single artist or band."/>
-      <input type="button" name="similar" value="similar" class="listen similar tooltip" tabindex="3" original-title="This search method will find artists and bands similar to your search."/>
-    </form>
-  <% end %>
 </header>

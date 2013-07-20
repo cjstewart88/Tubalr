@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :username, :background, :password, :password_confirmation, :remember_me, :login, :md5_email, :hd, :lastfm_session_key
+  attr_accessible :email, :username, :password, :password_confirmation, :remember_me, :login, :md5_email, :hd, :lastfm_session_key
 
   def self.find_for_database_authentication(warden_conditions)
      conditions = warden_conditions.dup

@@ -74,7 +74,7 @@ var History = {
     var playlists = this.playlists();
     Playlist.reset();
     jQuery.extend(Playlist, playlists[name]);
-    Playlist.resultsReady();
+    setTimeout(function () { Playlist.resultsReady() }, 2000);
   }
 };
 
@@ -83,7 +83,7 @@ $(document).ready(function () {
     $.each(History.sortedPlaylists(), function(i, list) {
       var date = new Date(list.visitTime);
       var text = list._name; // + ' ' + date;
-      var link = $('<li><a href="#">'+text+'</a></li>');
+      var link = $('<li><a href="#">'+decodeURIComponent(text)+'</a></li>');
       link.click(function() {
         History.loadPlaylist(list._name);
       });

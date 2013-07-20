@@ -30,11 +30,6 @@ class ApplicationController < ActionController::Base
     render :layout => "application", :template => "explore"
   end
 
-  def dj
-    @dj = params[:username]
-    render :layout => "application", :template => "index"
-  end
-
   def random
     random_reddit   = REDDIT.sample[:subreddits].sample
     random_genre    = '/just/' + GENRES.sample.sub(' ','%20')

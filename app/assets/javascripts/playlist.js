@@ -12,8 +12,6 @@ var Playlist = {
 
   reportUpdateNowPlayingThrottler: null,
 
-  djMode: null,
-
   options: {
     search:               null,
     searchType:           null,
@@ -21,19 +19,18 @@ var Playlist = {
     customPlaylistName:   null,
     persistentSorting:    false,
     videoID:              null,
-    subReddit:            null,
-    djUsername:           null,
-    djListener:           null
+    subReddit:            null
   },
 
   init: function (options) {
-    Playlist.reset();
-    $.extend(Playlist.options, options);
+    Playlist.reset(function () {
+      $.extend(Playlist.options, options);
 
-    Playlist.determineIfSpecialSearch();
-    Playlist.report();
+      Playlist.determineIfSpecialSearch();
+      Playlist.report();
 
-    Playlist[Playlist.options.searchType]();
+      Playlist[Playlist.options.searchType]();
+    });
   },
 
   resultsReady: function () {
@@ -45,7 +42,7 @@ var Playlist = {
     }
   },
 
-  reset: function () {
+  reset: function (callback) {
     if (Player.self && Playlist.videos.length > 0) {
       Player.self.stopVideo();
     }
@@ -59,10 +56,17 @@ var Playlist = {
     Playlist.options.videoID              = null;
     Playlist.options.subReddit            = null;
 
-    $('.remove-when-searching').fadeOut();
-    $('#player').fadeOut();
-    $('#empty-playlist').fadeOut();
-    $('#playlist-message').text('Loading...').fadeIn();
+    $('#empty-playlist').hide();
+    $('.remove-when-searching').fadeOut(function () {
+      if ($('#player').css('display') == "none") {
+        $('#loading').fadeIn(callback);    
+      }
+      else {
+        $('#player').fadeOut(function () {
+          $('#loading').fadeIn(callback);
+        });  
+      }
+    });
   },
 
   report: function () {
@@ -79,56 +83,6 @@ var Playlist = {
       Playlist.options.searchType = 'subreddit';
       Playlist.options.subReddit = search.replace('/r/', '');
     }
-  },
-
-  dj: function () {
-    Playlist.djMode = new Tubalr.DJ(Playlist.options.djListener);
-    Playlist.djMode.listenTo(Playlist.options.djUsername);
-    Playlist.djMode.onUpdate = Playlist.djModeChange;
-  },
-
-  djModeChange: function (dj, title, videoId, videoAt) {
-    Playlist.videos = [{
-      videoID:    videoId,
-      videoTitle: title,
-      startAt:    (videoAt < 0 ? 0 : videoAt)
-    }];
-
-    Playlist.resultsReady();
-  },
-
-  popupSearch: function () {
-    var search = $('#popup-search-query').val();
-    var videos = [];
-    if (search == '') { return; }
-
-    $('#popup-search-query, #search-popup-btn').attr('disabled', 'disabled');
-    $('#popup-search-results-holder').addClass('show-popup-search-message');
-    $('#popup-search-message').html("Searching...");
-    $('#popup-search-results').html('');
-
-    Playlist.just({
-      search:       search,
-      videos:       videos,
-      resultsReady: function () {
-        $('#popup-search-query, #search-popup-btn').removeAttr('disabled');
-
-        if (!videos || videos.length == 0) {
-          $('#popup-search-message').html("We couldn't find anything for you :(");
-        }
-        else {
-          $('#popup-search-results-holder').removeClass('show-popup-search-message');
-
-          $.each(videos, function (i, video) {
-            $('#popup-search-results').append(
-              "<li class='dragvid' data-video-title='" + video.videoTitle + "' data-video-id='" + video.videoID + "' >" +
-              "<span class='remove-video icon-trash'></span>" +
-              "<a href='#' id='" + video.videoID + "' >" + video.videoTitle + "</a></li>"
-            );
-          });
-        }
-      }
-    });
   },
 
   just: function (options) {
@@ -166,7 +120,7 @@ var Playlist = {
             )
           }
         });
-        $.when.apply($, ajaxs).then(options.resultsReady || Playlist.resultsReady);
+        $.when.apply($, ajaxs).then(Playlist.resultsReady);
       }
     });
   },
@@ -250,12 +204,7 @@ var Playlist = {
         });
       }
 
-      if (options.resultsReady) {
-        options.resultsReady();
-      }
-      else {
-        Playlist.resultsReady();
-      }
+      Playlist.resultsReady();
     });
   },
 
@@ -310,14 +259,14 @@ var Playlist = {
   },
 
   togglePlayer: function () {
-    $('#playlist-message').hide();
-
-    if (Playlist.videos.length == 0) {
-      $('#empty-playlist').fadeIn();
-    }
-    else {
-      $('#player').fadeIn(1000);
-    }
+    $('#loading').fadeOut(function () {
+      if (Playlist.videos.length == 0) {
+        $('#empty-playlist').fadeIn();
+      }
+      else {
+        $('#player').fadeIn();
+      }
+    });
   },
 
   preparePlaylist: function () {
@@ -430,14 +379,7 @@ var Playlist = {
 
     Player.checkPlayerStatus();
 
-    // if the user is in djing we need to update the
-    // connected listeners of the video change
-    if (Playlist.djMode && Playlist.djMode.broadcasting) {
-      Playlist.djMode.updateBroadcast(currentVideo.videoTitle, currentVideo.videoID, 0);
-    }
-    else {
-      History.update();
-    }
+    History.update();
 
     clearTimeout(Playlist.reportUpdateNowPlayingThrottler);
     Playlist.reportUpdateNowPlayingThrottler = setTimeout(function () {
@@ -539,11 +481,6 @@ var Playlist = {
         url += search + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
         url += '%2Fjust%2F' + search.replace(/%20/g, '%2B');
         break;
-      case 'dj':
-        search = Playlist.options.djUsername;
-        url += search + '%20DJ%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
-        url += '%2Fdj%2F' + search;
-        break;
       case 'similar':
         search = Playlist.options.search.replace(/[ +]/g,"%20");
         url += 'artists%2Fbands%20similar%20to%20' + search + '%20on%20%40tubalr%21&url=http%3A%2F%2Ftubalr.com';
@@ -580,10 +517,6 @@ var Playlist = {
     if (Playlist.options.searchType == "subreddit") {
       url += "r/" + Playlist.options.subReddit;
       shareText += "/r/" + Playlist.options.subReddit;
-    }
-    else if (Playlist.options.djUsername) {
-      url += "dj/" + Playlist.options.djUsername;
-      shareText += "I'm listening to " + Playlist.options.djUsername + " DJ";
     }
     else if (Playlist.options.search) {
       if (Playlist.options.searchType == "similar") {
@@ -667,16 +600,6 @@ $(document).ready(function () {
 
   $('#next').click(function () {
     Playlist.nextSong();
-    return false;
-  });
-
-  $('#pause').click(function () {
-    Player.self.pauseVideo();
-    return false;
-  });
-
-  $('#play').click(function () {
-    Player.self.playVideo();
     return false;
   });
 
