@@ -26,7 +26,7 @@ var WhatsHot = {
 
         if (options.el.parent().is(":visible")) {
           options.el.parent().find('.loading').fadeOut(function () {
-            this.remove();
+            $(this).remove();
             options.el.fadeIn();
           });
         }
