@@ -1,11 +1,50 @@
 var WhatsHot = {
 
+  init: function (options) {
+    if (options.el) {
+      console.log('append')
+      options.el.parent().append('<div class="loading"><i class="icon-refresh icon-spin icon-2x"></i></div>');
+    }
+
+    if (options.artists) {
+      WhatsHot.render(options);
+    }
+    else {
+      WhatsHot.fetchArtists(options);
+    }
+  },
+
   // Simply render the list of artists
 
   render: function (options) {
+    var numberOfImages  = Object.keys(options.artists).length;
+    var loadedImages    = 0;
+
+    var checkForLoadingImages = setInterval(function () {
+      if (loadedImages == numberOfImages) {
+        window.clearInterval(checkForLoadingImages);
+
+        if (options.el.parent().is(":visible")) {
+          options.el.parent().find('.loading').fadeOut(function () {
+            this.remove();
+            options.el.fadeIn();
+          });
+        }
+        else {
+          options.el.parent().find('.loading').remove()
+          options.el.show();
+        }
+      }
+    }, 100);
+
     for (var artist in options.artists) {
-      var li          = $("<li>");
-      var a           = $("<a>").attr("href", "/just/" + encodeURIComponent(artist));
+      var li  = $("<li>");
+      var a   = $("<a>").attr("href", "/just/" + encodeURIComponent(artist));
+      
+      $('<img/>').attr('src', options.artists[artist]).load(function() {
+        loadedImages++;
+      });
+
       var cover       = $("<div>").addClass("cover").css('background-image', 'url(' + options.artists[artist] + ')');
       var artistName  = $("<span>").text(artist);
 
@@ -17,17 +56,17 @@ var WhatsHot = {
 
   // Fetch new artists
   
-  fetchArtists: function () {
-    WhatsHot.artists = {};
+  fetchArtists: function (options) {
+    var genres  = options.genres || ["rock", "electronic", "hip hop", "indie rock", "techno", "hard rock", "indie folk", "indie pop", "electro", "trance", "alternative rock", "reggae", "dub"];
+    var ajaxs   = [];
 
-    var genres = ["rock", "electronic", "hip hop", "indie rock", "techno", "hard rock", "indie folk", "indie pop", "electro", "trance", "alternative rock", "reggae", "dub"];
-    var ajaxs = [];
+    options.artists = {};
 
     for (var i = 0; i < genres.length; i++) {
-      ajaxs.push($.getJSON("http://developer.echonest.com/api/v4/artist/top_hottt?api_key=OYJRQNQMCGIOZLFIW&format=json&results=10&genre=" + genres[i] + "&start=0&bucket=hotttnesss&bucket=id:7digital-US", function (data) {
+      ajaxs.push($.getJSON("http://developer.echonest.com/api/v4/artist/top_hottt?api_key=OYJRQNQMCGIOZLFIW&format=json&results=" + options.count + "&genre=" + genres[i] + "&start=0&bucket=hotttnesss&bucket=id:7digital-US", function (data) {
         $.each(data.response.artists, function (i, artist) {
-          if (!WhatsHot.artists[artist.name]) {
-            WhatsHot.artists[artist.name] = {
+          if (!options.artists[artist.name]) {
+            options.artists[artist.name] = {
               "sevenDigitalId": artist.foreign_ids[0].foreign_id.split(":")[2],
               "image": null
             }
@@ -36,25 +75,32 @@ var WhatsHot = {
       }));
     }
 
-    $.when.apply($, ajaxs).then(WhatsHot.fetchArtistsImage);
+    $.when.apply($, ajaxs).then(function () { 
+      WhatsHot.fetchArtistsImage(options) 
+    });
   },
 
-  fetchArtistsImage: function () {
+  fetchArtistsImage: function (options) {
     var ajaxs = [];
 
-    $.each(WhatsHot.artists, function (artist, properties) {
+    $.each(options.artists, function (artist, properties) {
       ajaxs.push($.getJSON("http://api.7digital.com/1.2/artist/releases?oauth_consumer_key=7danrkm5dhc8&pageSize=1&imageSize=175&artistId=" + this.sevenDigitalId, function (data) {
         if (data.releases.release.length == 1) {
-          WhatsHot.artists[artist] = data.releases.release[0].image;
+          options.artists[artist] = data.releases.release[0].image;
         }
         else {
-          delete WhatsHot.artists[artist];
+          delete options.artists[artist];
         }
       }));
     });
 
     $.when.apply($, ajaxs).then(function () {
-      console.log("Finished! Now use, copy(JSON.stringify(WhatsHot.artists).replace(/\":\"/g,'\"=>\"')), to copy what's hot results to your clipboard.");
+      if (options.el) {
+        WhatsHot.render(options);
+      }
+      else {
+        console.log("Finished! Now use, copy(JSON.stringify(options.artists).replace(/\":\"/g,'\"=>\"')), to copy what's hot results to your clipboard.");  
+      }
     });
   }
 

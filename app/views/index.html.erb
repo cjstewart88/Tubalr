@@ -3,9 +3,8 @@
     <div id="tabs">
       <ul>
         <li class="tab whats-hot-tab" data-tab-name="whats-hot">What's Hot</li>
-        <% if user_signed_in? %>
-          <li class="tab my-playlists-tab" data-tab-name="my-playlists">My Playlists</li>
-        <% end %>
+        <li class="tab my-playlists-tab" data-tab-name="my-playlists">My Playlists</li>
+        <li class="tab recommended-tab" data-tab-name="recommended">Recommended</li>
         <li class="tab genres-tab" data-tab-name="genres">Genres</li>
         <li class="tab reddit-tab" data-tab-name="reddit">Reddit Playlists </li>
         <li class="tab history-tab" data-tab-name="history">Recently Viewed</li>
@@ -15,35 +14,67 @@
 
     <div id="tabs-contents">
       <div class="tab-content whats-hot-tab-content">
-        <ul class="playlists whats-hot-list"></ul>
+        <ul class="playlists whats-hot-list album-cover-list"></ul>
         <script>
           $(document).ready(function () {
-            WhatsHot.render({ artists: <%= WHATS_HOT.to_json.html_safe %>, el: $('.whats-hot-list') });
+            WhatsHot.init({ 
+              artists: <%= WHATS_HOT.to_json.html_safe %>, 
+              el: $('.whats-hot-list')
+            });
           });
         </script>
       </div>      
 
-      <% if user_signed_in? %>
-        <div class="tab-content my-playlists-tab-content">
-          <p>
-            <b>TIP:</b> You can import your YouTube playlists or other users YouTube playlist. Head over to <a href="<%= "/#{current_user.username}/profile" %>">your profile</a> to get started.
-          </p>
-
-          <% if current_user.playlists.count != 0 %>
-            <ul class="playlists">
-              <% current_user.playlists.each do | playlist | %>
-                <li>
-                  <a href="<%= "/#{current_user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></a>
-                </li>
-              <% end %>
-            </ul>
-          <% else %>
+      <div class="tab-content my-playlists-tab-content">
+        <% if user_signed_in? %>
             <p>
-              Looks like you currently have 0 playlists, starting using tubalr and click the playlist dropdown under the video player to get started!
+              <b>TIP:</b> You can import your YouTube playlists or other users YouTube playlist. Head over to <a href="<%= "/#{current_user.username}/profile" %>">your profile</a> to get started.
             </p>
+
+            <% if current_user.playlists.count != 0 %>
+              <ul class="playlists">
+                <% current_user.playlists.each do | playlist | %>
+                  <li>
+                    <a href="<%= "/#{current_user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></a>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p>
+                Looks like you currently have 0 playlists, starting using tubalr and click the playlist dropdown under the video player to get started!
+              </p>
+            <% end %>
+        <% else %>
+          <p>
+            To create custom playlists, <a href="/users/sign_up">sign up</a> for an account!
+          </p>
+        <% end %>
+      </div>
+
+      <div class="tab-content recommended-tab-content">
+        <% if user_signed_in? %>
+          <% if current_user.favorite_genres.count == 0 %>
+            <p>
+              It looks like you haven't told us what your favorite genres are, to get some music recommendations head over to <a href="/users/edit">your profile</a> and pick some favorite genres!
+            </p>
+          <% else %>
+            <ul class="playlists recommended album-cover-list"></ul>
+            <script>
+              $(document).ready(function () {
+                WhatsHot.init({ 
+                  count:  20, 
+                  genres: <%= array_or_string_for_javascript(current_user.favorite_genres) %>, 
+                  el:     $('.recommended') 
+                });
+              });
+            </script>
           <% end %>
-        </div>
-      <% end %>
+        <% else %>
+          <p>
+            To get some music recommendations, <a href="/users/sign_up">sign up</a> for an account and tell us your favorite genres!
+          </p>
+        <% end %>
+      </div>  
 
       <div class="tab-content genres-tab-content">
         <ul class="playlists">

@@ -39,6 +39,13 @@
 
     &.active {
       display: block;
+
+    }
+
+    .loading {
+      height: 300px;
+      line-height: 300px;
+      text-align: center;
     }
   }
 }
@@ -56,8 +63,12 @@
     text-overflow: ellipsis;
   }
 
-  &.whats-hot-list li {
-    max-width: 182px;
+  &.album-cover-list {
+    display: none;
+  }
+
+  &.album-cover-list li {
+    max-width: 175px;
     width: auto;
     margin: 0;
     margin-right: 29px;

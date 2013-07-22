@@ -1,6 +1,8 @@
 @import "compass";
 
 .select2-drop {
+  margin-left: 4px;
+
   &.select2-drop-above, &.select2-drop-active {
     @include box-shadow(none);
   }
