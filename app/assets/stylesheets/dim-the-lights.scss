@@ -103,4 +103,12 @@ html.dim-the-lights {
   .album-cover-list li .cover {
     @include opacity(.5);
   }
+
+  .ui-dialog {
+    background: #111;
+
+    .ui-dialog-title, .ui-dialog-content, .ui-dialog-titlebar .ui-dialog-titlebar-close {
+      color: #8b8b8b;
+    }
+  }
 }
