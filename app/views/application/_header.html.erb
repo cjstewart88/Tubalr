@@ -10,16 +10,24 @@
   </form>
 
   <nav id="main-nav">
-    <%#link_to('about', '#', { :class => 'about-tubalr' }) %>
-    <% if user_signed_in? %>
-      <a href="<%= "/#{current_user.username}/profile" %>">
-        <img id="profile-badge" src="http://www.gravatar.com/avatar/<%= current_user.md5_email || 'false' %>?s=24" class="tooltip" original-title='Your Profile'>
-      </a>
-      <a href="/users/edit"><i class="icon-cog icon-large tooltip" original-title="Settings"></i></a>
-      <a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="icon-off icon-large tooltip" original-title="Sign Out"></i></a>
-    <% else %>
-      <%= link_to('Sign Up', '/users/sign_up', :class => 'sign-up') %>
+    <% if !user_signed_in? %>
+      <%= link_to('Sign Up', '/users/sign_up', :class => 'button small sign-up') %>
       <%= link_to('Sign In', '/users/sign_in') %>
     <% end %>
+
+    <div href="#" id="more-menu">
+      <i class="icon-angle-down icon-large"></i>
+      <div id="menu">
+        <a href="#" id="open-about-tubalr"><i class="icon-question icon-fixed-width"></i> About</a>
+        <a href="#" id="toggle-dim-the-lights"><i class="icon-moon icon-fixed-width"></i> <span>Dim The Lights</span></a>
+        <% if user_signed_in? %>
+          <a href="<%= "/#{current_user.username}/profile" %>" id="profile-badge">
+            <img src="http://www.gravatar.com/avatar/<%= current_user.md5_email || 'false' %>?s=14"> Your Profile
+          </a>
+          <a href="/users/edit"><i class="icon-cog icon-fixed-width"></i> Settings</a>
+          <a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="icon-off icon-fixed-width"></i> Sign Out</a>
+        <% end %>
+      </div> 
+    </div>
   </nav>
 </header>

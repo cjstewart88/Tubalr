@@ -17,7 +17,7 @@ $(document).ready(function () {
     title:      'About Tubalr'
   });
 
-  $('.about-tubalr').click(function () {
+  $('#open-about-tubalr').click(function () {
     $('#about-tubalr').dialog('open');
   });
 
@@ -38,5 +38,18 @@ $(document).ready(function () {
   // Tooltips
   $('.tooltip').tipsy({
     gravity: 'n'
+  });
+
+  // Dim the lights
+  $('#toggle-dim-the-lights').click(function () {
+    $(this).find('i').toggleClass('icon-moon icon-sun');
+    $('html').toggleClass('dim-the-lights');
+
+    if ($(this).find('i').hasClass('icon-sun')) {
+      $(this).find('span').text('Hit The Lights');
+    }
+    else {
+      $(this).find('span').text('Dim The Lights');
+    }
   });
 });

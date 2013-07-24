@@ -1,26 +1,24 @@
 <div id="loading">
-  <i class="icon-refresh icon-spin icon-2x"></i>
+  <i class="icon-refresh icon-spin icon-3x"></i>
 </div>
 
 <section id="empty-playlist">o_O This playlist has 0 videos... this is kinda weird.</section>
 
 <section id="player">
-  <aside id="share-playlist">
-    <span id="share-on-twitter" class="icon-twitter tooltip" original-title="Share on twitter."></span>
-    <span id="share-on-facebook" class="icon-facebook tooltip" original-title="Share on facebook."></span>
-  </aside>
-
   <h2 id="current-video-title"></h2>
 
-  <div id="ytplayerid"></div> 
-  <ul id="playlist"></ul>
-  <div class="clear"></div>
+  <div id="video-and-playlist">
+    <div id="ytplayerid"></div> 
+    <ul id="playlist"></ul>
+  </div>
 
   <div id="player-controls">
     <div id="player-controls-right">
       <a href="#" class="shuffle button small tooltip" original-title="Shuffle"><span class="icon-random"></span></a>
       <a href="#" id="previous" class="button small tooltip" original-title="Previous">&nbsp;<span class="icon-step-backward"></span></a>
       <a href="#" id="next" class="button small tooltip" original-title="Next"><span class="icon-step-forward"></span>&nbsp;</a>
+      <a href="#" id="share-on-facebook" class="button small">Share of Facebook</a>
+      <a href="#" id="share-on-twitter" class="button small">Share of Twitter</a>
     </div>
     
     <div id="player-controls-left">
@@ -28,8 +26,6 @@
         <%= render :partial => 'custom_playlist_dropdown' %>
       <% end %>
     </div>
-
-    <div class="clear"></div>
   </div>
 
 </section>

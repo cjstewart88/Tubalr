@@ -34,14 +34,14 @@
   <body>
     <div id="fb-root"></div>
     
-    <div id="notices">
-      <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
+    <div id="main-wrapper">
+      <div id="notices">
+        <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
+      </div>
+      <%= render :partial => 'header' %>
+      <%= yield %>
+      <%= render :partial => 'player' %>  
+      <%= render :partial => 'footer' %>
     </div>
-
-    <%= render :partial => 'header' %>
-    <%= yield %>
-    <%= render :partial => 'player' %>  
-    
-    <%= render :partial => 'footer' %>
   </body>
 </html>

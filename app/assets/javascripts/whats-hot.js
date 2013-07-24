@@ -3,7 +3,7 @@ var WhatsHot = {
   init: function (options) {
     if (options.el) {
       console.log('append')
-      options.el.parent().append('<div class="loading"><i class="icon-refresh icon-spin icon-2x"></i></div>');
+      options.el.parent().append('<div class="loading"><i class="icon-refresh icon-spin icon-3x"></i></div>');
     }
 
     if (options.artists) {

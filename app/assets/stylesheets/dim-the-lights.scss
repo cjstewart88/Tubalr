@@ -1,0 +1,97 @@
+@import "compass";
+
+html.dim-the-lights {
+
+  body {
+    background: #111;
+    color: #ccc;
+
+
+    ::-webkit-scrollbar {
+      background: #333;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #444;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+
+    a {
+      color: #ccc;
+
+      &:hover {
+        color: #3498DB;
+      }
+    }
+
+    input, a.button, button {
+      border-color: #333;
+      background: #333;
+      color: #ccc;
+
+      &:hover {
+        color: #ccc;
+      }
+    }
+
+    p a {
+      color: #3498DB;
+    }
+
+    .ui-dialog .ui-dialog-titlebar-close {
+      color: #000;
+    }
+
+    #notices aside {
+      background: #333;
+    }
+  }
+
+  #header #main-nav #more-menu:hover {
+    background: #333;
+
+    #menu {
+      background: #333;
+
+      a#profile-badge {
+        border-color: #464646;
+      }
+    }
+  }
+
+  .select2-choices {
+    background: #333;
+    border-color: #333 !important;
+  }
+
+  .select2-drop {
+    &.select2-drop-above, &.select2-drop-active {
+      background: #333;
+      color: #ccc;
+      border-color: #333;
+    }
+
+    .select2-search {
+      .select2-input {
+        border-color: #444;
+        color: #ccc;
+      }
+    }
+
+    .select2-no-results {
+      background: #333;
+    }
+  }
+
+  #s2id_add-to-playlist-dropdown {
+    &.select2-container, .select2-container.select2-drop-above {
+      .select2-choice {
+        background: #333;
+        border-color: #333;
+      }
+    }
+  }
+}

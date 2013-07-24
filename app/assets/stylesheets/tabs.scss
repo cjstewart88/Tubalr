@@ -1,8 +1,8 @@
 @import "compass";
 
 #tabs {
-  float: left;
-  width: 20%;
+  position: absolute;
+  width: 200px;
 
   ul {
     list-style-type: none;
@@ -31,8 +31,8 @@
 }
 
 #tabs-contents {
-  float: right;
-  width: 80%;
+  position: relative;
+  margin-left: 200px;
 
   .tab-content {
     display: none;
@@ -71,7 +71,7 @@
     max-width: 175px;
     width: auto;
     margin: 0;
-    margin-right: 29px;
+    margin-right: 28px;
     margin-bottom: 30px;
 
     .cover {

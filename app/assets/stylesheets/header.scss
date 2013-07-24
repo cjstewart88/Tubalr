@@ -10,11 +10,8 @@
     font-weight: 700;
     line-height: 120px;
 
-    a {
-      &:hover {
-        color: #464646;
-       text-decoration: none;
-      }
+    a:hover {
+      text-decoration: none;
     }
   }
 
@@ -34,15 +31,69 @@
 
     a {
       margin-left: 20px;
-      #profile-badge {
-        vertical-align: middle;
-        margin-top: -4px;
-        @include border-radius(4px); 
+      &:hover {
+       text-decoration: none;
+      }
+
+      &.sign-up {
+        border-color: #3498DB;
+        background: #3498DB;
+        color: #fff;
+      }
+    }
+
+    #more-menu {
+      display: inline-block;
+      position: relative;
+      line-height: normal;
+      margin-left: 20px;
+      padding: 6px 15px;
+      @include border-top-right-radius(3px); 
+      @include border-top-left-radius(3px); 
+      cursor: pointer;
+
+      #menu {
+        z-index: 10000;
+        top: 32px;
+        right: 0;
+        display: inline-block;
+        position: absolute;
+        display: none;
+        width: 120px;
+        background: #efefef;
+        padding: 10px 12px;
+        @include border-radius(3px); 
+        @include border-top-right-radius(0px); 
+
+        a {
+          margin: 0;
+          margin-bottom: 10px;
+          display: block;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+
+          &#profile-badge {
+            padding-top: 10px;
+            border-top: solid 1px #ccc;
+
+            img {
+              vertical-align: middle;
+              margin-top: -3px;
+              @include border-radius(3px); 
+              margin-right: 0.2857142857142857em;
+            }
+          }
+        }
       }
 
       &:hover {
-       text-decoration: none;
-       color: #464646;
+        background: #efefef;
+
+        #menu {
+          display: inline-block;
+        }
       }
     }
   }

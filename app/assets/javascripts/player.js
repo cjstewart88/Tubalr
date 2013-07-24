@@ -25,7 +25,7 @@ var Player = {
       width:    800,
       height:   400,
       version:  3,
-      playerVars: { 'autoplay': 1, 'rel': 0, 'theme': 'light', 'showinfo': 0, 'iv_load_policy': 3, 'autohide': 1, 'wmode': 'opaque', 'allowScriptAccess': 'always', 'version': 3, 'restriction': 'US' },
+      playerVars: { 'autoplay': 1, 'rel': 0, 'theme': 'dark', 'showinfo': 0, 'iv_load_policy': 3, 'autohide': 1, 'wmode': 'opaque', 'allowScriptAccess': 'always', 'version': 3, 'restriction': 'US' },
       events: {
         'onReady':        Player.onPlayerReady,
         'onStateChange':  Player.onPlayerStateChange,
