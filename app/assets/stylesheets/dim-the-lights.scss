@@ -4,7 +4,7 @@ html.dim-the-lights {
 
   body {
     background: #111;
-    color: #ccc;
+    color: #8b8b8b;
 
 
     ::-webkit-scrollbar {
@@ -20,7 +20,7 @@ html.dim-the-lights {
     }
 
     a {
-      color: #ccc;
+      color: #8b8b8b;
 
       &:hover {
         color: #3498DB;
@@ -28,6 +28,7 @@ html.dim-the-lights {
     }
 
     input, a.button, button {
+      @include opacity(.5);
       border-color: #333;
       background: #333;
       color: #ccc;
@@ -63,25 +64,29 @@ html.dim-the-lights {
   }
 
   .select2-choices {
-    background: #333;
-    border-color: #333 !important;
+    background: #222;
+    border-color: #222 !important;
   }
 
   .select2-drop {
     &.select2-drop-above, &.select2-drop-active {
-      background: #333;
-      color: #ccc;
-      border-color: #333;
+      background: #222;
+      color: #8b8b8b;
+      border-color: #222;
     }
 
     .select2-search {
       .select2-input {
-        border-color: #444;
-        color: #ccc;
+        color: #8b8b8b;
+        border-color: #333;
       }
     }
 
     .select2-no-results {
+      background: #222;
+    }
+
+    .select2-results .select2-highlighted {
       background: #333;
     }
   }
@@ -89,9 +94,13 @@ html.dim-the-lights {
   #s2id_add-to-playlist-dropdown {
     &.select2-container, .select2-container.select2-drop-above {
       .select2-choice {
-        background: #333;
-        border-color: #333;
+        background: #222;
+        border-color: #222;
       }
     }
+  }
+
+  .album-cover-list li .cover {
+    @include opacity(.5);
   }
 }
