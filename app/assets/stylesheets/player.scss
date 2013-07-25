@@ -1,0 +1,126 @@
+@import "compass";
+
+#loading {
+  display: none;
+  height: 300px;
+  line-height: 300px;
+  text-align: center;
+}
+
+#empty-playlist {
+  display: none;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 13px;
+  text-align: center;
+}
+
+#current-video-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+#player {
+  display: none;
+  position: absolute;
+  min-width: 820px;
+  top: 121px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 40px;
+}
+
+#video-and-playlist {
+  position: absolute;
+  top: 40px;
+  bottom: 100px;
+  left: 40px;
+  right: 40px;
+}
+
+#ytplayerid {
+  width: 71%;
+  height: 100%;
+  float: left;
+}
+
+#playlist {
+  width: 29%;
+  height: 100%;
+  float: left;
+  overflow: auto;
+  list-style-type: none;
+
+  a {
+    display: block;
+  	padding: 10px 34px 10px 34px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &.active {
+      color: #3498DB
+    }
+
+    &:hover {
+  	  text-decoration: none;
+    }
+  }
+
+  li {
+    position: relative;
+
+    .icon-trash {
+      position: absolute;
+      display: none;
+      top: 10px;
+      right: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    &:hover .icon-trash {
+      display: block;
+    }
+  }
+}
+
+#player-controls {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  left: 40px;
+}
+
+#player-controls-left, #player-controls-right {
+  height: 31px;
+
+  &#player-controls-left {
+    float: left;
+  }
+
+  &#player-controls-right {
+    float: right;
+    
+    .button {
+      display: inline-block;
+      background: none;
+      border: none; 
+    }
+
+    #share-on-facebook {
+      background: #3B5998;
+      color: #fff;
+      margin-left: 20px;
+      margin-right: 10px;
+    }
+
+    #share-on-twitter {
+      background: #4099FF;
+      color: #fff;
+    }
+  }
+}

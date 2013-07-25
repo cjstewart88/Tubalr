@@ -1,5 +1,7 @@
 var Player = {
+
   self: null,
+
   listeners: [],
 
   init: function () {
@@ -60,16 +62,6 @@ var Player = {
 
   addStateListener: function(listener) {
     Player.listeners.push(listener);
-  },
-
-  checkPlayerStatus: function () {
-    setInterval(function () {
-      newState = {
-        data: Player.self.getPlayerState()
-      }
-
-      Player.onPlayerStateChange(newState);
-    }, 500);
   }
 
 };

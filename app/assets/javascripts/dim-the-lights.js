@@ -7,7 +7,7 @@ var DimTheLights = {
 	init: function () {
 		var cookie  			= document.cookie;
     DimTheLights.dim 	= cookie.indexOf('dimthelights') >= 0 ? true : false;
-    
+    console.log(document.cookie)
     if (DimTheLights.dim) {
     	DimTheLights.toggleUi();
     }
@@ -39,7 +39,7 @@ var DimTheLights = {
 			var expires = date.toGMTString();
 		}
 
-		document.cookie = "dimthelights=;expires=" + expires;
+		document.cookie = "dimthelights=;path=/;expires=" + expires;
 	}
 
 };

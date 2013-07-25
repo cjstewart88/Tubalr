@@ -27,7 +27,7 @@ var Playlist = {
       $.extend(Playlist.options, options);
 
       Playlist.determineIfSpecialSearch();
-      Playlist.report();
+      Report.gaPageview();
 
       Playlist[Playlist.options.searchType]();
     });
@@ -69,14 +69,10 @@ var Playlist = {
     });
   },
 
-  report: function () {
-    Report.gaPageview();
-  },
-
   determineIfSpecialSearch: function () {
     var search = Playlist.options.search;
 
-    if (Playlist.genres.indexOf(search.replace(/[ +]/g, '')) != -1) {
+    if (Playlist.genres.indexOf(search.replace(/[+]/g, '')) != -1) {
       Playlist.options.searchType = 'genre';
     }
     else if (search.match('/r/') != null) {
@@ -85,18 +81,16 @@ var Playlist = {
     }
   },
 
-  just: function (options) {
-    options = options || {};
-
-    var search = options.search || Playlist.options.search;
-    var videos = options.videos || Playlist.videos;
+  just: function () {
+    var search = Playlist.options.search;
+    var videos = Playlist.videos;
 
     // This is needed so when the similar search calls this method
     // it only gets 20 songs for the original search
     var numberOfSongs = (Playlist.options.searchType == 'just' ? 40 : 20);
     $.getJSON('http://developer.echonest.com/api/v4/artist/songs?api_key=OYJRQNQMCGIOZLFIW&name=' + encodeURIComponent(search) + '&format=jsonp&callback=?&start=0&results=' + numberOfSongs , function (data) {
       if (data.response.status.code == 5 || data.response.songs.length <= 10) {
-        Playlist.youtube(options);
+        Playlist.youtube();
       }
       else {
         var ajaxs = [];
@@ -120,6 +114,7 @@ var Playlist = {
             )
           }
         });
+
         $.when.apply($, ajaxs).then(Playlist.resultsReady);
       }
     });
@@ -127,6 +122,7 @@ var Playlist = {
 
   similar: function () {
     var search = Playlist.options.search;
+
     $.getJSON('http://developer.echonest.com/api/v4/artist/similar?api_key=OYJRQNQMCGIOZLFIW&name=' + encodeURIComponent(search) + '&format=jsonp&callback=?&results=40&start=0', function (data) {
       if (data.response.status.code == 5) {
         Playlist.just()
@@ -188,9 +184,9 @@ var Playlist = {
     });
   },
 
-  youtube: function (options) {
-    var search = options.search || Playlist.options.search;
-    var videos = options.videos || Playlist.videos;
+  youtube: function () {
+    var search = Playlist.options.search;
+    var videos = Playlist.videos;
 
     $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '&orderby=relevance&start-index=1&max-results=40&v=2&alt=json-in-script&callback=?', function (data) {
       if (data.feed.hasOwnProperty("entry")) {
@@ -270,7 +266,7 @@ var Playlist = {
   },
 
   preparePlaylist: function () {
-    //don't sort a user playlist.
+    //don't randomly sort a user playlist.
     if (Playlist.options.customPlaylistOwner == null || Playlist.options.customPlaylistOwner.length == 0) {
       Playlist.videos.sort(function () {
         return (Math.round(Math.random()) - 0.5);
@@ -286,6 +282,7 @@ var Playlist = {
     $.each(Playlist.videos, function(i) {
       playlistContainer.append('<li data-video-title="' + this.videoTitle + '" data-video-id="' + this.videoID + '"><span class="remove-video icon-trash"></span><a href="#" id="' + this.videoID + '">' + this.videoTitle + '</a></li>');
     });
+
     if (Playlist.videos.length > 0) {
       $('#' + Playlist.videos[Playlist.currentTrack].videoID).addClass('active');
     }
@@ -376,8 +373,6 @@ var Playlist = {
       startSeconds: currentVideo.startAt || 0,
       suggestedQuality: (User.hd ? 'hd1080' : 'default')
     });
-
-    Player.checkPlayerStatus();
 
     History.update();
 
@@ -565,9 +560,12 @@ var Playlist = {
     else if (Playlist.options.videoID) {
       return "video " + Playlist.videos[Playlist.currentTrack].videoTitle;
     }
-    // just x, similar x, genre x
-    return this.options.searchType + " " + this.options.search;
+    else {
+      // just x, similar x, genre x
+      return this.options.searchType + " " + this.options.search;
+    }
   }
+
 };
 
 $(document).ready(function () {

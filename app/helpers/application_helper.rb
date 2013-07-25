@@ -1,4 +1,5 @@
 module ApplicationHelper
+
   def search_options
     options = {}
 
@@ -26,10 +27,6 @@ module ApplicationHelper
     options[:search] = array_or_string_for_javascript(escape_javascript(params[:artist_band]))
 
     options_for_javascript(options)
-  end
-
-  def user_object
-    @user || current_user
   end
 
 end

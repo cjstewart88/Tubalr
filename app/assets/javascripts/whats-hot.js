@@ -64,7 +64,7 @@ var WhatsHot = {
     for (var i = 0; i < genres.length; i++) {
       ajaxs.push($.getJSON("http://developer.echonest.com/api/v4/artist/top_hottt?api_key=OYJRQNQMCGIOZLFIW&format=json&results=" + options.count + "&genre=" + genres[i] + "&start=0&bucket=hotttnesss&bucket=id:7digital-US", function (data) {
         $.each(data.response.artists, function (i, artist) {
-          if (!options.artists[artist.name]) {
+          if (!options.artists[artist.name] && artist.foreign_ids) {
             options.artists[artist.name] = {
               "sevenDigitalId": artist.foreign_ids[0].foreign_id.split(":")[2],
               "image": null
@@ -98,7 +98,8 @@ var WhatsHot = {
         WhatsHot.render(options);
       }
       else {
-        console.log("Finished! Now use, copy(JSON.stringify(options.artists).replace(/\":\"/g,'\"=>\"')), to copy what's hot results to your clipboard.");  
+        WhatsHot.copyToLibrary = options.artists;
+        console.log("Finished! Now use, copy(JSON.stringify(WhatsHot.copyToLibrary).replace(/\":\"/g,'\"=>\"')), to copy what's hot results to your clipboard.");  
       }
     });
   }
