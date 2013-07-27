@@ -10,6 +10,8 @@ var User = {
 
   lastfmConnected:  null,
 
+  resume_last_playlist: null,
+
   init: function (options) {
     $.extend(User, options);
   },

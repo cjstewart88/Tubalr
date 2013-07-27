@@ -43,6 +43,7 @@ class RegistrationsController < Devise::RegistrationsController
 
     params[:user][:md5_email] = Digest::MD5.hexdigest(params[:user][:email])
     params[:user][:hd]        = (params[:user][:hd] == "true" ? true : false)
+    params[:user][:resume_last_playlist] = (params[:user][:resume_last_playlist] == "true" ? true : false)
 
     if @user.update_attributes(params[:user])
       set_flash_message :notice, :updated
