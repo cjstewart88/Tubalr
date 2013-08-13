@@ -27,7 +27,8 @@
         username:         '<%= escape_javascript(current_user.username) %>',
         bannedVideos:     <%= array_or_string_for_javascript(current_user.banned_videos.map(&:video_id)) %>,
         hd:               <%= current_user.hd %>,
-        lastfmConnected:  <%= current_user.lastfm_session_key ? 'true' : 'false' %>
+        lastfmConnected:  <%= current_user.lastfm_session_key ? 'true' : 'false' %>,
+        resume_last_playlist: <%= current_user.resume_last_playlist %>,
       });
     <% end if user_signed_in? %>
   </head>

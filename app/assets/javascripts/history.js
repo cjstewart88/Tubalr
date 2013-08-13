@@ -17,7 +17,6 @@ var History = {
   playlists: function() {
     var playlists = localStorage.getItem('playlists') || "{}";
     playlists = JSON.parse(playlists);
-    window.playlists = playlists;
     return playlists;
   },
 
@@ -30,7 +29,8 @@ var History = {
   },
 
   sortedKeys: function() {
-    var keys = Object.keys(this.playlists());
+    var playlists = this.playlists();
+    var keys = Object.keys(playlists);
     // later date is earlier in array
     keys.sort(function(a, b) {
       var date_a = playlists[a].visitTime,
@@ -75,6 +75,10 @@ var History = {
     Playlist.reset();
     jQuery.extend(Playlist, playlists[name]);
     setTimeout(function () { Playlist.resultsReady() }, 2000);
+  },
+
+  latest: function() {
+    return this.sortedKeys()[0];
   }
 };
 
@@ -89,6 +93,16 @@ $(document).ready(function () {
       });
       $('#history-list').append(link);
     });
+
+    // check if we're on the main page and this is the first page
+    // in this visit. If so and user wishes to resume last
+    // playlist, do exactly that.
+    var restore_last_playlist = User.resume_last_playlist &&
+                                location.pathname == "/" &&
+                                document.referrer.indexOf(location.hostname) == -1;
+    if (restore_last_playlist) {
+      History.loadPlaylist(History.latest());
+    }
   } else {
     $('.history-tab').hide();
   }

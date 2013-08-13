@@ -24,12 +24,21 @@
     </div>
 
     <div id="right-col">
-      <div id="video-quality">
+      <div class="register-checkbox">
         <label>Video Quality</label>
         <i>(could result in excessive buffering for slower connections)</i>
-        <div id="video-quality-inner">
+        <div class="register-checkbox-inner">
           <%= "<span class='error'>#{resource.errors[:hd][0]}</span>".html_safe if resource.errors[:hd][0] %><br />
           <%= f.check_box :hd, { :checked => current_user.hd ? 'checked' : '' }, 'true', 'false' %><%= f.label "Play videos in highest possible quality", :for => :user_hd, :class => 'normal-label' %>
+        </div>
+      </div>
+
+      <div class="register-checkbox">
+        <label>Resume last playlist upon </label>
+        <i>(upon re-opening tubalr)</i>
+        <div class="register-checkbox-inner">
+          <%= "<span class='error'>#{resource.errors[:resume_last_playlist][0]}</span>".html_safe if resource.errors[:resume_last_playlist][0] %><br />
+          <%= f.check_box :resume_last_playlist, { :checked => current_user.resume_last_playlist ? 'checked' : '' }, 'true', 'false' %><%= f.label "Resume last playlist when returning", :for => :user_resume_last_playlist, :class => 'normal-label' %>
         </div>
       </div>
 

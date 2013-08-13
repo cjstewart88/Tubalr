@@ -10,7 +10,10 @@ var User = {
 
   lastfmConnected:  null,
 
+  resume_last_playlist: null,
+
   init: function (options) {
+    window.o = options
     $.extend(User, options);
   },
 
