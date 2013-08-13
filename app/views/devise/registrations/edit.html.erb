@@ -34,7 +34,7 @@
       </div>
 
       <div class="register-checkbox">
-        <label>Resume last playlist upon </label>
+        <label>Resume last playlist</label>
         <i>(upon re-opening tubalr)</i>
         <div class="register-checkbox-inner">
           <%= "<span class='error'>#{resource.errors[:resume_last_playlist][0]}</span>".html_safe if resource.errors[:resume_last_playlist][0] %><br />
@@ -59,7 +59,7 @@
     </div>
 
     <div class="clear"></div>
-    
+
     <div><%= f.submit "Update" %></div>
 
     <div id="last-fm-settings">
