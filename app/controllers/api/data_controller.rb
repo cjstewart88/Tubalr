@@ -5,7 +5,8 @@ class Api::DataController < Api::BaseController
     render :json => {
       :top_genres => TOP_GENRES,
       :genres     => GENRES,
-      :reddit     => REDDIT
+      :reddit     => REDDIT,
+      :whats_hot  => WHATS_HOT
     }
   end
 
