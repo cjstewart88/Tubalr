@@ -59,12 +59,12 @@ var Playlist = {
     $('#empty-playlist').hide();
     $('.remove-when-searching').fadeOut(function () {
       if ($('#player').css('display') == "none") {
-        $('#loading').fadeIn(callback);    
+        $('#loading').fadeIn(callback);
       }
       else {
         $('#player').fadeOut(function () {
           $('#loading').fadeIn(callback);
-        });  
+        });
       }
     });
   },
@@ -98,7 +98,7 @@ var Playlist = {
         $.each(data.response.songs, function (i, track) {
           if (track.title.toLowerCase().search("cover") == -1 && track.title.toLowerCase().search("remix") == -1) {
             ajaxs.push(
-              $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '%20%2D$20' + escape(track.title) + '&orderby=relevance&start-index=1&max-results=10&v=2&format=5&alt=json-in-script&callback=?', function (data) {
+              $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '%20%2D%20' + escape(track.title) + '&orderby=relevance&start-index=1&max-results=10&v=2&format=5&alt=json-in-script&callback=?', function (data) {
                 if (data.feed.hasOwnProperty("entry")) {
                   $.each(data.feed.entry, function (i, video) {
                     if (Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video, videos) && Video.isNotCoverOrRemix(video) && Video.isNotUserBanned(video) && Video.isNotLive(video) && Video.hasTitle(video)) {
