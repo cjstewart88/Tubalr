@@ -4,6 +4,8 @@ var User = {
 
   username:         null,
 
+  email:            null,
+
   bannedVideos:     [],
 
   hd:               null,

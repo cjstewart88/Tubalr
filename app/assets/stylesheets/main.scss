@@ -1,20 +1,20 @@
 @import "compass";
 
-* { 
-  margin: 0px; 
-  padding: 0px; 
+* {
+  margin: 0px;
+  padding: 0px;
 }
 
-header, footer, aside, nav, article, section { 
-  display: block; 
+header, footer, aside, nav, article, section {
+  display: block;
 }
 
-*, object, embed { 
-  outline: none; 
+*, object, embed {
+  outline: none;
 }
 
-input::-moz-focus-inner { 
-  border: 0; 
+input::-moz-focus-inner {
+  border: 0;
 }
 
 html {
@@ -101,4 +101,10 @@ h3 {
 
 .clear {
   clear: both;
+}
+
+.uv-icon, .uv-icon svg {
+  width: 26px !important;
+  height: 26px !important;
+  right: 19px !important;
 }
