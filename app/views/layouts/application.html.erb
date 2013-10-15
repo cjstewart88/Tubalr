@@ -15,7 +15,7 @@
       _gaq.push(['_trackPageview']);
       (function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
     </script>
@@ -50,7 +50,6 @@
       UserVoice=window.UserVoice||[];(function(){var uv=document.createElement('script');uv.type='text/javascript';uv.async=true;uv.src='//widget.uservoice.com/ixcO5YcsfaMBfoVbniVxkw.js';var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(uv,s)})();
       UserVoice.push(['set', {accent_color: '#448dd6',trigger_color: 'white',trigger_background_color: 'rgba(46, 49, 51, 0.6)'}]);
       if (User.id) {
-        console.log(User)
         UserVoice.push(['identify', {
           email:    User.email,
           id:       User.id,
