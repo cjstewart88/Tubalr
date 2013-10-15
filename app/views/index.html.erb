@@ -17,13 +17,13 @@
         <ul class="playlists whats-hot-list album-cover-list"></ul>
         <script>
           $(document).ready(function () {
-            WhatsHot.init({ 
-              artists: <%= WHATS_HOT.to_json.html_safe %>, 
+            WhatsHot.init({
+              artists: <%= WHATS_HOT.to_json.html_safe %>,
               el: $('.whats-hot-list')
             });
           });
         </script>
-      </div>      
+      </div>
 
       <div class="tab-content my-playlists-tab-content">
         <% if user_signed_in? %>
@@ -55,16 +55,16 @@
         <% if user_signed_in? %>
           <% if current_user.favorite_genres.count == 0 %>
             <p>
-              It looks like you haven't told us what your favorite genres are, to get some music recommendations head over to <a href="/users/edit">your profile</a> and pick some favorite genres!
+              It looks like you haven't told us what your favorite genres are, to get some music recommendations head over to <a href="/users/edit">your settings page</a> and pick some favorite genres!
             </p>
           <% else %>
             <ul class="playlists recommended album-cover-list"></ul>
             <script>
               $(document).ready(function () {
-                WhatsHot.init({ 
-                  count:  20, 
-                  genres: <%= array_or_string_for_javascript(current_user.favorite_genres) %>, 
-                  el:     $('.recommended') 
+                WhatsHot.init({
+                  count:  20,
+                  genres: <%= array_or_string_for_javascript(current_user.favorite_genres) %>,
+                  el:     $('.recommended')
                 });
               });
             </script>
@@ -74,9 +74,29 @@
             To get some music recommendations, <a href="/users/sign_up">sign up</a> for an account and tell us your favorite genres!
           </p>
         <% end %>
-      </div>  
+      </div>
 
       <div class="tab-content genres-tab-content">
+        <h3>My Favorite Genres</h3>
+        <% if user_signed_in? %>
+          <% if current_user.favorite_genres.count != 0 %>
+            <ul class="playlists">
+              <% current_user.favorite_genres.each do | genre | %>
+                <li><a href='/just/<%= genre %>'><%= genre %></a></li>
+              <% end %>
+            </ul>
+          <% else %>
+            <p>
+              You currently have 0 favorite genres, head to <a href="/users/edit">your settings page</a> and pick some favorite genres!
+            </p>
+          <% end %>
+        <% else %>
+          <p>
+            To have quick acccess to your favorite genres, <a href="/users/sign_up">sign up</a> for an account and tell us your favorites!
+          </p>
+        <% end %>
+
+        <h3>All Genres</h3>
         <ul class="playlists">
           <% GENRES.each do | genre | %>
             <li><a href='/just/<%= genre %>'><%= genre %></a></li>
