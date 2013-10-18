@@ -516,6 +516,7 @@ var Playlist = {
     else if (Playlist.options.search) {
       if (Playlist.options.searchType == "similar") {
         shareText += "Artists/Bands similar to ";
+        url += "similar/";
       }
       else {
         shareText += "I'm listening to ";
