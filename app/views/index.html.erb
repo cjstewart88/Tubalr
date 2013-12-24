@@ -4,32 +4,54 @@
       <ul>
         <li class="tab whats-hot-tab" data-tab-name="whats-hot">What's Hot</li>
         <li class="tab my-playlists-tab" data-tab-name="my-playlists">My Playlists</li>
-        <li class="tab recommended-tab" data-tab-name="recommended">Recommended</li>
         <li class="tab genres-tab" data-tab-name="genres">Genres</li>
         <li class="tab reddit-tab" data-tab-name="reddit">Reddit Playlists </li>
         <li class="tab history-tab" data-tab-name="history">Recently Viewed</li>
         <li class="tab"><a href='/random'>Random Playlist</a></li>
-        <li>
-          <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VLGMMSXGJVV56" target="_blank" class="donate-button tooltip" original-title="Funds go towards keeping tubalr running and are greatly apprciated!">
-            <i class="icon-money icon-fixed-width"></i>
-            <i class="icon-smile icon-fixed-width"></i>
-            Donate
-          </a>
-        </li>
       </ul>
     </div>
 
     <div id="tabs-contents">
       <div class="tab-content whats-hot-tab-content">
-        <ul class="playlists whats-hot-list album-cover-list"></ul>
-        <script>
-          $(document).ready(function () {
-            WhatsHot.init({
-              artists: <%= WHATS_HOT.to_json.html_safe %>,
-              el: $('.whats-hot-list')
+        <% if user_signed_in? %>
+
+          <% if current_user.favorite_genres.count == 0 %>
+            <p>
+              It looks like you haven't told us what your favorite genres are, to get some music recommendations head over to <a href="/users/edit">your settings page</a> and pick some favorite genres!
+            </p>
+          <% else %>
+            <p>
+              The below artists are based off your favorite genres(<a href="/users/edit">edit</a>): <%= current_user.favorite_genres.pluck(:name).join(', ') %>.
+            </p>
+          <% end %>
+
+          <script>
+            $(document).ready(function () {
+              WhatsHot.init({
+                count:  <%= (current_user.favorite_genres.count == 0 ? '2' : '10') %>,
+                genres: <%= (current_user.favorite_genres.count == 0 ? 'null' : array_or_string_for_javascript(current_user.favorite_genres)) %>,
+                el:     $('.whats-hot-list')
+              });
             });
-          });
-        </script>
+          </script>
+
+        <% else %>
+
+          <p>
+            To get music recommendations, <a href="/users/sign_up">sign up</a> for an account and tell us your favorite genres!
+          </p>
+
+          <script>
+            $(document).ready(function () {
+              WhatsHot.init({
+                count:  2,
+                el:     $('.whats-hot-list')
+              });
+            });
+          </script>
+
+        <% end %>
+        <ul class="playlists whats-hot-list album-cover-list"></ul>
       </div>
 
       <div class="tab-content my-playlists-tab-content">
@@ -54,31 +76,6 @@
         <% else %>
           <p>
             To create custom playlists, <a href="/users/sign_up">sign up</a> for an account!
-          </p>
-        <% end %>
-      </div>
-
-      <div class="tab-content recommended-tab-content">
-        <% if user_signed_in? %>
-          <% if current_user.favorite_genres.count == 0 %>
-            <p>
-              It looks like you haven't told us what your favorite genres are, to get some music recommendations head over to <a href="/users/edit">your settings page</a> and pick some favorite genres!
-            </p>
-          <% else %>
-            <ul class="playlists recommended album-cover-list"></ul>
-            <script>
-              $(document).ready(function () {
-                WhatsHot.init({
-                  count:  20,
-                  genres: <%= array_or_string_for_javascript(current_user.favorite_genres) %>,
-                  el:     $('.recommended')
-                });
-              });
-            </script>
-          <% end %>
-        <% else %>
-          <p>
-            To get some music recommendations, <a href="/users/sign_up">sign up</a> for an account and tell us your favorite genres!
           </p>
         <% end %>
       </div>
@@ -134,5 +131,10 @@
     </div>
 
     <div class="clear"></div>
+
+    <div id="social">
+      <iframe src="http://www.facebook.com/plugins/like.php?href=http://www.facebook.com/pages/Tubalr/154359441249128&amp;send=false&amp;layout=button_count&amp;width=80&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; height:21px;" allowTransparency="true"></iframe>
+      <a href="https://twitter.com/tubalr" class="twitter-follow-button" data-show-count="true">Follow @tubalr</a>
+    </div>
   <% end %>
 </section>

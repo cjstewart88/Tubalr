@@ -39,7 +39,7 @@ var WhatsHot = {
     for (var artist in options.artists) {
       var li  = $("<li>");
       var a   = $("<a>").attr("href", "/just/" + encodeURIComponent(artist));
-      
+
       $('<img/>').attr('src', options.artists[artist]).load(function() {
         loadedImages++;
       });
@@ -54,7 +54,7 @@ var WhatsHot = {
   },
 
   // Fetch new artists
-  
+
   fetchArtists: function (options) {
     var genres  = options.genres || ["rock", "electronic", "hip hop", "indie rock", "techno", "hard rock", "indie folk", "indie pop", "electro", "trance", "alternative rock", "reggae", "dub"];
     var ajaxs   = [];
@@ -74,8 +74,8 @@ var WhatsHot = {
       }));
     }
 
-    $.when.apply($, ajaxs).then(function () { 
-      WhatsHot.fetchArtistsImage(options) 
+    $.when.apply($, ajaxs).then(function () {
+      WhatsHot.fetchArtistsImage(options)
     });
   },
 
@@ -99,7 +99,7 @@ var WhatsHot = {
       }
       else {
         WhatsHot.copyToLibrary = options.artists;
-        console.log("Finished! Now use, copy(JSON.stringify(WhatsHot.copyToLibrary).replace(/\":\"/g,'\"=>\"')), to copy what's hot results to your clipboard.");  
+        console.log("Finished! Now use, copy(JSON.stringify(WhatsHot.copyToLibrary).replace(/\":\"/g,'\"=>\"')), to copy what's hot results to your clipboard.");
       }
     });
   }

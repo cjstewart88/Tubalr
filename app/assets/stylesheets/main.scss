@@ -99,36 +99,17 @@ h3 {
   }
 }
 
-.donate-button {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 5px 12px 8px;
-  font-size: 24px;
-  background: #1D9E74;
-  color: #fff;
-  border: solid 1px #167C5B;
-  @include border-radius(4px);
-
-  i {
-    &.icon-smile {
-      display: none;
-    }
-  }
-
-  &:hover {
-    color: #fff;
-    border-color: #167C5B;
-
-    i.icon-smile {
-      display: inline-block;
-    }
-
-    i.icon-money {
-      display: none;
-    }
-  }
-}
-
 .clear {
   clear: both;
+}
+
+#social {
+  position: fixed;
+  bottom: 30px;
+  width: 200px;
+
+  iframe {
+    display: block;
+    margin-bottom: 10px;
+  }
 }

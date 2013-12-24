@@ -1,5 +1,35 @@
 var Video = {
 
+  determineBestVideo: function (youTubeResults, videos) {
+    if (youTubeResults) {
+      for (var i = 0; youTubeResults.length >= i; i++) {
+        var video = youTubeResults[i];
+
+        if (video && Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video, videos) && Video.isNotUserBanned(video) && Video.excludesWords(video) && Video.hasTitle(video)) {
+          return {
+            videoID:    video.id.$t.split(":")[3],
+            videoTitle: video.title.$t
+          };
+        }
+      }
+    }
+
+    return false;
+  },
+
+  excludesWords: function (video) {
+    var regex = new RegExp(/review|interview|cover|remix|alternate|preview|top albums|top songs|live|concert|camera|episode|acoustic/);
+    var test  = null;
+
+    test = video.media$group.media$description.$t.toLowerCase().search(regex);
+
+    if (test === -1) {
+      test = video.title.$t.toLowerCase().search(regex);
+    }
+
+    return (test === -1 ? true : false);
+  },
+
   isNotBlocked: function (video) {
     return !video.hasOwnProperty("app$control");
   },
@@ -9,7 +39,7 @@ var Video = {
   },
 
   isUnique: function (video, videos) {
-    videos = videos || Playlist.videos
+    videos = videos || Playlist.videos;
     var unique = true;
 
     for (var i = 0; i < videos.length; i++) {
@@ -30,40 +60,12 @@ var Video = {
     return unique;
   },
 
-  isNotCoverOrRemix: function (video) {
-    var videoTitle = video.title.$t.toLowerCase();
-
-    if (videoTitle.search('cover') >= 0 || videoTitle.search('remix') >= 0 || videoTitle.search('alternate') >= 0) {
-      return false;
-    }
-    else {
-      return true;
-    }
-  },
-
   isNotUserBanned: function (video) {
     return User.bannedVideos.indexOf(video.id.$t.split(":")[3]) == -1
   },
 
-  isNotLive: function (video) {
-    var videoDescription  = video.media$group.media$description.$t.toLowerCase();
-    var videoTitle        = video.title.$t.toLowerCase();
-
-    if (videoDescription.search('live') >= 0 || videoDescription.search('concert') >= 0 || videoTitle.search('live') >= 0 || videoTitle.search('concert') >= 0) {
-      return false;
-    }
-    else {
-      return true;
-    }
-  },
-
   hasTitle: function (video) {
-    if (video.title.$t.trim() == '') {
-      return false;
-    }
-    else {
-      return true;
-    }
+    return video.title.$t.trim() != '';
   },
 
   getVideoID: function (videoLinks) {
