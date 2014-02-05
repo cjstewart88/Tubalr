@@ -13,6 +13,8 @@ gem 'compass-rails'
 gem 'sass-rails'
 gem 'uglifier'
 
+gem 'errbag'
+
 group :development, :test do
   gem 'rspec-rails', ">= 2.0.0.beta"
 end
