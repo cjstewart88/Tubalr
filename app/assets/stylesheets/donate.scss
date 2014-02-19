@@ -1,0 +1,55 @@
+@import 'compass';
+
+#donate {
+  margin: 0 -40px;
+  padding: 10px 40px;
+  background: #d9edf7;
+  border-bottom: solid 1px #bce8f1;
+  color: #31708f;
+
+  #donate-left {
+    float: left;
+
+    .donate-link {
+      color: #31708f;
+      border-bottom: dashed 1px;
+
+      &:hover {
+        color: #3498DB;
+      }
+    }
+  }
+
+  #donate-right {
+    float: right;
+
+    #donate-goal {
+      float: left;
+      margin-right: 10px;
+
+      b {
+        margin-left: 10px;
+        margin-right: 5px;
+
+        &:first-child {
+          margin-left: 0px;
+        }
+      }
+    }
+
+    #donate-progress-bar {
+      float: right;
+      width: 200px;
+      height: 17px;
+      @include border-radius(8px);
+      background: #f5f5f5;
+
+      #donate-progress-bar-fill {
+        width: 50%;
+        height: 100%;
+        @include border-radius(8px);
+        background: #5cb85c;
+      }
+    }
+  }
+}

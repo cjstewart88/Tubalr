@@ -7,7 +7,7 @@
     <meta name="Description" content="Tubalr is a simple way to enjoy great music videos.">
     <%= csrf_meta_tag %>
 
-    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:400,700,800,400italic,700italic", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800", "application" %>
+    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:700", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800", "application" %>
 
     <script>
       var _gaq = _gaq || [];
@@ -20,7 +20,6 @@
       })();
     </script>
     <%= javascript_include_tag  "http://connect.facebook.net/en_US/all.js", "application" %>
-    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     <%= javascript_tag do %>
       User.init({
         id:               <%= current_user.id %>,
@@ -37,13 +36,28 @@
     <div id="fb-root"></div>
 
     <div id="main-wrapper">
+      <div id="donate">
+        <div id="donate-left">
+          Like Tubalr? Keep it running by <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VLGMMSXGJVV56" target="_blank" class="donate-link">donating via PayPal</a>.
+        </div>
+
+        <div id="donate-right">
+          <div id="donate-goal">
+            <b><%= Date::MONTHNAMES[Date.today.month] %> Goal:</b> $20
+            <b><%= Date::MONTHNAMES[Date.today.month] %> Donations:</b> $4.55
+            <b>Total Donations:</b> $181.44
+          </div>
+        </div>
+
+        <div class="clear"></div>
+      </div>
+
       <div id="notices">
         <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
       </div>
       <%= render :partial => 'header' %>
       <%= yield %>
       <%= render :partial => 'player' %>
-      <%= render :partial => 'footer' %>
     </div>
   </body>
 </html>

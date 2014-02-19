@@ -103,13 +103,12 @@ h3 {
   clear: both;
 }
 
-#social {
+#built-by {
   position: fixed;
   bottom: 30px;
   width: 200px;
 
-  iframe {
-    display: block;
-    margin-bottom: 10px;
+  a {
+    color: #3498DB;
   }
 }
