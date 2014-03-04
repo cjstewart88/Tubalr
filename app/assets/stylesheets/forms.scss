@@ -44,15 +44,6 @@ input[type=button], input[type=submit], a.button, button {
 
 button:focus { outline: 0; }
 
-.select2-drop-multi {
-  margin-left: 0;
-}
-
-.select2-container-multi.select2-container-active .select2-choices {
-  @include box-shadow(none);
-  border-color: #aaa;
-}
-
 form {
   #left-col, #right-col {
     float: left;

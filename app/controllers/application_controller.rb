@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
 
   def index
     flash[:notice] = "Thanks a ton for your support, it means a lot!" if params[:thanks]
-
-    render :layout => "application", :template => "index"
   end
 
   def stats
@@ -14,20 +12,18 @@ class ApplicationController < ActionController::Base
       :registered_users                 => User.count,
       :playlists_created                => Playlist.count,
       :videos_added_to_playlists        => Video.count,
+      :videos_watched                   => WatchedVideo.where(:user_agent => 'web').count,
       :users_registered_today           => User.where("created_at >= ?", Date.today).count,
       :playlists_created_today          => Playlist.where("created_at >= ?", Date.today).count,
       :videos_added_to_playlists_today  => Video.where("created_at >= ?", Date.today).count,
-      :videos_watched                   => WatchedVideo.count,
-      :videos_watched_on_web            => WatchedVideo.where(:user_agent => 'web').count,
-      :videos_watched_on_android        => WatchedVideo.where(:user_agent => 'android').count,
-      :videos_watched_on_ios            => WatchedVideo.where(:user_agent => 'ios').count
+      :videos_watch_today               => WatchedVideo.where("created_at >= ?", Date.today).where(:user_agent => 'web').count
     }
-
-    render :layout => "application", :template => "stats"
   end
 
-  def explore
-    render :layout => "application", :template => "explore"
+  def genres
+  end
+
+  def subreddits
   end
 
   def random

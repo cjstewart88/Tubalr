@@ -35,12 +35,6 @@ class RegistrationsController < Devise::RegistrationsController
 
     @user = User.find(current_user.id)
 
-    if params[:user][:favorite_genres]
-      @user.favorite_genre_list = params[:user][:favorite_genres].join(',')
-    else
-      @user.favorite_genre_list = []
-    end
-
     params[:user][:md5_email] = Digest::MD5.hexdigest(params[:user][:email])
     params[:user][:hd]        = (params[:user][:hd] == "true" ? true : false)
     params[:user][:resume_last_playlist] = (params[:user][:resume_last_playlist] == "true" ? true : false)

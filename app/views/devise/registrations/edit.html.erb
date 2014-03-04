@@ -48,14 +48,6 @@
           We use <a href="https://en.gravatar.com/" target="_blank">Gravatar.com</a> to manage user profile pictures. So head <a href="https://en.gravatar.com/" target="_blank">over there</a> to manage yours or sign up if you're not already!
         </p>
       </div>
-
-      <div>
-        <%= f.label "favorite genres" %>
-        <p>
-          Select your favorite genres so we can help you and others discover music! We will use your favorite genre's to help you discover new artists and user generated playlists. Your custom playlists will also be discoverable by those with similar favorite genres.
-        </p>
-        <%= select_tag("favorite-genres-picker", options_for_select([''] + GENRES, current_user.favorite_genres), :name => 'user[favorite_genres][]', :multiple => true) %>
-      </div>
     </div>
 
     <div class="clear"></div>

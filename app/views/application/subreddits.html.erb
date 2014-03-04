@@ -1,0 +1,10 @@
+<section class="remove-when-searching">
+  <% REDDIT.each do | r | %>
+    <h3><%= r[:category] %></h3>
+    <ul class="playlists">
+      <% r[:subreddits].each do | sr | %>
+        <li><a href='<%= sr %>'><%= sr %></a></li>
+      <% end %>
+    </ul>
+  <% end %>
+</section>

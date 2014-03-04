@@ -1,0 +1,130 @@
+<section class="remove-when-searching">
+  <% if !request.path.index("similar")  && !request.path.index("just")  && !request.path.index("video") && !request.path.index("genre") && !request.path.index("r/") && !@playlist_name  %>
+    <div id="tabs">
+      <ul>
+        <li class="tab user-curated-tab" data-tab-name="user-curated">User Curated Music</li>
+        <li class="tab my-playlists-tab" data-tab-name="my-playlists">My Playlists</li>
+        <li class="tab history-tab" data-tab-name="history">Recently Viewed</li>
+        <li class="tab"><a href='/random'>Random Playlist</a></li>
+      </ul>
+    </div>
+
+    <div id="tabs-contents">
+      <div class="tab-content user-curated-tab-content">
+        <p>
+          <b>Not sure what to listen to?</b> Choose from a playlist below to get started.
+          These playlists are currated by people(reddit) who care about their music,
+          so it'll be good. If you still don't see what your looking for, try
+          searching above or looking through our full list of <a href="/subreddits">subreddits</a> or <a href="/genres">genres</a>.
+        </p>
+
+        <h3>Electronic Music</h3>
+        <ul class="playlists">
+          <li><a href='/r/DubStep'>Dubstep</a></li>
+          <li><a href='/r/DnB'>Drum & Bass</a></li>
+          <li>
+            <a href='/r/electronicmagic' class='tooltip' original-title='"A place for beats and atmospheres
+            that are designed to take you on an emotional journey" <br/>- /r/electronicmagic'>Electronic Magic</a>
+          </li>
+          <li><a href='/r/electrohouse'>Electro House</a></li>
+          <li>
+            <a href='/r/glitch' class='tooltip' original-title='"Glitch is a cousin of Dubstep, Chiptunes
+              and Grime. What separates glitch from dubstep is intentional digital degradation artifacts
+              and intentional stutter effects." - /r/glitch'>Glitch</a>
+          </li>
+          <li><a href='/r/House'>House</a></li>
+          <li>
+            <a href='/r/Techno' class='tooltip' original-title='"We love skull-splitting kickdrums,
+            earth shaking basslines, distorted synths, crunchy claps and hypnotic pads." - /r/techno'>Techno</a>
+          </li>
+          <li><a href='/r/Trance'>Trance</a></li>
+        </ul>
+
+        <h3>Rock/Metal</h3>
+        <ul class="playlists">
+          <li>
+            <a href='/r/AlternativeRock'>Alternative Rock</a>
+          </li>
+          <li>
+            <a href='/r/deathmetal' class='tooltip' original-title='"An extreme
+              subgenre of heavy metal. It typically employs heavily distorted guitars, tremolo
+              picking, deep growling vocals, blast beat drumming, minor keys or atonality,
+              and complex song structures with multiple tempo changes." - wikipedia'>Death Metal</a>
+          </li>
+          <li>
+            <a href='/r/doommetal' class='tooltip' original-title='"An extreme form of heavy metal
+              music that typically uses slower tempos, low-tuned guitars and a much thicker or
+              heavier sound than other metal genres." - wikipedia'>Doom Metal</a>
+          </li>
+          <li><a href='/r/Grunge'>Grunge</a></li>
+          <li><a href='/r/IndieFolk'>Indie Folk</a></li>
+          <li><a href='/r/indie_rock'>Indie Rock</a></li>
+          <li>
+            <a href='/r/PostRock' class='tooltip' original-title='"An umbrella term to describe the
+            mostly instrumental music genre that uses rock instrumentation but disregards typical
+            rock song structure" - /r/PostRock'>Post Rock</a>
+          </li>
+          <li><a href='/r/PsychedelicRock'>Psychedelic Rock</a></li>
+          <li><a href='/r/ProgMetal'>Progressive Metal</a></li>
+          <li><a href='/r/Punk'>Punk</a></li>
+          <li>
+            <a href='/r/stonerrock' class='tooltip' original-title='"Stoner Rock is the fuzzed-out
+              step-child of hard rock and heavy metal, often with hints of pyschedelic and blues
+              rock as well as doom metal." <br/>- /r/stonerrock'>Stoner Rock</a>
+          </li>
+        </ul>
+
+        <h3>Other</h3>
+        <ul class="playlists">
+          <li><a href='/r/HipHopHeads'>Hip Hop Heads</a></li>
+          <li><a href='/r/Rap'>Rap</a></li>
+          <li><a href='/r/jazz'>Jazz</a></li>
+          <li><a href='/r/animemusic'>Anime Music</a></li>
+          <li><a href='/r/motown'>Motown</a></li>
+          <li><a href='/r/MovieMusic'>Movie Music</a></li>
+          <li><a href='/r/treemusic'>Tree Music</a></li>
+          <li><a href='/r/kpop'>K-Pop</a></li>
+          <li><a href='/r/gamemusic'>Game Music</a></li>
+          <li><a href='/r/chillmusic'>Chill</a></li>
+        </ul>
+      </div>
+
+      <div class="tab-content my-playlists-tab-content">
+        <% if user_signed_in? %>
+            <p>
+              <b>TIP:</b> You can import your YouTube playlists or other users YouTube playlist. Head over to <a href="<%= "/#{current_user.username}/profile" %>">your profile</a> to get started.
+            </p>
+
+            <% if current_user.playlists.count != 0 %>
+              <ul class="playlists">
+                <% current_user.playlists.each do | playlist | %>
+                  <li>
+                    <a href="<%= "/#{current_user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></a>
+                  </li>
+                <% end %>
+              </ul>
+            <% else %>
+              <p>
+                Looks like you currently have 0 playlists, starting using tubalr and click the playlist dropdown under the video player to get started!
+              </p>
+            <% end %>
+        <% else %>
+          <p>
+            To create custom playlists, <a href="/users/sign_up">sign up</a> for an account!
+          </p>
+        <% end %>
+      </div>
+
+      <div class="tab-content history-tab-content">
+        <ul id="history-list" class="playlists">
+        </ul>
+      </div>
+    </div>
+
+    <div class="clear"></div>
+
+    <div id="built-by">
+      <a href="https://twitter.com/codyjackstewart" class="twitter-follow-button" data-show-count="true">@codyjackstewart</a>
+    </div>
+  <% end %>
+</section>

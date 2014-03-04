@@ -3,7 +3,6 @@ class Api::DataController < Api::BaseController
 
   def library
     render :json => {
-      :top_genres => TOP_GENRES,
       :genres     => GENRES,
       :reddit     => REDDIT,
       :whats_hot  => WHATS_HOT

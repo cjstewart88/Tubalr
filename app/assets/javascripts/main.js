@@ -37,7 +37,8 @@ $(document).ready(function () {
 
   // Tooltips
   $('.tooltip').tipsy({
-    gravity: 'n'
+    gravity: 'n',
+    html: true
   });
 
 });

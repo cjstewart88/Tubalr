@@ -19,6 +19,9 @@ Tubalr::Application.routes.draw do
     resources :registrations, :only => [:create]
   end
 
+  get "/genres"                                     => "application#genres"
+  get "/subreddits"                                 => "application#subreddits"
+
   get "/stats"                                      => "application#stats"
   get "/just/:artist_band"                          => "application#index"
   get "/similar/:artist_band"                       => "application#index"
