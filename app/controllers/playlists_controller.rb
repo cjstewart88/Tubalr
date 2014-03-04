@@ -7,7 +7,7 @@ class PlaylistsController < ApplicationController
     @playlist_name      = params[:playlist_name]
     @is_playlist_owner  = current_user.present? && current_user.username == params[:username]
 
-    render :layout => "application", :template => "index"
+    render :layout => "application", :template => "application/index"
   end
 
   def import_youtube_playlists
@@ -80,5 +80,5 @@ class PlaylistsController < ApplicationController
     render :json => response
   end
 
-  
+
 end
