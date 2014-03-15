@@ -1,4 +1,5 @@
 class LastfmController < ApplicationController
+
   before_filter :authenticate_user!
 
   def grant_access
@@ -80,4 +81,5 @@ class LastfmController < ApplicationController
   def extract_track(video_title)
     video_title.split('-')[1] || nil
   end
+
 end

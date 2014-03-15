@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+
   before_filter :authenticate_user!, :only => [:update]
 
   def create
@@ -48,4 +49,5 @@ class RegistrationsController < Devise::RegistrationsController
       render "edit"
     end
   end
+
 end

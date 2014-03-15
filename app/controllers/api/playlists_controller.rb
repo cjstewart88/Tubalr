@@ -1,4 +1,5 @@
 class Api::PlaylistsController < Api::BaseController
+
   before_filter :authenticate_user!
 
   def create
@@ -36,4 +37,5 @@ class Api::PlaylistsController < Api::BaseController
 
     render :json => response
   end
+
 end

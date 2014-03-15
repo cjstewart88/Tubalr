@@ -13,4 +13,3 @@
 //= require report
 //= require custom-playlist-settings
 //= require history
-//= require whats-hot

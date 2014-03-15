@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery
 
-  before_filter :ensure_domain
+  protect_from_forgery
 
   def index
     flash[:notice] = "Thanks a ton for your support, it means a lot!" if params[:thanks]
@@ -32,14 +31,6 @@ class ApplicationController < ActionController::Base
     random_playlist = [random_reddit, random_genre].sample
 
     redirect_to random_playlist
-  end
-
-  private
-
-  def ensure_domain
-    if Rails.env.production? && request.env['HTTP_HOST'] != 'www.tubalr.com'
-      redirect_to "http://www.tubalr.com#{request.fullpath}", :status => 301
-    end
   end
 
 end

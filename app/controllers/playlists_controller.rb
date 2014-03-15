@@ -1,4 +1,5 @@
 class PlaylistsController < ApplicationController
+
   before_filter :authenticate_user!, :only => [:import_youtube_playlists, :create, :sort, :update]
 
   def listen
@@ -79,6 +80,5 @@ class PlaylistsController < ApplicationController
 
     render :json => response
   end
-
 
 end

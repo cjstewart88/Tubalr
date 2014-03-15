@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+
   has_many :playlists, :order => "lower(playlist_name) ASC"
   has_many :banned_videos
 
@@ -19,4 +20,5 @@ class User < ActiveRecord::Base
      login = conditions.delete(:login)
      where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
   end
+
 end

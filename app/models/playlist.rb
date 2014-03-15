@@ -1,4 +1,5 @@
 class Playlist < ActiveRecord::Base
+
   belongs_to :user, :counter_cache => true
   has_many :videos, :order => "track_number ASC", :dependent => :destroy
 
@@ -10,7 +11,7 @@ class Playlist < ActiveRecord::Base
     if track_number > (videos.count - 1)
       track_number = (videos.count - 1)
     end
-    
+
     video.update_attributes(track_number: track_number)
     videos_to_order = videos - [video]
     offset = 0

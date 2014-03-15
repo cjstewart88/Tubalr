@@ -11,12 +11,7 @@ Tubalr::Application.routes.draw do
     post  "/ban_video"                              => "banned_videos#ban_video"
     post  "/playlist/create"                        => "playlists#create"
     post  "/playlist/add_video"                     => "playlists#add_video"
-    get   "/library.json"                           => "data#library"
-    get   "/user/info.json"                         => "data#user_info"
-    get   "/user/:user_id/playlists.json"           => "data#user_playlists"
     get   "/playlist/:playlist_id"                  => "data#playlist_videos"
-    resources :sessions,      :only => [:create, :destroy]
-    resources :registrations, :only => [:create]
   end
 
   get "/genres"                                     => "application#genres"

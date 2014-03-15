@@ -1,4 +1,5 @@
 class Api::AnalyticsController < Api::BaseController
+
   def report_watched_video
     response = false
 
@@ -9,4 +10,5 @@ class Api::AnalyticsController < Api::BaseController
 
     render :json => { :success => response }
   end
+
 end
