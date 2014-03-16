@@ -11,5 +11,3 @@ gem 'jquery-rails', '1.0.12'
 gem 'compass-rails'
 gem 'sass-rails'
 gem 'uglifier'
-
-gem 'rails_12factor', group: :production
