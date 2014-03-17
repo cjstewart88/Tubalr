@@ -8,7 +8,7 @@
   <h2 id="current-video-title"></h2>
 
   <div id="video-and-playlist">
-    <div id="ytplayerid"></div> 
+    <div id="ytplayerid"></div>
     <ul id="playlist"></ul>
   </div>
 
@@ -20,7 +20,7 @@
       <a href="#" id="share-on-facebook" class="button small">Share on Facebook</a>
       <a href="#" id="share-on-twitter" class="button small">Share on Twitter</a>
     </div>
-    
+
     <div id="player-controls-left">
       <% if user_signed_in? %>
         <%= render :partial => 'custom_playlist_dropdown' %>
@@ -31,6 +31,6 @@
 </section>
 
 <%= javascript_tag do %>
-  Playlist.init(<%= search_options %>);
+  Playlist.init(<%= search_options.html_safe %>);
 <% end if request.path.index("/similar/") || request.path.index("/video/") || request.path.index("/r/") ||
           request.path.index("/genre/")  || request.path.index("/just/") || @playlist_name %>

@@ -7,7 +7,7 @@
     <meta name="Description" content="Tubalr is a simple way to enjoy great music videos.">
     <%= csrf_meta_tag %>
 
-    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:700", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800", "application" %>
+    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:700", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800", asset_path("application") %>
 
     <script>
       var _gaq = _gaq || [];
@@ -23,9 +23,9 @@
     <%= javascript_tag do %>
       User.init({
         id:               <%= current_user.id %>,
-        email:            '<%= escape_javascript(current_user.email) %>',
-        username:         '<%= escape_javascript(current_user.username) %>',
-        bannedVideos:     <%= array_or_string_for_javascript(current_user.banned_videos.map(&:video_id)) %>,
+        email:            <%= js_output(current_user.email) %>,
+        username:         <%= js_output(current_user.username) %>,
+        bannedVideos:     <%= js_output(current_user.banned_videos.map(&:video_id)) %>,
         hd:               <%= current_user.hd %>,
         lastfmConnected:  <%= current_user.lastfm_session_key ? 'true' : 'false' %>,
         resume_last_playlist: <%= current_user.resume_last_playlist %>,

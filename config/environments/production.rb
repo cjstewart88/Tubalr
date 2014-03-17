@@ -48,9 +48,9 @@ Tubalr::Application.configure do
   config.active_support.deprecation = :notify
 
   # config.assets.initialize_on_precompile = false
-  
+
   config.assets.js_compressor  = :uglifier
   config.assets.css_compressor = :scss
-  
+
   config.action_mailer.default_url_options = { :host => 'tubalr.com' }
 end

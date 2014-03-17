@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   validates_presence_of   :username
   validates_uniqueness_of :username, :case_sensitive => false
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :token_authenticatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
   attr_accessor :login
 
