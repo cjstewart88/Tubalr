@@ -140,6 +140,5 @@ DEPENDENCIES
   rails (= 3.2.17)
   rockstar
   sass-rails
-  therubyracer-heroku (= 0.8.1.pre3)
   uglifier
   unicorn
