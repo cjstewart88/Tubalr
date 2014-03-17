@@ -23,9 +23,9 @@
     <%= javascript_tag do %>
       User.init({
         id:               <%= current_user.id %>,
-        email:            '<%= escape_javascript(current_user.email) %>',
-        username:         '<%= escape_javascript(current_user.username) %>',
-        bannedVideos:     <%= array_or_string_for_javascript(current_user.banned_videos.map(&:video_id)) %>,
+        email:            <%= js_output(current_user.email) %>,
+        username:         <%= js_output(current_user.username) %>,
+        bannedVideos:     <%= js_output(current_user.banned_videos.map(&:video_id)) %>,
         hd:               <%= current_user.hd %>,
         lastfmConnected:  <%= current_user.lastfm_session_key ? 'true' : 'false' %>,
         resume_last_playlist: <%= current_user.resume_last_playlist %>,

@@ -4,7 +4,9 @@ Devise.setup do |config|
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class with default "from" parameter.
-  config.mailer_sender = "support@tubalr.com"
+  config.mailer_sender = "listen.to.tubalr@gmail.com"
+
+  config.secret_key = 'b874dff22931bbb6ba24f62434f0740704b9c4bb73db2778bb5418ada6e73f14eb717346b66c230a31e3ed89402d22dda7790028809a3c072a692de831499f79'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = "Devise::Mailer"

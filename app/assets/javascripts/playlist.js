@@ -26,7 +26,10 @@ var Playlist = {
     Playlist.reset(function () {
       $.extend(Playlist.options, options);
 
-      Playlist.determineIfSpecialSearch();
+      if (Playlist.options.search) {
+        Playlist.determineIfSpecialSearch();
+      }
+
       Report.gaPageview();
 
       Playlist[Playlist.options.searchType]();
