@@ -46,6 +46,21 @@ var Import = {
     $.when(ajax).then(Import.getPlaylistVideos);
   },
 
+  importSinglePlaylist: function(playlistId, withPlaylistName) {
+    var ajax = $.getJSON('https://gdata.youtube.com/feeds/api/playlists/' + playlistId + '?v=2&alt=json-in-script&callback=?', function (data) {
+      if (data.feed === undefined) { return false; }
+
+      Import.youtubePlaylists.push({
+        id:           playlistId,
+        name:         withPlaylistName || data.feed.title["$t"].replace(/[^a-z\d ]/ig,""),
+        videosCount:  data.feed.entry.length,
+        videos:       []
+      });
+    });
+
+    $.when(ajax).then(Import.getPlaylistVideos);
+  },
+
   getPlaylistVideos: function () {
     if (Import.youtubePlaylists.length == 0) {
       Import.importError();
@@ -71,6 +86,9 @@ var Import = {
                   id:    video.content.src.split('/')[4].split('?')[0],
                   title: video.title.$t
                 });
+              }
+              else {
+                console.log(video.content.src.split('/')[4].split('?')[0] , 'blocked')
               }
             });
           })
