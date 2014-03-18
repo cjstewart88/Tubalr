@@ -87,9 +87,6 @@ var Import = {
                   title: video.title.$t
                 });
               }
-              else {
-                console.log(video.content.src.split('/')[4].split('?')[0] , 'blocked')
-              }
             });
           })
         );

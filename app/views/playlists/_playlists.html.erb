@@ -1,12 +1,15 @@
 <div class="tab-content playlists-tab-content">
   <% if @user.playlists.count != 0 %>
-    <ul class="playlists">
+    <ul class="playlists with-playlist-art">
       <% @user.playlists.each do | playlist | %>
-        <li id="<%= playlist.id %>" data-playlist-name="<%= playlist.playlist_name%>">
-          <a href="<%= "/#{@user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></a>
-          <% if @profile_owner %>
-            <span class='custom-playlist-settings-open-dialog icon-wrench tooltip' original-title="Edit Playlist"></span>
-          <% end %>
+        <li id="<%= playlist.id %>" data-playlist-name="<%= playlist.playlist_name%>" data-playlist-art="<%= playlist.art %>">
+          <a href="<%= "/#{@user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>">
+            <img class="art" src="<%= playlist.art == '' || playlist.art.nil? ? '/assets/no-art.png' : playlist.art %>"/>
+            <span><%= playlist.playlist_name %></a></span>
+            <% if @profile_owner %>
+              <span class='custom-playlist-settings-open-dialog icon-wrench tooltip' original-title="Edit Playlist"></span>
+            <% end %>
+          </a>
         </li>
       <% end %>
     </ul>

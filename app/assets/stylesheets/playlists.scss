@@ -54,7 +54,8 @@
   list-style-type: none;
 
   li {
-    display: inline-block; 
+    position: relative;
+    display: inline-block;
     width: 170px;
     margin-right: 30px;
     margin-bottom: 30px;
@@ -63,23 +64,17 @@
     text-overflow: ellipsis;
   }
 
-  &.album-cover-list {
-    display: none;
-  }
-
-  &.album-cover-list li {
+  &.with-playlist-art li {
     max-width: 175px;
     width: auto;
     margin: 0;
-    margin-right: 28px;
+    margin-right: 62px;
     margin-bottom: 30px;
 
-    .cover {
+    .art {
+      display: block;
       width: 175px;
       height: 175px;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: 50% 50%;
     }
 
     span {

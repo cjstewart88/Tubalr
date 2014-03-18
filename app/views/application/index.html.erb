@@ -2,7 +2,7 @@
   <% if !request.path.index("similar")  && !request.path.index("just")  && !request.path.index("video") && !request.path.index("genre") && !request.path.index("r/") && !@playlist_name  %>
     <div id="tabs">
       <ul>
-        <li class="tab user-curated-tab" data-tab-name="user-curated">User Curated Music</li>
+        <li class="tab discover-tab" data-tab-name="discover">Discover</li>
         <li class="tab my-playlists-tab" data-tab-name="my-playlists">My Playlists</li>
         <li class="tab history-tab" data-tab-name="history">Recently Viewed</li>
         <li class="tab"><a href='/random'>Random Playlist</a></li>
@@ -10,13 +10,25 @@
     </div>
 
     <div id="tabs-contents">
-      <div class="tab-content user-curated-tab-content">
+      <div class="tab-content discover-tab-content">
         <p>
           <b>Not sure what to listen to?</b> Choose from a playlist below to get started.
-          These playlists are currated by people(reddit) who care about their music,
+          These playlists are currated by people who care about their music,
           so it'll be good. If you still don't see what your looking for, try
           searching above or looking through our full list of <a href="/subreddits">subreddits</a> or <a href="/genres">genres</a>.
         </p>
+
+        <h3>The Mix</h3>
+        <ul class="playlists with-playlist-art">
+          <% (User.exists?(27928) ? User.find(27928).playlists : []).each do | playlist | %>
+            <li id="<%= playlist.id %>">
+              <a href="<%= "/#{playlist.user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>">
+                <img class="art" src="<%= playlist.art == '' || playlist.art.nil? ? '/assets/no-art.png' : playlist.art %>"/>
+                <span><%= playlist.playlist_name %></a></span>
+              </a>
+            </li>
+          <% end %>
+        </ul>
 
         <h3>Electronic Music</h3>
         <ul class="playlists">
@@ -96,10 +108,13 @@
             </p>
 
             <% if current_user.playlists.count != 0 %>
-              <ul class="playlists">
+              <ul class="playlists with-playlist-art">
                 <% current_user.playlists.each do | playlist | %>
-                  <li>
-                    <a href="<%= "/#{current_user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>"><%= playlist.playlist_name %></a>
+                  <li id="<%= playlist.id %>">
+                    <a href="<%= "/#{current_user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>">
+                      <img class="art" src="<%= playlist.art == '' || playlist.art.nil? ? '/assets/no-art.png' : playlist.art %>"/>
+                      <span><%= playlist.playlist_name %></a></span>
+                    </a>
                   </li>
                 <% end %>
               </ul>

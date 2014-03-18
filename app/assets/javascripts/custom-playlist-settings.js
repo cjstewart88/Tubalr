@@ -7,6 +7,7 @@ var CustomPlaylistSettings = {
   init: function (options) {
     $.extend(CustomPlaylistSettings, options);
     $('#playlist-name').val(CustomPlaylistSettings.playlistName);
+    $('#playlist-art-input').val(CustomPlaylistSettings.playlistArt);
   },
 
   destroy: function () {
@@ -59,6 +60,22 @@ var CustomPlaylistSettings = {
     });
   },
 
+  updateArt: function () {
+    var newPlaylistArt = $('#playlist-art-input').val();
+
+    $.ajax({
+      type: 'PUT',
+      url: '/playlists/' + CustomPlaylistSettings.playlistID,
+      data: {
+        id:  CustomPlaylistSettings.playlistID,
+        art: newPlaylistArt
+      },
+      success: function (data) {
+        location.reload();
+      }
+    });
+  },
+
   playlistNameTaken: function (failedName) {
     CustomPlaylistSettings.notice('You already have a playlist named <b>' + failedName + '</b>.');
 
@@ -101,7 +118,8 @@ $(document).ready(function () {
   $('.custom-playlist-settings-open-dialog').click(function () {
     CustomPlaylistSettings.init({
       playlistID:   $(this).parent().attr('id'),
-      playlistName: $(this).parent().data('playlist-name')
+      playlistName: $(this).parent().data('playlist-name'),
+      playlistArt:  $(this).parent().data('playlist-art')
     });
 
     $('#custom-playlist-settings').dialog('open');
@@ -117,6 +135,10 @@ $(document).ready(function () {
 
   $('#save-playlist-name').click(function () {
     CustomPlaylistSettings.rename();
+  });
+
+  $('#save-playlist-art').click(function () {
+    CustomPlaylistSettings.updateArt();
   });
 
 });

@@ -4,6 +4,10 @@
   input[type=button], input[type=submit], a.button, button {
     background: #548FF4;
     color: #fff;
+
+    &:hover {
+      color: #fff;
+    }
   }
 }
 
@@ -16,19 +20,3 @@
 .ui-dialog .ui-dialog-titlebar-close { position: absolute; right: 10px; font-style: italic; color: #000; }
 .ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; overflow: auto; zoom: 1; color: #000; }
 .ui-dialog .ui-dialog-content ul { list-style-type: none; }
-
-#about-tubalr { display: none; }
-
-#about-tubalr {
-  p {
-    display: block;
-    margin-bottom: 15px;
-    line-height: 16px;
-    font-size: 12px;
-  }
-
-  h3 {
-    font-size: 17px;
-    margin-bottom: 10px;
-  }
-}

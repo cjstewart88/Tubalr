@@ -53,11 +53,17 @@ class PlaylistsController < ApplicationController
   def update
     to_return = {}
 
-    if current_user.playlists.where("lower(playlist_name) = ?", params[:name].downcase).present?
-      to_return[:name_taken] = true
-    else
+    if params[:name]
+      if current_user.playlists.where("lower(playlist_name) = ?", params[:name].downcase).present?
+        to_return[:name_taken] = true
+      else
+        playlist = current_user.playlists.find(params[:id])
+        playlist.playlist_name = params[:name]
+        playlist.save
+      end
+    elsif params[:art]
       playlist = current_user.playlists.find(params[:id])
-      playlist.playlist_name = params[:name]
+      playlist.art = params[:art]
       playlist.save
     end
 
