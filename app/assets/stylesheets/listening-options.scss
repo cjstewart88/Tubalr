@@ -1,5 +1,16 @@
 @import "compass";
 
+// everyone can thank sir john ledbetter for this glorius animation
+@-webkit-keyframes imfeelinglucky {
+  0% {
+   background-position-x: 0px;
+  }
+
+  100% {
+   background-position-x: -114px;
+  }
+}
+
 #listening-options {
   margin-top: 130px;
 
@@ -59,10 +70,11 @@
 
           &.im-feeling-lucky {
             &:hover {
+              -webkit-animation: imfeelinglucky 1s linear infinite;
               @include text-shadow(0px 0px 2px rgba(0, 0, 0, 0.9));
               $experimental-support-for-svg: true;
               background: #efefef;
-              @include background(linear-gradient(left, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff));
+              @include background(linear-gradient(left, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff, #ff0000));
             }
           }
         }
