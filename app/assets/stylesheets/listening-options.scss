@@ -43,13 +43,18 @@
 
       li {
         display: inline-block;
-        background: #efefef;
         margin-right: 10px;
         margin-bottom: 10px;
 
         a {
           display: inline-block;
           padding: 5px 10px;
+          background: #efefef;
+
+          &:hover {
+            background: #3498DB;
+            color: #fff;
+          }
         }
       }
     }
