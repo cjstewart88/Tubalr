@@ -3,11 +3,21 @@
 // everyone can thank sir john ledbetter for this glorius animation
 @-webkit-keyframes imfeelinglucky {
   0% {
-   background-position-x: 0px;
+    background-position-x: 0px;
   }
 
   100% {
-   background-position-x: -114px;
+    background-position-x: -114px;
+  }
+}
+
+@-moz-keyframes imfeelinglucky {
+  0% {
+    background-position: 0px 0px;
+  }
+
+  100% {
+    background-position: -114px 0px;
   }
 }
 
@@ -71,6 +81,7 @@
           &.im-feeling-lucky {
             &:hover {
               -webkit-animation: imfeelinglucky 1s linear infinite;
+              -moz-animation: imfeelinglucky 1s infinite linear;
               @include text-shadow(0px 0px 2px rgba(0, 0, 0, 0.9));
               $experimental-support-for-svg: true;
               background: #efefef;
