@@ -1,16 +1,21 @@
 @import 'compass';
 
 #donate {
-  margin: 0 -40px;
-  padding: 10px 40px;
+  @include box-sizing(border-box);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  min-width: 1024px;
+  margin: 0 -20px;
+  padding: 10px 20px;
   background: #d9edf7;
-  border-bottom: solid 1px #bce8f1;
+  border-top: solid 1px #bce8f1;
   color: #31708f;
 
   #donate-left {
     float: left;
 
-    .donate-link {
+    a {
       color: #31708f;
       border-bottom: dashed 1px;
 

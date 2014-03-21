@@ -24,11 +24,11 @@ html {
 
 body {
   height: 100%;
-  padding: 0 40px;
+  padding: 0 20px;
   background: #fff;
   font-family: 'Open Sans', sans-serif;
   font-size: 12px;
-	color: #464646;
+	color: #444444;
 
   ::-webkit-scrollbar {
     width: 8px;
@@ -54,7 +54,7 @@ p {
 }
 
 a {
-  color: #464646;
+  color: #444444;
   text-decoration: none;
 
   &:hover {
@@ -70,17 +70,18 @@ a {
 h2 {
   font-size: 16px;
   margin-bottom: 30px;
-  text-transform: capitalize;
 }
 
 h3 {
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 #main-wrapper {
-  height: 100%;
-  width: 100%;
-  min-width: 820px;
+  @include box-sizing(border-box);
+  position: relative;
+  width: 1024px;
+  margin: 0 auto;
+  padding-bottom: 40px;
 }
 
 #notices {
@@ -88,6 +89,7 @@ h3 {
   top: 10px;
   left: 10px;
   width: 180px;
+  z-index: 1000;
 
   aside {
     display: block;
@@ -101,14 +103,4 @@ h3 {
 
 .clear {
   clear: both;
-}
-
-#built-by {
-  position: fixed;
-  bottom: 30px;
-  width: 200px;
-
-  a {
-    color: #3498DB;
-  }
 }

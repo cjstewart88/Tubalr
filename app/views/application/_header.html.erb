@@ -3,30 +3,23 @@
     <a href='/' class="tooltip" original-title="Pronounced: tuba-ler">tubalr</a>
   </h1>
 
-  <form id="listenForm" onSubmit="return false;">
-    <input type="text" name="q" autocomplete="off" id="q" class="small" value="<%= params[:artist_band].gsub('+',' ') if params[:artist_band].present? %>" tabindex="1" placeholder="search for artists or bands"/>
-    <input type="button" name="just" value="only" class="small listen just tooltip" tabindex="2" original-title="This search method is to search for a single artist or band."/>
-    <input type="button" name="similar" value="similar" class="small listen similar tooltip" tabindex="3" original-title="This search method will find artists and bands similar to your search."/>
-  </form>
-
   <nav id="main-nav">
     <% if !user_signed_in? %>
       <%= link_to('Sign Up', '/users/sign_up', :class => 'button small sign-up') %>
       <%= link_to('Sign In', '/users/sign_in') %>
-    <% end %>
-
-    <div href="#" id="more-menu">
-      <i class="icon-angle-down icon-large"></i>
-      <div id="menu">
-        <a href="#" id="toggle-dim-the-lights"><i class="icon-moon icon-fixed-width"></i> <span>Dim The Lights</span></a>
-        <% if user_signed_in? %>
-          <a href="<%= "/#{current_user.username}/profile" %>" id="profile-badge">
-            <img src="http://www.gravatar.com/avatar/<%= current_user.md5_email || 'false' %>?s=14"> Your Profile
-          </a>
-          <a href="/users/edit"><i class="icon-cog icon-fixed-width"></i> Settings</a>
-          <a href="/users/sign_out" data-method="delete" rel="nofollow"><i class="icon-off icon-fixed-width"></i> Sign Out</a>
-        <% end %>
+    <% else %>
+      <div href="#" id="main-nav-dropdown">
+        <img src="http://www.gravatar.com/avatar/<%= current_user.md5_email || 'false' %>?s=24">
+        <i class="icon-angle-down"></i>
+        <div id="main-nav-dropdown-menu">
+          <% if user_signed_in? %>
+            <a href="<%= "/#{current_user.username}/profile" %>" id="profile-badge">Your Playlists</a>
+            <a href="/users/edit">Settings</a>
+            <a href="/users/sign_out" data-method="delete" rel="nofollow">Sign Out</a>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </nav>
 </header>
+<div class="clear"></div>

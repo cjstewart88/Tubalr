@@ -9,10 +9,11 @@
 
 #empty-playlist {
   display: none;
-  width: 400px;
-  margin: 0 auto;
-  margin-top: 13px;
   text-align: center;
+}
+
+#player {
+  display: none;
 }
 
 #current-video-title {
@@ -22,23 +23,9 @@
   margin: 0;
 }
 
-#player {
-  display: none;
-  position: absolute;
-  min-width: 820px;
-  top: 150px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0 40px;
-}
-
 #video-and-playlist {
-  position: absolute;
-  top: 40px;
-  bottom: 100px;
-  left: 40px;
-  right: 40px;
+  margin-top: 20px;
+  height: 460px;
 }
 
 #ytplayerid {
@@ -89,15 +76,10 @@
 }
 
 #player-controls {
-  position: absolute;
-  bottom: 40px;
-  right: 40px;
-  left: 40px;
+  margin-top: 20px;
 }
 
 #player-controls-left, #player-controls-right {
-  height: 31px;
-
   &#player-controls-left {
     float: left;
   }

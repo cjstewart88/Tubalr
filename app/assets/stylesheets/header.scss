@@ -1,28 +1,17 @@
 @import "compass";
 
 #header {
-  height: 120px;
-  line-height: 120px;
+  height: 100px;
+  line-height: 100px;
 
   #logo {
     float: left;
-    font: 30px 'PT Sans';
+    font: 40px 'PT Sans';
     font-weight: 700;
-    line-height: 120px;
+    line-height: 100px;
 
     a:hover {
       text-decoration: none;
-    }
-  }
-
-  #listenForm {
-    float: left;
-    margin-left: 30px;
-
-    input[type=button] {
-      border-color: #3498DB;
-      background: #3498DB;
-      color: #fff;
     }
   }
 
@@ -42,57 +31,72 @@
       }
     }
 
-    #more-menu {
+    #main-nav-dropdown {
       display: inline-block;
       position: relative;
       line-height: normal;
-      margin-left: 20px;
-      padding: 6px 15px;
-      @include border-top-right-radius(3px); 
-      @include border-top-left-radius(3px); 
+      padding: 25px 0 25px 25px;
+      @include border-top-right-radius(2px);
+      @include border-top-left-radius(2px);
       cursor: pointer;
 
-      #menu {
+      img {
+        vertical-align: middle;
+        margin-top: -2px;
+        margin-right: 8px;
+        @include border-radius(3px);
+        border: none;
+      }
+
+      #main-nav-dropdown-menu {
         z-index: 10000;
-        top: 32px;
+        top: 65px;
         right: 0;
         display: inline-block;
         position: absolute;
         display: none;
-        width: 120px;
-        background: #efefef;
-        padding: 10px 12px;
-        @include border-radius(3px); 
-        @include border-top-right-radius(0px); 
+        width: 150px;
+        background: #fff;
+        border: solid 1px #ccc;
+        @include box-shadow(0 1px 5px rgba(0, 0, 0, 0.1));
+        @include border-radius(2px);
+
+        &:before {
+          content: '';
+          display: inline-block;
+          border-left: 7px solid transparent;
+          border-right: 7px solid transparent;
+          border-bottom: 7px solid #ccc;
+          border-bottom-color: rgba(0, 0, 0, 0.2);
+          position: absolute;
+          top: -7px;
+          right: 9px;
+        }
+        &:after {
+          content: '';
+          display: inline-block;
+          border-left: 6px solid transparent;
+          border-right: 6px solid transparent;
+          border-bottom: 6px solid #ffffff;
+          position: absolute;
+          top: -6px;
+          right: 10px;
+        }
 
         a {
           margin: 0;
-          margin-bottom: 10px;
+          padding: 15px 20px;
           display: block;
+          border-bottom:solid 1px #efefef;
 
           &:last-child {
-            margin-bottom: 0;
-          }
-
-          &#profile-badge {
-            padding-top: 10px;
-            border-top: solid 1px #ccc;
-
-            img {
-              vertical-align: middle;
-              margin-top: -3px;
-              @include border-radius(3px); 
-              margin-right: 0.2857142857142857em;
-              border: none;
-            }
+            border-bottom: none;
           }
         }
       }
 
       &:hover {
-        background: #efefef;
-
-        #menu {
+        #main-nav-dropdown-menu {
           display: inline-block;
         }
       }

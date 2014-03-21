@@ -1,0 +1,65 @@
+@import "compass";
+
+#listening-options {
+  margin-top: 130px;
+
+  #type-of-music, #search-for-music {
+    float: left;
+    width: 45%;
+    text-align: center;
+
+    #type-of-music-inner-container, #search-for-music-inner-container {
+      max-width: 410px;
+
+      &#type-of-music-inner-container {
+        margin-left: auto;
+        margin-right: 20px;
+      }
+
+      &#search-for-music-inner-container {
+        margin-left: 20px;
+        margin-right: auto;
+
+        h2 {
+          margin-bottom: 50px;
+        }
+      }
+    }
+  }
+
+  #or {
+    float: left;
+    width: 10%;
+    text-align: center;
+    margin-top: 76px;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: italic;
+  }
+
+  #type-of-music {
+    ul {
+      list-style-type: none;
+
+      li {
+        display: inline-block;
+        background: #efefef;
+        margin-right: 10px;
+        margin-bottom: 10px;
+
+        a {
+          display: inline-block;
+          padding: 5px 10px;
+        }
+      }
+    }
+  }
+
+  #search-for-music {
+    #q {
+      width: 200px;
+      margin: 0px;
+    }
+  }
+
+}

@@ -15,7 +15,11 @@ input[type=text], input[type=email], input[type=password], textarea {
   border: none;
   font-size: 12px;
   border: solid 1px #E6E6E6;
-  @include border-radius(4px);
+  @include border-radius(2px);
+
+  &:focus {
+    border-color: #ccc;
+  }
 
   &.small {
     padding: 6px 14px;
@@ -24,21 +28,36 @@ input[type=text], input[type=email], input[type=password], textarea {
 
 input[type=button], input[type=submit], a.button, button {
   font-size: 12px;
-  color: #464646;
+  color: #444444;
   line-height: normal;
   padding: 8px 20px;
   background-color: #E6E6E6;
   border: solid 1px #E6E6E6;
   cursor: pointer;
-  @include border-radius(4px);
+  @include border-radius(2px);
 
   &:hover {
     text-decoration: none;
-    color: #464646;
   }
 
   &.small {
     padding: 6px 14px;
+  }
+
+  &.call-to-action {
+    border-color: #3498DB;
+    background: #3498DB;
+    color: #fff;
+
+    &:active, &:hover, &:focus {
+      background-color: #2F83BB;
+      border-color: #2F83BB;
+    }
+  }
+
+  &.destroy {
+    background: #E83841;
+    color: #fff;
   }
 }
 
