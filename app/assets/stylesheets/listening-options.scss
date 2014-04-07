@@ -23,6 +23,7 @@
 
 #listening-options {
   margin-top: 130px;
+  clear: both;
 
   #type-of-music, #search-for-music {
     float: left;
@@ -106,5 +107,9 @@
       border-bottom: dashed 1px #ccc;
     }
   }
+}
 
+#curated-by-cody {
+  margin-top: 150px;
+  text-align: center;
 }
