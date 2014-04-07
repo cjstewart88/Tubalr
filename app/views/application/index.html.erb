@@ -41,7 +41,7 @@
   <div class="clear"></div>
 </div>
 
-<div id="curated-by-cody">
+<div id="curated-by-cody" class="remove-when-searching">
   <h2>Curated by Cody</h2>
   <ul class="playlists with-playlist-art">
     <% (User.exists?(27928) ? User.find(27928).playlists : []).each do | playlist | %>
