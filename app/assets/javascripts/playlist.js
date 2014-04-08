@@ -348,8 +348,6 @@ var Playlist = {
       suggestedQuality: (User.hd ? 'hd1080' : 'default')
     });
 
-    History.update();
-
     clearTimeout(Playlist.reportUpdateNowPlayingThrottler);
     Playlist.reportUpdateNowPlayingThrottler = setTimeout(function () {
       Report.lastfmAction('update_now_playing');
