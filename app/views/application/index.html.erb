@@ -40,17 +40,3 @@
 
   <div class="clear"></div>
 </div>
-
-<div id="curated-by-cody" class="remove-when-searching">
-  <h2>Curated by Cody</h2>
-  <ul class="playlists with-playlist-art">
-    <% (User.exists?(27928) ? User.find(27928).playlists : []).each do | playlist | %>
-      <li id="<%= playlist.id %>">
-        <a href="<%= "/#{playlist.user.username}/playlist/#{url_encode(playlist.playlist_name)}" %>">
-          <img class="art" src="<%= playlist.art == '' || playlist.art.nil? ? '/assets/no-art.png' : playlist.art %>"/>
-          <span><%= playlist.playlist_name %></a></span>
-        </a>
-      </li>
-    <% end %>
-  </ul>
-</div>
