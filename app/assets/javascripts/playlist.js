@@ -217,7 +217,7 @@ var Playlist = {
           if (videoID.length == 11){
             Playlist.videos.push({
               videoID:    videoID,
-              videoTitle: post.media.oembed.title
+              videoTitle: post.media.oembed.title.replace(/&amp;/g, '&')
             });
           }
         }
