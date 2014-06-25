@@ -477,52 +477,6 @@ var Playlist = {
     window.open(url, 'twitter', opts);
   },
 
-  shareOnFacebook: function () {
-    var url       = "http://www.tubalr.com/";
-    var shareText = "";
-
-    if (Playlist.options.searchType == "subreddit") {
-      url += "r/" + Playlist.options.subReddit;
-      shareText += "/r/" + Playlist.options.subReddit;
-    }
-    else if (Playlist.options.search) {
-      if (Playlist.options.searchType == "similar") {
-        shareText += "Artists/Bands similar to ";
-        url += "similar/";
-      }
-      else {
-        shareText += "I'm listening to ";
-        url += "just/";
-      }
-
-      url += Playlist.options.search.replace(/ /g,"%20");
-      shareText += unescape(Playlist.options.search.replace(/[+]/g," "));
-    }
-    else if (Playlist.options.videoID) {
-      url += "video/" + Playlist.videos[Playlist.currentTrack].videoID;
-      shareText += unescape(Playlist.videos[Playlist.currentTrack].videoTitle.replace(/[+]/g," "));
-    }
-    else if (Playlist.options.customPlaylistOwner) {
-      url += Playlist.options.customPlaylistOwner.replace(/ /g,"%20") + "/playlist/" + Playlist.options.customPlaylistName.replace(/ /g,"%20");
-      shareText += unescape(Playlist.options.customPlaylistName.replace(/[+]/g," "));
-    }
-
-    shareText += ", on tubalr!";
-
-    FB.ui({
-        method: 'stream.publish',
-        attachment: {
-          name: shareText,
-          href: url,
-          description: ("Tubalr allows you to effortlessly listen to a band's or artist's top YouTube videos without all the clutter YouTube brings.")
-        },
-        display: 'popup'
-      },
-      function (response) {
-      }
-    );
-  },
-
   name: function() {
     if (this.options.subReddit) {
       return "/r/"+this.options.subReddit;
@@ -585,10 +539,6 @@ $(document).ready(function () {
 
   $('#share-on-twitter').click(function () {
     Playlist.shareOnTwitter();
-  });
-
-  $('#share-on-facebook').click(function () {
-    Playlist.shareOnFacebook();
   });
 
   $('#playlist').sortable({
