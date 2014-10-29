@@ -437,46 +437,6 @@ var Playlist = {
     }
   },
 
-  shareOnTwitter: function () {
-    var url     = "http://twitter.com/share?text=I%27m%20listening%20to%20";
-    var search  = "";
-
-    switch (Playlist.options.searchType) {
-      case 'genre':
-      case 'just':
-        search = Playlist.options.search.replace(/[ +]/g,"%20");
-        url += search + '%20on%20%40tubalr%21&url=http%3A%2F%2Fwww.tubalr.com';
-        url += '%2Fjust%2F' + search.replace(/%20/g, '%2B');
-        break;
-      case 'similar':
-        search = Playlist.options.search.replace(/[ +]/g,"%20");
-        url += 'artists%2Fbands%20similar%20to%20' + search + '%20on%20%40tubalr%21&url=http%3A%2F%2Fwww.tubalr.com';
-        url += '%2Fsimilar%2F' + search.replace(/%20/g,'%2B');
-        break;
-      case 'customPlaylist':
-        search = Playlist.options.customPlaylistName.replace(/[ +]/g,'%20');
-        var tubalrURL = "http://www.tubalr.com/"+Playlist.options.customPlaylistOwner+"/playlist/"+Playlist.options.customPlaylistName;
-        url += search + '%20on%20%40tubalr%21&url='+encodeURIComponent(tubalrURL);
-        break;
-      case 'video':
-        url += Playlist.videos[Playlist.currentTrack].videoTitle.replace(/[ +]/g,"%20") + '%20on%20%40tubalr%21&url=http%3A%2F%2Fwww.tubalr.com';
-        url += '%2Fvideo%2F' + Playlist.videos[Playlist.currentTrack].videoID;
-        break;
-      case 'subreddit':
-        url += '%2Fr%2F' + Playlist.options.subReddit + '%20on%20%40tubalr%21&url=http%3A%2F%2Fwww.tubalr.com';
-        url += '%2Fr%2F' + Playlist.options.subReddit;
-        break;
-    }
-
-    var opts = 'status=1'     +
-               ',width=575'   +
-               ',height=400'  +
-               ',top='        + ($(window).height() - 400)  / 2  +
-               ',left='       + ($(window).width()  - 575)  / 2;
-
-    window.open(url, 'twitter', opts);
-  },
-
   name: function() {
     if (this.options.subReddit) {
       return "/r/"+this.options.subReddit;
@@ -535,10 +495,6 @@ $(document).ready(function () {
 
   $('#playlist').delegate('a', 'click', function () {
     Playlist.jumpToSong($(this).index('#playlist a'));
-  });
-
-  $('#share-on-twitter').click(function () {
-    Playlist.shareOnTwitter();
   });
 
   $('#playlist').sortable({

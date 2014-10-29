@@ -104,16 +104,3 @@ h3 {
 .clear {
   clear: both;
 }
-
-.social {
-  max-width: 250px;
-  overflow: hidden;
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-
-  iframe {
-    display: block;
-    margin-top: 10px
-  }
-}
