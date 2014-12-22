@@ -16,15 +16,32 @@
   display: none;
 }
 
-#current-video-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  margin: 0;
+#title-and-controls {
+  height: 40px;
+
+  #current-video-title {
+    float: left;
+    max-width: 730px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin: 0;
+    padding-left: 14px;
+  }
+
+
+  #player-controls {
+    float: right;
+
+    .button {
+      display: inline-block;
+      background: none;
+      border: none;
+    }
+  }
 }
 
 #video-and-playlist {
-  margin-top: 20px;
   height: 460px;
 }
 
@@ -71,26 +88,6 @@
 
     &:hover .icon-trash {
       display: block;
-    }
-  }
-}
-
-#player-controls {
-  margin-top: 20px;
-}
-
-#player-controls-left, #player-controls-right {
-  &#player-controls-left {
-    float: left;
-  }
-
-  &#player-controls-right {
-    float: right;
-
-    .button {
-      display: inline-block;
-      background: none;
-      border: none;
     }
   }
 }

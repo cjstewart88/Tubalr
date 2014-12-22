@@ -5,7 +5,7 @@ var Video = {
       for (var i = 0; youTubeResults.length >= i; i++) {
         var video = youTubeResults[i];
 
-        if (video && Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video, videos) && Video.isNotUserBanned(video) && Video.excludesWords(video) && Video.hasTitle(video)) {
+        if (video && Video.isNotBlocked(video) && Video.isMusic(video) && Video.isUnique(video, videos) && Video.excludesWords(video) && Video.hasTitle(video)) {
           return {
             videoID:    video.id.$t.split(":")[3],
             videoTitle: video.title.$t
@@ -58,10 +58,6 @@ var Video = {
     }
 
     return unique;
-  },
-
-  isNotUserBanned: function (video) {
-    return User.bannedVideos.indexOf(video.id.$t.split(":")[3]) == -1
   },
 
   hasTitle: function (video) {

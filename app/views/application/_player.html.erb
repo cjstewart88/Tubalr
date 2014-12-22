@@ -5,30 +5,23 @@
 <section id="empty-playlist">o_O This playlist has 0 videos... this is kinda weird.</section>
 
 <section id="player">
-  <h2 id="current-video-title"></h2>
+  <div id="title-and-controls">
+    <h2 id="current-video-title"></h2>
+
+    <div id="player-controls">
+      <a href="#" class="shuffle button small tooltip" original-title="Shuffle"><span class="icon-random"></span></a>
+      <a href="#" id="previous" class="button small tooltip" original-title="Previous">&nbsp;<span class="icon-step-backward"></span></a>
+      <a href="#" id="next" class="button small tooltip" original-title="Next"><span class="icon-step-forward"></span>&nbsp;</a>
+    </div>
+  </div>
 
   <div id="video-and-playlist">
     <div id="ytplayerid"></div>
     <ul id="playlist"></ul>
   </div>
-
-  <div id="player-controls">
-    <div id="player-controls-right">
-      <a href="#" class="shuffle button small tooltip" original-title="Shuffle"><span class="icon-random"></span></a>
-      <a href="#" id="previous" class="button small tooltip" original-title="Previous">&nbsp;<span class="icon-step-backward"></span></a>
-      <a href="#" id="next" class="button small tooltip" original-title="Next"><span class="icon-step-forward"></span>&nbsp;</a>
-    </div>
-
-    <div id="player-controls-left">
-      <% if user_signed_in? %>
-        <%= render :partial => 'custom_playlist_dropdown' %>
-      <% end %>
-    </div>
-  </div>
-  <div class="clear"></div>
 </section>
 
 <%= javascript_tag do %>
   Playlist.init(<%= search_options.html_safe %>);
 <% end if request.path.index("/similar/") || request.path.index("/video/") || request.path.index("/r/") ||
-          request.path.index("/genre/")  || request.path.index("/just/") || @playlist_name %>
+          request.path.index("/genre/")  || request.path.index("/just/") %>

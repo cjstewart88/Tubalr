@@ -15,9 +15,6 @@ var Playlist = {
   options: {
     search:               null,
     searchType:           null,
-    customPlaylistOwner:  null,
-    customPlaylistName:   null,
-    persistentSorting:    false,
     videoID:              null,
     subReddit:            null
   },
@@ -53,9 +50,6 @@ var Playlist = {
     Playlist.videos                       = [];
     Playlist.currentTrack                 = 0;
     Playlist.direction                    = 'forward';
-    Playlist.options.customPlaylistOwner  = null;
-    Playlist.options.customPlaylistName   = null;
-    Playlist.options.persistentSorting    = false;
     Playlist.options.videoID              = null;
     Playlist.options.subReddit            = null;
 
@@ -165,7 +159,7 @@ var Playlist = {
     $.getJSON('http://gdata.youtube.com/feeds/api/videos?q=' + escape(search) + '&orderby=relevance&start-index=1&max-results=40&v=2&alt=json-in-script&callback=?', function (data) {
       if (data.feed.hasOwnProperty("entry")) {
         $.each(data.feed.entry, function (i, video) {
-          if (Video.isNotBlocked(video) && Video.isNotUserBanned(video) && Video.hasTitle(video)) {
+          if (Video.isNotBlocked(video) && Video.hasTitle(video)) {
             videos.push({
               videoID:    video.id.$t.split(":")[3],
               videoTitle: video.title.$t
@@ -174,15 +168,6 @@ var Playlist = {
         });
       }
 
-      Playlist.resultsReady();
-    });
-  },
-
-  customPlaylist: function () {
-    var url = "/" + Playlist.options.customPlaylistOwner + "/playlist/" + Playlist.options.customPlaylistName + ".json";
-
-    $.getJSON(url, function (data) {
-      Playlist.videos = data;
       Playlist.resultsReady();
     });
   },
@@ -240,12 +225,10 @@ var Playlist = {
   },
 
   preparePlaylist: function () {
-    //don't randomly sort a user playlist.
-    if (Playlist.options.customPlaylistOwner == null || Playlist.options.customPlaylistOwner.length == 0) {
-      Playlist.videos.sort(function () {
-        return (Math.round(Math.random()) - 0.5);
-      });
-    }
+    //randomly sort
+    Playlist.videos.sort(function () {
+      return (Math.round(Math.random()) - 0.5);
+    });
 
     Playlist.buildPlaylistUI();
   },
@@ -278,8 +261,6 @@ var Playlist = {
   },
 
   shuffle: function () {
-    Playlist.options.persistentSorting = false;
-
     var currentTrackVideoID = Playlist.videos[Playlist.currentTrack].videoID;
 
     Playlist.videos.sort(function () {
@@ -343,20 +324,8 @@ var Playlist = {
     $('#' + currentVideo.videoID).addClass('active');
 
     Player.self.loadVideoById({
-      videoId: currentVideo.videoID,
-      startSeconds: currentVideo.startAt || 0,
-      suggestedQuality: (User.hd ? 'hd1080' : 'default')
+      videoId: currentVideo.videoID
     });
-
-    clearTimeout(Playlist.reportUpdateNowPlayingThrottler);
-    Playlist.reportUpdateNowPlayingThrottler = setTimeout(function () {
-      Report.lastfmAction('update_now_playing');
-    }, 10000);
-  },
-
-  throttlePersistSort: function () {
-    clearTimeout(Playlist.sortThrottler);
-    Playlist.sortThrottler = setTimeout(Playlist.persistSort, 5000);
   },
 
   sortVideos: function () {
@@ -376,51 +345,9 @@ var Playlist = {
     });
 
     Playlist.videos = positions;
-
-    if (Playlist.options.persistentSorting) {
-      Playlist.throttlePersistSort();
-    }
-  },
-
-  persistSort: function () {
-    $.ajax({
-      type:         'POST',
-      url:          '/' + User.username + '/playlist/' + Playlist.options.customPlaylistName + '/sort',
-      dataType:     'json',
-      contentType:  'application/json',
-      data:         JSON.stringify({tracks: Playlist.videos})
-    });
   },
 
   removeVideo: function (videoID) {
-    if (User.id) {
-      if (User.username == Playlist.options.customPlaylistOwner) {
-        $.ajax({
-          type: 'POST',
-          url: '/playlist/delete_video',
-          data: {
-            playlist_name:  Playlist.options.customPlaylistName,
-            video_id:       videoID
-          },
-          dataType: 'json',
-          success: function (data) { }
-        });
-      }
-      else {
-        $.ajax({
-          type: 'POST',
-          url: '/api/ban_video',
-          data: {
-            video_id: videoID
-          },
-          dataType: 'json',
-          success: function (data) {
-            User.bannedVideos.push(videoID);
-          }
-        });
-      }
-    }
-
     $("#playlist #" + videoID).parent().remove();
 
     var videoIndex = findIndexByKeyValue(Playlist.videos,'videoID', videoID);
@@ -440,9 +367,6 @@ var Playlist = {
   name: function() {
     if (this.options.subReddit) {
       return "/r/"+this.options.subReddit;
-    }
-    else if (this.options.customPlaylistName) {
-      return "playlist " + this.options.customPlaylistName + " by " + this.options.customPlaylistOwner;
     }
     else if (Playlist.options.videoID) {
       return "video " + Playlist.videos[Playlist.currentTrack].videoTitle;

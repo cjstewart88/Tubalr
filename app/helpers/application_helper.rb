@@ -3,12 +3,7 @@ module ApplicationHelper
   def search_options
     options = {}
 
-    if @playlist_name
-      options[:searchType]          = 'customPlaylist'
-      options[:customPlaylistOwner] = @username
-      options[:customPlaylistName]  = @playlist_name
-      options[:persistentSorting]   = @is_playlist_owner
-    elsif request.path.index('/just/')
+    if request.path.index('/just/')
       options[:searchType] = 'just'
     elsif request.path.index('/similar/')
       options[:searchType] = 'similar'

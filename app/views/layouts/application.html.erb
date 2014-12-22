@@ -20,17 +20,6 @@
       })();
     </script>
     <%= javascript_include_tag  "application" %>
-    <%= javascript_tag do %>
-      User.init({
-        id:               <%= current_user.id %>,
-        email:            <%= js_output(current_user.email) %>,
-        username:         <%= js_output(current_user.username) %>,
-        bannedVideos:     <%= js_output(current_user.banned_videos.map(&:video_id)) %>,
-        hd:               <%= current_user.hd %>,
-        lastfmConnected:  <%= current_user.lastfm_session_key ? 'true' : 'false' %>,
-        resume_last_playlist: <%= current_user.resume_last_playlist %>,
-      });
-    <% end if user_signed_in? %>
   </head>
   <body>
     <div id="fb-root"></div>
@@ -41,7 +30,11 @@
 
     <div id="main-wrapper">
 
-      <%= render :partial => 'header' %>
+      <header id="header">
+        <h1 id="logo">
+          <a href='/' class="tooltip" original-title="Pronounced: tuba-ler">tubalr</a>
+        </h1>
+      </header>
 
       <%= yield %>
 

@@ -1,16 +1,4 @@
 $(document).ready(function () {
-  // About Tubalr Dialog
-  $('#about-tubalr').dialog({
-    modal:      true,
-    autoOpen:   false,
-    width:      800,
-    draggable:  false,
-    title:      'About Tubalr'
-  });
-
-  $('#open-about-tubalr').click(function () {
-    $('#about-tubalr').dialog('open');
-  });
 
   // If there's rails invoked flash messages, fade them out.
   if ($('.flash-msg')) {

@@ -13,27 +13,4 @@
     white-space: nowrap;
     text-overflow: ellipsis;
   }
-
-  &.with-playlist-art li {
-    max-width: 175px;
-    width: auto;
-    margin: 0;
-    margin-right: 27px;
-    margin-bottom: 30px;
-
-    .art {
-      display: block;
-      width: 175px;
-      height: 175px;
-    }
-
-    span {
-      display: block;
-      margin-top: 15px;
-      text-align: center;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-  }
 }

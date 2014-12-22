@@ -42,7 +42,6 @@ var Player = {
 
   onPlayerStateChange: function (newState) {
     if (newState.data == 0) {
-      Report.reportWatchedVideo();
       Playlist.nextSong();
     }
 

@@ -5,101 +5,13 @@
   line-height: 100px;
 
   #logo {
-    float: left;
+    text-align: center;
     font: 40px 'PT Sans';
     font-weight: 700;
     line-height: 100px;
 
     a:hover {
       text-decoration: none;
-    }
-  }
-
-  #main-nav {
-    float: right;
-
-    a {
-      margin-left: 20px;
-      &:hover {
-       text-decoration: none;
-      }
-
-      &.sign-up {
-        border-color: #3498DB;
-        background: #3498DB;
-        color: #fff;
-      }
-    }
-
-    #main-nav-dropdown {
-      display: inline-block;
-      position: relative;
-      line-height: normal;
-      padding: 25px 0 25px 25px;
-      @include border-top-right-radius(2px);
-      @include border-top-left-radius(2px);
-      cursor: pointer;
-
-      img {
-        vertical-align: middle;
-        margin-top: -2px;
-        margin-right: 8px;
-        @include border-radius(3px);
-        border: none;
-      }
-
-      #main-nav-dropdown-menu {
-        z-index: 10000;
-        top: 65px;
-        right: 0;
-        display: inline-block;
-        position: absolute;
-        display: none;
-        width: 150px;
-        background: #fff;
-        border: solid 1px #ccc;
-        @include box-shadow(0 1px 5px rgba(0, 0, 0, 0.1));
-        @include border-radius(2px);
-
-        &:before {
-          content: '';
-          display: inline-block;
-          border-left: 7px solid transparent;
-          border-right: 7px solid transparent;
-          border-bottom: 7px solid #ccc;
-          border-bottom-color: rgba(0, 0, 0, 0.2);
-          position: absolute;
-          top: -7px;
-          right: 9px;
-        }
-        &:after {
-          content: '';
-          display: inline-block;
-          border-left: 6px solid transparent;
-          border-right: 6px solid transparent;
-          border-bottom: 6px solid #ffffff;
-          position: absolute;
-          top: -6px;
-          right: 10px;
-        }
-
-        a {
-          margin: 0;
-          padding: 15px 20px;
-          display: block;
-          border-bottom:solid 1px #efefef;
-
-          &:last-child {
-            border-bottom: none;
-          }
-        }
-      }
-
-      &:hover {
-        #main-nav-dropdown-menu {
-          display: inline-block;
-        }
-      }
     }
   }
 }

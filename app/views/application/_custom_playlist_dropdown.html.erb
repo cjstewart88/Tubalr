@@ -1,6 +1,0 @@
-<%= select_tag "add-to-playlist-dropdown", options_for_select([[nil, nil],['(+) Create New Playlist', 'new']] + current_user.playlists.map{ | p | [p.playlist_name, p.id, { "data-test" => "derp" }]}), { "data-placeholder" => "Add to Playlist" } %>       
-<span id="create-new-playlist">
-  <input type="text"    class="small" id="create-new-playlist-name"   placeholder="Enter New Playlist Name..."/>
-  <input type="button"  class="small" id="create-new-playlist-submit" value="Create"/>
-  <input type="button"  class="small" id="create-new-playlist-cancel" value="Cancel"/>
-</span>
