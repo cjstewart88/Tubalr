@@ -4,4 +4,3 @@
 //= require player
 //= require playlist
 //= require video
-//= require report

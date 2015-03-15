@@ -3,11 +3,10 @@
   <head>
     <title>Tubalr - A simple tool for enjoying music videos!</title>
 
-    <meta property="og:image" content="http://www.tubalr.com/assets/facebook-meta-logo.png"/>
     <meta name="Description" content="Tubalr is a simple way to enjoy great music videos.">
     <%= csrf_meta_tag %>
 
-    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=PT+Sans:700", "http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600,800", asset_path("application") %>
+    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Cabin", "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css", asset_path("application") %>
 
     <script>
       var _gaq = _gaq || [];
@@ -22,23 +21,13 @@
     <%= javascript_include_tag  "application" %>
   </head>
   <body>
-    <div id="fb-root"></div>
+    <nav id="nav">
+      <a href="/" class="nav-item <%= 'active' if request.path == root_path %>">tubalr</a>
+      <a href="/reddit-playlists" class="nav-item <%= 'active' if request.path == reddit_playlists_path %>">Reddit Playlists</a>
+      <a href="/genres" class="nav-item <%= 'active' if request.path == genres_path %>">Generes</a>
+      <a href="/random" class="nav-item">Random</a>
+    </nav>
 
-    <div id="notices">
-      <%= "<aside class='flash-msg'>#{flash[:notice]}</aside>".html_safe  if !flash[:notice].nil? %>
-    </div>
-
-    <div id="main-wrapper">
-
-      <header id="header">
-        <h1 id="logo">
-          <a href='/' class="tooltip" original-title="Pronounced: tuba-ler">tubalr</a>
-        </h1>
-      </header>
-
-      <%= yield %>
-
-      <%= render :partial => 'player' %>
-    </div>
+    <%= yield %>
   </body>
 </html>

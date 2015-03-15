@@ -1,10 +1,14 @@
-<section class="remove-when-searching">
+<p id="intro">
+  The playlists below are currated communities on <a href="http://reddit.com" target="_blank">reddit</a>.
+</p>
+
+<div id="content">
   <% REDDIT.each do | r | %>
     <h3><%= r[:category] %></h3>
-    <ul class="playlists">
+    <ul>
       <% r[:subreddits].each do | sr | %>
         <li><a href='<%= sr %>'><%= sr %></a></li>
       <% end %>
     </ul>
   <% end %>
-</section>
+</div>

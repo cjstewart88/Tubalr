@@ -14,7 +14,7 @@ var Player = {
     // lets keep the session active in google analytics to
     // track better avg visit duration
     setInterval(function () {
-      Report.gaPing();
+      _gaq.push(['_trackEvent', 'ping', 'pong']);
     }, 60000);
   },
 
@@ -23,7 +23,7 @@ var Player = {
     // to work, not sure why...
     Playlist.togglePlayer();
 
-    Player.self = new YT.Player('ytplayerid', {
+    Player.self = new YT.Player('youtube-player', {
       width:    800,
       height:   400,
       version:  3,

@@ -1,42 +1,24 @@
-<div id="listening-options" class="remove-when-searching">
-  <div id="type-of-music">
-    <div id="type-of-music-inner-container">
-      <h2>What type of music would you like to listen to?</h2>
-      <ul>
-        <li><a href='/r/dubstep'>Dubstep</a></li>
-        <li><a href='/r/electronic'>Electronic</a></li>
-        <li><a href='/r/electronicmagic'>Electronic Magic</a></li>
-        <li><a href='/r/electrohouse'>Electro House</a></li>
-        <li><a href='/r/house'>House</a></li>
-        <li><a href='/r/techno'>Techno</a></li>
-        <li><a href='/r/trance'>Trance</a></li>
-        <li><a href='/r/HipHopHeads'>Hip Hop</a></li>
-        <li><a href='/just/jazz'>Jazz</a></li>
-        <li><a href='/just/chillwave'>Chillwave</a></li>
-        <li><a href='/r/punk'>Punk</a></li>
-        <li><a href='/r/metal'>Metal</a></li>
-        <li><a href='/r/progmetal'>Prog. Metal</a></li>
-        <li><a href='/r/postrock'>Post Rock</a></li>
-        <li><a href='/r/indie_rock'>Indie Rock</a></li>
-        <li><a href='/just/indie+folk'>Indie Folk</a></li>
-        <li><a href='/random' class="im-feeling-lucky">I'm Feeling Lucky</a></li>
-      </ul>
-    </div>
-  </div>
+<p id="intro">
+  Choose a playlist below or view the reddit and genres playlists... if you're feeling lucky, try a random playlist.
+</p>
 
-  <span id="or">- or -</span>
-
-  <div id="search-for-music">
-    <div id="search-for-music-inner-container">
-      <h2>Search for something yourself:</h2>
-      <form id="search-for-music-form" onSubmit="return false;">
-        <input type="text" name="q" autocomplete="off" id="q" class="small" value="<%= params[:artist_band].gsub('+',' ') if params[:artist_band].present? %>" tabindex="1" placeholder="search for artists or bands"/>
-        <input type="button" name="just" value="only" class="small call-to-action just tooltip" tabindex="2" original-title="This search method is to search for a single artist or band."/>
-        <input type="button" name="similar" value="similar" class="small call-to-action similar tooltip" tabindex="3" original-title="This search method will find artists and bands similar to your search."/>
-      </form>
-      <a href="/subreddits" class="bottom-link">Full Subreddit List</a> <a href="/genres" class="bottom-link">Full Genre List</a>
-    </div>
-  </div>
-
-  <div class="clear"></div>
+<div id="content">
+  <ul>
+    <li><a href='/r/dubstep'>Dubstep</a></li>
+    <li><a href='/r/electronic'>Electronic</a></li>
+    <li><a href='/r/electronicmagic'>Electronic Magic</a></li>
+    <li><a href='/r/electrohouse'>Electro House</a></li>
+    <li><a href='/r/house'>House</a></li>
+    <li><a href='/r/techno'>Techno</a></li>
+    <li><a href='/r/trance'>Trance</a></li>
+    <li><a href='/r/HipHopHeads'>Hip Hop</a></li>
+    <li><a href='/genres/jazz'>Jazz</a></li>
+    <li><a href='/genres/chillwave'>Chillwave</a></li>
+    <li><a href='/r/punk'>Punk</a></li>
+    <li><a href='/r/metal'>Metal</a></li>
+    <li><a href='/r/progmetal'>Prog. Metal</a></li>
+    <li><a href='/r/postrock'>Post Rock</a></li>
+    <li><a href='/r/indie_rock'>Indie Rock</a></li>
+    <li><a href='/genres/indie+folk'>Indie Folk</a></li>
+  </ul>
 </div>

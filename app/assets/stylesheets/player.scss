@@ -1,93 +1,30 @@
-@import "compass";
-
-#loading {
+#youtube-player {
   display: none;
-  height: 300px;
-  line-height: 300px;
-  text-align: center;
 }
 
-#empty-playlist {
-  display: none;
+#loading {
   text-align: center;
+  color: #d7d7d7;
 }
 
 #player {
   display: none;
+  text-align: center;
+  color: #d7d7d7;
 }
 
-#title-and-controls {
-  height: 40px;
-
-  #current-video-title {
-    float: left;
-    max-width: 730px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    margin: 0;
-    padding-left: 14px;
-  }
-
-
-  #player-controls {
-    float: right;
-
-    .button {
-      display: inline-block;
-      background: none;
-      border: none;
-    }
-  }
+#currently-playing {
+  margin: 0 0 20px 0;
+  font-weight: 400;
+  font-size: 18px;
 }
 
-#video-and-playlist {
-  height: 460px;
-}
+#play, #pause, #next, #previous {
+  cursor: pointer;
+  font-size: 20px;
+  margin: 0 10px;
 
-#ytplayerid {
-  width: 71%;
-  height: 100%;
-  float: left;
-}
-
-#playlist {
-  width: 29%;
-  height: 100%;
-  float: left;
-  overflow: auto;
-  list-style-type: none;
-
-  a {
-    display: block;
-  	padding: 10px 34px 10px 34px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    &.active {
-      color: #3498DB
-    }
-
-    &:hover {
-  	  text-decoration: none;
-    }
-  }
-
-  li {
-    position: relative;
-
-    .icon-trash {
-      position: absolute;
-      display: none;
-      top: 10px;
-      right: 10px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    &:hover .icon-trash {
-      display: block;
-    }
+  &#play {
+    display: none;
   }
 }

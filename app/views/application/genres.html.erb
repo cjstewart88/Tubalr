@@ -1,8 +1,11 @@
-<section class="remove-when-searching">
-  <h3>All Genres</h3>
-  <ul class="playlists">
+<p id="intro">
+  The genres below are currated by <a href="http://the.echonest.com/" target="_blank">echonest</a>.
+</p>
+
+<div id="content">
+  <ul>
     <% GENRES.each do | genre | %>
-      <li><a href='/just/<%= genre %>'><%= genre %></a></li>
+      <li><a href='/genres/<%= genre.parameterize %>'><%= genre %></a></li>
     <% end %>
   </ul>
-</section>
+</div>

@@ -1,12 +1,10 @@
 Tubalr::Application.routes.draw do
   root :to => "application#index"
 
-  get "/genres"                                     => "application#genres"
-  get "/subreddits"                                 => "application#subreddits"
+  get "/genres"            => "application#genres"
+  get "/reddit-playlists"  => "application#reddit_playlists"
 
-  get "/just/:artist_band"                          => "application#index"
-  get "/similar/:artist_band"                       => "application#index"
-  get "/video/:video_id"                            => "application#index"
-  get "/r/:subreddit"                               => "application#index"
-  get "/random"                                     => "application#random"
+  get "/genres/:genre"     => "application#playing_now"
+  get "/r/:subreddit"      => "application#playing_now"
+  get "/random"            => "application#random"
 end

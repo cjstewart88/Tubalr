@@ -1,106 +1,74 @@
-@import "compass";
-
-* {
-  margin: 0px;
-  padding: 0px;
-}
-
-header, footer, aside, nav, article, section {
-  display: block;
-}
-
-*, object, embed {
-  outline: none;
-}
-
-input::-moz-focus-inner {
-  border: 0;
-}
-
-html {
-  overflow-y: scroll;
-  height: 100%;
-}
+@import 'compass';
 
 body {
-  height: 100%;
-  padding: 0 20px;
-  background: #fff;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 12px;
-	color: #444444;
-
-  ::-webkit-scrollbar {
-    width: 8px;
-    background: #efefef;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #ccc;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #c3c3c3;
-  }
-}
-
-p {
-  margin-bottom: 30px;
-  line-height: 22px;
-
-  a {
-    color: #3498DB;
-  }
+  margin: 0;
+  font-family: 'Cabin', sans-serif;
+  background: #313640;
+  color: #fff;
 }
 
 a {
-  color: #444444;
   text-decoration: none;
+  color: #fff;
 
-  &:hover {
-    color: #3498DB;
-  }
-
-  &:active {
-    color: #3498DB;
-    outline: none;
+  &:hover, &.active {
+    color: #00df80;
   }
 }
 
-h2 {
-  font-size: 16px;
-  margin-bottom: 30px;
-}
+#nav {
+  margin: 25px 0;
+  font-size: 12px;
+  text-align: center;
 
-h3 {
-  margin-bottom: 30px;
-}
-
-#main-wrapper {
-  @include box-sizing(border-box);
-  position: relative;
-  width: 1024px;
-  margin: 0 auto;
-  padding-bottom: 40px;
-}
-
-#notices {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 180px;
-  z-index: 1000;
-
-  aside {
-    display: block;
-    margin-bottom: 10px;
-    background: #efefef;
-    width: 160px;
-    padding: 10px;
-    @include border-radius(4px);
+  .nav-item {
+    margin: 0 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
   }
 }
 
-.clear {
-  clear: both;
+#intro {
+  margin: 25px 0;
+  left: 0;
+  right: 0;
+  padding: 10px 0;
+  font-size: 12px;
+  color: #b8b8b8;
+  background: #2B2F38;
+  text-align: center;
+
+  a {
+    color: #b8b8b8;
+    text-decoration: underline;
+
+    &:hover {
+    color: #00df80;
+    }
+  }
+}
+
+#content {
+  max-width: 890px;
+  margin: 25px auto;
+  text-align: center;
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+
+    li {
+      width: 260px;
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 12px;
+    }
+  }
+
+  h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #D9D790;
+  }
 }

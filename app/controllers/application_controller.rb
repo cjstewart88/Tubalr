@@ -5,15 +5,23 @@ class ApplicationController < ActionController::Base
   def index
   end
 
+  def playing_now
+    if params[:genre]
+      @genre = params[:genre].gsub('-', ' ')
+    elsif params[:subreddit]
+      @subreddit = params[:subreddit].gsub('-', ' ')
+    end
+  end
+
   def genres
   end
 
-  def subreddits
+  def reddit_playlists
   end
 
   def random
     random_reddit   = REDDIT.sample[:subreddits].sample
-    random_genre    = '/just/' + GENRES.sample.sub(' ','%20')
+    random_genre    = '/genres/' + GENRES.sample.parameterize
     random_playlist = [random_reddit, random_genre].sample
 
     redirect_to random_playlist
