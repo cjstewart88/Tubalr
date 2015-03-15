@@ -401,7 +401,7 @@ $(document).ready(function () {
     }
   });
 
-  $('.remove-video').live('click', function (e) {
+  $('.remove-video').on('click', function (e) {
     e.stopImmediatePropagation();
     Playlist.removeVideo($(this).next().attr('id'));
     return false;
@@ -419,12 +419,6 @@ $(document).ready(function () {
 
   $('#playlist').delegate('a', 'click', function () {
     Playlist.jumpToSong($(this).index('#playlist a'));
-  });
-
-  $('#playlist').sortable({
-    receive: Playlist.sortVideos,
-    stop: Playlist.sortVideos,
-    helper: 'clone'
   });
 
   $('.shuffle').click(function () {
