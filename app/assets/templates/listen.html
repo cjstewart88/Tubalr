@@ -1,0 +1,8 @@
+<span ng-show="error">{{error}}</span>
+<span ng-show="loading">loading...</span>
+
+<span ng-show="playlist.videos">
+  <ul>
+    <li ng-repeat="v in playlist.videos">{{v.id}} - {{v.title}}</li>
+  </ul>
+</span>

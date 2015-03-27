@@ -20,14 +20,8 @@
     </script>
     <%= javascript_include_tag  "application" %>
   </head>
-  <body>
-    <nav id="nav">
-      <a href="/" class="nav-item <%= 'active' if request.path == root_path %>">tubalr</a>
-      <a href="/reddit-playlists" class="nav-item <%= 'active' if request.path == reddit_playlists_path %>">Reddit Playlists</a>
-      <a href="/genres" class="nav-item <%= 'active' if request.path == genres_path %>">Generes</a>
-      <a href="/random" class="nav-item">Random</a>
-    </nav>
-
+  <body ng-app="tubalr">
+    <div ng-view></div>
     <%= yield %>
   </body>
 </html>
