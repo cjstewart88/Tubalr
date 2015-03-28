@@ -8,13 +8,15 @@
 //= require factories
 //= require services
 //= require controllers
+//= require directives
 
 angular.module('tubalr', [
     'ngRoute',
     'templates',
     'tubalr.factories',
     'tubalr.services',
-    'tubalr.controllers'
+    'tubalr.controllers',
+    'tubalr.directives'
   ])
 
   .config(['$routeProvider', function($routeProvider) {

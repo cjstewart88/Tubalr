@@ -1,10 +1,12 @@
 angular.module('tubalr.services')
-  .service('Playlist', ['$q', 'Echonest', 'Reddit', function($q, Echonest, Reddit) {
+  .service('Playlist', ['$q', '$rootScope', 'Echonest', 'Reddit', function($q, $rootScope, Echonest, Reddit) {
 
     var Playlist = {
-      videos: [],
-      search: null,
-      type:   null
+      videos:            [],
+      search:            null,
+      type:              null,
+      currentVideoIndex: null,
+      direction:         'forward'
     };
 
     Playlist.build = function(opts) {
@@ -19,6 +21,8 @@ angular.module('tubalr.services')
       if (this.type == 'r') {
         Reddit.subreddit(this.search).then(function(videos) {
           playlist.videos = videos;
+          playlist.currentVideoIndex = 0;
+          $rootScope.$broadcast('playVideo', Playlist.videos[Playlist.currentVideoIndex]);
           deferred.resolve();
         }, function() {
           deferred.reject('Playlist could not be built');
@@ -26,7 +30,29 @@ angular.module('tubalr.services')
       }
 
       return deferred.promise;
-    }
+    };
+
+    Playlist.nextVideo = function() {
+      this.direction = 'forward';
+
+      if (this.currentVideoIndex == this.videos.length-1) {
+        this.currentVideoIndex = 0;
+      }
+      else {
+        this.currentVideoIndex += 1;
+      }
+    };
+
+    Playlist.previousVideo = function() {
+      this.direction = 'backward';
+
+      if (this.currentVideoIndex == 0) {
+        this.currentVideoIndex = Playlist.videos.length-1;
+      }
+      else {
+        this.currentVideoIndex -= 1;
+      }
+    };
 
     return Playlist;
 
