@@ -21,10 +21,10 @@ angular.module('tubalr.services')
         $window.onYouTubeIframeAPIReady = function() {
           Player.ytApi = new YT.Player('player', {
             playerVars: {
-              autoplay: 1, rel: 0, theme: 'dark', showinfo: 0, iv_load_policy: 3, autohide: 1,
+              autoplay: 1, rel: 0, theme: 'dark', showinfo: 1, iv_load_policy: 3, autohide: 1,
               wmode: 'opaque', allowScriptAccess: 'always', version: 3, restriction: 'US'
             },
-            width: 50, height: 50,
+            width: 200, height: 100,
             events: {
               onReady: function() {
                 deferred.resolve();
@@ -40,18 +40,13 @@ angular.module('tubalr.services')
     };
 
     function onPlayerStateChange(newState) {
-      // if (newState.data == 0) {
-      //   Playlist.nextVideo();
-      // }
+      if (newState.data == 0) {
+        $rootScope.$broadcast('nextVideo');
+      }
     };
 
     function onPlayerError(errorCode) {
-      // if (Playlist.direction == "backward") {
-      //   Playlist.previousSong();
-      // }
-      // else {
-      //   Playlist.nextSong();
-      // }
+      $rootScope.$broadcast('videoError');
     };
 
     $rootScope.$on('playVideo', function(e, video) {

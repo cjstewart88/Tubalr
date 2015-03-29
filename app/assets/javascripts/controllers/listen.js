@@ -18,7 +18,6 @@ angular.module('tubalr.controllers')
         $scope.loading = false;
         $scope.error   = error;
       });
-
     });
 
   }]);

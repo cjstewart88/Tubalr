@@ -21,7 +21,7 @@ angular.module('tubalr.services')
       if (this.type == 'r') {
         Reddit.subreddit(this.search).then(function(videos) {
           playlist.videos = videos;
-          playlist.currentVideoIndex = 0;
+          playlist.currentVideoIndex = 3;
           $rootScope.$broadcast('playVideo', Playlist.videos[Playlist.currentVideoIndex]);
           deferred.resolve();
         }, function() {
@@ -32,7 +32,8 @@ angular.module('tubalr.services')
       return deferred.promise;
     };
 
-    Playlist.nextVideo = function() {
+    Playlist.nextVideo = function(opts) {
+      opts = opts || {};
       this.direction = 'forward';
 
       if (this.currentVideoIndex == this.videos.length-1) {
@@ -41,9 +42,13 @@ angular.module('tubalr.services')
       else {
         this.currentVideoIndex += 1;
       }
+
+      if (opts.forceDigest)  $rootScope.$apply();
+      $rootScope.$broadcast('playVideo', this.videos[this.currentVideoIndex]);
     };
 
-    Playlist.previousVideo = function() {
+    Playlist.previousVideo = function(opts) {
+      opts = opts || {};
       this.direction = 'backward';
 
       if (this.currentVideoIndex == 0) {
@@ -52,7 +57,23 @@ angular.module('tubalr.services')
       else {
         this.currentVideoIndex -= 1;
       }
+
+      if (opts.forceDigest)  $rootScope.$apply();
+      $rootScope.$broadcast('playVideo', this.videos[this.currentVideoIndex]);
     };
+
+    $rootScope.$on('nextVideos', function(e, video) {
+      Playlist.nextVideo();
+    });
+
+    $rootScope.$on('videoError', function(e) {
+      if (Playlist.direction == "backward") {
+        Playlist.previousVideo({ forceDigest: true });
+      }
+      else {
+        Playlist.nextVideo({ forceDigest: true });
+      }
+    });
 
     return Playlist;
 
