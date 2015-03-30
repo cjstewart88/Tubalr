@@ -1,17 +1,13 @@
-<a href="#/r/rap">rap</a>
-<a href="#/r/rock">rock</a>
-
 <span ng-show="error">{{error}}</span>
 <span ng-show="loading">loading...</span>
 
-<span ng-show="playlist.videos">
+<div ng-show="!loading && !error">
   <button ng-click="playlist.previousVideo()">Previous</button>
   <button ng-click="playlist.nextVideo()">Next</button>
-  {{playlist.currentVideoIndex}}
   <ul>
-    <li ng-repeat="v in playlist.videos">
+    <li ng-repeat="v in playlist.videos" ng-click="playlist.jumpToVideo($index)">
       <span ng-show="$index == playlist.currentVideoIndex">-></span>
       {{v.id}} - {{v.title}}
     </li>
   </ul>
-</span>
+</div>

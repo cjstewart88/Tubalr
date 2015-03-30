@@ -9,6 +9,7 @@ angular.module('tubalr.services')
       var deferred = $q.defer();
 
       if (Player.ytApi) {
+        Player.ytApi.stopVideo();
         deferred.resolve();
       }
       else {

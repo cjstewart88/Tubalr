@@ -12,24 +12,38 @@ angular.module('tubalr.services')
     Playlist.build = function(opts) {
       var deferred = $q.defer();
 
-      var playlist    = this;
-
-      playlist.search = opts.search;
-      playlist.type   = opts.type;
-      playlist.videos = [];
+      Playlist.search = opts.search;
+      Playlist.type   = opts.type;
+      Playlist.videos = [];
 
       if (this.type == 'r') {
         Reddit.subreddit(this.search).then(function(videos) {
-          playlist.videos = videos;
-          playlist.currentVideoIndex = 3;
-          $rootScope.$broadcast('playVideo', Playlist.videos[Playlist.currentVideoIndex]);
-          deferred.resolve();
+          videosReady(videos, deferred);
+        }, function() {
+          deferred.reject('Playlist could not be built');
+        });
+      }
+      else if (this.type == "genres") {
+        Echonest.genre(this.search).then(function(videos) {
+          videosReady(videos, deferred);
         }, function() {
           deferred.reject('Playlist could not be built');
         });
       }
 
       return deferred.promise;
+    };
+
+    var videosReady = function(videos, deferred) {
+      Playlist.videos = videos;
+      Playlist.currentVideoIndex = 0;
+      $rootScope.$broadcast('playVideo', Playlist.videos[Playlist.currentVideoIndex]);
+      deferred.resolve();
+    };
+
+    Playlist.jumpToVideo = function(index) {
+      Playlist.currentVideoIndex = index;
+      $rootScope.$broadcast('playVideo', this.videos[this.currentVideoIndex]);
     };
 
     Playlist.nextVideo = function(opts) {
@@ -62,11 +76,12 @@ angular.module('tubalr.services')
       $rootScope.$broadcast('playVideo', this.videos[this.currentVideoIndex]);
     };
 
-    $rootScope.$on('nextVideos', function(e, video) {
-      Playlist.nextVideo();
+    $rootScope.$on('nextVideo', function(e, video) {
+      Playlist.nextVideo({ forceDigest: true });
     });
 
     $rootScope.$on('videoError', function(e) {
+      console.log(Playlist.videos[Playlist.currentVideoIndex])
       if (Playlist.direction == "backward") {
         Playlist.previousVideo({ forceDigest: true });
       }

@@ -1,0 +1,59 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cabin', sans-serif;
+}
+
+input, button {
+  font-family: 'Cabin', sans-serif;
+}
+
+$left-section-width: 200px;
+  $logo-height: 60px;
+  $playlists-search-height: 30px;
+
+
+#left-section {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: $left-section-width;
+  overflow: auto;
+
+  #logo {
+    position: fixed;
+    z-index: 1;
+    width: $left-section-width;
+    height: $logo-height;
+    line-height: $logo-height;
+    background: #fff;
+    text-align: center;
+    font: 'PT Sans';
+    font-size: 40px;
+    font-weight: 700;
+  }
+
+  #playlists-search {
+    position: fixed;
+    z-index: 1;
+    top: $logo-height;
+    height: $playlists-search-height;
+    width: $left-section-width;
+    background: #fff;
+  }
+
+  #playlists {
+    position: relative;
+    top: $logo-height+$playlists-search-height;
+  }
+}
+
+#right-section {
+  position: absolute;
+  left: $left-section-width;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}

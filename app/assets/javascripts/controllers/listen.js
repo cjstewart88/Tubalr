@@ -1,9 +1,9 @@
 angular.module('tubalr.controllers')
 
-  .controller('ListenCtrl', ['$scope', '$routeParams', '$q', 'Playlist', 'Player',
-    function($scope, $routeParams, $q, Playlist, Player) {
+  .controller('ListenCtrl', ['$rootScope', '$scope', '$routeParams', '$q', 'Playlist', 'Player',
+    function($rootScope, $scope, $routeParams, $q, Playlist, Player) {
 
-    $scope.loading  = true;
+    $rootScope.loading  = true;
 
     $scope.playlist = Playlist;
     $scope.player   = Player;
@@ -13,10 +13,11 @@ angular.module('tubalr.controllers')
         type:   $routeParams.playlist_type,
         search: $routeParams.playlist_search
       }).then(function() {
-        $scope.loading  = false;
+        $rootScope.loading  = false;
+        $rootScope.error    = null;
       }, function(error) {
-        $scope.loading = false;
-        $scope.error   = error;
+        $rootScope.loading = false;
+        $rootScope.error   = error;
       });
     });
 
