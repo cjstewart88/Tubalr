@@ -6,7 +6,10 @@
     <meta name="Description" content="Tubalr is a simple way to enjoy great music videos.">
     <%= csrf_meta_tag %>
 
-    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Cabin", "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css", asset_path("application") %>
+    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Raleway:400,200",
+      "http://fonts.googleapis.com/css?family=PT+Sans:700",
+      "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css",
+      "application" %>
 
     <script>
       var _gaq = _gaq || [];
@@ -20,13 +23,36 @@
     </script>
     <%= javascript_include_tag  "application" %>
   </head>
-  <body>
-    <nav id="nav">
-      <a href="/" class="nav-item <%= 'active' if request.path == root_path %>">tubalr</a>
-      <a href="/reddit-playlists" class="nav-item <%= 'active' if request.path == reddit_playlists_path %>">Reddit Playlists</a>
-      <a href="/genres" class="nav-item <%= 'active' if request.path == genres_path %>">Generes</a>
-      <a href="/random" class="nav-item">Random</a>
-    </nav>
+  <body ng-app="tubalr">
+    <div id="left-section">
+      <div id="fixed-section">
+        <h1>tubalr</h1>
+        <input ng-model="playlistsSearch" type="text" placeholder="Search for a playlist...">
+      </div>
+
+      <div id="playlists">
+        <h3>Subreddits</h3>
+        <ul>
+          <li ng-repeat="sr in <%= SUBREDDITS %> | filter:playlistsSearch">
+            <a ng-href='#/r/{{sr}}' ng-class="{'active-playlist': sr == playlist_search}">{{sr}}</a>
+          </li>
+        </ul>
+
+        <h3>Genres</h3>
+        <ul>
+          <li ng-repeat="genre in <%= GENRES %> | filter:playlistsSearch">
+            <a ng-href='#/genres/{{genre}}' ng-class="{'active-playlist': sr == playlist_search}">{{genre}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="right-section">
+      <div ng-show="!loading && !error">
+        <div id="player"></div>
+      </div>
+      <div ng-view></div>
+    </div>
 
     <%= yield %>
   </body>

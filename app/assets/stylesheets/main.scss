@@ -1,74 +1,107 @@
 @import 'compass';
+@import 'util';
 
 body {
   margin: 0;
-  font-family: 'Cabin', sans-serif;
-  background: #313640;
-  color: #fff;
+  padding: 0;
+  font-family: 'Raleway', sans-serif;
+  color: $font-color;
+  background: $background-color;
+}
+
+input, button {
+  font-family: 'Raleway', sans-serif;
+  outline: none;
 }
 
 a {
+  color: #fff;
   text-decoration: none;
+
+  &:hover {
+    color: $text-hover-color;
+  }
+}
+
+#player {
+  display: none;
+}
+
+#left-section {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: $left-section-width;
+  overflow: auto;
   color: #fff;
 
-  &:hover, &.active {
-    color: #00df80;
-  }
-}
+  #fixed-section {
+    position: fixed;
+    z-index: 1;
+    width: $left-section-width;
+    height: $fixed-section-height;
+    background: $background-color;
+    text-align: center;
 
-#nav {
-  margin: 25px 0;
-  font-size: 12px;
-  text-align: center;
+    h1 {
+      margin: 0;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      font-family: 'PT Sans';
+      font-size: 40px;
+      font-weight: 700;
+    }
 
-  .nav-item {
-    margin: 0 20px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-  }
-}
-
-#intro {
-  margin: 25px 0;
-  left: 0;
-  right: 0;
-  padding: 10px 0;
-  font-size: 12px;
-  color: #b8b8b8;
-  background: #2B2F38;
-  text-align: center;
-
-  a {
-    color: #b8b8b8;
-    text-decoration: underline;
-
-    &:hover {
-    color: #00df80;
+    input {
+      background: none;
+      padding: 8px 18px;
+      border: solid 1px #e0e0e0;
+      @include border-radius(16px);
+      color: #fff;
     }
   }
-}
 
-#content {
-  max-width: 890px;
-  margin: 25px auto;
-  text-align: center;
+  #playlists {
+    position: relative;
+    top: $fixed-section-height;
 
-  ul {
-    list-style-type: none;
-    padding-left: 0;
-    margin: 0;
-
-    li {
-      width: 260px;
-      display: inline-block;
-      margin-bottom: 20px;
+    h3 {
+      margin-left: 20px;
+      color: #e0e0e0;
       font-size: 12px;
+      text-transform: uppercase;
     }
-  }
 
-  h3 {
-    margin-top: 0;
-    font-size: 16px;
-    color: #D9D790;
+    ul {
+      margin-left: 20px;
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        height: 35px;
+        line-height: 35px;
+
+        a {
+          font-size: 14px;
+          color: #737d86;
+
+          &:hover, &.active-playlist {
+            color: $text-hover-color;
+          }
+        }
+      }
+    }
+
+
   }
+}
+
+#right-section {
+  position: absolute;
+  left: $left-section-width;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
 }

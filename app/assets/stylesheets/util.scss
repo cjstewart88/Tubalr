@@ -1,0 +1,14 @@
+@mixin calc($property, $expression) {
+  #{$property}: -moz-calc(#{$expression});
+  #{$property}: -webkit-calc(#{$expression});
+  #{$property}: calc(#{$expression});
+}
+
+$left-section-width: 200px;
+$fixed-section-height: 170px;
+
+$background-color: #383840;
+$font-color: #AFB8C0;
+$text-hover-color: #9cf4a7;
+
+$player-controls-height: 60px;
