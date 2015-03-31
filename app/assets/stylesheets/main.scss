@@ -1,17 +1,31 @@
+@import 'compass';
+@import 'util';
+
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Cabin', sans-serif;
+  font-family: 'Raleway', sans-serif;
+  color: $font-color;
+  background: $background-color;
 }
 
 input, button {
-  font-family: 'Cabin', sans-serif;
+  font-family: 'Raleway', sans-serif;
+  outline: none;
 }
 
-$left-section-width: 200px;
-  $logo-height: 60px;
-  $playlists-search-height: 30px;
+a {
+  color: #fff;
+  text-decoration: none;
 
+  &:hover {
+    color: $text-hover-color;
+  }
+}
+
+#player {
+  display: none;
+}
 
 #left-section {
   position: absolute;
@@ -20,32 +34,66 @@ $left-section-width: 200px;
   bottom: 0;
   width: $left-section-width;
   overflow: auto;
+  color: #fff;
 
-  #logo {
+  #fixed-section {
     position: fixed;
     z-index: 1;
     width: $left-section-width;
-    height: $logo-height;
-    line-height: $logo-height;
-    background: #fff;
+    height: $fixed-section-height;
+    background: $background-color;
     text-align: center;
-    font: 'PT Sans';
-    font-size: 40px;
-    font-weight: 700;
-  }
 
-  #playlists-search {
-    position: fixed;
-    z-index: 1;
-    top: $logo-height;
-    height: $playlists-search-height;
-    width: $left-section-width;
-    background: #fff;
+    h1 {
+      margin: 0;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      font-family: 'PT Sans';
+      font-size: 40px;
+      font-weight: 700;
+    }
+
+    input {
+      background: none;
+      padding: 8px 18px;
+      border: solid 1px #e0e0e0;
+      @include border-radius(16px);
+      color: #fff;
+    }
   }
 
   #playlists {
     position: relative;
-    top: $logo-height+$playlists-search-height;
+    top: $fixed-section-height;
+
+    h3 {
+      margin-left: 20px;
+      color: #e0e0e0;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    ul {
+      margin-left: 20px;
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        height: 35px;
+        line-height: 35px;
+
+        a {
+          font-size: 14px;
+          color: #737d86;
+
+          &:hover, &.active-playlist {
+            color: $text-hover-color;
+          }
+        }
+      }
+    }
+
+
   }
 }
 

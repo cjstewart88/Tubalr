@@ -1,8 +1,11 @@
 angular.module('tubalr.services')
-  .service('Player', ['$q', '$window', '$rootScope', function($q, $window, $rootScope) {
+  .service('Player', ['$q', '$window', '$rootScope', '$interval', function($q, $window, $rootScope, $interval) {
 
     var Player = {
-      ytApi: null
+      ytApi: null,
+      state: 'playing',
+      currentTime: 0,
+      percentPlayed: 0
     };
 
     Player.init = function(opts) {
@@ -44,14 +47,31 @@ angular.module('tubalr.services')
       if (newState.data == 0) {
         $rootScope.$broadcast('nextVideo');
       }
+      else if (newState.data == 1) {
+        Player.state = 'playing';
+        $rootScope.$apply();
+      }
+      else if (newState.data == 2) {
+        Player.state = 'paused';
+        $rootScope.$apply();
+      }
     };
 
     function onPlayerError(errorCode) {
       $rootScope.$broadcast('videoError');
     };
 
+    var updatePlayerInfo;
     $rootScope.$on('playVideo', function(e, video) {
-      Player.ytApi.loadVideoById(video.id)
+      Player.ytApi.loadVideoById(video.id);
+
+      updatePlayerInfo = $interval(function() {
+        elapsed = Player.ytApi.getCurrentTime();
+        duration = Player.ytApi.getDuration();
+        Player.currentTime = elapsed;
+        Player.percentPlayed = (elapsed/duration)*100;
+
+      }, 100);
     });
 
     return Player;

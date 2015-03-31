@@ -9,6 +9,7 @@
 //= require services
 //= require controllers
 //= require directives
+//= require filters
 
 angular.module('tubalr', [
     'ngRoute',
@@ -16,7 +17,8 @@ angular.module('tubalr', [
     'tubalr.factories',
     'tubalr.services',
     'tubalr.controllers',
-    'tubalr.directives'
+    'tubalr.directives',
+    'tubalr.filters'
   ])
 
   .config(['$routeProvider', function($routeProvider) {

@@ -6,7 +6,7 @@
     <meta name="Description" content="Tubalr is a simple way to enjoy great music videos.">
     <%= csrf_meta_tag %>
 
-    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Cabin",
+    <%= stylesheet_link_tag "http://fonts.googleapis.com/css?family=Raleway:400,200",
       "http://fonts.googleapis.com/css?family=PT+Sans:700",
       "//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css",
       "application" %>
@@ -25,21 +25,24 @@
   </head>
   <body ng-app="tubalr">
     <div id="left-section">
-      <div id="logo">
-        tubalr
+      <div id="fixed-section">
+        <h1>tubalr</h1>
+        <input ng-model="playlistsSearch" type="text" placeholder="Search for a playlist...">
       </div>
-      <div id="playlists-search">
-        <input ng-model="playlistsSearch" type="text" placeholder="Search">
-      </div>
+
       <div id="playlists">
         <h3>Subreddits</h3>
         <ul>
-          <li ng-repeat="sr in <%= SUBREDDITS %> | filter:playlistsSearch"><a ng-href='#/r/{{sr}}'>{{sr}}</a></li>
+          <li ng-repeat="sr in <%= SUBREDDITS %> | filter:playlistsSearch">
+            <a ng-href='#/r/{{sr}}' ng-class="{'active-playlist': sr == playlist_search}">{{sr}}</a>
+          </li>
         </ul>
 
         <h3>Genres</h3>
         <ul>
-          <li ng-repeat="genre in <%= GENRES %> | filter:playlistsSearch"><a ng-href='#/genres/{{genre}}'>{{genre}}</a></li>
+          <li ng-repeat="genre in <%= GENRES %> | filter:playlistsSearch">
+            <a ng-href='#/genres/{{genre}}' ng-class="{'active-playlist': sr == playlist_search}">{{genre}}</a>
+          </li>
         </ul>
       </div>
     </div>

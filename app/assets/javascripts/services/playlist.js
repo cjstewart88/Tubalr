@@ -81,7 +81,6 @@ angular.module('tubalr.services')
     });
 
     $rootScope.$on('videoError', function(e) {
-      console.log(Playlist.videos[Playlist.currentVideoIndex])
       if (Playlist.direction == "backward") {
         Playlist.previousVideo({ forceDigest: true });
       }
