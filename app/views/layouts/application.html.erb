@@ -36,13 +36,15 @@
           <li ng-repeat="sr in <%= SUBREDDITS %> | filter:playlistsSearch">
             <a ng-href='#/r/{{sr}}' ng-class="{'active-playlist': sr == playlist_search}">{{sr}}</a>
           </li>
+          <li class="no-search-results" ng-show="(<%= GENRES %> | filter:playlistsSearch).length == 0">No results</li>
         </ul>
 
         <h3>Genres</h3>
         <ul>
           <li ng-repeat="genre in <%= GENRES %> | filter:playlistsSearch">
-            <a ng-href='#/genres/{{genre}}' ng-class="{'active-playlist': sr == playlist_search}">{{genre}}</a>
+            <a ng-href='#/genres/{{genre}}' ng-class="{'active-playlist': genre == playlist_search}">{{genre}}</a>
           </li>
+          <li class="no-search-results" ng-show="(<%= GENRES %> | filter:playlistsSearch).length == 0">No results</li>
         </ul>
       </div>
     </div>

@@ -17,6 +17,7 @@ input, button {
 a {
   color: #fff;
   text-decoration: none;
+  @include transition(0.5s);
 
   &:hover {
     color: $text-hover-color;
@@ -51,6 +52,12 @@ a {
       font-family: 'PT Sans';
       font-size: 40px;
       font-weight: 700;
+      cursor: default;
+      @include transition(0.5s);
+
+      &:hover {
+        color: $text-hover-color;
+      }
     }
 
     input {
@@ -59,6 +66,12 @@ a {
       border: solid 1px #e0e0e0;
       @include border-radius(16px);
       color: #fff;
+      @include transition(0.5s);
+
+      &:focus {
+        box-shadow: 0px 0px 15px -2px rgba(156, 244, 167, 0.36);
+        border-color: rgba(156, 244, 167, 0.6);
+      }
     }
   }
 
@@ -81,6 +94,11 @@ a {
       li {
         height: 35px;
         line-height: 35px;
+
+        &.no-search-results {
+          color: #737d86;
+          font-size: 12px;
+        }
 
         a {
           font-size: 14px;

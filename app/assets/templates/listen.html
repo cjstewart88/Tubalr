@@ -5,11 +5,13 @@
   </div>
 
   <div ng-show="!loading && !error">
+    <h2 id="playlist-title">{{yourListeningTo()}}</h2>
     <ul id="playlist">
       <li ng-repeat="v in playlist.videos" ng-click="playlist.jumpToVideo($index)"
         ng-class="{'active-playlist-item': $index == playlist.currentVideoIndex}"
         class="playlist-item">
-        {{v.title}}
+        <span class="playlist-item-title">{{v.title}}</span>
+        <span class="playlist-item-duration">{{v.duration ? (v.duration | hhmmss) : ''}}</span>
       </li>
     </ul>
 

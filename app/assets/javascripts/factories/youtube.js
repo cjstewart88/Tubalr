@@ -40,8 +40,9 @@ angular.module('tubalr.factories')
 
         if (videoIsNotBlocked(video) && videoIsMusic(video) && videoHasTitle(video)) {
           bestVideo =  {
-            id:    video.id.$t.split(":")[3],
-            title: video.title.$t
+            id:       video.id.$t.split(":")[3],
+            title:    video.title.$t,
+            duration: video.media$group.yt$duration.seconds
           };
 
           return deferred.resolve(bestVideo);

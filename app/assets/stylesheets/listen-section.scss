@@ -12,21 +12,47 @@
     }
   }
 
+  #playlist-title {
+    margin: 44px 45px 38px;
+    font-size: 18px;
+    text-transform: uppercase;
+  }
+
   #playlist {
     padding: 0;
     margin: 20px 20px $player-controls-height;
     list-style-type: none;
 
     .playlist-item {
-      height: 40px;
-      line-height: 40px;
+      height: 50px;
+      line-height: 50px;
+      padding: 0 25px;
       cursor: pointer;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      @include transition(0.5s);
+
+      &:nth-child(odd) {
+        background: #31313B;
+      }
 
       &:hover, &.active-playlist-item {
         color: $text-hover-color;
+      }
+
+      .playlist-item-title {
+        @include calc(width, '100% - 130px');
+        display: inline-block;
+        margin-right: 60px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .playlist-item-duration {
+        float: right;
+        width: 70px;
+        font-size: 12px;
+        font-family: sans-serif;
+        text-align: right;
       }
     }
   }
@@ -40,6 +66,7 @@
     line-height: $player-controls-height;
     padding: 0 20px;
     background: #2b2a30;
+    @include box-shadow(0 5px 25px 14px rgba(0,0,0,.2));
 
     #left-controls-wrapper {
       float: left;
@@ -69,15 +96,15 @@
       }
 
       #progress-bar-outer {
-        height: 3px;
+        height: 8px;
         @include calc(width, '100% - 140px');
-        margin: 27px auto 0;
+        margin: 25px auto 0;
         background: #42424a;
-        @include border-radius(2px);
+        @include border-radius(4px);
 
         #progress-bar-inner {
-          height: 3px;
-          @include border-radius(2px);
+          height: 8px;
+          @include border-radius(4px);
           width: 0%;
           background: $text-hover-color;
         }
@@ -92,6 +119,7 @@
       background: none;
       color: $font-color;
       font-size: 16px;
+      @include transition(0.5s);
 
       &:hover {
         color: #9cf4a7;
