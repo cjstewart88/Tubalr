@@ -2,4 +2,5 @@
   *= require_tree ../../../vendor/assets/stylesheets/
   *= require main
   *= require listen-section
+  *= require index-section
 */
