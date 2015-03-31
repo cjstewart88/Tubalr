@@ -11,6 +11,10 @@
 //= require directives
 //= require filters
 
+setInterval(function() {
+  _gaq.push(['_trackEvent', 'ping', 'pong']);
+}, 30000)
+
 angular.module('tubalr', [
     'ngRoute',
     'templates',
