@@ -1,7 +1,7 @@
 angular.module('tubalr.controllers')
 
-  .controller('ListenCtrl', ['$rootScope', '$scope', '$routeParams', '$q', 'Playlist', 'Player',
-    function($rootScope, $scope, $routeParams, $q, Playlist, Player) {
+  .controller('ListenCtrl', ['$rootScope', '$scope', '$route', '$routeParams', '$q', 'Playlist', 'Player',
+    function($rootScope, $scope, $route, $routeParams, $q, Playlist, Player) {
 
     $rootScope.loading  = true;
 
@@ -10,6 +10,9 @@ angular.module('tubalr.controllers')
 
     $rootScope.playlist_type   = $routeParams.playlist_type;
     $rootScope.playlist_search = $routeParams.playlist_search;
+
+    // report to google analytics as pageview
+    _gaq.push(['_trackPageview', '/'+$rootScope.playlist_type+'/'+$rootScope.playlist_search]);
 
     $scope.yourListeningTo = function() {
       if ($rootScope.playlist_type == 'r') {
