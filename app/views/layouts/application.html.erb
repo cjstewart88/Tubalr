@@ -24,27 +24,44 @@
     <%= javascript_include_tag  "application" %>
   </head>
   <body ng-app="tubalr">
-    <div id="left-section">
+    <div id="left-section" ng-controller="LeftSectionCtrl">
       <div id="fixed-section">
         <h1>tubalr</h1>
-        <input ng-model="playlistsSearch" type="text" placeholder="Search for a playlist...">
+        <input ng-model="playlistsSearch" ng-model-options="{debounce: 1000}" ng-keydown="onKey($event)"
+          type="text" placeholder="Search for a playlist..." autofocus>
       </div>
 
       <div id="playlists">
-        <h3>Subreddits</h3>
-        <ul>
+        <h3>Artists</h3>
+        <div ng-show="playlistsSearch && artists">
+          <ul>
+            <li ng-repeat="a in artists">
+              <a ng-href='#/artists/{{a}}'>{{a}}</a>
+            </li>
+          </ul>
+        </div>
+        <div ng-show="!playlistsSearch" id="search-for-artists-msg">
+          Search above for specific artist playlists.
+        </div>
+
+        <h3 class="clickable-h3" ng-click="expandSubreddits = !expandSubreddits">
+          Subreddits
+          <i class="fa" ng-class="{'fa-chevron-up': !expandSubreddits, 'fa-chevron-down': expandSubreddits}"></i>
+        </h3>
+        <ul ng-show="expandSubreddits">
           <li ng-repeat="sr in <%= SUBREDDITS %> | filter:playlistsSearch">
-            <a ng-href='#/r/{{sr}}' ng-class="{'active-playlist': sr == playlist_search}">{{sr}}</a>
+            <a ng-href='#/r/{{sr}}'>{{sr}}</a>
           </li>
-          <li class="no-search-results" ng-show="(<%= GENRES %> | filter:playlistsSearch).length == 0">No results</li>
         </ul>
 
-        <h3>Genres</h3>
-        <ul>
+        <h3 class="clickable-h3" ng-click="expandGenres = !expandGenres">
+          Genres
+          <i class="fa" ng-class="{'fa-chevron-up': !expandGenres, 'fa-chevron-down': expandGenres || playlistsSearch}"></i>
+        </h3>
+        <ul ng-show="expandGenres">
           <li ng-repeat="genre in <%= GENRES %> | filter:playlistsSearch">
-            <a ng-href='#/genres/{{genre}}' ng-class="{'active-playlist': genre == playlist_search}">{{genre}}</a>
+            <a ng-href='#/genres/{{genre}}'>{{genre}}</a>
           </li>
-          <li class="no-search-results" ng-show="(<%= GENRES %> | filter:playlistsSearch).length == 0">No results</li>
         </ul>
       </div>
     </div>

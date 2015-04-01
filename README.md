@@ -1,12 +1,5 @@
-# General Usage
-Watch/Listen to just Band of Horses:
-[http://www.tubalr.com/just/Band+of+Horses](http://www.tubalr.com/just/Band+of+Horses)
-
-Watch/Listen to bands similar to Fleet Foxes:
-[http://www.tubalr.com/similar/Fleet+Foxes](http://www.tubalr.com/similar/Fleet+Foxes)
-
 # Contributing
-Please go for it if you're interested in pitching in to make Tubalr better. 
+Please go for it if you're interested in pitching in to make Tubalr better.
 
 ## Get up and running
 
@@ -24,14 +17,14 @@ Please go for it if you're interested in pitching in to make Tubalr better.
 
 ## Basic Git/GitHub Workflow
 
-1. Fork it    
+1. Fork it
 
 2. Make a branch for your fixes or new features: `git checkout -b branch_name_here`
 
-3. Make your changes, test to make sure they work and that no previous 
+3. Make your changes, test to make sure they work and that no previous
 functionality is broken.
 
-4. Push to your fork 
+4. Push to your fork
 
 5. Open a pull request and describe your changes!
 

@@ -32,7 +32,7 @@ a {
   position: absolute;
   left: 0;
   top: 0;
-  bottom: 0;
+  bottom: 60px;
   width: $left-section-width;
   overflow: auto;
   color: #fff;
@@ -81,9 +81,28 @@ a {
 
     h3 {
       margin-left: 20px;
+      margin-bottom: 25px;
       color: #e0e0e0;
       font-size: 12px;
       text-transform: uppercase;
+
+      i {
+        float: right;
+        margin-right: 20px;
+      }
+
+      &.clickable-h3 {
+        cursor: pointer;
+      }
+    }
+
+    #search-for-artists-msg {
+      margin-left: 20px;
+      margin-bottom: 25px;
+      margin-top: 25px;
+      font-size: 14px;
+      color: #737d86;
+      line-height: 22px;
     }
 
     ul {
@@ -101,10 +120,15 @@ a {
         }
 
         a {
+          display: inline-block;
+          width: 100%;
           font-size: 14px;
           color: #737d86;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
 
-          &:hover, &.active-playlist {
+          &:hover {
             color: $text-hover-color;
           }
         }
@@ -119,7 +143,7 @@ a {
   position: absolute;
   left: $left-section-width;
   top: 0;
-  bottom: 0;
+  bottom: 60px;
   right: 0;
   overflow: auto;
 }

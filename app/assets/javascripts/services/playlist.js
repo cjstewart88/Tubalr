@@ -23,8 +23,15 @@ angular.module('tubalr.services')
           deferred.reject('Playlist could not be built');
         });
       }
-      else if (this.type == "genres") {
+      else if (this.type == 'genres') {
         Echonest.genre(this.search).then(function(videos) {
+          videosReady(videos, deferred);
+        }, function() {
+          deferred.reject('Playlist could not be built');
+        });
+      }
+      else if (this.type == 'artists') {
+        Echonest.artist(this.search).then(function(videos) {
           videosReady(videos, deferred);
         }, function() {
           deferred.reject('Playlist could not be built');
