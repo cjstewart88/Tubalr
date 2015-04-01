@@ -40,7 +40,7 @@
             </li>
           </ul>
         </div>
-        <div ng-show="!playlistsSearch" id="search-for-artists-msg">
+        <div ng-show="!playlistsSearch" class="playlists-msg">
           Search above for specific artist playlists.
         </div>
 
@@ -53,6 +53,9 @@
             <a ng-href='#/r/{{sr}}'>{{sr}}</a>
           </li>
         </ul>
+        <div ng-show="(<%= SUBREDDITS %> | filter:playlistsSearch).length == 0" class="playlists-msg">
+          No results
+        </div>
 
         <h3 class="clickable-h3" ng-click="expandGenres = !expandGenres">
           Genres
@@ -63,6 +66,9 @@
             <a ng-href='#/genres/{{genre}}'>{{genre}}</a>
           </li>
         </ul>
+        <div ng-show="(<%= GENRES %> | filter:playlistsSearch).length == 0" class="playlists-msg">
+          No results
+        </div>
       </div>
     </div>
 
