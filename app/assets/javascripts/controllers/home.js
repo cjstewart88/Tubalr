@@ -1,5 +1,9 @@
 angular.module('tubalr.controllers')
 
-  .controller('HomeCtrl', ['$scope', '$routeParams', function($scope, $routeParams) {
+  .controller('HomeCtrl', ['$scope', 'Player', function($scope, Player) {
+
+    if (Player.ytApi) {
+      Player.ytApi.stopVideo();
+    }
 
   }]);

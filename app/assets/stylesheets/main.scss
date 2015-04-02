@@ -52,12 +52,6 @@ a {
       font-family: 'PT Sans';
       font-size: 40px;
       font-weight: 700;
-      cursor: default;
-      @include transition(0.5s);
-
-      &:hover {
-        color: $text-hover-color;
-      }
     }
 
     input {

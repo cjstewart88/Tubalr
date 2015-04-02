@@ -26,24 +26,12 @@
   <body ng-app="tubalr">
     <div id="left-section" ng-controller="LeftSectionCtrl">
       <div id="fixed-section">
-        <h1>tubalr</h1>
-        <input ng-model="playlistsSearch" ng-model-options="{debounce: 1000}" ng-keydown="onKey($event)"
+        <h1><a href="/#/">tubalr</a></h1>
+        <input ng-model="playlistsSearch" ng-keydown="onKey($event)"
           type="text" placeholder="Search for a playlist..." autofocus>
       </div>
 
       <div id="playlists">
-        <h3>Artists</h3>
-        <div ng-show="playlistsSearch && artists">
-          <ul>
-            <li ng-repeat="a in artists">
-              <a ng-href='#/artists/{{a}}'>{{a}}</a>
-            </li>
-          </ul>
-        </div>
-        <div ng-show="!playlistsSearch" class="playlists-msg">
-          Search above for specific artist playlists.
-        </div>
-
         <h3 class="clickable-h3" ng-click="expandSubreddits = !expandSubreddits">
           Subreddits
           <i class="fa" ng-class="{'fa-chevron-up': !expandSubreddits, 'fa-chevron-down': expandSubreddits}"></i>
@@ -59,7 +47,7 @@
 
         <h3 class="clickable-h3" ng-click="expandGenres = !expandGenres">
           Genres
-          <i class="fa" ng-class="{'fa-chevron-up': !expandGenres, 'fa-chevron-down': expandGenres || playlistsSearch}"></i>
+          <i class="fa" ng-class="{'fa-chevron-up': !expandGenres, 'fa-chevron-down': expandGenres}"></i>
         </h3>
         <ul ng-show="expandGenres">
           <li ng-repeat="genre in <%= GENRES %> | filter:playlistsSearch">

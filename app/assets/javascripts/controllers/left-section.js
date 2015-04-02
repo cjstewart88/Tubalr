@@ -11,10 +11,6 @@ angular.module('tubalr.controllers')
 
       $scope.expandSubreddits = true;
       $scope.expandGenres = true;
-
-      Echonest.artistSuggest($scope.playlistsSearch).then(function(artists) {
-        $scope.artists = artists;
-      });
     });
 
     $scope.onKey = function(event) {
@@ -23,17 +19,13 @@ angular.module('tubalr.controllers')
         $scope.playlistsSearch = null;
         break;
       case 13: /* enter */
-        if ($scope.playlistsSearch) {
-          $location.path('/artists/' + $scope.playlistsSearch);
-        }
+        event.preventDefault();
         break;
       case 38: /* up */
         event.preventDefault();
-        console.log('up')
         break;
       case 40: /* down */
         event.preventDefault();
-        console.log('down')
         break;
       default:
         break;

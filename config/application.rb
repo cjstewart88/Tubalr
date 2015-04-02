@@ -13,7 +13,7 @@ module Tubalr
     config.filter_parameters += [:password]
 
     config.assets.initialize_on_precompile = false
-    config.assets.precompile += %w( *.css *.js )
+    config.assets.precompile += %w( *.css *.js *.png )
     config.assets.enabled = true
     config.assets.paths << "#{Rails.root}/vendor/assets/fonts"
   end
