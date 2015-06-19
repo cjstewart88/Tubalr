@@ -19,7 +19,7 @@
         <i id="next" class="fa fa-fw fa-forward" ng-click="playlist.nextVideo()"></i>
      </button>
     </div>
-    <h2 id="playlist-title">{{yourListeningTo()}}</h2>
+    <h2 id="playlist-title">/r/{{subreddit}}</h2>
     <ul id="playlist">
       <li class="playlist-item" ng-repeat="v in playlist.videos" ng-click="playlist.jumpToVideo($index)"
         ng-class="{'active-playlist-item': $index == playlist.currentVideoIndex}">

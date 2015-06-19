@@ -8,25 +8,14 @@ angular.module('tubalr.controllers')
     $scope.playlist = Playlist;
     $scope.player   = Player;
 
-    $rootScope.playlist_type   = $routeParams.playlist_type;
-    $rootScope.playlist_search = $routeParams.playlist_search;
+    $rootScope.subreddit = $routeParams.subreddit;
 
     // report to google analytics as pageview
-    _gaq.push(['_trackPageview', '/'+$rootScope.playlist_type+'/'+$rootScope.playlist_search]);
-
-    $scope.yourListeningTo = function() {
-      if ($rootScope.playlist_type == 'r') {
-        return '/r/' + $routeParams.playlist_search;
-      }
-      else if($rootScope.playlist_type == 'genres') {
-        return $routeParams.playlist_search;
-      }
-    };
+    _gaq.push(['_trackPageview', '/r/'+$rootScope.subreddit]);
 
     $scope.player.init().then(function() {
       $scope.playlist.build({
-        type:   $scope.playlist_type,
-        search: $scope.playlist_search
+        subreddit: $scope.subreddit
       }).then(function() {
         $rootScope.loading  = false;
         $rootScope.error    = null;

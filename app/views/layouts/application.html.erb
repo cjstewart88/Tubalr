@@ -32,29 +32,12 @@
       </div>
 
       <div id="playlists">
-        <h3 class="clickable-h3" ng-click="expandSubreddits = !expandSubreddits">
-          Subreddits
-          <i class="fa" ng-class="{'fa-chevron-up': !expandSubreddits, 'fa-chevron-down': expandSubreddits}"></i>
-        </h3>
-        <ul ng-show="expandSubreddits">
+        <ul>
           <li ng-repeat="sr in <%= SUBREDDITS %> | filter:playlistsSearch">
             <a ng-href='#/r/{{sr}}'>{{sr}}</a>
           </li>
         </ul>
         <div ng-show="(<%= SUBREDDITS %> | filter:playlistsSearch).length == 0" class="playlists-msg">
-          No results
-        </div>
-
-        <h3 class="clickable-h3" ng-click="expandGenres = !expandGenres">
-          Genres
-          <i class="fa" ng-class="{'fa-chevron-up': !expandGenres, 'fa-chevron-down': expandGenres}"></i>
-        </h3>
-        <ul ng-show="expandGenres">
-          <li ng-repeat="genre in <%= GENRES %> | filter:playlistsSearch">
-            <a ng-href='#/genres/{{genre}}'>{{genre}}</a>
-          </li>
-        </ul>
-        <div ng-show="(<%= GENRES %> | filter:playlistsSearch).length == 0" class="playlists-msg">
           No results
         </div>
       </div>

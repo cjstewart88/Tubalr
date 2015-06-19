@@ -32,7 +32,7 @@ angular.module('tubalr', [
         controller:  'HomeCtrl',
         templateUrl: 'index.html'
       })
-      .when('/:playlist_type/:playlist_search', {
+      .when('/r/:subreddit', {
         controller: 'ListenCtrl',
         templateUrl: 'listen.html'
       });

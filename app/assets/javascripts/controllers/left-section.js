@@ -1,17 +1,6 @@
 angular.module('tubalr.controllers')
 
-  .controller('LeftSectionCtrl', ['$scope', '$location', 'Echonest', function($scope, $location, Echonest) {
-
-    $scope.expandSubreddits = false;
-    $scope.expandGenres = false;
-
-    $scope.$watch('playlistsSearch', function(newVal, oldVal) {
-      // ignore initial update
-      if (newVal === oldVal) { return; }
-
-      $scope.expandSubreddits = true;
-      $scope.expandGenres = true;
-    });
+  .controller('LeftSectionCtrl', ['$scope', '$location', function($scope, $location) {
 
     $scope.onKey = function(event) {
       switch(event.keyCode) {

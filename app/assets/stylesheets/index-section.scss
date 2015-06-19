@@ -4,13 +4,6 @@
   margin-top: 30px;
   margin-left: 20px;
 
-  h3 {
-    font-weight: 200;
-  }
-
-  .featured-playlist {
-  }
-
   .featured-playlist {
     position: relative;
     display: inline-block;
@@ -49,61 +42,57 @@
     }
   }
 
-  /*
-    subreddits
-  */
-
-  .r-chillstep {
-    background-image: asset_url('featured-playlists-art/r-chillstep.png');
+  .chillstep {
+    background-image: asset_url('featured-playlists-art/chillstep.png');
   }
 
-  .r-chillmusic {
-    background-image: image-url('featured-playlists-art/r-chillmusic.png');
+  .chillmusic {
+    background-image: image-url('featured-playlists-art/chillmusic.png');
   }
 
-  .r-ambientmusic {
-    background-image: image-url('featured-playlists-art/r-ambientmusic.png');
+  .ambientmusic {
+    background-image: image-url('featured-playlists-art/ambientmusic.png');
   }
 
-  .r-indie-rock {
-    background-image: image-url('featured-playlists-art/r-indie-rock.png');
+  .indie-rock {
+    background-image: image-url('featured-playlists-art/indie-rock.png');
   }
 
-  .r-dubstep {
-    background-image: image-url('featured-playlists-art/r-dubstep.png');
+  .dubstep {
+    background-image: image-url('featured-playlists-art/dubstep.png');
   }
 
-  .r-postrock {
-    background-image: image-url('featured-playlists-art/r-postrock.png');
+  .postrock {
+    background-image: image-url('featured-playlists-art/postrock.png');
   }
 
-  .r-stonerrock {
-    background-image: image-url('featured-playlists-art/r-stonerrock.png');
+  .stonerrock {
+    background-image: image-url('featured-playlists-art/stonerrock.png');
   }
 
-  .r-listentothis {
-    background-image: image-url('featured-playlists-art/r-listentothis.png');
+  .listentothis {
+    background-image: image-url('featured-playlists-art/listentothis.png');
   }
 
-  .r-punk {
-    background-image: image-url('featured-playlists-art/r-punk.png');
+  .punk {
+    background-image: image-url('featured-playlists-art/punk.png');
   }
 
-  .r-electrohouse {
-    background-image: image-url('featured-playlists-art/r-electrohouse.png');
+  .electrohouse {
+    background-image: image-url('featured-playlists-art/electrohouse.png');
   }
 
-  .r-house {
-    background-image: image-url('featured-playlists-art/r-house.png');
+  .house {
+    background-image: image-url('featured-playlists-art/house.png');
   }
 
-  .r-posthardcore {
-    background-image: image-url('featured-playlists-art/r-posthardcore.png');
+  .posthardcore {
+    background-image: image-url('featured-playlists-art/posthardcore.png');
   }
 
-  /*
-    Genres
-  */
+  .reggae {
+    background-image: image-url('featured-playlists-art/reggae.png');
+  }
 
   .jazz {
     background-image: image-url('featured-playlists-art/jazz.png');
@@ -135,10 +124,6 @@
 
   .blues {
     background-image: image-url('featured-playlists-art/blues.png');
-  }
-
-  .reggea {
-    background-image: image-url('featured-playlists-art/reggea.png');
   }
 
   .country {

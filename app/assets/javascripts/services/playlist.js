@@ -1,9 +1,9 @@
 angular.module('tubalr.services')
-  .service('Playlist', ['$q', '$rootScope', 'Echonest', 'Reddit', function($q, $rootScope, Echonest, Reddit) {
+  .service('Playlist', ['$q', '$rootScope', 'Reddit', function($q, $rootScope, Reddit) {
 
     var Playlist = {
       videos:            [],
-      search:            null,
+      subreddit:         null,
       type:              null,
       currentVideoIndex: null,
       direction:         'forward'
@@ -12,24 +12,15 @@ angular.module('tubalr.services')
     Playlist.build = function(opts) {
       var deferred = $q.defer();
 
-      Playlist.search = opts.search;
-      Playlist.type   = opts.type;
-      Playlist.videos = [];
+      Playlist.subreddit = opts.subreddit;
+      Playlist.type      = opts.type;
+      Playlist.videos    = [];
 
-      if (this.type == 'r') {
-        Reddit.subreddit(this.search).then(function(videos) {
-          videosReady(videos, deferred);
-        }, function() {
-          deferred.reject('Playlist could not be built');
-        });
-      }
-      else if (this.type == 'genres') {
-        Echonest.genre(this.search).then(function(videos) {
-          videosReady(videos, deferred);
-        }, function() {
-          deferred.reject('Playlist could not be built');
-        });
-      }
+      Reddit.subreddit(this.subreddit).then(function(videos) {
+        videosReady(videos, deferred);
+      }, function() {
+        deferred.reject('Playlist could not be built');
+      });
 
       return deferred.promise;
     };
