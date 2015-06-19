@@ -41,18 +41,9 @@
       .playlist-item-title {
         @include calc(width, '100% - 130px');
         display: inline-block;
-        margin-right: 60px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-      }
-
-      .playlist-item-duration {
-        float: right;
-        width: 70px;
-        font-size: 12px;
-        font-family: sans-serif;
-        text-align: right;
       }
     }
   }

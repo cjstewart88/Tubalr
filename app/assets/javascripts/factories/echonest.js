@@ -40,7 +40,7 @@ angular.module('tubalr.factories')
       }
 
       $q.all(searches).then(function(videos) {
-        videos = videos.filter(function(n){ return n != undefined });
+        videos = videos.filter(function(n){ return n !== undefined });
         opts.deferred.resolve(videos);
       });
     };

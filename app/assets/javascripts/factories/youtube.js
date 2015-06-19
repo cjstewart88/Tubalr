@@ -21,12 +21,17 @@ angular.module('tubalr.factories')
       this.query({
         q: q
       }, function(results) {
-        var video = results.items[0];
+        if (results.items && results.items[0].id) {
+          var video = results.items[0];
 
-        deferred.resolve({
-          id:    video.id.videoId,
-          title: video.snippet.title
-        })
+          deferred.resolve({
+            id:    video.id.videoId,
+            title: video.snippet.title
+          });
+        }
+        else {
+          deferred.resolve();
+        }
       }, function(error) {
         deferred.reject();
       });
