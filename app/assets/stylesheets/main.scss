@@ -32,7 +32,7 @@ a {
   position: absolute;
   left: 0;
   top: 0;
-  bottom: 60px;
+  bottom: 0;
   width: $left-section-width;
   overflow: auto;
   color: #fff;
@@ -137,7 +137,7 @@ a {
   position: absolute;
   left: $left-section-width;
   top: 0;
-  bottom: 60px;
+  bottom: 0;
   right: 0;
   overflow: auto;
 }

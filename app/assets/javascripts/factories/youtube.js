@@ -1,15 +1,16 @@
 angular.module('tubalr.factories')
   .factory('YouTube', ['$resource', '$q', function($resource, $q) {
-    var YouTube = $resource('http://gdata.youtube.com/feeds/api/videos', { }, {
+    var YouTube = $resource('https://www.googleapis.com/youtube/v3/search', { }, {
       query: {
         method: 'JSONP',
         params: {
-          'orderby': 'relevance',
-          'start-index': 1,
-          'max-results': 10,
-          'v': 2,
-          'alt': 'json-in-script',
-          'callback': 'JSON_CALLBACK'
+          'order': 'relevance',
+          'maxResults': 1,
+          'callback': 'JSON_CALLBACK',
+          'videoSyndicated': true,
+          'type': 'video',
+          'key': 'AIzaSyDoc0Z8XuE0og7YLzVPbf06Ju8-4dgC-j0',
+          'part': 'snippet'
         }
       }
     });
@@ -20,50 +21,17 @@ angular.module('tubalr.factories')
       this.query({
         q: q
       }, function(results) {
-        determineBestVideo(results.feed.entry, deferred);
+        var video = results.items[0];
+
+        deferred.resolve({
+          id:    video.id.videoId,
+          title: video.snippet.title
+        })
       }, function(error) {
         deferred.reject();
       });
 
       return deferred.promise;
-    };
-
-    var determineBestVideo = function(videos, deferred) {
-      if (!videos) {
-        return deferred.resolve(bestVideo);
-      }
-
-      var bestVideo = null;
-
-      for (var i = 0; i < videos.length; i++) {
-        var video = videos[i];
-
-        if (videoIsNotBlocked(video) && videoIsMusic(video) && videoHasTitle(video)) {
-          bestVideo =  {
-            id:       video.id.$t.split(":")[3],
-            title:    video.title.$t,
-            duration: video.media$group.yt$duration.seconds
-          };
-
-          return deferred.resolve(bestVideo);
-        }
-
-        if (i == videos.length-1) {
-          return deferred.resolve(bestVideo);
-        }
-      }
-    };
-
-    var videoIsNotBlocked = function(video) {
-      return video.yt$accessControl[4].permission != 'denied' && !video.hasOwnProperty('app$control');
-    };
-
-    var videoIsMusic = function(video) {
-      return video.media$group.media$category[0].$t === "Music";
-    };
-
-    var videoHasTitle = function(video) {
-      return video.title.$t.trim() != '';
     };
 
     return YouTube;
