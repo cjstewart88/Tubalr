@@ -13,6 +13,10 @@ angular.module('tubalr.controllers')
     // report to google analytics as pageview
     _gaq.push(['_trackPageview', '/r/'+$rootScope.subreddit]);
 
+    $scope.yourListeningTo = function() {
+      return '/r/' + $routeParams.subreddit;
+    };
+
     $scope.player.init().then(function() {
       $scope.playlist.build({
         subreddit: $scope.subreddit
