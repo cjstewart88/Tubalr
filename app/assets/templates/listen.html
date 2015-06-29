@@ -5,26 +5,36 @@
   </div>
 
   <div ng-show="!loading && !error">
-    <div id="player-controls">
-      <button class="control-button">
-        <i id="previous" class="fa fa-fw fa-backward" ng-click="playlist.previousVideo()"></i>
-      </button>
-      <button class="control-button play-pause-button" ng-show="player.ytApi.getPlayerState() == 2" ng-click="player.ytApi.playVideo()">
-        <i class="fa fa-fw fa-play"></i>
-      </button>
-      <button class="control-button play-pause-button" ng-show="player.ytApi.getPlayerState() == 1" ng-click="player.ytApi.pauseVideo()">
-        <i class="fa fa-fw fa-pause"></i>
-      </button>
-     <button class="control-button">
-        <i id="next" class="fa fa-fw fa-forward" ng-click="playlist.nextVideo()"></i>
-     </button>
-    </div>
-    <h2 id="playlist-title">/r/{{subreddit}}</h2>
+    <h2 id="playlist-title">{{yourListeningTo()}}</h2>
     <ul id="playlist">
-      <li class="playlist-item" ng-repeat="v in playlist.videos" ng-click="playlist.jumpToVideo($index)"
-        ng-class="{'active-playlist-item': $index == playlist.currentVideoIndex}">
+      <li ng-repeat="v in playlist.videos" ng-click="playlist.jumpToVideo($index)"
+        ng-class="{'active-playlist-item': $index == playlist.currentVideoIndex}"
+        class="playlist-item">
         <span class="playlist-item-title">{{v.title}}</span>
       </li>
     </ul>
+
+    <div id="player-controls">
+      <div id="left-controls-wrapper">
+        <button class="control-button">
+          <i id="previous" class="fa fa-fw fa-backward" ng-click="playlist.previousVideo()"></i>
+        </button>
+        <button class="control-button play-pause-button" ng-show="player.ytApi.getPlayerState() == 2" ng-click="player.ytApi.playVideo()">
+          <i class="fa fa-fw fa-play"></i>
+        </button>
+        <button class="control-button play-pause-button" ng-show="player.ytApi.getPlayerState() == 1" ng-click="player.ytApi.pauseVideo()">
+          <i class="fa fa-fw fa-pause"></i>
+        </button>
+       <button class="control-button">
+          <i id="next" class="fa fa-fw fa-forward" ng-click="playlist.nextVideo()"></i>
+       </button>
+     </div>
+
+      <div id="progress-wrapper">
+        <span id="time-elapsed">{{player.currentTime | hhmmss }}</span>
+        <div id="progress-bar-outer"><div id="progress-bar-inner" ng-style="{width: player.percentPlayed+'%'}"></div></div>
+        <span id="total-time">{{player.ytApi.getDuration() | hhmmss }}</span>
+      </div>
+    </div>
   </div>
 </div>

@@ -24,6 +24,19 @@ a {
   }
 }
 
+::-webkit-scrollbar {
+  background: rgba(0, 0, 0, 0.1);
+  width: 10px;
+
+  &:hover {
+    @include box-shadow(rgba(0, 0, 0, 0.1) 1px 0px 2px inset);
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+}
+
 #player {
   display: none;
 }
@@ -31,8 +44,8 @@ a {
 #left-section {
   position: absolute;
   left: 0;
-  top: 0;
-  bottom: 0;
+  top: $fixed-section-height;
+  bottom: 60px;
   width: $left-section-width;
   overflow: auto;
   color: #fff;
@@ -40,6 +53,7 @@ a {
   #fixed-section {
     position: fixed;
     z-index: 1;
+    top: 0;
     width: $left-section-width;
     height: $fixed-section-height;
     background: $background-color;
@@ -70,9 +84,6 @@ a {
   }
 
   #playlists {
-    position: relative;
-    top: $fixed-section-height;
-
     h3 {
       margin-left: 20px;
       margin-bottom: 25px;
@@ -100,6 +111,7 @@ a {
     }
 
     ul {
+      margin-top: 0;
       margin-left: 20px;
       list-style-type: none;
       padding: 0;
@@ -135,7 +147,7 @@ a {
   position: absolute;
   left: $left-section-width;
   top: 0;
-  bottom: 0;
+  bottom: 60px;
   right: 0;
   overflow: auto;
 }

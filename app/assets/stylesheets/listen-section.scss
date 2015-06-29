@@ -39,7 +39,7 @@
       }
 
       .playlist-item-title {
-        @include calc(width, '100% - 130px');
+        width: 100%;
         display: inline-block;
         white-space: nowrap;
         overflow: hidden;
@@ -49,12 +49,58 @@
   }
 
   #player-controls {
-    float: right;
-    margin-right: 45px;
-    background: rgba(0,0,0,.3);
-    padding: 8px 16px;
-    border-radius: 18px;
-    margin-top: -7px;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: $player-controls-height;
+    line-height: $player-controls-height;
+    padding: 0 20px;
+    background: #2b2a30;
+    @include box-shadow(0 5px 25px 5px rgba(0,0,0,.1));
+
+    #left-controls-wrapper {
+      float: left;
+      width: 95px;
+    }
+
+    #progress-wrapper {
+      @include calc(width, '100% - 95px');
+      position: relative;
+      float: left;
+
+      #time-elapsed, #total-time {
+        position: absolute;
+        top: 0;
+        width: 70px;
+        text-align: center;
+        font-size: 12px;
+        font-family: sans-serif;
+
+        &#time-elapsed {
+          left: 0;
+        }
+
+        &#total-time {
+          right: 0;
+        }
+      }
+
+      #progress-bar-outer {
+        height: 8px;
+        @include calc(width, '100% - 140px');
+        margin: 25px auto 0;
+        background: #42424a;
+        @include border-radius(4px);
+
+        #progress-bar-inner {
+          height: 8px;
+          @include border-radius(4px);
+          width: 0%;
+          background: $text-hover-color;
+        }
+      }
+    }
 
     .control-button {
       padding: 0;

@@ -1,5 +1,6 @@
 angular.module('tubalr.services')
-  .service('Player', ['$q', '$window', '$rootScope', function($q, $window, $rootScope) {
+  .service('Player', ['$q', '$window', '$rootScope', '$interval',
+    function($q, $window, $rootScope, $interval) {
 
     var Player = {
       ytApi: null,
@@ -63,6 +64,18 @@ angular.module('tubalr.services')
 
     $rootScope.$on('playVideo', function(e, video) {
       Player.ytApi.loadVideoById(video.id);
+    });
+
+    var updatePlayerInfo;
+    $rootScope.$on('playVideo', function(e, video) {
+      Player.ytApi.loadVideoById(video.id);
+
+      updatePlayerInfo = $interval(function() {
+        elapsed = Player.ytApi.getCurrentTime();
+        duration = Player.ytApi.getDuration();
+        Player.currentTime = elapsed;
+        Player.percentPlayed = (elapsed/duration)*100;
+      }, 100);
     });
 
     return Player;
