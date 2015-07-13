@@ -32,7 +32,7 @@
 
       <div id="progress-wrapper">
         <span id="time-elapsed">{{player.currentTime | hhmmss }}</span>
-        <div id="progress-bar-outer"><div id="progress-bar-inner" ng-style="{width: player.percentPlayed+'%'}"></div></div>
+        <div id="progress-bar-outer" ng-click="player.seekToClick($event)"><div id="progress-bar-inner" ng-style="{width: player.percentPlayed+'%'}"></div></div>
         <span id="total-time">{{player.ytApi.getDuration() | hhmmss }}</span>
       </div>
     </div>

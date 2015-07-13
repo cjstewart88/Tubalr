@@ -92,6 +92,7 @@
         margin: 25px auto 0;
         background: #42424a;
         @include border-radius(4px);
+        cursor: pointer;
 
         #progress-bar-inner {
           height: 8px;
