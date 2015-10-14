@@ -78,6 +78,14 @@ angular.module('tubalr.services')
       }, 100);
     });
 
+    Player.seekToClick = function ($event) {
+      var bounds = $event.currentTarget.getBoundingClientRect();
+      var pixelPosition = $event.clientX - bounds.left; 
+      var percentage = pixelPosition / bounds.width;
+      var seconds = Player.ytApi.getDuration() * percentage;
+      Player.ytApi.seekTo( seconds );
+    }
+
     return Player;
 
   }]);
